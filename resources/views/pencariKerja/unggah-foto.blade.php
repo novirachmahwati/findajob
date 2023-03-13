@@ -37,8 +37,8 @@
                             </div>
                             <div class="col-9">
                                 <div class="numbers">
-                                    <p class="text-sm mb-0 font-weight-bold" style="margin-left: 10px;">
-                                        Unggah Foto Profil
+                                    <p class="text-sm mb-0 font-weight-bold" style="margin-left: 10px; line-height: 3">
+                                        Unggah Foto
                                     </p>
                                 </div>
                             </div>
@@ -47,7 +47,7 @@
                 </div>
             </div>
             <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
-                <div class="card">
+                <div class="card" style="opacity: 0.5; background-color: #DED3D3">
                     <div class="card-body p-3">
                         <div class="row">
                             <div class="col-3 text-end">
@@ -69,7 +69,7 @@
                 </div>
             </div>
             <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
-                <div class="card">
+                <div class="card" style="opacity: 0.5; background-color: #DED3D3">
                     <div class="card-body p-3">
                         <div class="row">
                             <div class="col-3 text-end">
@@ -81,7 +81,7 @@
                             </div>
                             <div class="col-9">
                                 <div class="numbers">
-                                    <p class="text-sm mb-0 font-weight-bold" style="margin-left: 10px; ">
+                                    <p class="text-sm mb-0 font-weight-bold" style="margin-left: 10px; line-height: 3">
                                         Unggah Daftar Riwayat Hidup
                                     </p>
                                 </div>
@@ -95,27 +95,24 @@
             <div class="col-lg-12 mb-lg-0 mb-4">
                 <div class="card z-index-2 h-100">
                     <div class="card-header pb-0 pt-4 bg-transparent">
-                        <h6 class="text-capitalize" style="margin-left: 15px">Unggah Daftar Riwayat Hidup</h6>
+                        <h6 class="text-capitalize" style="margin-left: 15px">Unggah Foto Pencari Kerja</h6>
                     </div>
                     <div class="card-body p-3" style="margin-top: -15px">
                         <div class="row">
                             <div class="col">
-                                <form role="form" method="POST" action={{ route('SE.store') }} enctype="multipart/form-data">
+                                <form role="form" method="POST" action={{ route('UF.store') }} enctype="multipart/form-data">
                                     @csrf
                                     <div class="card-body">
-                                        <div class="form-group">
-                                            <input type="file" name="foto" accept="image/png, image/jpeg">
+                                        <div class="card mb-4 mb-xl-0">
+                                            <div class="card-header">Foto Profil</div>
+                                            <div class="card-body text-center">
+                                                <img class="img-account-profile rounded-circle mb-2" style="width: 100px" src="{{ asset('img/user.png') }}" alt="">
+                                                <div class="small font-italic text-muted mb-4">JPG atau PNG (Maksimal 5 MB)</div>
+                                                <div class="form-group" style="margin-left: 100px">
+                                                    <input type="file" name="foto" accept="image/png, image/jpeg">
+                                                </div>
+                                            </div>
                                         </div>
-                                        {{-- <div class="input-group">
-                                            <input type="file" class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
-                                            <button class="btn btn-primary" type="button" id="inputGroupFileAddon04">Button</button>
-                                        </div> --}}
-                                        <div class="p-3">
-                                            <p>Catatan :</p>
-                                            <p>Resume CV yang sudah diunggah dapat diakses oleh semua perusahaan yang telah dilamar</p>
-                                            <p class="text-secondary"><i>Unggah CV dalam bentuk <b class="text-danger">PDF (Maksimal 3 mb)</b></i></p>
-                                            <p>Catatan :</p>
-                                    </div>
                                     <div class="card-footer pb-0">
                                         <div class="d-flex align-items-center">
                                             <button type="submit" class="btn btn-primary btn-lg ms-auto" style="margin-right: -22px">Selanjutnya 

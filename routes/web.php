@@ -62,14 +62,16 @@ Route::group(['middleware' => 'auth'], function () {
 		Route::get('/lengkapi-biodata', [PencariKerjaController::class, 'LB_create'])->name('LB.create');
 		Route::post('/lengkapi-biodata', [PencariKerjaController::class, 'LB_store'])->name('LB.store');
 
-		Route::get('/upload-foto', [PencariKerjaController::class, 'UF_create'])->name('UF.create');
-		Route::post('/upload-foto', [PencariKerjaController::class, 'UF_store'])->name('UF.store');
+		Route::get('/unggah-foto', [PencariKerjaController::class, 'UF_create'])->name('UF.create');
+		Route::post('/unggah-foto', [PencariKerjaController::class, 'UF_store'])->name('UF.store');
 
 		Route::get('/sertifikasi', [PencariKerjaController::class, 'SE_create'])->name('SE.create');
 		Route::post('/sertifikasi', [PencariKerjaController::class, 'SE_store'])->name('SE.store');
 
-		Route::get('/upload-cv', [PencariKerjaController::class, 'UC_create'])->name('UC.create');
-		Route::post('/upload-cv', [PencariKerjaController::class, 'UC_store'])->name('UC.store');
+		Route::get('/unggah-daftar-riwayat-hidup', [PencariKerjaController::class, 'UC_create'])->name('UC.create');
+		Route::post('/unggah-daftar-riwayat-hidup', [PencariKerjaController::class, 'UC_store'])->name('UC.store');
+		Route::get('/download-cv', [PencariKerjaController::class, 'UC_download'])->name('UC.download');
+		Route::post('/unggah-daftar-riwayat-hidup', [PencariKerjaController::class, 'UC_store'])->name('UC.store');
 
 		Route::get('/{pencari_kerja_id}', [PencariKerjaController::class, 'show'])->name('pencari_kerja.show');
 		Route::get('/{pencari_kerja_id}', [PencariKerjaController::class, 'update'])->name('pencari_kerja.edit');

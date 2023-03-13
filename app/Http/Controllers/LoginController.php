@@ -32,8 +32,8 @@ class LoginController extends Controller
             return redirect()->intended('dashboard');
         }
 
-        return back()->withErrors([
-            'email' => 'The provided credentials do not match our records.',
+        return back()->withInput()->withErrors([
+            'email' => 'Email atau kata sandi yang Anda masukkan salah.',
         ]);
     }
 

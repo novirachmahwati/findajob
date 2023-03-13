@@ -10,14 +10,7 @@
                         <div class="row">
                             <div class="col-8">
                                 <div class="numbers">
-                                    <p class="text-sm mb-0 text-uppercase font-weight-bold">BELUM ADA LAMARAN YANG TERKIRIM</p>
-                                    {{-- <h5 class="font-weight-bolder">
-                                        $53,000
-                                    </h5>
-                                    <p class="mb-0">
-                                        <span class="text-success text-sm font-weight-bolder">+55%</span>
-                                        since yesterday
-                                    </p> --}}
+                                    <p class="text-sm mb-0 font-weight-bold">Belum ada lamaran pekerjaan terkirim</p>
                                 </div>
                             </div>
                             <div class="col-4 text-end">
@@ -35,19 +28,12 @@
                         <div class="row">
                             <div class="col-8">
                                 <div class="numbers">
-                                    <p class="text-sm mb-0 text-uppercase font-weight-bold">BELUM ADA CV YANG DIUNGGAH</p>
-                                    {{-- <h5 class="font-weight-bolder">
-                                        2,300
-                                    </h5>
-                                    <p class="mb-0">
-                                        <span class="text-success text-sm font-weight-bolder">+3%</span>
-                                        since last week
-                                    </p> --}}
+                                    <p class="text-sm mb-0 font-weight-bold">1 Daftar riwayat hidup berhasil diunggah</p>
                                 </div>
                             </div>
                             <div class="col-4 text-end">
                                 <div class="icon icon-shape bg-gradient-danger shadow-danger text-center rounded-circle">
-                                    <i class="ni ni-world text-lg opacity-10" aria-hidden="true"></i>
+                                    <i class="fa fa-file text-lg opacity-10" aria-hidden="true"></i>
                                 </div>
                             </div>
                         </div>
@@ -60,14 +46,7 @@
                         <div class="row">
                             <div class="col-8">
                                 <div class="numbers">
-                                    <p class="text-sm mb-0 text-uppercase font-weight-bold">BELUM ADA SERTIFIKASI YANG DIMILIKI</p>
-                                    {{-- <h5 class="font-weight-bolder">
-                                        +3,462
-                                    </h5>
-                                    <p class="mb-0">
-                                        <span class="text-danger text-sm font-weight-bolder">-2%</span>
-                                        since last quarter
-                                    </p> --}}
+                                    <p class="text-sm mb-0 font-weight-bold">Belum ada sertifikasi yang dimiliki</p>
                                 </div>
                             </div>
                             <div class="col-4 text-end">
@@ -85,18 +64,12 @@
                         <div class="row">
                             <div class="col-8">
                                 <div class="numbers">
-                                    <p class="text-sm mb-0 text-uppercase font-weight-bold">UNDUH CONTOH TEMPLATE CV</p>
-                                    {{-- <h5 class="font-weight-bolder">
-                                        $103,430
-                                    </h5>
-                                    <p class="mb-0">
-                                        <span class="text-success text-sm font-weight-bolder">+5%</span> than last month
-                                    </p> --}}
+                                    <p class="text-sm mb-0 font-weight-bold">Unduh format daftar riwayat hidup</p>
                                 </div>
                             </div>
                             <div class="col-4 text-end">
                                 <div class="icon icon-shape bg-gradient-warning shadow-warning text-center rounded-circle">
-                                    <i class="ni ni-cart text-lg opacity-10" aria-hidden="true"></i>
+                                    <i class="fa fa-download text-lg opacity-10" aria-hidden="true"></i>
                                 </div>
                             </div>
                         </div>
@@ -108,22 +81,19 @@
             <div class="col-lg-12 mb-lg-0 mb-4">
                 <div class="card z-index-2 h-100">
                     <div class="card-header pb-0 pt-3 bg-transparent">
-                        {{-- <h6 class="text-capitalize">Lengkapi Profil</h6> --}}
-                        {{-- <p class="text-sm mb-0">
-                            <i class="fa fa-arrow-up text-success"></i>
-                            <span class="font-weight-bold">4% more</span> in 2021
-                        </p> --}}
                     </div>
                     <div class="card-body p-3">
                         <div class="row">
                             <div class="col-auto ms-4">
                                 <div class="avatar avatar-xl position-relative">
-                                    <img src="/img/team-1.jpg" alt="profile_image" class="w-100 border-radius-lg shadow-sm">
+                                    {{-- <img src="{{ asset(auth()->user()->pencariKerja->foto), asset('img/user.png') }}" alt="profile_image" class="w-100 border-radius-lg shadow-sm"> --}}
+                                    <img src="{{ asset(auth()->user()->pencariKerja->foto) }}" onerror="this.src='{{ asset('img/user.png') }}'"  alt="profile_image" class="w-100 img-account-profile rounded-circle shadow-sm">
                                 </div>
                             </div>
                             <div class="col">
-                                <h4>Edward Newgate</h4>
-                                <p><i class="fas fa-envelope"></i>&nbsp;edwardnewgate@gmail.com |&nbsp;<i class="fas fa-phone"></i>&nbsp;(+62) 8543-54343-44</p>
+                                <h4>{{ auth()->user()->name }}</h4>
+                                <p><i class="fas fa-envelope"></i>&nbsp;{{ auth()->user()->email }} |&nbsp;<i class="fas fa-phone"></i>&nbsp;{{ auth()->user()->pencariKerja->no_telp }}</p>
+                                {{-- <p><i class="fa fa-user" aria-hidden="true"></i> {{ auth()->user()->role }}</p> --}}
                             </div>
                         </div>
                         <div class="row">
@@ -132,23 +102,25 @@
                                     @csrf
                                     <div class="card-header pb-0">
                                         <div class="d-flex align-items-center">
-                                            {{-- <p class="mb-0">Edit Profile</p> --}}
-                                            <button type="submit" class="btn btn-primary btn-sm ms-auto">Save</button>
+                                            <p class="mb-0">Edit Profile</p>
+                                            <button type="submit" class="btn btn-primary btn-sm ms-auto">Simpan</button>
                                         </div>
                                     </div>
                                     <div class="card-body">
-                                        <p class="text-uppercase text-sm">Informasi User</p>
                                         <div class="row">
+                                            <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label for="example-text-input" class="form-control-label">Nama</label>
-                                                    <input class="form-control" type="text" name="name" value="{{ old('username', auth()->user()->name) }}">
+                                                    <label for="example-text-input" class="form-control-label">Nama<span class="titik-logo">*</span></label>
+                                                    <input class="form-control" type="text" name="name" value="{{ old('name', auth()->user()->name) }}">
+                                                    @error('name') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label for="example-text-input" class="form-control-label">Email address</label>
+                                                    <label for="example-text-input" class="form-control-label">Email<span class="titik-logo">*</span></label>
                                                     <input class="form-control" type="email" name="email" value="{{ old('email', auth()->user()->email) }}">
+                                                    @error('email') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
@@ -163,51 +135,56 @@
                                                     <input class="form-control" type="text" name="lastname" value="{{ old('lastname', auth()->user()->lastname) }}">
                                                 </div>
                                             </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="example-text-input" class="form-control-label">Role</label>
-                                                    <input class="form-control" type="text" name="role" value="{{ old('role', auth()->user()->role) }}">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <hr class="horizontal dark">
-                                        <p class="text-uppercase text-sm">Informasi Pencari Kerja</p>
-                                        <div class="row">
                                             <div class="col-md-12">
                                                 <div class="form-group">
-                                                    <label for="example-text-input" class="form-control-label">Alamat</label>
-                                                    <input class="form-control" type="text" name="alamat"
-                                                        value="{{ old('alamat', auth()->user()->alamat) }}">
+                                                    <label for="example-text-input" class="form-control-label">Role</label>
+                                                    <input class="form-control" type="text" name="role" value="{{ old('role', auth()->user()->role) }}" readonly>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label for="example-text-input" class="form-control-label">Alamat<span class="titik-logo">*</span></label>
+                                                    <input class="form-control" type="text" name="alamat" value="{{ old('alamat', auth()->user()->pencariKerja->alamat) }}">
+                                                    @error('alamat') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label for="example-text-input" class="form-control-label">Tempat Lahir</label>
-                                                    <input class="form-control" type="text" name="tempat_lahir"  value="{{ old('tempat_lahir', auth()->user()->tempat_lahir) }}">
+                                                    <label for="example-text-input" class="form-control-label">Tempat Lahir<span class="titik-logo">*</span></label>
+                                                    <input class="form-control" type="text" name="tempat_lahir"  value="{{ old('tempat_lahir', auth()->user()->pencariKerja->tempat_lahir) }}">
+                                                    @error('tempat_lahir') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label for="example-text-input" class="form-control-label">Ulangi Kata Sandi</label>
-                                                    <input class="form-control" type="text" name="lastname" value="{{ old('lastname', auth()->user()->lastname) }}">
+                                                    <label for="example-text-input" class="form-control-label">Tanggal Lahir<span class="titik-logo">*</span></label>
+                                                    <input class="form-control" type="date" name="tgl_lahir" value="{{ old('tgl_lahir', auth()->user()->pencariKerja->tgl_lahir) }}">
+                                                    @error('tgl_lahir') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
                                                 </div>
                                             </div>
-                                            <div class="col-md-4">
+                                            <div class="col-md-12">
                                                 <div class="form-group">
-                                                    <label for="example-text-input" class="form-control-label">City</label>
-                                                    <input class="form-control" type="text" name="city" value="{{ old('city', auth()->user()->city) }}">
+                                                    <label for="jenis_kelamin" class="form-control-label">Jenis Kelamin<span class="titik-logo">*</span></label>
+                                                    <select class="form-control" name="jenis_kelamin">
+                                                        <option value="" disabled hidden></option>
+                                                        <option value="Laki-laki" @if(old('jenis_kelamin') == 'Laki-laki')selected @endif>Laki-laki</option>
+                                                        <option value="Perempuan" @if(old('jenis_kelamin') == 'Perempuan')selected @endif>Perempuan</option>
+                                                    </select>
+                                                    @error('jenis_kelamin') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
                                                 </div>
                                             </div>
-                                            <div class="col-md-4">
+                                            <div class="col-md-12">
                                                 <div class="form-group">
-                                                    <label for="example-text-input" class="form-control-label">Country</label>
-                                                    <input class="form-control" type="text" name="country" value="{{ old('country', auth()->user()->country) }}">
+                                                    <label for="example-text-input" class="form-control-label">No. Telepon<span class="titik-logo">*</span></label>
+                                                    <input class="form-control" type="text" name="no_telp" value="{{ old('no_telp', auth()->user()->pencariKerja->no_telp) }}">
+                                                    @error('no_telp') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
                                                 </div>
                                             </div>
-                                            <div class="col-md-4">
+                                            <div class="col-md-12">
                                                 <div class="form-group">
-                                                    <label for="example-text-input" class="form-control-label">Postal code</label>
-                                                    <input class="form-control" type="text" name="postal" value="{{ old('postal', auth()->user()->postal) }}">
+                                                    <label for="example-text-input" class="form-control-label">Agama<span class="titik-logo">*</span></label>
+                                                    <input class="form-control" type="text" name="agama" value="{{ old('agama', auth()->user()->pencariKerja->agama) }}">
+                                                    @error('agama') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
                                                 </div>
                                             </div>
                                         </div>

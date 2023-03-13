@@ -122,21 +122,21 @@
                                             <div class="col-md-12">
                                                 <div class="form-group">
                                                     <label for="example-text-input" class="form-control-label">Alamat<span class="titik-logo">*</span></label>
-                                                    <input class="form-control" type="text" name="alamat" value="{{ old('alamat', auth()->user()->alamat) }}">
+                                                    <input class="form-control" type="text" name="alamat" value="{{ old('alamat', auth()->user()->pencariKerja->alamat) }}">
                                                     @error('alamat') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="example-text-input" class="form-control-label">Tempat Lahir<span class="titik-logo">*</span></label>
-                                                    <input class="form-control" type="text" name="tempat_lahir"  value="{{ old('tempat_lahir', auth()->user()->tempat_lahir) }}">
+                                                    <input class="form-control" type="text" name="tempat_lahir"  value="{{ old('tempat_lahir', auth()->user()->pencariKerja->tempat_lahir) }}">
                                                     @error('tempat_lahir') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="example-text-input" class="form-control-label">Tanggal Lahir<span class="titik-logo">*</span></label>
-                                                    <input class="form-control" type="date" name="tgl_lahir" value="{{ old('tgl_lahir', auth()->user()->tgl_lahir) }}">
+                                                    <input class="form-control" type="date" name="tgl_lahir" value="{{ old('tgl_lahir', auth()->user()->pencariKerja->tgl_lahir) }}">
                                                     @error('tgl_lahir') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
                                                 </div>
                                             </div>
@@ -154,14 +154,14 @@
                                             <div class="col-md-12">
                                                 <div class="form-group">
                                                     <label for="example-text-input" class="form-control-label">No. Telepon<span class="titik-logo">*</span></label>
-                                                    <input class="form-control" type="text" name="no_telp" value="{{ old('no_telp', auth()->user()->no_telp) }}">
+                                                    <input class="form-control" type="text" name="no_telp" value="{{ old('no_telp', auth()->user()->pencariKerja->no_telp) }}">
                                                     @error('no_telp') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
                                                 </div>
                                             </div>
                                             <div class="col-md-12">
                                                 <div class="form-group">
                                                     <label for="example-text-input" class="form-control-label">Agama<span class="titik-logo">*</span></label>
-                                                    <input class="form-control" type="text" name="agama" value="{{ old('agama', auth()->user()->agama) }}">
+                                                    <input class="form-control" type="text" name="agama" value="{{ old('agama', auth()->user()->pencariKerja->agama) }}">
                                                     @error('agama') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
                                                 </div>
                                             </div>
