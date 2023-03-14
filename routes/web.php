@@ -74,7 +74,8 @@ Route::group(['middleware' => 'auth'], function () {
 		Route::post('/unggah-daftar-riwayat-hidup', [PencariKerjaController::class, 'UC_store'])->name('UC.store');
 
 		Route::get('/{pencari_kerja_id}', [PencariKerjaController::class, 'show'])->name('pencari_kerja.show');
-		Route::get('/{pencari_kerja_id}', [PencariKerjaController::class, 'update'])->name('pencari_kerja.edit');
+		// Route::get('/{pencari_kerja_id}', [PencariKerjaController::class, 'update'])->name('pencari_kerja.edit');
+		Route::post('/edit', [PencariKerjaController::class, 'update'])->name('pencari_kerja.edit');
 	});
 	
 });

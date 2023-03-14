@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 class PencariKerjaController extends Controller
 {
@@ -111,22 +112,9 @@ class PencariKerjaController extends Controller
         $fileName = time().$request->file('cv')->getClientOriginalName();
         $path = $request->file('cv')->storeAs('cv', $fileName, 'public');
         $requestData['cv'] = '/storage/'.$path;
-        // $pencariKerja->fill($requestData);
-        // dd($request['cv']);
-        // $pencariKerja->cv = $request['cv'];
         $pencariKerja = pencariKerja::where('id', Auth::user()->pencariKerja->id)->first();
         $pencariKerja->fill($requestData);
         $pencariKerja->save();
-
-        // if ($request->has('nama')) {
-        //     $attributes = request()->validate([
-        //         'nama' => 'required|max:255',
-        //         'penerbit' => 'required|max:255',
-        //         'pencari_kerja_id' => 'required'
-        //     ]);
-            
-        //     sertifikasi::create($attributes);
-        // }
         
         return redirect('/dashboard');
         
@@ -169,7 +157,29 @@ class PencariKerjaController extends Controller
      */
     public function update(Request $request, pencariKerja $pencariKerja)
     {
-        //
+        $attributes = request()->validate([
+            'name' => 'required|max:255',
+            'email' => ['required', 'email', 'max:255',  Rule::unique('users')->ignore(auth()->user()->id),],
+            'alamat' => 'required|max:255',
+            'tempat_lahir' => 'required|max:255',
+            'tgl_lahir' => 'required|date',
+            'jenis_kelamin' => 'required|max:255',
+            'no_telp' => 'required|max:15',
+            'agama' => 'required|max:20'
+        ]);
+
+        auth()->user()->update([
+            'name' => $request->get('name'),
+            'email' => $request->get('email'),
+        ]);
+
+        $pencariKerja = pencariKerja::where('id', Auth::user()->pencariKerja->id)->first();
+        $pencariKerja->fill($attributes);
+        $pencariKerja->save();
+
+        return back()->with('success', 'Profil berhasil diperbarui!');
+        // return "hehe";
+        // return redirect('dashboard')->with('success', 'Profile updated!');
     }
 
     /**

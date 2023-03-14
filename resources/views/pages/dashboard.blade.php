@@ -10,7 +10,7 @@
                         <div class="row">
                             <div class="col-8">
                                 <div class="numbers">
-                                    <p class="text-sm mb-0 font-weight-bold">Belum ada lamaran pekerjaan terkirim</p>
+                                    <p class="text-sm mb-0 font-weight-bold">Belum ada lamaran kerja terkirim</p>
                                 </div>
                             </div>
                             <div class="col-4 text-end">
@@ -86,21 +86,21 @@
                         <div class="row">
                             <div class="col-auto ms-4">
                                 <div class="avatar avatar-xl position-relative">
-                                    {{-- <img src="{{ asset(auth()->user()->pencariKerja->foto), asset('img/user.png') }}" alt="profile_image" class="w-100 border-radius-lg shadow-sm"> --}}
-                                    <img src="{{ asset(auth()->user()->pencariKerja->foto) }}" onerror="this.src='{{ asset('img/user.png') }}'"  alt="profile_image" class="w-100 img-account-profile rounded-circle shadow-sm">
+                                    <img src="{{ asset(auth()->user()->pencariKerja->foto) }}" onerror="this.src='{{ asset('img/user.png') }}'"  alt="profile_image" class="w-100 border-radius-lg shadow-sm">
                                 </div>
                             </div>
                             <div class="col">
                                 <h4>{{ auth()->user()->name }}</h4>
                                 <p><i class="fas fa-envelope"></i>&nbsp;{{ auth()->user()->email }} |&nbsp;<i class="fas fa-phone"></i>&nbsp;{{ auth()->user()->pencariKerja->no_telp }}</p>
-                                {{-- <p><i class="fa fa-user" aria-hidden="true"></i> {{ auth()->user()->role }}</p> --}}
                             </div>
                         </div>
                         <div class="row">
                             <div class="col">
-                                <form role="form" method="POST" action={{ route('profil.update') }} enctype="multipart/form-data">
+                                <form role="form" method="POST" action={{ route('pencari_kerja.edit') }} enctype="multipart/form-data">
                                     @csrf
+                                    {{-- @method('PUT') --}}
                                     <div class="card-header pb-0">
+                                        @include('layouts.flash-message')
                                         <div class="d-flex align-items-center">
                                             <p class="mb-0">Edit Profile</p>
                                             <button type="submit" class="btn btn-primary btn-sm ms-auto">Simpan</button>
@@ -126,13 +126,13 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="example-text-input" class="form-control-label">Kata Sandi Baru</label>
-                                                    <input class="form-control" type="text" name="firstname"  value="{{ old('firstname', auth()->user()->firstname) }}">
+                                                    <input class="form-control" type="password" name="password">
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="example-text-input" class="form-control-label">Ulangi Kata Sandi</label>
-                                                    <input class="form-control" type="text" name="lastname" value="{{ old('lastname', auth()->user()->lastname) }}">
+                                                    <input class="form-control" type="password" name="password_confirmation">
                                                 </div>
                                             </div>
                                             <div class="col-md-12">
@@ -188,132 +188,13 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <hr class="horizontal dark">
-                                        <p class="text-uppercase text-sm">About me</p>
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <div class="form-group">
-                                                    <label for="example-text-input" class="form-control-label">About me</label>
-                                                    <input class="form-control" type="text" name="about"
-                                                        value="{{ old('about', auth()->user()->about) }}">
-                                                </div>
-                                            </div>
-                                        </div>
                                     </div>
                                 </form>
-                                {{-- <div class="accordion" role="tablist" id="accordion-1" style="padding: 20px;">
-                                    <div class="accordion-item">
-                                        <h2 class="accordion-header" role="tab"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#accordion-1 .item-1" aria-expanded="false" aria-controls="accordion-1 .item-1" style="font-weight: bold;">PENGALAMAN KERJA</button></h2>
-                                        <div class="accordion-collapse collapse item-1" role="tabpanel" data-bs-parent="#accordion-1">
-                                            <div class="accordion-body">
-                                                <div style="text-align: right;"><a href="#" data-bs-target="#modal-1" data-bs-toggle="modal"><i class="fas fa-edit" style="color: var(--bs-red);"></i></a></div>
-                                                <ul>
-                                                    <li>Item 1</li>
-                                                    <li>Item 2</li>
-                                                    <li>Item 3</li>
-                                                    <li>Item 4</li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="accordion-item">
-                                        <h2 class="accordion-header" role="tab"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#accordion-1 .item-2" aria-expanded="false" aria-controls="accordion-1 .item-2" style="font-weight: bold;">PENDIDIKAN</button></h2>
-                                        <div class="accordion-collapse collapse item-2" role="tabpanel" data-bs-parent="#accordion-1">
-                                            <div class="accordion-body">
-                                                <div style="text-align: right;"><a href="#" data-bs-target="#modal-2" data-bs-toggle="modal"><i class="fas fa-edit" style="color: var(--bs-red);"></i></a></div>
-                                                <ul>
-                                                    <li>Item 1</li>
-                                                    <li>Item 2</li>
-                                                    <li>Item 3</li>
-                                                    <li>Item 4</li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="accordion-item">
-                                        <h2 class="accordion-header" role="tab"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#accordion-1 .item-3" aria-expanded="false" aria-controls="accordion-1 .item-3" style="font-weight: bold;">SKILL</button></h2>
-                                        <div class="accordion-collapse collapse item-3" role="tabpanel" data-bs-parent="#accordion-1">
-                                            <div class="accordion-body">
-                                                <div style="text-align: right;"><a href="#"  data-bs-target="#modal-3" data-bs-toggle="modal"><i class="fas fa-edit" style="color: var(--bs-red);"></i></a></div>
-                                                <ul>
-                                                    <li>Item 1</li>
-                                                    <li>Item 2</li>
-                                                    <li>Item 3</li>
-                                                    <li>Item 4</li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="accordion-item">
-                                        <h2 class="accordion-header" role="tab"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#accordion-1 .item-4" aria-expanded="false" aria-controls="accordion-1 .item-4" style="font-weight: bold;">INFO TAMBAHAN</button></h2>
-                                        <div class="accordion-collapse collapse item-4" role="tabpanel" data-bs-parent="#accordion-1">
-                                            <div class="accordion-body">
-                                                <div style="text-align: right;"><a href="#" data-bs-target="#modal-5" data-bs-toggle="modal"><i class="fas fa-edit" style="color: var(--bs-red);"></i></a></div>
-                                                <p class="mb-0">Nullam id dolor id nibh ultricies vehicula ut id elit. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="accordion-item">
-                                        <h2 class="accordion-header" role="tab"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#accordion-1 .item-5" aria-expanded="false" aria-controls="accordion-1 .item-5" style="font-weight: bold;">IDENTITAS</button></h2>
-                                        <div class="accordion-collapse collapse item-5" role="tabpanel" data-bs-parent="#accordion-1">
-                                            <div class="accordion-body">
-                                                <div style="text-align: right;"><a href="#" data-bs-target="#modal-4" data-bs-toggle="modal"><i class="fas fa-edit" style="color: var(--bs-red);"></i></a></div>
-                                                <p class="mb-0">Nullam id dolor id nibh ultricies vehicula ut id elit. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div> --}}
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            {{-- <div class="col-lg-5">
-                <div class="card card-carousel overflow-hidden h-100 p-0">
-                    <div id="carouselExampleCaptions" class="carousel slide h-100" data-bs-ride="carousel">
-                        <div class="carousel-inner border-radius-lg h-100">
-                            <div class="carousel-item h-100 active" style="background-image: url('./img/carousel-1.jpg'); background-size: cover;">
-                                <div class="carousel-caption d-none d-md-block bottom-0 text-start start-0 ms-5">
-                                    <div class="icon icon-shape icon-sm bg-white text-center border-radius-md mb-3">
-                                        <i class="ni ni-camera-compact text-dark opacity-10"></i>
-                                    </div>
-                                    <h5 class="text-white mb-1">Get started with Argon</h5>
-                                    <p>There’s nothing I really wanted to do in life that I wasn’t able to get good at.</p>
-                                </div>
-                            </div>
-                            <div class="carousel-item h-100" style="background-image: url('./img/carousel-2.jpg'); background-size: cover;">
-                                <div class="carousel-caption d-none d-md-block bottom-0 text-start start-0 ms-5">
-                                    <div class="icon icon-shape icon-sm bg-white text-center border-radius-md mb-3">
-                                        <i class="ni ni-bulb-61 text-dark opacity-10"></i>
-                                    </div>
-                                    <h5 class="text-white mb-1">Faster way to create web pages</h5>
-                                    <p>That’s my skill. I’m not really specifically talented at anything except for the
-                                        ability to learn.</p>
-                                </div>
-                            </div>
-                            <div class="carousel-item h-100" style="background-image: url('./img/carousel-3.jpg'); background-size: cover;">
-                                <div class="carousel-caption d-none d-md-block bottom-0 text-start start-0 ms-5">
-                                    <div class="icon icon-shape icon-sm bg-white text-center border-radius-md mb-3">
-                                        <i class="ni ni-trophy text-dark opacity-10"></i>
-                                    </div>
-                                    <h5 class="text-white mb-1">Share with us your design tips!</h5>
-                                    <p>Don’t be afraid to be wrong because you can’t learn anything from a compliment.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <button class="carousel-control-prev w-5 me-3" type="button"
-                            data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Previous</span>
-                        </button>
-                        <button class="carousel-control-next w-5 me-3" type="button"
-                            data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Next</span>
-                        </button>
-                    </div>
-                </div>
-            </div> --}}
         </div>
         <div class="row mt-4">
             <div class="col-lg-7 mb-lg-0 mb-4">
