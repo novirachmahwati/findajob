@@ -81,7 +81,7 @@
                             </div>
                             <div class="col-9">
                                 <div class="numbers">
-                                    <p class="text-sm mb-0 font-weight-bold" style="margin-left: 10px; line-height: 3">
+                                    <p class="text-sm mb-0 font-weight-bold" style="margin-left: 10px">
                                         Unggah Daftar Riwayat Hidup
                                     </p>
                                 </div>

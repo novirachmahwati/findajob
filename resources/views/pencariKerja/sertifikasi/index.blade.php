@@ -1,9 +1,9 @@
 @extends('layouts.app', ['class' => 'g-sidenav-show bg-gray-100'])
-@section('title', 'Profil Pencari Kerja')
+@section('title', 'Sertifikasi')
 @section('content')
-    @include('layouts.navbars.auth.topnav', ['title' => 'Profil Pencari Kerja'])
+    @include('layouts.navbars.auth.topnav', ['title' => 'Sertifikasi'])
     <div class="container-fluid py-4">
-        <div class="row">
+        {{-- <div class="row">
             <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
                 <div class="card">
                     <div class="card-body p-3">
@@ -90,7 +90,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
         <div class="row mt-4">
             <div class="col-lg-12 mb-lg-0 mb-4">
                 <div class="card z-index-2 h-100">
@@ -109,6 +109,26 @@
                                                 Tambah
                                             </a>
                                         </p>
+                                        <table class="table table-bordered yajra-datatable" id="table">
+                                            <thead>
+                                                <tr>
+                                                    <th>No</th>
+                                                    <th>Nama</th>
+                                                    <th>Penerbit</th>
+                                                    <th>Tgl Diterbitkan</th>
+                                                    <th>Kredensial</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                                {{-- <tr>No</tr>
+                                                <tr>Nama</tr>
+                                                <tr>Penerbit</tr>
+                                                <tr>Tgl Diterbitkan</tr>
+                                                <tr>Tgl Kadaluawarsa</tr>
+                                                <tr>Kredensial</tr>
+                                                <tr>Action</tr> --}}
+                                            </thead>
+                                            <tbody></tbody>
+                                        </table>
                                         <div class="collapse" id="collapseExample">
                                             <div class="card card-body">
                                                 <div class="row">
@@ -158,12 +178,12 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    <div class="card-footer pb-0">
+                                    {{-- <div class="card-footer pb-0">
                                         <div class="d-flex align-items-center">
                                             <button type="submit" class="btn btn-primary btn-lg ms-auto" style="margin-right: -22px">Selanjutnya 
                                                 <i class="fa fa-forward" style="font-size: 15px; margin-left: 5px"></i></button>
                                         </div>
-                                    </div>
+                                    </div> --}}
                                 </form>
                             </div>
                         </div>
@@ -173,4 +193,64 @@
         </div>
         @include('layouts.footers.auth.footer')
     </div>
+@endsection
+
+{{-- @push('scripts') --}}
+    {{-- {{ $dataTable->scripts() }} --}}
+    {{-- {{ $dataTable->scripts(attributes: ['type' => 'module']) }} --}}
+    {{-- <script type="text/javascript">
+        $(document).ready(function () {
+            $('#table').Datatable();
+        })
+    </script> --}}
+{{-- @endpush --}}
+
+@section('bottom-content')
+    <script type="text/javascript">
+        // $(function () {
+        
+        // var table = $('.yajra-datatable').DataTable({
+        //     processing: true,
+        //     serverSide: true,
+        //     ajax: "{{ route('sertifikasi.index') }}",
+        //     columns: [
+        //         {data: 'DT_RowIndex', name: 'DT_RowIndex'},
+        //         {data: 'nama', name: 'nama'},
+        //         {data: 'penerbit', name: 'penerbit'},
+        //         {data: 'tgl_diterbitkan', name: 'tgl_diterbitkan'},
+        //         {data: 'tgl_kadaluwarsa', name: 'tgl_kadaluwarsa'},
+        //         {data: 'kredensial_url', name: 'kredensial_url'},
+        //         {
+        //             data: 'action', 
+        //             name: 'action', 
+        //             orderable: true, 
+        //             searchable: true
+        //         },
+        //     ]
+        // });
+        
+        // });
+        $(document).ready(function () {
+        
+        var table = $('.yajra-datatable').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: "{{ route('sertifikasi.index') }}",
+            columns: [
+                {data: 'id', name: 'id'},
+                {data: 'nama', name: 'nama'},
+                {data: 'penerbit', name: 'penerbit'},
+                {data: 'tgl_diterbitkan', name: 'tgl_diterbitkan'},
+                {data: 'kredensial_button', name: 'kredensial_button', orderable: false, searchable: false},
+                {
+                    data: 'action', 
+                    name: 'action', 
+                    orderable: false, 
+                    searchable: false
+                },
+            ]
+        });
+        
+        });
+    </script>
 @endsection

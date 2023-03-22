@@ -178,8 +178,6 @@ class PencariKerjaController extends Controller
         $pencariKerja->save();
 
         return back()->with('success', 'Profil berhasil diperbarui!');
-        // return "hehe";
-        // return redirect('dashboard')->with('success', 'Profile updated!');
     }
 
     /**

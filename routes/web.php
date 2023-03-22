@@ -47,7 +47,7 @@ Route::get('/', function () {return redirect('/dashboard');})->middleware('auth'
 	Route::get('/registrasi-pencari-kerja', [RegisterController::class, 'create'])->middleware('guest')->name('registrasi');
 	Route::post('/registrasi-pencari-kerja', [RegisterController::class, 'store'])->middleware('guest')->name('registrasi.perform');
 	Route::get('/registrasi-penyedia-kerja', [RegisterController::class, 'createPenyediaKerja'])->middleware('guest')->name('registrasi.penyediaKerja');
-	Route::post('/registrasi-penyedia-kerja', [RegisterController::class, 'store'])->middleware('guest')->name('registrasi.penyediaKerja.perform');
+	Route::post('/registrasi-penyedia-kerja', [RegisterController::class, 'storePenyediaKerja'])->middleware('guest')->name('registrasi.penyediaKerja.perform');
 	Route::get('/login', [LoginController::class, 'show'])->middleware('guest')->name('login');
 	Route::post('/login', [LoginController::class, 'login'])->middleware('guest')->name('login.perform');
 	Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard')->middleware('auth');
@@ -77,5 +77,8 @@ Route::group(['middleware' => 'auth'], function () {
 		// Route::get('/{pencari_kerja_id}', [PencariKerjaController::class, 'update'])->name('pencari_kerja.edit');
 		Route::post('/edit', [PencariKerjaController::class, 'update'])->name('pencari_kerja.edit');
 	});
+
+	Route::get('/sertifikasi', [SertifikasiController::class, 'index'])->name('sertifikasi.index');
+	Route::post('/sertifikasi', [SertifikasiController::class, 'SE_store'])->name('SE.store');
 	
 });

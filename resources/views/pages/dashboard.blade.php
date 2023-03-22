@@ -123,18 +123,6 @@
                                                     @error('email') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
                                                 </div>
                                             </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="example-text-input" class="form-control-label">Kata Sandi Baru</label>
-                                                    <input class="form-control" type="password" name="password">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="example-text-input" class="form-control-label">Ulangi Kata Sandi</label>
-                                                    <input class="form-control" type="password" name="password_confirmation">
-                                                </div>
-                                            </div>
                                             <div class="col-md-12">
                                                 <div class="form-group">
                                                     <label for="example-text-input" class="form-control-label">Role</label>
@@ -167,8 +155,8 @@
                                                     <label for="jenis_kelamin" class="form-control-label">Jenis Kelamin<span class="titik-logo">*</span></label>
                                                     <select class="form-control" name="jenis_kelamin">
                                                         <option value="" disabled hidden></option>
-                                                        <option value="Laki-laki" @if(old('jenis_kelamin') == 'Laki-laki')selected @endif>Laki-laki</option>
-                                                        <option value="Perempuan" @if(old('jenis_kelamin') == 'Perempuan')selected @endif>Perempuan</option>
+                                                        <option value="Laki-laki" {{ auth()->user()->pencariKerja->jenis_kelamin == "Laki-laki"  ? 'selected' : ''}} >Laki-laki</option>
+                                                        <option value="Perempuan" {{ auth()->user()->pencariKerja->jenis_kelamin == "Perempuan"  ? 'selected' : ''}}>Perempuan</option>
                                                     </select>
                                                     @error('jenis_kelamin') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
                                                 </div>
