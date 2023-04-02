@@ -129,28 +129,28 @@
                                                     </div>
                                                     <div class="col-md-6">
                                                         <div class="form-group">
-                                                            <label for="example-text-input" class="form-control-label">Tanggal Diterbitkan</label>
+                                                            <label for="example-text-input" class="form-control-label">Tanggal Diterbitkan<span class="titik-logo">*</span></label>
                                                             <input class="form-control" type="date" name="tgl_diterbitkan" value="{{ old('tgl_diterbitkan') }}">
                                                             @error('tgl_diterbitkan') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
                                                         </div>
                                                     </div>
                                                     <div class="col-md-6">
                                                         <div class="form-group">
-                                                            <label for="example-text-input" class="form-control-label">Tanggal Kadaluawarsa</label>
+                                                            <label for="example-text-input" class="form-control-label">Tanggal Kadaluawarsa<span class="titik-logo">*</span></label>
                                                             <input class="form-control" type="date" name="tgl_kadaluwarsa" value="{{ old('tgl_kadaluwarsa') }}">
                                                             @error('tgl_kadaluwarsa') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
                                                         </div>
                                                     </div>
                                                     <div class="col-md-12">
                                                         <div class="form-group">
-                                                            <label for="example-text-input" class="form-control-label">Kredensial ID</label>
+                                                            <label for="example-text-input" class="form-control-label">Kredensial ID<span class="titik-logo">*</span></label>
                                                             <input class="form-control" type="text" name="kredensial_id" value="{{ old('kredensial_id') }}">
                                                             @error('kredensial_id') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
                                                         </div>
                                                     </div>
                                                     <div class="col-md-12">
                                                         <div class="form-group">
-                                                            <label for="example-text-input" class="form-control-label">Kredensial URL</label>
+                                                            <label for="example-text-input" class="form-control-label">Kredensial URL<span class="titik-logo">*</span></label>
                                                             <input class="form-control" type="text" name="kredensial_url" value="{{ old('kredensial_url') }}">
                                                             @error('kredensial_url') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
                                                         </div>

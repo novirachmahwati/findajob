@@ -79,6 +79,7 @@ Route::group(['middleware' => 'auth'], function () {
 	});
 
 	Route::get('/sertifikasi', [SertifikasiController::class, 'index'])->name('sertifikasi.index');
-	Route::post('/sertifikasi', [SertifikasiController::class, 'SE_store'])->name('SE.store');
+	Route::post('/sertifikasi', [SertifikasiController::class, 'store'])->name('sertifikasi.store');
+	Route::get('/sertifikasi/{id}', [SertifikasiController::class, 'show'])->name('sertifikasi.show');
 	
 });

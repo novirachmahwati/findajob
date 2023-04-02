@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\sertifikasi;
 use Illuminate\Http\Request;
-use App\DataTables\sertifikasiDataTable;
 use DataTables;
 
 class SertifikasiController extends Controller
@@ -24,33 +23,35 @@ class SertifikasiController extends Controller
                     return $kredensialBtn;
                 })
                 ->addColumn('action', function($data){
-                    // $btn = '<a href="javascript:void(0)" class="btn btn-sm btn-light btn-circle"><i class="fa fa-eye" aria-hidden="true"></i></a>';
-                    $btn = '<div class="dropdown dropstart">          
+                    $btn = '<div class="dropdown dropstart text-end">          
                                 <button type="button" class="btn btn-link" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></button>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="#"><i class="fa fa-eye" aria-hidden="true"></i>Lihat</a></li>
-                                    <li><a class="dropdown-item" href="#"><i class="fa fa-pencil" aria-hidden="true"></i>Edit</a></li>
-                                    <li><a class="dropdown-item" href="#"><i class="fa fa-trash-o" aria-hidden="true"></i>Hapus</a></li>
+                                <ul class="dropdown-menu dropdown-menu-end">
+                                    <li>
+                                        <a class="dropdown-item lihat" data-id="'.$data->id.'">
+                                            <i class="fa fa-eye" aria-hidden="true"></i>
+                                            <span class="d-sm-inline d-none ms-2">Lihat</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="#">
+                                            <i class="fa fa-pencil" aria-hidden="true"></i>
+                                            <span class="d-sm-inline d-none ms-2">Edit</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="#">
+                                            <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                            <span class="d-sm-inline d-none ms-2">Hapus</span>
+                                        </a>
+                                    </li>
                                 </ul>
                             </div>';
-                //     $btn = '<div class="dropdown">
-                //                 <button class="btn btn-link dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                //                     <i class="fa fa-ellipsis-v"></i>
-                //                 </button>
-                //                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                //                     <li><a class="dropdown-item" href="#">Lihat</a></li>
-                //                     <li><a class="dropdown-item" href="#">Edit</a></li>
-                //                     <li><a class="dropdown-item" href="#">Hapus</a></li>
-                //                 </ul>
-                //   </div>';
                     return $btn;
                 })
                 ->rawColumns(['kredensial_button','action'])
                 ->make(true);
         }
 
-        // return view('users');
-        // return $dataTable->render('pencariKerja.sertifikasi.index');
         return view('pencariKerja.sertifikasi.index');
     }
 
@@ -72,7 +73,21 @@ class SertifikasiController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if ($request->filled('nama')) {
+            $attributes = request()->validate([
+                'nama' => 'required|max:255',
+                'penerbit' => 'required|max:255',
+                'tgl_diterbitkan' => 'required|date',
+                'tgl_kadaluwarsa' => 'required|date',
+                'kredensial_id' => 'required|max:255',
+                'kredensial_url' => 'required|max:255',
+                'pencari_kerja_id' => 'required'
+            ]);
+
+            sertifikasi::create($attributes);
+        }
+        
+        return back()->with('succes', 'Sertifikasi berhasil ditambahkan!');
     }
 
     /**
@@ -81,9 +96,11 @@ class SertifikasiController extends Controller
      * @param  \App\Models\sertifikasi  $sertifikasi
      * @return \Illuminate\Http\Response
      */
-    public function show(sertifikasi $sertifikasi)
+    public function show($id)
     {
-        //
+        $data = sertifikasi::findOrFail($id);
+        echo json_encode($data);
+        // return view('pencariKerja.sertifikasi.show');
     }
 
     /**

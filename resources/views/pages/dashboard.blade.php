@@ -98,7 +98,6 @@
                             <div class="col">
                                 <form role="form" method="POST" action={{ route('pencari_kerja.edit') }} enctype="multipart/form-data">
                                     @csrf
-                                    {{-- @method('PUT') --}}
                                     <div class="card-header pb-0">
                                         @include('layouts.flash-message')
                                         <div class="d-flex align-items-center">

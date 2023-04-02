@@ -72,6 +72,10 @@ class PencariKerjaController extends Controller
             $attributes = request()->validate([
                 'nama' => 'required|max:255',
                 'penerbit' => 'required|max:255',
+                'tgl_diterbitkan' => 'required|date',
+                'tgl_kadaluwarsa' => 'required|date',
+                'kredensial_id' => 'required|max:255',
+                'kredensial_url' => 'required|max:255',
                 'pencari_kerja_id' => 'required'
             ]);
 
