@@ -51,7 +51,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
                 <div class="modal-body">
-                    <form role="form_tambah" id="myform" method="POST" action={{ route('SE.store') }} enctype="multipart/form-data">
+                    <form role="form_tambah" id="myform" method="POST" action={{ route('sertifikasi.store') }} enctype="multipart/form-data">
                         @csrf
                         <div class="row">
                             <input type="hidden" name="pencari_kerja_id" value="{{ auth()->user()->pencariKerja->id }}">
@@ -109,72 +109,6 @@
         </div>
     </div>
 
-    <!-- Modal Lihat -->
-    <div class="modal fade" id="modal_lihat" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-scrollable modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Lihat Sertifikasi</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <form role="form" method="POST" action={{ route('sertifikasi.store') }} enctype="multipart/form-data">
-                @csrf
-                <div class="modal-body">
-                    <div class="row">
-                        <input type="hidden" name="pencari_kerja_id" value="{{ auth()->user()->pencariKerja->id }}">
-                        <input type="hidden" name="id" id="l_id">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label for="example-text-input" class="form-control-label">Nama<span class="titik-logo">*</span></label>
-                                <input class="form-control" type="text" id="l_nama" name="nama" value="" placeholder="Contoh: CCNA">
-                                @error('nama') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
-                            </div>
-                        </div>
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label for="example-text-input" class="form-control-label">Penerbit<span class="titik-logo">*</span></label>
-                                <input class="form-control" type="text" id="l_penerbit" name="penerbit" value="" placeholder="Contoh: Cisco">
-                                @error('penerbit') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
-                            </div>
-                        </div>
-                        <div class="col-md-6" style="float: left !important;">
-                            <div class="form-group">
-                                <label for="example-text-input" class="form-control-label">Tanggal Diterbitkan<span class="titik-logo">*</span></label>
-                                <input class="form-control" type="date" id="l_tgl_diterbitkan" name="tgl_diterbitkan" value="">
-                                @error('tgl_diterbitkan') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
-                            </div>
-                        </div>
-                        <div class="col-md-6" style="float: left !important; padding-left: 10px">
-                            <div class="form-group">
-                                <label for="example-text-input" class="form-control-label">Tanggal Kadaluawarsa<span class="titik-logo">*</span></label>
-                                <input class="form-control" type="date" id="l_tgl_kadaluwarsa" name="tgl_kadaluwarsa" value="">
-                                @error('tgl_kadaluwarsa') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
-                            </div>
-                        </div>
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label for="example-text-input" class="form-control-label">Kredensial ID<span class="titik-logo">*</span></label>
-                                <input class="form-control" type="text" id="l_kredensial_id" name="kredensial_id" value="">
-                                @error('kredensial_id') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
-                            </div>
-                        </div>
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label for="example-text-input" class="form-control-label">Kredensial URL<span class="titik-logo">*</span></label>
-                                <input class="form-control" type="text" id="l_kredensial_url" name="kredensial_url" value="">
-                                @error('kredensial_url') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                    <button type="submit" class="btn btn-primary">Simpan</button>
-                </div>
-            </form>
-        </div>
-        </div>
-    </div>
 @endsection
 
 
@@ -185,6 +119,9 @@
             var table = $('.yajra-datatable').DataTable({
                 processing: true,
                 serverSide: true,
+                language: {
+                    url: '//cdn.datatables.net/plug-ins/1.13.4/i18n/id.json',
+                },
                 ajax: "{{ route('sertifikasi.index') }}",
                 columns: [
                     {data: 'id', name: 'id'},
@@ -194,82 +131,6 @@
                 ]
             });
 
-            //lihat data
-            $('.lihat').on("click",function() {
-                var _this = $(this).parents('tr');
-                $('#l_nama').val(_this.find('.nama').text());
-                var id = $(this).attr('data-id');
-                $('#l_nama').val(data.nama);
-                $.ajax({
-                    url : "{{ route('sertifikasi.show', ['id' => "+id+"]) }}",
-                    type: "GET",
-                    dataType: "JSON",
-                    success: function(data)
-                    {
-                        $('#modal_lihat').modal('show');
-                        $('#l_id').val(data.id);
-                        $('#l_nama').val(data.nama);
-                        // $('#modal_lihat').modal('show');
-                    },
-                    error: function(){
-                        alert('failure');
-                    }
-                });
-            });
-
-            //lihat data
-            // $('.lihat').on("click",function() {
-            //     var id = $(this).attr('data-id');
-            //     $.ajax({
-            //         url : "{{ route('sertifikasi.show', ['id' => "+id+"]) }}",
-            //         type: "GET",
-            //         dataType: "JSON",
-            //         success: function(data)
-            //         {
-            //             $('#l_id').val(data.id);
-            //             $('#l_nama').val(data.nama);
-            //             $('#modal_lihat').modal('show');
-            //         },
-            //         error: function(){
-            //             alert('failure');
-            //         }
-            //     });
-            // });
-
         });
-
-
-        // // modal lihat
-        // $(document).on('click', '.lihat', function()
-        // {
-        //     var _this = $(this).parents('tr');
-        //     $('#l_nama').val(_this.find('.nama').text());
-        // })
     </script>
-    <script>
-        $(document).ready(function() {
-            //lihat data
-            $('.lihat').on("click",function() {
-                var _this = $(this).parents('tr');
-                $('#l_nama').val(_this.find('.nama').text());
-                var id = $(this).attr('data-id');
-                $('#l_nama').val(data.nama);
-                $.ajax({
-                    url : "{{ route('sertifikasi.show', ['id' => "+id+"]) }}",
-                    type: "GET",
-                    dataType: "JSON",
-                    success: function(data)
-                    {
-                        $('#modal_lihat').modal('show');
-                        $('#l_id').val(data.id);
-                        $('#l_nama').val(data.nama);
-                        // $('#modal_lihat').modal('show');
-                    },
-                    error: function(){
-                        alert('failure');
-                    }
-                });
-            });});
-
-
 @endsection

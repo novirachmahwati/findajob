@@ -168,7 +168,7 @@ class PencariKerjaController extends Controller
             'tempat_lahir' => 'required|max:255',
             'tgl_lahir' => 'required|date',
             'jenis_kelamin' => 'required|max:255',
-            'no_telp' => 'required|max:15',
+            'no_telp' => 'required|max:16',
             'agama' => 'required|max:20'
         ]);
 

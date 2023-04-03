@@ -81,5 +81,15 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('/sertifikasi', [SertifikasiController::class, 'index'])->name('sertifikasi.index');
 	Route::post('/sertifikasi', [SertifikasiController::class, 'store'])->name('sertifikasi.store');
 	Route::get('/sertifikasi/{id}', [SertifikasiController::class, 'show'])->name('sertifikasi.show');
+	Route::get('/sertifikasi/{id}/edit', [SertifikasiController::class, 'edit'])->name('sertifikasi.edit');
+	Route::put('/sertifikasi/{id}', [SertifikasiController::class, 'update'])->name('sertifikasi.update');
+	Route::delete('/sertifikasi/{id}', [SertifikasiController::class, 'delete'])->name('sertifikasi.delete');
+
+
+	// Route::resource('/sertifikasi', [SertifikasiController::class, 'index']);
+	// Route::resources([
+	// 	'sertifikasi' => SertifikasiController::class,
+	// 	'lowongan' => LowonganController::class,
+	// ]);
 	
 });

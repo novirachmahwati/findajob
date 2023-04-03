@@ -27,13 +27,13 @@ class SertifikasiController extends Controller
                                 <button type="button" class="btn btn-link" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></button>
                                 <ul class="dropdown-menu dropdown-menu-end">
                                     <li>
-                                        <a class="dropdown-item lihat" data-id="'.$data->id.'">
+                                        <a class="dropdown-item" href="'.route('sertifikasi.show', ['id' => $data->id]).'">
                                             <i class="fa fa-eye" aria-hidden="true"></i>
                                             <span class="d-sm-inline d-none ms-2">Lihat</span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="#">
+                                        <a class="dropdown-item" href="'.route('sertifikasi.edit', ['id' => $data->id]).'">
                                             <i class="fa fa-pencil" aria-hidden="true"></i>
                                             <span class="d-sm-inline d-none ms-2">Edit</span>
                                         </a>
@@ -99,8 +99,7 @@ class SertifikasiController extends Controller
     public function show($id)
     {
         $data = sertifikasi::findOrFail($id);
-        echo json_encode($data);
-        // return view('pencariKerja.sertifikasi.show');
+        return view('pencariKerja.sertifikasi.show', compact('data'));
     }
 
     /**
@@ -109,9 +108,10 @@ class SertifikasiController extends Controller
      * @param  \App\Models\sertifikasi  $sertifikasi
      * @return \Illuminate\Http\Response
      */
-    public function edit(sertifikasi $sertifikasi)
+    public function edit($id)
     {
-        //
+        $data = sertifikasi::findOrFail($id);
+        return view('pencariKerja.sertifikasi.edit', compact('data'));
     }
 
     /**
