@@ -124,7 +124,7 @@
                 },
                 ajax: "{{ route('sertifikasi.index') }}",
                 columns: [
-                    {data: 'id', name: 'id'},
+                    {data: 'DT_Row_Index', name:'DT_Row_Index' },
                     {data: 'nama', name: 'nama'},
                     {data: 'penerbit', name: 'penerbit'},
                     {data: 'action',  name: 'action', orderable: false, searchable: false},

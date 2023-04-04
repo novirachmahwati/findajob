@@ -16,24 +16,20 @@ class SertifikasiController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $data = sertifikasi::select('id','nama','penerbit','tgl_diterbitkan','kredensial_url')->get();
-            return Datatables::of($data)->addIndexColumn()
-                ->addColumn('kredensial_button', function($data){
-                    $kredensialBtn = '<a href="'.$data->kredensial_url.'" class="btn btn-sm btn-outline-secondary">Tampilkan Kredensial</a>';
-                    return $kredensialBtn;
-                })
-                ->addColumn('action', function($data){
+            $sertifikasi = sertifikasi::select('id','nama','penerbit','tgl_diterbitkan','kredensial_url')->get();
+            return Datatables::of($sertifikasi)->addIndexColumn()
+                ->addColumn('action', function($sertifikasi){
                     $btn = '<div class="dropdown dropstart text-end">          
                                 <button type="button" class="btn btn-link" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></button>
                                 <ul class="dropdown-menu dropdown-menu-end">
                                     <li>
-                                        <a class="dropdown-item" href="'.route('sertifikasi.show', ['id' => $data->id]).'">
+                                        <a class="dropdown-item" href="'.route('sertifikasi.show', $sertifikasi->id).'">
                                             <i class="fa fa-eye" aria-hidden="true"></i>
                                             <span class="d-sm-inline d-none ms-2">Lihat</span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="'.route('sertifikasi.edit', ['id' => $data->id]).'">
+                                        <a class="dropdown-item" href="'.route('sertifikasi.edit', $sertifikasi->id).'">
                                             <i class="fa fa-pencil" aria-hidden="true"></i>
                                             <span class="d-sm-inline d-none ms-2">Edit</span>
                                         </a>
@@ -48,7 +44,7 @@ class SertifikasiController extends Controller
                             </div>';
                     return $btn;
                 })
-                ->rawColumns(['kredensial_button','action'])
+                ->rawColumns('action')
                 ->make(true);
         }
 
@@ -96,10 +92,9 @@ class SertifikasiController extends Controller
      * @param  \App\Models\sertifikasi  $sertifikasi
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(sertifikasi $sertifikasi)
     {
-        $data = sertifikasi::findOrFail($id);
-        return view('pencariKerja.sertifikasi.show', compact('data'));
+        return view('pencariKerja.sertifikasi.show', compact('sertifikasi'));
     }
 
     /**
@@ -108,10 +103,9 @@ class SertifikasiController extends Controller
      * @param  \App\Models\sertifikasi  $sertifikasi
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(sertifikasi $sertifikasi)
     {
-        $data = sertifikasi::findOrFail($id);
-        return view('pencariKerja.sertifikasi.edit', compact('data'));
+        return view('pencariKerja.sertifikasi.edit', compact('sertifikasi'));
     }
 
     /**
@@ -123,7 +117,19 @@ class SertifikasiController extends Controller
      */
     public function update(Request $request, sertifikasi $sertifikasi)
     {
-        //
+        $request->validate([
+            'nama' => 'required|max:255',
+            'penerbit' => 'required|max:255',
+            'tgl_diterbitkan' => 'required|date',
+            'tgl_kadaluwarsa' => 'required|date',
+            'kredensial_id' => 'required|max:255',
+            'kredensial_url' => 'required|max:255',
+            'pencari_kerja_id' => 'required'
+        ]);
+
+        $sertifikasi->fill($request->post())->save();
+        
+        return redirect()->route('sertifikasi.index')->with('succes', 'Sertifikasi berhasil diubah!');
     }
 
     /**
