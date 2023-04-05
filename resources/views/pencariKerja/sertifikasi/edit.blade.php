@@ -56,7 +56,7 @@
                                                 <div class="col-md-12">
                                                     <div class="form-group">
                                                         <label for="example-text-input" class="form-control-label">Kredensial URL<span class="titik-logo">*</span></label>
-                                                        <input class="form-control" type="url" name="kredensial_url" value="{{ $sertifikasi->kredensial_url }}">
+                                                        <input class="form-control" type="text" name="kredensial_url" value="{{ $sertifikasi->kredensial_url }}">
                                                         @error('kredensial_url') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
                                                     </div>
                                                 </div>
@@ -64,7 +64,7 @@
                                 </div>
                                 <div class="card-footer d-flex justify-content-end">
                                     <a href="javascript:history.back()" class="btn btn-secondary">Kembali</a>
-                                    <button type="submit" class="btn btn-primary">Simpan</button>
+                                    <button type="submit" class="btn btn-primary ms-3">Simpan</button>
                                 </div>
                             </form>
                             </div>

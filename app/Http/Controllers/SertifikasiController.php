@@ -16,7 +16,7 @@ class SertifikasiController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $sertifikasi = sertifikasi::select('id','nama','penerbit','tgl_diterbitkan','kredensial_url')->get();
+            $sertifikasi = sertifikasi::select('id','nama','penerbit','tgl_diterbitkan')->orderBy('tgl_diterbitkan','desc')->get();
             return Datatables::of($sertifikasi)->addIndexColumn()
                 ->addColumn('action', function($sertifikasi){
                     $btn = '<div class="dropdown dropstart text-end">          
@@ -24,19 +24,19 @@ class SertifikasiController extends Controller
                                 <ul class="dropdown-menu dropdown-menu-end">
                                     <li>
                                         <a class="dropdown-item" href="'.route('sertifikasi.show', $sertifikasi->id).'">
-                                            <i class="fa fa-eye" aria-hidden="true"></i>
+                                            <i class="fa fa-eye text-success" aria-hidden="true"></i>
                                             <span class="d-sm-inline d-none ms-2">Lihat</span>
                                         </a>
                                     </li>
                                     <li>
                                         <a class="dropdown-item" href="'.route('sertifikasi.edit', $sertifikasi->id).'">
-                                            <i class="fa fa-pencil" aria-hidden="true"></i>
+                                            <i class="fa fa-pencil text-primary" aria-hidden="true"></i>
                                             <span class="d-sm-inline d-none ms-2">Edit</span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="#">
-                                            <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                        <a class="dropdown-item" href="javascript:void(0);" onclick="loadDeleteModal({{ $sertifikasi->id }})">
+                                            <i class="fa fa-trash-o text-danger" aria-hidden="true"></i>
                                             <span class="d-sm-inline d-none ms-2">Hapus</span>
                                         </a>
                                     </li>
@@ -44,7 +44,7 @@ class SertifikasiController extends Controller
                             </div>';
                     return $btn;
                 })
-                ->rawColumns('action')
+                ->rawColumns(['action'])
                 ->make(true);
         }
 
@@ -83,7 +83,7 @@ class SertifikasiController extends Controller
             sertifikasi::create($attributes);
         }
         
-        return back()->with('succes', 'Sertifikasi berhasil ditambahkan!');
+        return back()->with('success', 'Sertifikasi berhasil ditambahkan!');
     }
 
     /**
@@ -129,7 +129,7 @@ class SertifikasiController extends Controller
 
         $sertifikasi->fill($request->post())->save();
         
-        return redirect()->route('sertifikasi.index')->with('succes', 'Sertifikasi berhasil diubah!');
+        return redirect()->route('sertifikasi.index')->with('success', 'Sertifikasi berhasil diubah!');
     }
 
     /**
@@ -140,6 +140,7 @@ class SertifikasiController extends Controller
      */
     public function destroy(sertifikasi $sertifikasi)
     {
-        //
+        $sertifikasi->delete();
+        return redirect()->route('sertifikasi.index')->with('success', 'Sertifikasi berhasil dihapus!');
     }
 }

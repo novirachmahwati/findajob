@@ -18,7 +18,7 @@
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label for="example-text-input" class="form-control-label">Nama<span class="titik-logo">*</span></label>
-                                                <input class="form-control" type="text" name="nama" value="{{ $data->nama }}" readonly>
+                                                <input class="form-control" type="text" name="nama" value="{{ $sertifikasi->nama }}" readonly>
                                                 @error('nama') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
                                             </div>
                                         </div>

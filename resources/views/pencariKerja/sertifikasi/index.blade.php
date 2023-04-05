@@ -7,9 +7,9 @@
             <div class="col-lg-12 mb-lg-0 mb-4">
                 <div class="card z-index-2 h-100">
                     <div class="card-header pb-0 pt-4 bg-transparent">
-                        <h6 class="text-capitalize" style="margin-left: 15px">Lisensi & Sertifikasi</h6>
+                        <h6 class="text-capitalize ms-4">Lisensi & Sertifikasi</h6>
                     </div>
-                    <div class="card-body p-3" style="margin-top: -15px">
+                    <div class="card-body mt-n4">
                         <div class="row">
                             <div class="col">
                                 <div class="card-body">
@@ -21,7 +21,7 @@
                                         </button>
                                     </p>
                                     <div class="border border-light rounded-3 p-3">
-                                    <table class="table table-bordered table-hover yajra-datatable" id="table">
+                                    <table class="table table-bordered table-hover yajra-datatable sertifikasi-datatable" id="table">
                                         <thead>
                                             <tr>
                                                 <th>No</th>
@@ -104,11 +104,31 @@
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
                     <button type="submit" class="btn btn-primary" form="form_tambah">Simpan</button>
                 </div>
-            {{-- </form> --}}
         </div>
         </div>
     </div>
 
+    <!-- Modal Hapus -->
+    <div class="modal fade" id="deleteModal" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="deleteModal" aria-hidden="true">
+   <div class="modal-dialog modal-sm" role="document">
+       <div class="modal-content">
+           <div class="modal-header">
+               <h5 class="modal-title">This action is not reversible.</h5>
+               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                   <span aria-hidden="true">&times;</span>
+               </button>
+           </div>
+           <div class="modal-body">
+               Are you sure you want to delete?
+               <input type="hidden" id="id" name="id">
+           </div>
+           <div class="modal-footer">
+               <button type="button" class="btn bg-white" data-dismiss="modal">Close</button>
+               <button type="button" class="btn btn-danger" id="modal-confirm_delete">Delete</button>
+           </div>
+       </div>
+   </div>
+</div>
 @endsection
 
 
@@ -116,7 +136,7 @@
     <script type="text/javascript">
         $(document).ready(function () {
             // datatable
-            var table = $('.yajra-datatable').DataTable({
+            var table = $('.sertifikasi-datatable').DataTable({
                 processing: true,
                 serverSide: true,
                 language: {
@@ -124,7 +144,7 @@
                 },
                 ajax: "{{ route('sertifikasi.index') }}",
                 columns: [
-                    {data: 'DT_Row_Index', name:'DT_Row_Index' },
+                    {data: 'DT_RowIndex', name:'DT_RowIndex', orderable: false, searchable: false},
                     {data: 'nama', name: 'nama'},
                     {data: 'penerbit', name: 'penerbit'},
                     {data: 'action',  name: 'action', orderable: false, searchable: false},
@@ -132,5 +152,23 @@
             });
 
         });
+
+        function loadDeleteModal(id) {
+            $('#modal-confirm_delete').attr('onclick', `confirmDelete(${id})`);
+            $('#deleteModal').modal('show');
+        }
+
+        function confirmDelete(id) {
+            $.ajax({
+                url: '{{ url('sertifikasi') }}/' + id,
+                type: 'post',
+                data: {
+                    '_method': 'delete',
+                },
+                success: function (data) {
+	                $('#deleteModal').modal('hide');
+                }
+            });
+        }
     </script>
 @endsection
