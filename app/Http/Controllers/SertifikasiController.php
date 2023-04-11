@@ -35,7 +35,7 @@ class SertifikasiController extends Controller
                                         </a>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="javascript:void(0);" onclick="loadDeleteModal({{ $sertifikasi->id }})">
+                                        <a class="dropdown-item deleteSertifikasi" href="javascript:void(0);" data-toggle="tooltip" data-id="'.$sertifikasi->id .'">
                                             <i class="fa fa-trash-o text-danger" aria-hidden="true"></i>
                                             <span class="d-sm-inline d-none ms-2">Hapus</span>
                                         </a>
@@ -141,6 +141,7 @@ class SertifikasiController extends Controller
     public function destroy(sertifikasi $sertifikasi)
     {
         $sertifikasi->delete();
-        return redirect()->route('sertifikasi.index')->with('success', 'Sertifikasi berhasil dihapus!');
+        // return redirect()->route('sertifikasi.index')->with('success', 'Sertifikasi berhasil dihapus!');
+        return response()->json(['success'=>'Record deleted successfully.']);
     }
 }

@@ -150,25 +150,26 @@
                     {data: 'action',  name: 'action', orderable: false, searchable: false},
                 ]
             });
+                // $.ajaxSetup({
+                //     headers: {
+                //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                //     }
+            $('body').on('click', '.deleteSertifikasi', function () {
+                var id = $(this).data('id');
 
-        });
-
-        function loadDeleteModal(id) {
-            $('#modal-confirm_delete').attr('onclick', `confirmDelete(${id})`);
-            $('#deleteModal').modal('show');
-        }
-
-        function confirmDelete(id) {
-            $.ajax({
-                url: '{{ url('sertifikasi') }}/' + id,
-                type: 'post',
-                data: {
-                    '_method': 'delete',
-                },
-                success: function (data) {
-	                $('#deleteModal').modal('hide');
+                var deleteConfirm = confirm("Are you sure?");
+                if (deleteConfirm == true) {
+                    // AJAX request
+                    $.ajax({
+                        url: "{{ url('sertifikasi') }}"+'/'+id,
+                        type: 'DELETE',
+                        data: {"_token": "{{ csrf_token() }}"},
+                        success: function (data) {
+                            table.draw();
+                        },
+                    });
                 }
-            });
-        }
+    });       
+  });
     </script>
 @endsection
