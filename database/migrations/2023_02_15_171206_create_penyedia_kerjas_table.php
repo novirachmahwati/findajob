@@ -16,14 +16,16 @@ return new class extends Migration
         Schema::dropIfExists('penyedia_kerjas');
         Schema::create('penyedia_kerjas', function (Blueprint $table) {
             $table->id();
-            $table->string('bidang');
-            $table->string('alamat');
-            $table->string('no_telp');
-            $table->integer('jml_karyawan');
-            $table->text('deskripsi');
+            $table->string('bidang')->nullable();
+            $table->string('alamat')->nullable();
+            $table->string('no_telp')->nullable();
+            $table->integer('jml_karyawan')->nullable();
+            $table->text('deskripsi')->nullable();
             $table->string('website')->nullable();
             $table->string('sosial_media')->nullable();
             $table->string('foto')->nullable();
+            $table->string('nama_administrator')->nullable();
+            $table->string('no_telp_administrator')->nullable();
             $table->unsignedInteger('user_id');
             $table->timestamps();
         });

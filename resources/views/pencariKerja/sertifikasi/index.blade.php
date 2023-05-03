@@ -51,7 +51,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
                 <div class="modal-body">
-                    <form role="form_tambah" id="myform" method="POST" action={{ route('sertifikasi.store') }} enctype="multipart/form-data">
+                    <form role="form_tambah" id="form_tambah" method="POST" action={{ route('sertifikasi.store') }} enctype="multipart/form-data">
                         @csrf
                         <div class="row">
                             <input type="hidden" name="pencari_kerja_id" value="{{ auth()->user()->pencariKerja->id }}">
@@ -157,7 +157,7 @@
             $('body').on('click', '.deleteSertifikasi', function () {
                 var id = $(this).data('id');
 
-                var deleteConfirm = confirm("Are you sure?");
+                var deleteConfirm = confirm("Apakah anda yakin akan menghapus data ini?");
                 if (deleteConfirm == true) {
                     // AJAX request
                     $.ajax({
@@ -165,7 +165,7 @@
                         type: 'DELETE',
                         data: {"_token": "{{ csrf_token() }}"},
                         success: function (data) {
-                            table.draw();
+                            location.reload();
                         },
                     });
                 }

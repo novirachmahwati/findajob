@@ -7,6 +7,51 @@ use Illuminate\Http\Request;
 
 class PenyediaKerjaController extends Controller
 {
+    
+    // Lengkapi Data
+    public function LD_create()
+    {
+        return view('penyediaKerja.lengkapi-data');
+    }
+
+    public function LD_store()
+    {
+        $attributes = request()->validate([
+            'nama_administrator' => 'required|max:255',
+            'no_telp_administrator' => 'required|max:16',
+            'user_id' => 'required'
+        ]);
+        
+        penyediaKerja::create($attributes);
+        
+        return redirect('/penyedia-kerja/data-perusahaan');
+    }
+
+    // Data Perusahaan
+    public function DP_create()
+    {
+        return view('penyediaKerja.data-perusahaan');
+    }
+
+    public function DP_store()
+    {
+        $attributes = request()->validate([
+            'bidang' => 'required|max:255',
+            'alamat' => 'required|max:255',
+            'no_telp' => 'required|date',
+            'jml_karyawan' => 'required|max:255',
+            'deskripsi' => 'required|max:15',
+            'website' => 'required|max:20',
+            'sosial_media' => 'required|max:255',
+            'user_id' => 'required'
+        ]);
+        
+        penyediaKerja::create($attributes);
+        
+        return redirect('/pencari-kerja/unggah-foto');
+    }
+
+
     /**
      * Display a listing of the resource.
      *

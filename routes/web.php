@@ -78,6 +78,25 @@ Route::group(['middleware' => 'auth'], function () {
 		Route::post('/edit', [PencariKerjaController::class, 'update'])->name('pencari_kerja.edit');
 	});
 
+	// Penyedia Kerja
+	Route::prefix('penyedia-kerja')->group(function () {
+		Route::get('/lengkapi-data', [PenyediaKerjaController::class, 'LD_create'])->name('LD.create');
+		Route::post('/lengkapi-data', [PenyediaKerjaController::class, 'LD_store'])->name('LD.store');
+
+		Route::get('/data-perusahaan', [PenyediaKerjaController::class, 'DP_create'])->name('DP.create');
+		Route::post('/data-perusahaan', [PenyediaKerjaController::class, 'DP_store'])->name('DP.store');
+
+		Route::get('/unggah-foto', [PenyediaKerjaController::class, 'UFP_create'])->name('UFP.create');
+		Route::post('/unggah-foto', [PenyediaKerjaController::class, 'UFP_store'])->name('UFP.store');
+
+		Route::get('/unggah-lowongan', [PenyediaKerjaController::class, 'UL_create'])->name('UL.create');
+		Route::post('/unggah-lowongan', [PenyediaKerjaController::class, 'UL_store'])->name('UL.store');
+
+		Route::get('/{pencari_kerja_id}', [PenyediaKerjaController::class, 'show'])->name('pencari_kerja.show');
+		// Route::get('/{pencari_kerja_id}', [PencariKerjaController::class, 'update'])->name('pencari_kerja.edit');
+		Route::post('/edit', [PenyediaKerjaController::class, 'update'])->name('pencari_kerja.edit');
+	});
+
 	// Route::get('/sertifikasi', [SertifikasiController::class, 'index'])->name('sertifikasi.index');
 	// Route::post('/sertifikasi', [SertifikasiController::class, 'store'])->name('sertifikasi.store');
 	// Route::get('/sertifikasi/{id}', [SertifikasiController::class, 'show'])->name('sertifikasi.show');
