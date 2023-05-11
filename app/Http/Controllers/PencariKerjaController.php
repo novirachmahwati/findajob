@@ -113,9 +113,8 @@ class PencariKerjaController extends Controller
 
         $requestData = $request->all();
         
-        $fileName = time().$request->file('cv')->getClientOriginalName();
-        $path = $request->file('cv')->storeAs('cv', $fileName, 'public');
-        $requestData['cv'] = '/storage/'.$path;
+        $cvBase64 = base64_encode(file_get_contents($request->file('cv')));
+        $requestData['cv'] = $cvBase64 ;
         $pencariKerja = pencariKerja::where('id', Auth::user()->pencariKerja->id)->first();
         $pencariKerja->fill($requestData);
         $pencariKerja->save();

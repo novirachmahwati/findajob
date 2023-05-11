@@ -92,6 +92,11 @@ Route::group(['middleware' => 'auth'], function () {
 		Route::get('/unggah-lowongan', [PenyediaKerjaController::class, 'UL_create'])->name('UL.create');
 		Route::post('/unggah-lowongan', [PenyediaKerjaController::class, 'UL_store'])->name('UL.store');
 
+		Route::get('/unggah-lowongan-pekerjaan', [PenyediaKerjaController::class, 'ULP_create'])->name('ULP.create');
+		Route::post('/unggah-lowongan-pekerjaan', [PenyediaKerjaController::class, 'ULP_store'])->name('ULP.store');
+
+		Route::get('/dashboard', [PenyediaKerjaController::class, 'index'])->name('penyedia-kerja.dashboard');
+		
 		Route::get('/{pencari_kerja_id}', [PenyediaKerjaController::class, 'show'])->name('pencari_kerja.show');
 		// Route::get('/{pencari_kerja_id}', [PencariKerjaController::class, 'update'])->name('pencari_kerja.edit');
 		Route::post('/edit', [PenyediaKerjaController::class, 'update'])->name('pencari_kerja.edit');

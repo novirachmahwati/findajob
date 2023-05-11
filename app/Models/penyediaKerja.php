@@ -14,8 +14,6 @@ class penyediaKerja extends Model
         'no_telp',
         'jml_karyawan',
         'deskripsi',
-        'website',
-        'sosial_media',
         'foto',
         'user_id'
     ];

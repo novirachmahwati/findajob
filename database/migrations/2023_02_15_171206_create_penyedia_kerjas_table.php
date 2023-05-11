@@ -19,10 +19,8 @@ return new class extends Migration
             $table->string('bidang')->nullable();
             $table->string('alamat')->nullable();
             $table->string('no_telp')->nullable();
-            $table->integer('jml_karyawan')->nullable();
+            $table->string('jml_karyawan')->nullable();
             $table->text('deskripsi')->nullable();
-            $table->string('website')->nullable();
-            $table->string('sosial_media')->nullable();
             $table->string('foto')->nullable();
             $table->string('nama_administrator')->nullable();
             $table->string('no_telp_administrator')->nullable();

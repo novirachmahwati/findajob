@@ -82,7 +82,7 @@
                             <div class="col-9">
                                 <div class="numbers">
                                     <p class="text-sm mb-0 font-weight-bold" style="margin-left: 10px;">
-                                        Unggah Lowongan
+                                        Unggah Lowongan Pekerjaan
                                     </p>
                                 </div>
                             </div>
@@ -123,7 +123,7 @@
                                                 <div class="form-group">
                                                     <label for="bidang" class="form-control-label">Bidang Bisnis<span class="titik-logo">*</span></label>
                                                     <select class="form-control" name="bidang">
-                                                        <option value="" disabled hidden></option>
+                                                        <option value="" hidden>Pilih Bidang Bisnis</option>
                                                         <option value="IT/Komputer" @if(old('bidang') == 'IT/Komputer')selected @endif>IT/Komputer</option>
                                                     </select>
                                                     @error('bidang') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
@@ -132,81 +132,39 @@
                                             <div class="col-md-12">
                                                 <div class="form-group">
                                                     <label for="example-text-input" class="form-control-label">Alamat<span class="titik-logo">*</span></label>
-                                                    <input class="form-control" type="text" name="alamat" value="{{ old('alamat') }}">
+                                                    <input class="form-control" type="text" name="alamat" value="{{ old('alamat') }}" placeholder="Alamat Perusahaan">
                                                     @error('alamat') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="example-text-input" class="form-control-label">No. Telepon<span class="titik-logo">*</span></label>
-                                                    <input class="form-control" type="text" name="no_telp" value="{{ old('no_telp') }}">
+                                                    <input class="form-control" type="text" name="no_telp" value="{{ old('no_telp') }}" placeholder="No. Telepon Perusahaan">
                                                     @error('no_telp') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label for="bidang" class="form-control-label">Jumlah Karyawan<span class="titik-logo">*</span></label>
-                                                    <select class="form-control" name="bidang">
-                                                        <option value="" disabled hidden></option>
+                                                    <label for="jml_karyawan" class="form-control-label">Jumlah Karyawan<span class="titik-logo">*</span></label>
+                                                    <select class="form-control" name="jml_karyawan">
+                                                        <option value="" hidden>Pilih Jumlah Karyawan</option>
                                                         <option value="< 50 Karyawan" @if(old('jml_karyawan') == '< 50 Karyawan')selected @endif>< 50 Karyawan</option>
+                                                        <option value="50-100 Karyawan" @if(old('jml_karyawan') == '50-100 Karyawan')selected @endif>50-100 Karyawan</option>
+                                                        <option value="101-250 Karyawan" @if(old('jml_karyawan') == '101-250 Karyawan')selected @endif>101-250 Karyawan</option>
+                                                        <option value="251-500 Karyawan" @if(old('jml_karyawan') == '251-500 Karyawan')selected @endif>251-500 Karyawan</option>
+                                                        <option value="501-1000 Karyawan" @if(old('jml_karyawan') == '501-1000 Karyawan')selected @endif>501-1000 Karyawan</option>
+                                                        <option value="> 1000 Karyawan" @if(old('jml_karyawan') == '> 1000 Karyawan')selected @endif>> 1000 Karyawan</option>
                                                     </select>
                                                     @error('jml_karyawan') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
                                                 </div>
                                             </div>
                                             <div class="col-md-12">
                                                 <div class="form-group">
-                                                    <label for="example-text-input" class="form-control-label">Deskripsi<span class="titik-logo">*</span></label>
-                                                    <textarea class="form-control" type="text" name="deskripsi" value="{{ old('deskripsi') }}"></textarea>
+                                                    <label for="deskripsi" class="form-control-label">Deskripsi<span class="titik-logo">*</span></label>
+                                                    <textarea class="form-control" type="text" name="deskripsi" value="{{ old('deskripsi') }}" placeholder="Deskripsi Perusahaan"></textarea>
                                                     @error('deskripsi') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
                                                 </div>
                                             </div>
-                                            {{-- <div class="col-md-12">
-                                                <div class="form-group">
-                                                    <label for="example-text-input" class="form-control-label">Alamat<span class="titik-logo">*</span></label>
-                                                    <input class="form-control" type="text" name="alamat" value="{{ old('alamat', auth()->user()->penyediaKerja->alamat) }}">
-                                                    @error('alamat') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="example-text-input" class="form-control-label">Tempat Lahir<span class="titik-logo">*</span></label>
-                                                    <input class="form-control" type="text" name="tempat_lahir"  value="{{ old('tempat_lahir', auth()->user()->penyediaKerja->tempat_lahir) }}">
-                                                    @error('tempat_lahir') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="example-text-input" class="form-control-label">Tanggal Lahir<span class="titik-logo">*</span></label>
-                                                    <input class="form-control" type="date" name="tgl_lahir" value="{{ old('tgl_lahir', auth()->user()->penyediaKerja->tgl_lahir) }}">
-                                                    @error('tgl_lahir') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
-                                                </div>
-                                            </div>
-                                            <div class="col-md-12">
-                                                <div class="form-group">
-                                                    <label for="jenis_kelamin" class="form-control-label">Jenis Kelamin<span class="titik-logo">*</span></label>
-                                                    <select class="form-control" name="jenis_kelamin">
-                                                        <option value="" disabled hidden></option>
-                                                        <option value="Laki-laki" @if(old('jenis_kelamin') == 'Laki-laki')selected @endif>Laki-laki</option>
-                                                        <option value="Perempuan" @if(old('jenis_kelamin') == 'Perempuan')selected @endif>Perempuan</option>
-                                                    </select>
-                                                    @error('jenis_kelamin') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
-                                                </div>
-                                            </div>
-                                            <div class="col-md-12">
-                                                <div class="form-group">
-                                                    <label for="example-text-input" class="form-control-label">No. Telepon<span class="titik-logo">*</span></label>
-                                                    <input class="form-control" type="text" name="no_telp" value="{{ old('no_telp', auth()->user()->penyediaKerja->no_telp) }}">
-                                                    @error('no_telp') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
-                                                </div>
-                                            </div>
-                                            <div class="col-md-12">
-                                                <div class="form-group">
-                                                    <label for="example-text-input" class="form-control-label">Agama<span class="titik-logo">*</span></label>
-                                                    <input class="form-control" type="text" name="agama" value="{{ old('agama', auth()->user()->penyediaKerja->agama) }}">
-                                                    @error('agama') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
-                                                </div>
-                                            </div>
-                                        </div> --}}
                                     <div class="card-footer pb-0">
                                         <div class="d-flex align-items-center">
                                             <button type="submit" class="btn btn-primary btn-lg ms-auto" style="margin-right: -22px">Selanjutnya 

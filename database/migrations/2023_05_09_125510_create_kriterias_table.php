@@ -21,7 +21,15 @@ return new class extends Migration
             $table->string('penghargaan');
             $table->string('organisasi');
             $table->string('bahasa');
+            $table->unsignedInteger('lowongan_kerja_id');
             $table->timestamps();
+        });
+
+        Schema::table('kriterias', function($table) {
+            $table->foreign('lowongan_kerja_id')
+            ->references('id')
+            ->on('lowongan_kerjas')
+            ->onDelete('cascade');
         });
     }
 

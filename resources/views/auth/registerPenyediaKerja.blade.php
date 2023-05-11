@@ -40,7 +40,7 @@
                                             @error('password') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
                                         </div>
                                         <div class="text-center">
-                                            <button type="submit" class="btn btn-lg btn-primary btn-lg w-100 mb-0 mt-3">Register</button>
+                                            <button type="submit" class="btn btn-lg btn-primary btn-lg w-100 mb-0 mt-3">Daftar</button>
                                         </div>
                                     </form>
                                 </div>

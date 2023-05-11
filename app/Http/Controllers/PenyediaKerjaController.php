@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\penyediaKerja;
+use App\Models\lowonganKerja;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PenyediaKerjaController extends Controller
 {
@@ -38,17 +40,78 @@ class PenyediaKerjaController extends Controller
         $attributes = request()->validate([
             'bidang' => 'required|max:255',
             'alamat' => 'required|max:255',
-            'no_telp' => 'required|date',
+            'no_telp' => 'required|max:16',
             'jml_karyawan' => 'required|max:255',
-            'deskripsi' => 'required|max:15',
-            'website' => 'required|max:20',
-            'sosial_media' => 'required|max:255',
+            'deskripsi' => 'required|max:255',
             'user_id' => 'required'
         ]);
         
         penyediaKerja::create($attributes);
         
-        return redirect('/pencari-kerja/unggah-foto');
+        return redirect('/penyedia-kerja/unggah-foto');
+    }
+
+    // Unggah Foto
+    public function UFP_create()
+    {
+        return view('penyediaKerja.unggah-foto');
+    }
+
+    public function UFP_store(Request $request)
+    {
+        $requestData = $request->all();
+        $foto = $request->hasFile('foto');
+        if($foto){
+            $fileName = time().$request->file('foto')->getClientOriginalName();
+            $path = $request->file('foto')->storeAs('images', $fileName, 'public');
+            $requestData['foto'] = '/storage/'.$path;
+            
+            $penyediaKerja = penyediaKerja::where('id', Auth::user()->penyediaKerja->id)->first();
+            $penyediaKerja->fill($requestData);
+            $penyediaKerja->save();
+        }
+        
+        return redirect('/penyedia-kerja/unggah-lowongan');
+        
+        
+    }
+
+    // Unggah Lowongan
+    public function UL_create()
+    {
+        return view('penyediaKerja.unggah-lowongan');
+    }
+
+    public function UL_store(Request $request)
+    {
+        return redirect('/penyedia-kerja/dashboard');
+    }
+
+    // Unggah Lowongan Pekerjaan
+    public function ULP_create()
+    {
+        return view('penyediaKerja.unggah-lowongan-pekerjaan');
+    }
+
+    public function ULP_store(Request $request)
+    {
+        if ($request->filled('nama')) {
+            $attributes = request()->validate([
+                'nama' => 'required|max:255',
+                'penerbit' => 'required|max:255',
+                'tgl_diterbitkan' => 'required|date',
+                'tgl_kadaluwarsa' => 'required|date',
+                'kredensial_id' => 'required|max:255',
+                'kredensial_url' => 'required|max:255',
+                'pencari_kerja_id' => 'required'
+            ]);
+
+            lowonganKerja::create($attributes);
+        }
+        
+        return redirect('/penyedia-kerja/dashboard');
+        
+        
     }
 
 
@@ -59,7 +122,7 @@ class PenyediaKerjaController extends Controller
      */
     public function index()
     {
-        //
+        return view('pages.dashboard');
     }
 
     /**

@@ -62,4 +62,12 @@ class User extends Authenticatable
     {
         return $this->hasOne(pencariKerja::class);
     }
+
+    /**
+     * Get the pencariKerja associated with the user.
+     */
+    public function penyediaKerja(): HasOne
+    {
+        return $this->hasOne(penyediaKerja::class);
+    }
 }
