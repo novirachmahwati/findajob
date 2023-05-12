@@ -17,11 +17,16 @@ return new class extends Migration
         Schema::create('lowongan_kerjas', function (Blueprint $table) {
             $table->id();
             $table->string('judul_pekerjaan');
-            $table->string('jenis');
-            $table->string('lokasi');
-            $table->string('gaji');
-            $table->text('deskripsi');
-            $table->text('status');
+            $table->text('deskripsi_pekerjaan');
+            $table->string('jenis_pekerjaan');
+            $table->string('lokasi_pekerjaan');
+            $table->string('rentang_gaji_minimal');
+            $table->string('rentang_gaji_maksimal');
+            $table->string('jenis_kelamin');
+            $table->date('tanggal_tayang');
+            $table->date('tanggal_kadaluwarsa');
+            $table->integer('kuota');
+            $table->string('status');
             $table->unsignedInteger('penyedia_kerja_id');
             $table->timestamps();
         });

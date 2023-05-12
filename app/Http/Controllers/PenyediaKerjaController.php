@@ -82,7 +82,7 @@ class PenyediaKerjaController extends Controller
         return view('penyediaKerja.unggah-lowongan');
     }
 
-    public function UL_store(Request $request)
+    public function UL_store()
     {
         return redirect('/penyedia-kerja/dashboard');
     }
@@ -95,23 +95,56 @@ class PenyediaKerjaController extends Controller
 
     public function ULP_store(Request $request)
     {
-        if ($request->filled('nama')) {
-            $attributes = request()->validate([
-                'nama' => 'required|max:255',
-                'penerbit' => 'required|max:255',
-                'tgl_diterbitkan' => 'required|date',
-                'tgl_kadaluwarsa' => 'required|date',
-                'kredensial_id' => 'required|max:255',
-                'kredensial_url' => 'required|max:255',
-                'pencari_kerja_id' => 'required'
-            ]);
+        $attributes = request()->validate([
+            'judul_pekerjaan' => 'required|max:255',
+            'deskripsi_pekerjaan' => 'required|max:1000',
+            'jenis_pekerjaan' => 'required|max:255',
+            'lokasi_pekerjaan' => 'required|max:255',
+            'rentang_gaji_minimal' => 'required|max:255',
+            'rentang_gaji_maksimal' => 'required|max:255',
+            'jenis_kelamin' => 'required|max:255',
+            'tanggal_tayang' => 'required|date',
+            'tanggal_kadaluwarsa' => 'required|date',
+            'kuota' => 'required|max:255',
+            'status' => 'required|max:255',
+            'penyedia_kerja_id' => 'required'
+        ]);
 
-            lowonganKerja::create($attributes);
-        }
+        $attributes['jenis_kelamin'] = $request->input('jenis_kelamin');
+
+        $lowonganKerja = lowonganKerja::create($attributes);
         
-        return redirect('/penyedia-kerja/dashboard');
+        // return redirect('/penyedia-kerja/dashboard');
+        return redirect()->route('PUK.create')->with([ 'lowongan_kerja_id' => $lowonganKerja->id ]);
+    }
+
+    // Persyaratan Umum & Khusus
+    public function PUK_create()
+    {
+        return view('penyediaKerja.persyaratan-umum-khusus');
+    }
+
+    public function PUK_store(Request $request)
+    {
+        $attributes = request()->validate([
+            'judul_pekerjaan' => 'required|max:255',
+            'deskripsi_pekerjaan' => 'required|max:500',
+            'jenis_pekerjaan' => 'required|max:255',
+            'lokasi_pekerjaan' => 'required|max:255',
+            'rentang_gaji_minimal' => 'required|max:255',
+            'rentang_gaji_maksimal' => 'required|max:255',
+            'jenis_kelamin' => 'required|max:255',
+            'tanggal_tayang' => 'required|date',
+            'tanggal_kadaluwarsa' => 'required|date',
+            'kuota' => 'required|max:255',
+            'status' => 'required|max:255',
+            'penyedia_kerja_id' => 'required'
+        ]);
+
+        $lowonganKerja = lowonganKerja::create($attributes);
         
-        
+        // return redirect('/penyedia-kerja/dashboard');
+        return redirect()->route('PUK.create')->with([ 'lowongan_kerja_id' => $lowonganKerja->id ]);
     }
 
 
