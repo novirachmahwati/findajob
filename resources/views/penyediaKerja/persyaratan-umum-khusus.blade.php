@@ -62,8 +62,8 @@
                             </div>
                             <div class="col-9">
                                 <div class="numbers">
-                                    <p class="text-sm mb-0 font-weight-bold" style="margin-left: 10px">
-                                        Perankingan Persyaratan
+                                    <p class="text-sm mb-0 font-weight-bold" style="margin-left: 10px; line-height: 3">
+                                        Kontak
                                     </p>
                                 </div>
                             </div>
@@ -108,23 +108,42 @@
                                     @csrf
                                     <div class="card-body">
                                         <div class="row">
-                                            <input type="hidden" name="penyedia_kerja_id" value="{{ auth()->user()->penyediaKerja->id }}">
-                                            <input type="hidden" name="status" value="Aktif">
+                                            <input type="hidden" name="lowongan_kerja_id" value="{{ $lowongan_kerja_id }}">
+                                            <input type="hidden" name="prioritas_minimal_pendidikan" value="#">
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="minimal_pendidikan" class="form-control-label">Minimal Pendidikan<span class="titik-logo">*</span></label>
                                                     <select class="form-control" name="minimal_pendidikan">
                                                         <option value="" hidden>Pilih Minimal Pendidikan</option>
-                                                        <option value="SMK" @if(old('minimal_pendidikan') == 'SMK')selected @endif>SMK</option>
-                                                        <option value="Diploma" @if(old('minimal_pendidikan') == 'Diploma')selected @endif>Diploma</option>
-                                                        <option value="Sarjana" @if(old('minimal_pendidikan') == 'Sarjana')selected @endif>Sarjana</option>
-                                                        <option value="Magister" @if(old('minimal_pendidikan') == 'Magister')selected @endif>Magister</option>
-                                                        <option value="Doktoral" @if(old('minimal_pendidikan') == 'Doktoral')selected @endif>Doktoral</option>
-                                                        <option value="SD atau Sederajat" @if(old('minimal_pendidikan') == 'SD atau Sederajat')selected @endif>SD atau Sederajat</option>
-                                                        <option value="SMP atau Sederajat" @if(old('minimal_pendidikan') == 'SMP atau Sederajat')selected @endif>SMP atau Sederajat</option>
-                                                        <option value="SMA atau Sederajat" @if(old('minimal_pendidikan') == 'SMA atau Sederajat')selected @endif>SMA atau Sederajat</option>
+                                                        <option value="S3" @if(old('minimal_pendidikan') == 'S3')selected @endif>S3</option>
+                                                        <option value="S2" @if(old('minimal_pendidikan') == 'S2')selected @endif>S2</option>
+                                                        <option value="S1 / D4" @if(old('minimal_pendidikan') == 'S1 / D4')selected @endif>S1 / D4</option>
+                                                        <option value="D3" @if(old('minimal_pendidikan') == 'D3')selected @endif>D3</option>
+                                                        <option value="SMA / SMK" @if(old('minimal_pendidikan') == 'SMA / SMK')selected @endif>SMA / SMK</option>
+                                                        <option value="SMP" @if(old('minimal_pendidikan') == 'SMP')selected @endif>SMP</option>
+                                                        <option value="SD" @if(old('minimal_pendidikan') == 'SD')selected @endif>SD</option>
                                                     </select>
                                                     @error('minimal_pendidikan') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="tahun_pengalaman" class="form-control-label">Tahun Pengalaman<span class="titik-logo">*</span></label>
+                                                    <select class="form-control" name="tahun_pengalaman">
+                                                        <option value="" hidden>Pilih Minimal Tahun Pengalaman Kerja</option>
+                                                        <option value="Fresh Graduate" @if(old('tahun_pengalaman') == 'Fresh Graduate')selected @endif>Fresh Graduate</option>
+                                                        <option value="1 - 2 Tahun" @if(old('tahun_pengalaman') == '1 - 2 Tahun')selected @endif>1 - 2 Tahun</option>
+                                                        <option value="3 - 5 Tahun" @if(old('tahun_pengalaman') == '3 - 5 Tahun')selected @endif>3 - 5 Tahun</option>
+                                                        <option value="> 5 Tahun" @if(old('tahun_pengalaman') == '> 5 Tahun')selected @endif>> 5 Tahun</option>
+                                                    </select>
+                                                    @error('tahun_pengalaman') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label for="jurusan_pendidikan_terakhir" class="form-control-label">Jurusan Pendidikan Terakhir<span class="titik-logo">*</span></label>
+                                                    <input class="form-control" type="text" name="jurusan_pendidikan_terakhir" value="{{ old('jurusan_pendidikan_terakhir') }}" placeholder="Jurusan Pendidikan Terakhir">
+                                                    @error('jurusan_pendidikan_terakhir') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
                                                 </div>
                                             </div>
                                             <div class="col-md-12">
@@ -133,12 +152,12 @@
                                                 </div>
                                                 <div class="form-group" style="margin-top:-15px;">
                                                     <div class="form-check form-check-inline">
-                                                        <input class="form-check-input" name="status_pernikahan[]" type="checkbox" id="inlineCheckbox1" value="Single / Belum Menikah">
-                                                        <label class="form-check-label" for="inlineCheckbox1">Single / Belum Menikah</label>
+                                                        <input class="form-check-input" name="status_pernikahan[]" type="checkbox" id="inlineCheckboxSP1" value="Single / Belum Menikah">
+                                                        <label class="form-check-label" for="inlineCheckboxSP1">Single / Belum Menikah</label>
                                                     </div>
                                                     <div class="form-check form-check-inline">
-                                                        <input class="form-check-input" name="status_pernikahan[]" type="checkbox" id="inlineCheckbox2" value="Sudah Menikah">
-                                                        <label class="form-check-label" for="inlineCheckbox2">Sudah Menikah</label>
+                                                        <input class="form-check-input" name="status_pernikahan[]" type="checkbox" id="inlineCheckboxSP2" value="Sudah Menikah">
+                                                        <label class="form-check-label" for="inlineCheckboxSP2">Sudah Menikah</label>
                                                     </div>
                                                     @error('status_pernikahan') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
                                                 </div>
@@ -156,16 +175,71 @@
                                                     @error('rentang_usia_maksimal') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
                                                 </div>
                                             </div>
-                                            <hr class="horizontal dark mt-3">
-                                            {{-- <div class="card-header pb-0 pt-4 bg-transparent"> --}}
-                                                <h6 class="text-capitalize mt-3">Persyaratan Khusus</h6>
-                                                <p>Masukkan persyaratan khusus dan requirement yang kamu butuhkan, seperti keahlian bahasa tertentu.</p>
-                                            {{-- </div> --}}
                                             <div class="col-md-12">
                                                 <div class="form-group">
-                                                    <label for="kualifikasi" class="form-control-label">Kualifikasi / Requirements <span class="titik-logo">*</span></label>
-                                                    <textarea class="ckeditor form-control" type="text" name="kualifikasi" value="{{ old('kualifikasi') }}" placeholder="Kualifikasi"></textarea>
-                                                    @error('kualifikasi') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
+                                                    <label for="bahasa" class="form-control-label">Bahasa<span class="titik-logo">*</span></label>
+                                                </div>
+                                                <div class="form-group" style="margin-top:-15px;">
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" name="bahasa[]" type="checkbox" id="inlineCheckbox1" value="Bahasa Indonesia">
+                                                        <label class="form-check-label" for="inlineCheckbox1">Bahasa Indonesia</label>
+                                                    </div>
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" name="bahasa[]" type="checkbox" id="inlineCheckbox2" value="Inggris">
+                                                        <label class="form-check-label" for="inlineCheckbox2">Inggris</label>
+                                                    </div>
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" name="bahasa[]" type="checkbox" id="inlineCheckbox3" value="Mandarin">
+                                                        <label class="form-check-label" for="inlineCheckbox3">Mandarin</label>
+                                                    </div>
+                                                    @error('status_pernikahan') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
+                                                </div>
+                                            </div>
+                                            <hr class="horizontal dark mt-3">
+                                                <h6 class="text-capitalize mt-3">Persyaratan Khusus</h6>
+                                                <p>Masukkan persyaratan khusus dan requirement yang kamu butuhkan, kemudian pilih prioritasnya.</p>
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label for="keterampilan_teknis" class="form-control-label">Keterampilan Teknis / Hard Skill <span class="titik-logo">*</span></label>
+                                                    <div class="table-responsive">  
+                                                        <table class="table table-bordered" id="dynamic_field_keterampilan_teknis">  
+                                                            <tr>  
+                                                                <td><input type="text" name="keterampilan_teknis[]" placeholder="Contoh: Python" class="form-control" /></td>   
+                                                                <td><select class="form-control" name="prioritas_keterampilan_teknis[]">
+                                                                    <option value="" hidden>Pilih Prioritas</option>
+                                                                    <option value="4" @if(old('prioritas_keterampilan_teknis') == '4')selected @endif>Sangat Penting</option>
+                                                                    <option value="3" @if(old('prioritas_keterampilan_teknis') == '3')selected @endif>Penting</option>
+                                                                    <option value="2" @if(old('prioritas_keterampilan_teknis') == '2')selected @endif>Regular</option>
+                                                                    <option value="1" @if(old('prioritas_keterampilan_teknis') == '1')selected @endif>Menambah Value</option>
+                                                                </select></td>
+                                                                <td><button type="button" name="add_keterampilan_teknis" id="add_keterampilan_teknis" class="btn btn-success"><i class="fa fa-plus" aria-hidden="true"></i></button></td>  
+                                                            </tr>  
+                                                        </table>  
+                                                    </div>
+                                                    @error('keterampilan_teknis') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
+                                                    @error('prioritas_keterampilan_teknis') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label for="keterampilan_non_teknis" class="form-control-label">Keterampilan Non Teknis / Soft Skill <span class="titik-logo">*</span></label>
+                                                    <div class="table-responsive">  
+                                                        <table class="table table-bordered" id="dynamic_field_keterampilan_non_teknis">  
+                                                            <tr>  
+                                                                <td><input type="text" name="keterampilan_non_teknis[]" placeholder="Contoh: Kreatif" class="form-control" /></td>   
+                                                                <td><select class="form-control" name="prioritas_keterampilan_non_teknis[]">
+                                                                    <option value="" hidden>Pilih Prioritas</option>
+                                                                    <option value="4" @if(old('prioritas_keterampilan_non_teknis') == '4')selected @endif>Sangat Penting</option>
+                                                                    <option value="3" @if(old('prioritas_keterampilan_non_teknis') == '3')selected @endif>Penting</option>
+                                                                    <option value="2" @if(old('prioritas_keterampilan_non_teknis') == '2')selected @endif>Regular</option>
+                                                                    <option value="1" @if(old('prioritas_keterampilan_non_teknis') == '1')selected @endif>Menambah Value</option>
+                                                                </select></td>
+                                                                <td><button type="button" name="add_keterampilan_non_teknis" id="add_keterampilan_non_teknis" class="btn btn-success"><i class="fa fa-plus" aria-hidden="true"></i></button></td>  
+                                                            </tr>  
+                                                        </table>  
+                                                    </div>
+                                                    @error('keterampilan_non_teknis') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
+                                                    @error('prioritas_keterampilan_non_teknis') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
                                                 </div>
                                             </div>
                                     </div>
@@ -187,10 +261,42 @@
 @endsection
 
 @section('bottom-content')
-    <script src="//cdn.ckeditor.com/4.14.1/standard/ckeditor.js"></script>
     <script type="text/javascript">
-        $(document).ready(function () {
-            $('.ckeditor').ckeditor();
+        $(document).ready(function(){      
+        var i=1;  
+
+
+        $('#add_keterampilan_teknis').click(function(){  
+            i++;  
+            $('#dynamic_field_keterampilan_teknis').append('<tr id="row'+i+'" class="dynamic-added"><td><input type="text" name="keterampilan_teknis[]" placeholder="Contoh: SQL" class="form-control" /></td>   \
+                                                                <td><select class="form-control" name="prioritas_keterampilan_teknis[]"> \
+                                                                    <option value="" hidden>Pilih Prioritas</option> \
+                                                                    <option value="4" @if(old("prioritas_keterampilan_teknis") == "4")selected @endif>Sangat Penting</option> \
+                                                                    <option value="3" @if(old("prioritas_keterampilan_teknis") == "3")selected @endif>Penting</option> \
+                                                                    <option value="2" @if(old("prioritas_keterampilan_teknis") == "2")selected @endif>Regular</option> \
+                                                                    <option value="1" @if(old("prioritas_keterampilan_teknis") == "1")selected @endif>Menambah Value</option> \
+                                                                </select></td> \
+                                                                <td><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">X</button></td></tr>');  
         });
+        
+        $('#add_keterampilan_non_teknis').click(function(){  
+            i++;  
+            $('#dynamic_field_keterampilan_non_teknis').append('<tr id="row'+i+'" class="dynamic-added"><td><input type="text" name="keterampilan_non_teknis[]" placeholder="Contoh: Inovatif" class="form-control" /></td>   \
+                                                                <td><select class="form-control" name="prioritas_keterampilan_non_teknis[]"> \
+                                                                    <option value="" hidden>Pilih Prioritas</option> \
+                                                                    <option value="4" @if(old("prioritas_keterampilan_non_teknis") == "4")selected @endif>Sangat Penting</option> \
+                                                                    <option value="3" @if(old("prioritas_keterampilan_non_teknis") == "3")selected @endif>Penting</option> \
+                                                                    <option value="2" @if(old("prioritas_keterampilan_non_teknis") == "2")selected @endif>Regular</option> \
+                                                                    <option value="1" @if(old("prioritas_keterampilan_non_teknis") == "1")selected @endif>Menambah Value</option> \
+                                                                </select></td> \
+                                                                <td><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">X</button></td></tr>');  
+        });
+    });
+
+
+        $(document).on('click', '.btn_remove', function(){  
+            var button_id = $(this).attr("id");   
+            $('#row'+button_id+'').remove();  
+        });  
     </script>
 @endsection

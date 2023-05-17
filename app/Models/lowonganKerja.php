@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class lowonganKerja extends Model
 {
@@ -35,8 +35,8 @@ class lowonganKerja extends Model
     /**
      * Get the kriteria associated with lowonganKerja.
      */
-    public function kriteria(): HasMany
+    public function kriteria(): HasOne
     {
-        return $this->hasMany(kriteria::class);
+        return $this->hasOne(kriteria::class);
     }
 }

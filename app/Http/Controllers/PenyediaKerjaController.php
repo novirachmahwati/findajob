@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\penyediaKerja;
 use App\Models\lowonganKerja;
+use App\Models\kriteria;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -105,7 +106,7 @@ class PenyediaKerjaController extends Controller
             'jenis_kelamin' => 'required|max:255',
             'tanggal_tayang' => 'required|date',
             'tanggal_kadaluwarsa' => 'required|date',
-            'kuota' => 'required|max:255',
+            'kuota' => 'required|max:10000',
             'status' => 'required|max:255',
             'penyedia_kerja_id' => 'required'
         ]);
@@ -115,7 +116,8 @@ class PenyediaKerjaController extends Controller
         $lowonganKerja = lowonganKerja::create($attributes);
         
         // return redirect('/penyedia-kerja/dashboard');
-        return redirect()->route('PUK.create')->with([ 'lowongan_kerja_id' => $lowonganKerja->id ]);
+        // return redirect()->route('PUK.create')->with([ 'lowongan_kerja_id' => $lowonganKerja->id ]);
+        return view('penyediaKerja.persyaratan-umum-khusus',['lowongan_kerja_id' => $lowonganKerja->id]);
     }
 
     // Persyaratan Umum & Khusus
@@ -127,8 +129,70 @@ class PenyediaKerjaController extends Controller
     public function PUK_store(Request $request)
     {
         $attributes = request()->validate([
+            'minimal_pendidikan' => 'required|max:255',
+            'prioritas_minimal_pendidikan' => 'required|max:500',
+            'tahun_pengalaman' => 'required|max:255',
+            'jurusan_pendidikan_terakhir' => 'required|max:255',
+            'status_pernikahan' => 'required|max:255',
+            'rentang_usia_minimal' => 'required|max:255',
+            'rentang_usia_maksimal' => 'required|max:255',
+            'bahasa' => 'required|max:255',
+            'keterampilan_teknis' => 'required|max:255',
+            'prioritas_keterampilan_teknis' => 'required|max:255',
+            'keterampilan_non_teknis' => 'required|max:255',
+            'prioritas_keterampilan_non_teknis' => 'required|max:255',
+            'lowongan_kerja_id' => 'required'
+        ]);
+
+        switch($request->minimal_pendidikan) {
+            case('S3'):
+                $attributes['prioritas_minimal_pendidikan'] = "['SD':0, 'SMP':0, 'SMA / SMK':0, 'D3':0, 'S1 / D4':0, 'S2':0, 'S3':0]";
+                break;
+            case('S2'):
+                $attributes['prioritas_minimal_pendidikan'] = "['SD':0, 'SMP':0, 'SMA / SMK':0, 'D3':0, 'S1 / D4':0, 'S2':0, 'S3':0]";
+                break;
+            case('S1 / D4'):
+                $attributes['prioritas_minimal_pendidikan'] = "['SD':0, 'SMP':0, 'SMA / SMK':0, 'D3':0, 'S1 / D4':0, 'S2':0, 'S3':0]";
+                break;
+            case('D3'):
+                $attributes['prioritas_minimal_pendidikan'] = "['SD':0, 'SMP':0, 'SMA / SMK':0, 'D3':0, 'S1 / D4':0, 'S2':0, 'S3':0]";
+                break;
+            case('SMA / SMK'):
+                $attributes['prioritas_minimal_pendidikan'] = "['SD':0, 'SMP':0, 'SMA / SMK':0, 'D3':0, 'S1 / D4':0, 'S2':0, 'S3':0]";
+                break;
+            case('SMP'):
+                $attributes['prioritas_minimal_pendidikan'] = "['SD':0, 'SMP':0, 'SMA / SMK':0, 'D3':0, 'S1 / D4':0, 'S2':0, 'S3':0]";
+                break;
+            case('SD'):
+                $attributes['prioritas_minimal_pendidikan'] = "['SD':0, 'SMP':0, 'SMA / SMK':0, 'D3':0, 'S1 / D4':0, 'S2':0, 'S3':0]";
+                break;
+        }
+
+        $attributes['status_pernikahan'] = $request->input('status_pernikahan');
+        $attributes['bahasa'] = $request->input('bahasa');
+        $attributes['keterampilan_teknis'] = $request->input('keterampilan_teknis');
+        $attributes['prioritas_keterampilan_teknis'] = $request->input('prioritas_keterampilan_teknis');
+        $attributes['keterampilan_non_teknis'] = $request->input('keterampilan_non_teknis');
+        $attributes['prioritas_keterampilan_non_teknis'] = $request->input('prioritas_keterampilan_non_teknis');
+        
+        $kriteria = kriteria::create($attributes);
+        
+        // return redirect('/penyedia-kerja/dashboard');
+        // return redirect()->route('PUK.create')->with([ 'lowongan_kerja_id' => $kriteria->lowongan_kerja_id ]);
+        return view('penyediaKerja.kontak',['lowongan_kerja_id' => $kriteria->lowongan_kerja_id]);
+    }
+
+    // Kontak Lowongan Pekerjaan
+    public function KL_create()
+    {
+        return view('penyediaKerja.kontak');
+    }
+
+    public function KL_store(Request $request)
+    {
+        $attributes = request()->validate([
             'judul_pekerjaan' => 'required|max:255',
-            'deskripsi_pekerjaan' => 'required|max:500',
+            'deskripsi_pekerjaan' => 'required|max:1000',
             'jenis_pekerjaan' => 'required|max:255',
             'lokasi_pekerjaan' => 'required|max:255',
             'rentang_gaji_minimal' => 'required|max:255',
@@ -136,7 +200,7 @@ class PenyediaKerjaController extends Controller
             'jenis_kelamin' => 'required|max:255',
             'tanggal_tayang' => 'required|date',
             'tanggal_kadaluwarsa' => 'required|date',
-            'kuota' => 'required|max:255',
+            'kuota' => 'required|max:10000',
             'status' => 'required|max:255',
             'penyedia_kerja_id' => 'required'
         ]);

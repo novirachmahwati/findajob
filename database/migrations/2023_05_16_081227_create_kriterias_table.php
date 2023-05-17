@@ -15,12 +15,18 @@ return new class extends Migration
     {
         Schema::create('kriterias', function (Blueprint $table) {
             $table->id();
-            $table->string('pendidikan');
-            $table->string('skill');
-            $table->string('pengalaman_kerja');
-            $table->string('penghargaan');
-            $table->string('organisasi');
+            $table->string('minimal_pendidikan');
+            $table->string('prioritas_minimal_pendidikan');
+            $table->string('tahun_pengalaman');
+            $table->string('jurusan_pendidikan_terakhir');
+            $table->string('status_pernikahan');
+            $table->integer('rentang_usia_minimal');
+            $table->integer('rentang_usia_maksimal');
             $table->string('bahasa');
+            $table->string('keterampilan_teknis');
+            $table->string('prioritas_keterampilan_teknis');
+            $table->string('keterampilan_non_teknis');
+            $table->string('prioritas_keterampilan_non_teknis');
             $table->unsignedInteger('lowongan_kerja_id');
             $table->timestamps();
         });
