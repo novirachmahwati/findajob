@@ -148,21 +148,20 @@
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label for="rentang_gaji_minimal" class="form-control-label">Rentang Gaji<span class="titik-logo">*</span></label>
-                                                    <input class="form-control" type="number" name="rentang_gaji_minimal" value="{{ old('rentang_gaji_minimal') }}" placeholder="Rentang gaji minimal">
+                                                    <label for="rentang_gaji_minimal" class="form-control-label">Rentang Gaji (Rupiah)<span class="titik-logo">*</span></label>
+                                                    <input class="form-control" type="number" name="rentang_gaji_minimal" value="{{ old('rentang_gaji_minimal') }}" placeholder="Rentang gaji minimal" min="1">
                                                     @error('rentang_gaji_minimal') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group" style="margin-top: 30px;">
-                                                    <input class="form-control" type="number" name="rentang_gaji_maksimal" value="{{ old('rentang_gaji_maksimal') }}" placeholder="Rentang gaji maksimal">
+                                                    <input class="form-control" type="number" name="rentang_gaji_maksimal" value="{{ old('rentang_gaji_maksimal') }}" placeholder="Rentang gaji maksimal" min="1">
                                                     @error('rentang_gaji_maksimal') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
                                                 </div>
                                             </div>
                                             <div class="col-md-12">
                                                 <div class="form-group">
-                                                    <label for="jenis_pekerjaan" class="form-control-label">Jenis Kelamin<span class="titik-logo">*</span></label>
-                                                    @error('jenis_pekerjaan') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
+                                                    <label for="jenis_kelamin" class="form-control-label">Jenis Kelamin<span class="titik-logo">*</span></label>
                                                 </div>
                                                 <div class="form-group" style="margin-top:-15px;">
                                                     <div class="form-check form-check-inline">
@@ -173,7 +172,7 @@
                                                         <input class="form-check-input" name="jenis_kelamin[]" type="checkbox" id="inlineCheckbox2" value="Perempuan">
                                                         <label class="form-check-label" for="inlineCheckbox2">Perempuan</label>
                                                     </div>
-                                                    @error('jenis_pekerjaan') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
+                                                    @error('jenis_kelamin') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
                                                 </div>
                                             </div>
                                             <hr class="horizontal dark">
@@ -194,7 +193,7 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="kuota" class="form-control-label">Kuota<span class="titik-logo">*</span></label>
-                                                    <input class="form-control" type="number" name="kuota" value="{{ old('kuota') }}" placeholder="Kuota Lowongan">
+                                                    <input class="form-control" type="number" name="kuota" value="{{ old('kuota') }}" placeholder="Kuota Lowongan" min="1">
                                                     @error('kuota') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
                                                 </div>
                                             </div>

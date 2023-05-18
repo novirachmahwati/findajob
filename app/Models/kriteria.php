@@ -19,6 +19,8 @@ class kriteria extends Model
         'prioritas_keterampilan_teknis',
         'keterampilan_non_teknis',
         'prioritas_keterampilan_non_teknis',
+        'sertifikasi',
+        'prioritas_sertifikasi',
         'lowongan_kerja_id'
     ];
 
@@ -80,6 +82,26 @@ class kriteria extends Model
     public function getPrioritasKeterampilanNonTeknisAttribute($value)
     {
         return $this->attributes['prioritas_keterampilan_non_teknis'] = json_decode($value);
+    }
+
+    public function setSertifikasiAttribute($value)
+    {
+        $this->attributes['sertifikasi'] = json_encode($value);
+    }
+
+    public function getSertifikasiAttribute($value)
+    {
+        return $this->attributes['sertifikasi'] = json_decode($value);
+    }
+
+    public function setPrioritasSertifikasiAttribute($value)
+    {
+        $this->attributes['prioritas_sertifikasi'] = json_encode($value);
+    }
+
+    public function getPrioritasSertifikasiAttribute($value)
+    {
+        return $this->attributes['prioritas_sertifikasi'] = json_decode($value);
     }
 
     /**

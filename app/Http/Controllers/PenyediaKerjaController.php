@@ -141,30 +141,32 @@ class PenyediaKerjaController extends Controller
             'prioritas_keterampilan_teknis' => 'required|max:255',
             'keterampilan_non_teknis' => 'required|max:255',
             'prioritas_keterampilan_non_teknis' => 'required|max:255',
+            'sertifikasi' => 'max:255',
+            'prioritas_sertifikasi' => 'required|max:255',
             'lowongan_kerja_id' => 'required'
         ]);
 
         switch($request->minimal_pendidikan) {
             case('S3'):
-                $attributes['prioritas_minimal_pendidikan'] = "['SD':0, 'SMP':0, 'SMA / SMK':0, 'D3':0, 'S1 / D4':0, 'S2':0, 'S3':0]";
+                $attributes['prioritas_minimal_pendidikan'] = "['SD':0, 'SMP':0, 'SMA / SMK':0, 'D3':0, 'S1 / D4':0, 'S2':0, 'S3':1]";
                 break;
             case('S2'):
-                $attributes['prioritas_minimal_pendidikan'] = "['SD':0, 'SMP':0, 'SMA / SMK':0, 'D3':0, 'S1 / D4':0, 'S2':0, 'S3':0]";
+                $attributes['prioritas_minimal_pendidikan'] = "['SD':0, 'SMP':0, 'SMA / SMK':0, 'D3':0, 'S1 / D4':0, 'S2':1, 'S3':2]";
                 break;
             case('S1 / D4'):
-                $attributes['prioritas_minimal_pendidikan'] = "['SD':0, 'SMP':0, 'SMA / SMK':0, 'D3':0, 'S1 / D4':0, 'S2':0, 'S3':0]";
+                $attributes['prioritas_minimal_pendidikan'] = "['SD':0, 'SMP':0, 'SMA / SMK':0, 'D3':0, 'S1 / D4':1, 'S2':2, 'S3':3]";
                 break;
             case('D3'):
-                $attributes['prioritas_minimal_pendidikan'] = "['SD':0, 'SMP':0, 'SMA / SMK':0, 'D3':0, 'S1 / D4':0, 'S2':0, 'S3':0]";
+                $attributes['prioritas_minimal_pendidikan'] = "['SD':0, 'SMP':0, 'SMA / SMK':0, 'D3':1, 'S1 / D4':2, 'S2':3, 'S3':4]";
                 break;
             case('SMA / SMK'):
-                $attributes['prioritas_minimal_pendidikan'] = "['SD':0, 'SMP':0, 'SMA / SMK':0, 'D3':0, 'S1 / D4':0, 'S2':0, 'S3':0]";
+                $attributes['prioritas_minimal_pendidikan'] = "['SD':0, 'SMP':0, 'SMA / SMK':1, 'D3':2, 'S1 / D4':3, 'S2':4, 'S3':5]";
                 break;
             case('SMP'):
-                $attributes['prioritas_minimal_pendidikan'] = "['SD':0, 'SMP':0, 'SMA / SMK':0, 'D3':0, 'S1 / D4':0, 'S2':0, 'S3':0]";
+                $attributes['prioritas_minimal_pendidikan'] = "['SD':0, 'SMP':1, 'SMA / SMK':2, 'D3':3, 'S1 / D4':4, 'S2':5, 'S3':6]";
                 break;
             case('SD'):
-                $attributes['prioritas_minimal_pendidikan'] = "['SD':0, 'SMP':0, 'SMA / SMK':0, 'D3':0, 'S1 / D4':0, 'S2':0, 'S3':0]";
+                $attributes['prioritas_minimal_pendidikan'] = "['SD':1, 'SMP':2, 'SMA / SMK':3, 'D3':4, 'S1 / D4':5, 'S2':6, 'S3':7]";
                 break;
         }
 
@@ -174,11 +176,11 @@ class PenyediaKerjaController extends Controller
         $attributes['prioritas_keterampilan_teknis'] = $request->input('prioritas_keterampilan_teknis');
         $attributes['keterampilan_non_teknis'] = $request->input('keterampilan_non_teknis');
         $attributes['prioritas_keterampilan_non_teknis'] = $request->input('prioritas_keterampilan_non_teknis');
+        $attributes['sertifikasi'] = $request->input('sertifikasi');
+        $attributes['prioritas_sertifikasi'] = $request->input('prioritas_sertifikasi');
         
         $kriteria = kriteria::create($attributes);
         
-        // return redirect('/penyedia-kerja/dashboard');
-        // return redirect()->route('PUK.create')->with([ 'lowongan_kerja_id' => $kriteria->lowongan_kerja_id ]);
         return view('penyediaKerja.kontak',['lowongan_kerja_id' => $kriteria->lowongan_kerja_id]);
     }
 

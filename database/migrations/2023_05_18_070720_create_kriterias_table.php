@@ -27,6 +27,8 @@ return new class extends Migration
             $table->string('prioritas_keterampilan_teknis');
             $table->string('keterampilan_non_teknis');
             $table->string('prioritas_keterampilan_non_teknis');
+            $table->string('sertifikasi')->nullable();
+            $table->string('prioritas_sertifikasi')->nullable();
             $table->unsignedInteger('lowongan_kerja_id');
             $table->timestamps();
         });

@@ -94,6 +94,7 @@ Route::group(['middleware' => 'auth'], function () {
 
 		Route::get('/unggah-lowongan-pekerjaan', [PenyediaKerjaController::class, 'ULP_create'])->name('ULP.create');
 		Route::post('/unggah-lowongan-pekerjaan', [PenyediaKerjaController::class, 'ULP_store'])->name('ULP.store');
+		Route::get('/persyaratan-umum-khusus', [PenyediaKerjaController::class, 'PUK_create'])->name('PUK.create');
 		Route::post('/persyaratan-umum-khusus', [PenyediaKerjaController::class, 'PUK_store'])->name('PUK.store');
 
 		Route::get('/kontak-lowongan', [PenyediaKerjaController::class, 'KL_create'])->name('KL.create');

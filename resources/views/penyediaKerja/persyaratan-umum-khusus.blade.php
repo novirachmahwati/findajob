@@ -165,13 +165,13 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="rentang_usia_minimal" class="form-control-label">Rentang Usia (Tahun)<span class="titik-logo">*</span></label>
-                                                    <input class="form-control" type="number" name="rentang_usia_minimal" value="{{ old('rentang_usia_minimal') }}" placeholder="Rentang usia minimal">
+                                                    <input class="form-control" type="number" name="rentang_usia_minimal" value="{{ old('rentang_usia_minimal') }}" placeholder="Rentang usia minimal" min="15" max="100">
                                                     @error('rentang_usia_minimal') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group" style="margin-top: 30px;">
-                                                    <input class="form-control" type="number" name="rentang_usia_maksimal" value="{{ old('rentang_usia_maksimal') }}" placeholder="Rentang usia maksimal">
+                                                    <input class="form-control" type="number" name="rentang_usia_maksimal" value="{{ old('rentang_usia_maksimal') }}" placeholder="Rentang usia maksimal" min="15" max="100">
                                                     @error('rentang_usia_maksimal') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
                                                 </div>
                                             </div>
@@ -204,8 +204,8 @@
                                                     <div class="table-responsive">  
                                                         <table class="table table-bordered" id="dynamic_field_keterampilan_teknis">  
                                                             <tr>  
-                                                                <td><input type="text" name="keterampilan_teknis[]" placeholder="Contoh: Python" class="form-control" /></td>   
-                                                                <td><select class="form-control" name="prioritas_keterampilan_teknis[]">
+                                                                <td><input type="text" name="keterampilan_teknis[]" placeholder="Contoh: Python" class="form-control" required/></td>   
+                                                                <td><select class="form-control" name="prioritas_keterampilan_teknis[]" required>
                                                                     <option value="" hidden>Pilih Prioritas</option>
                                                                     <option value="4" @if(old('prioritas_keterampilan_teknis') == '4')selected @endif>Sangat Penting</option>
                                                                     <option value="3" @if(old('prioritas_keterampilan_teknis') == '3')selected @endif>Penting</option>
@@ -226,8 +226,8 @@
                                                     <div class="table-responsive">  
                                                         <table class="table table-bordered" id="dynamic_field_keterampilan_non_teknis">  
                                                             <tr>  
-                                                                <td><input type="text" name="keterampilan_non_teknis[]" placeholder="Contoh: Kreatif" class="form-control" /></td>   
-                                                                <td><select class="form-control" name="prioritas_keterampilan_non_teknis[]">
+                                                                <td><input type="text" name="keterampilan_non_teknis[]" placeholder="Contoh: Kreatif" class="form-control" required/></td>   
+                                                                <td><select class="form-control" name="prioritas_keterampilan_non_teknis[]" required>
                                                                     <option value="" hidden>Pilih Prioritas</option>
                                                                     <option value="4" @if(old('prioritas_keterampilan_non_teknis') == '4')selected @endif>Sangat Penting</option>
                                                                     <option value="3" @if(old('prioritas_keterampilan_non_teknis') == '3')selected @endif>Penting</option>
@@ -240,6 +240,28 @@
                                                     </div>
                                                     @error('keterampilan_non_teknis') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
                                                     @error('prioritas_keterampilan_non_teknis') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label for="sertifikasi" class="form-control-label">Sertifikasi</label>
+                                                    <div class="table-responsive">  
+                                                        <table class="table table-bordered" id="dynamic_field_sertifikasi">  
+                                                            <tr>  
+                                                                <td><input type="text" name="sertifikasi[]" placeholder="Contoh: CCNA" class="form-control" /></td>   
+                                                                <td><select class="form-control" name="prioritas_sertifikasi[]">
+                                                                    <option value="" hidden>Pilih Prioritas</option>
+                                                                    <option value="4" @if(old('prioritas_sertifikasi') == '4')selected @endif>Sangat Penting</option>
+                                                                    <option value="3" @if(old('prioritas_sertifikasi') == '3')selected @endif>Penting</option>
+                                                                    <option value="2" @if(old('prioritas_sertifikasi') == '2')selected @endif>Regular</option>
+                                                                    <option value="1" @if(old('prioritas_sertifikasi') == '1')selected @endif>Menambah Value</option>
+                                                                </select></td>
+                                                                <td><button type="button" name="add_sertifikasi" id="add_sertifikasi" class="btn btn-success"><i class="fa fa-plus" aria-hidden="true"></i></button></td>  
+                                                            </tr>  
+                                                        </table>  
+                                                    </div>
+                                                    @error('sertifikasi') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
+                                                    @error('prioritas_sertifikasi') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
                                                 </div>
                                             </div>
                                     </div>
@@ -288,6 +310,19 @@
                                                                     <option value="3" @if(old("prioritas_keterampilan_non_teknis") == "3")selected @endif>Penting</option> \
                                                                     <option value="2" @if(old("prioritas_keterampilan_non_teknis") == "2")selected @endif>Regular</option> \
                                                                     <option value="1" @if(old("prioritas_keterampilan_non_teknis") == "1")selected @endif>Menambah Value</option> \
+                                                                </select></td> \
+                                                                <td><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">X</button></td></tr>');  
+        });
+
+        $('#add_sertifikasi').click(function(){  
+            i++;  
+            $('#dynamic_field_sertifikasi').append('<tr id="row'+i+'" class="dynamic-added"><td><input type="text" name="sertifikasi[]" placeholder="Contoh: Oracle" class="form-control" /></td>   \
+                                                                <td><select class="form-control" name="prioritas_sertifikasi[]"> \
+                                                                    <option value="" hidden>Pilih Prioritas</option> \
+                                                                    <option value="4" @if(old("prioritas_sertifikasi") == "4")selected @endif>Sangat Penting</option> \
+                                                                    <option value="3" @if(old("prioritas_sertifikasi") == "3")selected @endif>Penting</option> \
+                                                                    <option value="2" @if(old("prioritas_sertifikasi") == "2")selected @endif>Regular</option> \
+                                                                    <option value="1" @if(old("prioritas_sertifikasi") == "1")selected @endif>Menambah Value</option> \
                                                                 </select></td> \
                                                                 <td><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">X</button></td></tr>');  
         });
