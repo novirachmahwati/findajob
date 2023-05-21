@@ -193,24 +193,26 @@ class PenyediaKerjaController extends Controller
     public function KL_store(Request $request)
     {
         $attributes = request()->validate([
-            'judul_pekerjaan' => 'required|max:255',
-            'deskripsi_pekerjaan' => 'required|max:1000',
-            'jenis_pekerjaan' => 'required|max:255',
-            'lokasi_pekerjaan' => 'required|max:255',
-            'rentang_gaji_minimal' => 'required|max:255',
-            'rentang_gaji_maksimal' => 'required|max:255',
-            'jenis_kelamin' => 'required|max:255',
-            'tanggal_tayang' => 'required|date',
-            'tanggal_kadaluwarsa' => 'required|date',
-            'kuota' => 'required|max:10000',
-            'status' => 'required|max:255',
-            'penyedia_kerja_id' => 'required'
+            'email' => 'required|email|max:255',
+            'lowongan_kerja_id' => 'required'
         ]);
+            
+        $lowonganKerja = lowonganKerja::where('id', $attributes['lowongan_kerja_id'])->first();
+        $lowonganKerja->fill($attributes);
+        $lowonganKerja->save();
 
-        $lowonganKerja = lowonganKerja::create($attributes);
-        
-        // return redirect('/penyedia-kerja/dashboard');
-        return redirect()->route('PUK.create')->with([ 'lowongan_kerja_id' => $lowonganKerja->id ]);
+        return redirect()->route('SDK.create');
+    }
+
+    // Syarat dan Ketentuan
+    public function SDK_create()
+    {
+        return view('penyediaKerja.syarat-dan-ketentuan');
+    }
+
+    public function SDK_store()
+    {   
+        return redirect()->route('penyedia-kerja.dashboard');
     }
 
 

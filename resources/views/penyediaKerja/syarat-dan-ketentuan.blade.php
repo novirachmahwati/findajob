@@ -72,7 +72,7 @@
                 </div>
             </div>
             <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
-                <div class="card" style="opacity: 0.5; background-color: #DED3D3">
+                <div class="card">
                     <div class="card-body p-3">
                         <div class="row">
                             <div class="col-3 text-end">
@@ -98,30 +98,47 @@
             <div class="col-lg-12 mb-lg-0 mb-4">
                 <div class="card z-index-2 h-100">
                     <div class="card-header pb-0 pt-4 bg-transparent">
-                        <h6 class="text-capitalize" style="margin-left: 15px">Kontak</h6>
-                        <p style="margin-left: 15px">Kami akan mengirimkan email ke daftar email di bawah ini untuk setiap lamaran yang masuk.</p>
+                        <h6 class="text-capitalize" style="margin-left: 15px">Syarat & Ketentuan</h6>
+                        <p style="margin-left: 15px">Berikut merupakan syarat dan ketentuan untuk menayangkan lowongan pekerjaan ini.</p>
                     </div>
                     <div class="card-body p-3" style="margin-top: -30px">
                         <div class="row">
                             <div class="col">
-                                <form role="form" method="POST" action={{ route('KL.store') }} enctype="multipart/form-data">
+                                <div class="bg-light rounded mt-3 p-3" style="overflow-y: scroll; height: 300px; margin-left: 20px">
+                                    <p>1. Ketika membuka lowongan kerja di Findajob </p>
+                                    <ol type="a">
+                                        <li>Penyedia Kerja adalah perusahaan atau perseorangan yang menyediakan lowongan pekerjaan yang akan ditayangkan di Findajob</li>
+                                        <li>Penyedia Kerja perusahaan atau perseorangan wajib memiliki akun di Findajob dan wajib melengkapi data yang dipersyaratkan</li>
+                                        <li>Penyedia Kerja secara sadar memahami data penyedia Kerja dan lowongan pekerjaan yang akan ditampilkan</li>
+                                    </ol>
+                                    <p>2. Anda wajib melindungi dan menjaga seluruh data individu yang ada pada akun anda, termasuk data anda, perusahaan, dan pencari kerja sesuai perundangan yang berlaku.</p>
+                                    <p>3. Konten dan materi lowongan kerja yang dipublikasikan menjadi tanggungjawab penyedia kerja.</p>
+                                    <p>4. Admin Findajob berhak :</p>
+                                    <ol type="a">
+                                        <li>Mengelola dan mengolah data yang sudah diberikan penyedia kerja untuk kepentingan pelaporan.</li>
+                                        <li>Menghapus, memblokir, memverifikasi, dan menyatakan status lainnya terkait data yang diberikan penyedia kerja bilamana ditemukan kesesuaian atau ketidaksesuaian.</li>
+                                    </ol>
+                                </div>
+                                <form role="form" method="POST" action={{ route('ULP.store') }} enctype="multipart/form-data">
                                     @csrf
                                     <div class="card-body">
                                         <div class="row">
-                                            <input type="hidden" name="lowongan_kerja_id" value="{{ $lowongan_kerja_id }}">
                                             <div class="col-md-12">
-                                                <div class="form-group">
-                                                    <label for="kontak" class="form-control-label">Kontak <span class="titik-logo">*</span></label>
-                                                    <input class="form-control" type="text" name="kontak" value="{{ old('kontak') }}" placeholder="Masukkan Email Anda">
-                                                    @error('kontak') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
-                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" value="" id="check">
+                                                    <label class="form-check-label" for="check">
+                                                      Saya setuju dengan syarat dan ketentuan di atas
+                                                    </label>
+                                                  </div>
                                             </div>
                                         </div>
                                     </div>
                                         <div class="card-footer pb-0">
                                         <div class="d-flex align-items-center">
-                                            <button type="submit" class="btn btn-primary btn-lg ms-auto" style="margin-right: -22px">Selanjutnya 
-                                                <i class="fa fa-forward" style="font-size: 15px; margin-left: 5px"></i></button>
+                                            <button type="submit" class="btn btn-primary btn-lg ms-auto text-white" style="margin-right: -22px" id="submit" disabled>
+                                                Selanjutnya 
+                                                <i class="fa fa-forward" style="font-size: 15px; margin-left: 5px"></i>
+                                            </button>
                                         </div>
                                     </div>
                                 </form>
@@ -136,10 +153,15 @@
 @endsection
 
 @section('bottom-content')
-    <script src="//cdn.ckeditor.com/4.14.1/standard/ckeditor.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
-            $('.ckeditor').ckeditor();
+            $('#check').click(function() {
+                if ($(this).is(':checked')) {
+                    $('#submit').removeAttr('disabled');
+                } else {
+                    $('#submit').attr('disabled', 'disabled');
+                }
+                });
         });
     </script>
 @endsection
