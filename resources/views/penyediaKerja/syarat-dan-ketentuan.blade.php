@@ -119,7 +119,7 @@
                                         <li>Menghapus, memblokir, memverifikasi, dan menyatakan status lainnya terkait data yang diberikan penyedia kerja bilamana ditemukan kesesuaian atau ketidaksesuaian.</li>
                                     </ol>
                                 </div>
-                                <form role="form" method="POST" action={{ route('ULP.store') }} enctype="multipart/form-data">
+                                <form role="form" method="POST" action={{ route('SDK.store') }} enctype="multipart/form-data">
                                     @csrf
                                     <div class="card-body">
                                         <div class="row">

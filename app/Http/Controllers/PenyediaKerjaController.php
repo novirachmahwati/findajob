@@ -215,7 +215,6 @@ class PenyediaKerjaController extends Controller
         return redirect()->route('penyedia-kerja.dashboard');
     }
 
-
     /**
      * Display a listing of the resource.
      *
@@ -223,7 +222,7 @@ class PenyediaKerjaController extends Controller
      */
     public function index()
     {
-        return view('pages.dashboard');
+        return view('penyediaKerja.dashboard');
     }
 
     /**
