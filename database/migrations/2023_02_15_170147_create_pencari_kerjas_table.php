@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('no_telp');
             $table->string('agama');
             $table->string('foto')->nullable();
-            $table->string('cv')->nullable();
+            $table->text('cv')->nullable();
             $table->unsignedInteger('user_id');
             $table->timestamps();
         });

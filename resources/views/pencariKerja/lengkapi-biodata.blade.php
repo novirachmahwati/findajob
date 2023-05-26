@@ -107,36 +107,36 @@
                                             <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label for="example-text-input" class="form-control-label">Nama</label>
-                                                    <input class="form-control" type="text" name="name" value="{{ old('name', auth()->user()->name) }}" readonly>
+                                                    <label for="example-text-input" class="form-control-label">Nama<span class="titik-logo">*</span></label>
+                                                    <input class="form-control" type="text" name="name" value="{{ old('name', auth()->user()->name) }}">
                                                     @error('name') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label for="example-text-input" class="form-control-label">Email address</label>
-                                                    <input class="form-control" type="email" name="email" value="{{ old('email', auth()->user()->email) }}" readonly>
+                                                    <label for="example-text-input" class="form-control-label">Email<span class="titik-logo">*</span></label>
+                                                    <input class="form-control" type="email" name="email" value="{{ old('email', auth()->user()->email) }}">
                                                     @error('email') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
                                                 </div>
                                             </div>
                                             <div class="col-md-12">
                                                 <div class="form-group">
                                                     <label for="example-text-input" class="form-control-label">Alamat<span class="titik-logo">*</span></label>
-                                                    <input class="form-control" type="text" name="alamat" value="{{ old('alamat', auth()->user()->pencariKerja->alamat) }}">
+                                                    <input class="form-control" type="text" name="alamat" value="{{ old('alamat') }}" placeholder="Alamat Pencari Kerja">
                                                     @error('alamat') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="example-text-input" class="form-control-label">Tempat Lahir<span class="titik-logo">*</span></label>
-                                                    <input class="form-control" type="text" name="tempat_lahir"  value="{{ old('tempat_lahir', auth()->user()->pencariKerja->tempat_lahir) }}">
+                                                    <input class="form-control" type="text" name="tempat_lahir"  value="{{ old('tempat_lahir') }}" placeholder="Tempat Lahir Pencari Kerja">
                                                     @error('tempat_lahir') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="example-text-input" class="form-control-label">Tanggal Lahir<span class="titik-logo">*</span></label>
-                                                    <input class="form-control" type="date" name="tgl_lahir" value="{{ old('tgl_lahir', auth()->user()->pencariKerja->tgl_lahir) }}">
+                                                    <input class="form-control" type="date" name="tgl_lahir" value="{{ old('tgl_lahir') }}">
                                                     @error('tgl_lahir') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
                                                 </div>
                                             </div>
@@ -144,7 +144,7 @@
                                                 <div class="form-group">
                                                     <label for="jenis_kelamin" class="form-control-label">Jenis Kelamin<span class="titik-logo">*</span></label>
                                                     <select class="form-control" name="jenis_kelamin">
-                                                        <option value="" disabled hidden></option>
+                                                        <option value="" hidden>Pilih Jenis Kelamin</option>
                                                         <option value="Laki-laki" @if(old('jenis_kelamin') == 'Laki-laki')selected @endif>Laki-laki</option>
                                                         <option value="Perempuan" @if(old('jenis_kelamin') == 'Perempuan')selected @endif>Perempuan</option>
                                                     </select>
@@ -154,14 +154,14 @@
                                             <div class="col-md-12">
                                                 <div class="form-group">
                                                     <label for="example-text-input" class="form-control-label">No. Telepon<span class="titik-logo">*</span></label>
-                                                    <input class="form-control" type="text" name="no_telp" value="{{ old('no_telp', auth()->user()->pencariKerja->no_telp) }}">
+                                                    <input class="form-control" type="text" name="no_telp" value="{{ old('no_telp') }}" placeholder="No. Telepon Pencari Kerja">
                                                     @error('no_telp') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
                                                 </div>
                                             </div>
                                             <div class="col-md-12">
                                                 <div class="form-group">
                                                     <label for="example-text-input" class="form-control-label">Agama<span class="titik-logo">*</span></label>
-                                                    <input class="form-control" type="text" name="agama" value="{{ old('agama', auth()->user()->pencariKerja->agama) }}">
+                                                    <input class="form-control" type="text" name="agama" value="{{ old('agama') }}" placeholder="Agama Pencari Kerja">
                                                     @error('agama') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
                                                 </div>
                                             </div>

@@ -8,13 +8,33 @@
                 <p class="text-white" style="position: relative !important">Daftar Lowongan Kerja</p>
             </div>
             <div class="col-xl-12">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="row g-0">
-                            <div class="col-sm-6 col-md-8 text-white">
-                                <input type="text" class="form-control" placeholder="Have a question? Ask Now">
+                <div class="card h-75">
+                    <div class="card-body p-3">
+                        <div class="row gx-6">
+                            <div class="col-sm-6 col-md-5 text-white">
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text" id="basic-addon1">@</span>
+                                    <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+                                  </div>
+                                {{-- <input type="text" class="form-control" placeholder="Cari berdasarkan judul lowongan atau nama perusahaan">  --}}
                             </div>
-                            <div class="col-6 col-md-4 text-white">.col-6 .col-md-4</div>
+                            <div class="col-6 col-md-1">
+                                <div class="vr" style="height: 40px;"></div>
+                            </div>
+                            <div class="col-6 col-md-2 text-white" style="margin-left:-50px">
+                                <input type="text" class="form-control" placeholder="Masukkan Lokasi" style="border: 0px solid #d2d6da !important">
+                            </div>
+                            <div class="col-6 col-md-1">
+                                <div class="vr" style="height: 40px;"></div>
+                            </div>
+                            <div class="col-6 col-md-2 text-white" style="margin-left:-50px">
+                                <input type="text" class="form-control" placeholder="Masukkan Lokasi" style="border: 0px solid #d2d6da !important">
+                            </div>
+                            <div class="col-6 col-md-1 text-white">
+                                <button id="search-button" type="button" class="btn btn-primary">
+                                    <i class="fas fa-search"></i>
+                                  </button>
+                            </div>
                         </div>
                     </div>
                 </div>

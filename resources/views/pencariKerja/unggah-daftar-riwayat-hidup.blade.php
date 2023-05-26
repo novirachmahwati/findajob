@@ -110,7 +110,7 @@
                                         <div class="pt-3">
                                             <p>Catatan :</p>
                                             <p>Daftar riwayat hidup yang sudah diunggah dapat diakses oleh semua perusahaan yang telah dilamar</p>
-                                            <p>Kami menganjurkan anda menggunakan format yang dapat diunduh <a href="{{ route('UC.download') }}" class="text-success"><b>disini.</b></a> Untuk performa lamaran yang lebih baik.</p>
+                                            <p>Kami menganjurkan anda menggunakan format yang dapat diunduh <a href="{{ route('UC.download') }}" class="text-success"><b><u>disini.</u></b></a> Untuk performa lamaran yang lebih baik.</p>
                                             <p class="text-secondary"><i>Unggah daftar riwayat hidup dalam bentuk <b class="text-danger">PDF (Maksimal 3 MB)</b></i></p>
                                     </div>
                                     <div class="card-footer pb-0">

@@ -104,7 +104,7 @@
                                     @csrf
                                     <div class="card-body">
                                         <p>
-                                            <a class="btn btn-light" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                            <a class="btn btn-success" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
                                                 <i class="fa fa-plus" aria-hidden="true"></i>
                                                 Tambah
                                             </a>
