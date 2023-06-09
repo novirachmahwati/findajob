@@ -46,7 +46,7 @@
                     </a>
                     <ul class="dropdown-menu  dropdown-menu-end  px-2 py-3 me-sm-n4" aria-labelledby="dropdownMenuButton">
                         <li class="mb-2">
-                            <a href="{{ route('profil') }}" class="dropdown-item border-radius-md">
+                            <a href="{{ route('profil.index') }}" class="dropdown-item border-radius-md">
                                 <i class="fa fa-user"></i>
                                 <span class="d-sm-inline d-none ms-2">Edit Profil</span>
                             </a>

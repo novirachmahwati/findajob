@@ -53,8 +53,8 @@ Route::get('/', function () {return redirect('/dashboard');})->middleware('auth'
 	Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard')->middleware('auth');
 	
 Route::group(['middleware' => 'auth'], function () {
-	Route::get('/profil', [UserProfileController::class, 'show'])->name('profil');
-	Route::post('/profil', [UserProfileController::class, 'update'])->name('profil.update');
+	Route::get('/profile', [UserProfileController::class, 'show'])->name('profile');
+	Route::post('/profile', [UserProfileController::class, 'update'])->name('profile.update');
 	Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 
 	// Pencari Kerja
@@ -121,7 +121,11 @@ Route::group(['middleware' => 'auth'], function () {
 	// Route::resource('/sertifikasi', [SertifikasiController::class, 'index']);
 	Route::resources([
 		'sertifikasi' => SertifikasiController::class,
-		'lowongan' => LowonganController::class,
+		'lowongan' => LowonganKerjaController::class,
+		'info-penyedia-kerja' => SertifikasiController::class,
+		'profil' => LowonganKerjaController::class,
+		'riwayat-lamaran' => LowonganKerjaController::class,
+		'cv' => LowonganKerjaController::class,
 	]);
 	
 });

@@ -115,8 +115,6 @@ class PenyediaKerjaController extends Controller
 
         $lowonganKerja = lowonganKerja::create($attributes);
         
-        // return redirect('/penyedia-kerja/dashboard');
-        // return redirect()->route('PUK.create')->with([ 'lowongan_kerja_id' => $lowonganKerja->id ]);
         return view('penyediaKerja.persyaratan-umum-khusus',['lowongan_kerja_id' => $lowonganKerja->id]);
     }
 

@@ -10,85 +10,92 @@
     </div>
     <hr class="horizontal dark mt-0">
     <div class="collapse navbar-collapse w-auto " id="sidenav-collapse-main">
-        <ul class="navbar-nav">
-            <li class="nav-item mt-3">
-                <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Halaman</h6>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link {{ Route::currentRouteName() == 'dashboard' ? 'active' : '' }}" href="{{ route('dashboard') }}">
-                    <div
-                        class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="ni ni-tv-2 text-primary text-sm opacity-10"></i>
-                    </div>
-                    <span class="nav-link-text ms-1">Dashboard</span>
-                </a>
-            </li>
-            {{-- <li class="nav-item">
-                <a class="nav-link {{ Route::currentRouteName() == 'cari-lowongan' ? 'active' : '' }}" href="{{ route('cari-lowongan') }}">
-                    <div
-                        class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="fa fa-search text-dark text-sm opacity-10"></i>
-                    </div>
-                    <span class="nav-link-text ms-1">Cari Lowongan</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link {{ Route::currentRouteName() == 'info-penyedia-kerja' ? 'active' : '' }}" href="{{ route('info-penyedia-kerja') }}">
-                    <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="fa fa-building text-danger text-sm opacity-10"></i>
-                    </div>
-                    <span class="nav-link-text ms-1">Info Penyedia Kerja</span>
-                </a>
-            </li>
-            <li class="nav-item mt-3">
-                <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Akun</h6>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link {{ Route::currentRouteName() == 'profil' ? 'active' : '' }}" href="{{ route('profil') }}">
-                    <div
-                        class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="ni ni-single-02 text-dark text-sm opacity-10"></i>
-                    </div>
-                    <span class="nav-link-text ms-1">Profil</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link {{  Route::currentRouteName() == 'riwayat-lamaran' ? 'active' : '' }}" href="{{ route('riwayat-lamaran') }}">
-                    <div
-                        class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="ni ni-single-copy-04 text-success text-sm opacity-10"></i>
-                    </div>
-                    <span class="nav-link-text ms-1">Riwayat Lamaran</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link {{  Route::currentRouteName() == 'cv' ? 'active' : '' }}" href="{{ route('cv') }}">
-                    <div
-                        class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="fa fa-file text-primary text-sm opacity-10"></i>
-                    </div>
-                    <span class="nav-link-text ms-1">CV Diunggah</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link {{ Route::currentRouteName() == 'sertifikasi' ? 'active' : '' }}" href="{{ route('sertifikasi') }}">
-                    <div
-                        class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="fa fa-id-card-o text-danger text-sm opacity-10"></i>
-                    </div>
-                    <span class="nav-link-text ms-1">Sertifikasi</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link {{ Route::currentRouteName() == 'logout' ? 'active' : '' }}" href="{{ route('logout') }}">
-                    <div
-                        class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="fa fa-sign-out text-dark text-sm opacity-10"></i>
-                    </div>
-                    <span class="nav-link-text ms-1">Log Out</span>
-                </a>
-            </li> --}}
-        </ul>
+        @if (Auth::user()->role == "Pencari Kerja")
+            <ul class="navbar-nav">
+                <li class="nav-item mt-3">
+                    <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Halaman</h6>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ Route::currentRouteName() == 'dashboard' ? 'active' : '' }}" href="{{ route('dashboard') }}">
+                        <div
+                            class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="ni ni-tv-2 text-primary text-sm opacity-10"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">Dashboard</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ Route::currentRouteName() == 'lowongan' ? 'active' : '' }}" href="{{ route('lowongan.index') }}">
+                        <div
+                            class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="fa fa-search text-dark text-sm opacity-10"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">Cari Lowongan</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ Route::currentRouteName() == 'info-penyedia-kerja' ? 'active' : '' }}" href="{{ route('info-penyedia-kerja.index') }}">
+                        <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="fa fa-building text-danger text-sm opacity-10"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">Info Penyedia Kerja</span>
+                    </a>
+                </li>
+                <li class="nav-item mt-3">
+                    <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Akun</h6>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ Route::currentRouteName() == 'profil' ? 'active' : '' }}" href="{{ route('profil.index') }}">
+                        <div
+                            class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="ni ni-single-02 text-dark text-sm opacity-10"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">Profil</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{  Route::currentRouteName() == 'riwayat-lamaran' ? 'active' : '' }}" href="{{ route('riwayat-lamaran.index') }}">
+                        <div
+                            class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="ni ni-single-copy-04 text-success text-sm opacity-10"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">Riwayat Lamaran</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{  Route::currentRouteName() == 'cv' ? 'active' : '' }}" href="{{ route('cv.index') }}">
+                        <div
+                            class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="fa fa-file text-primary text-sm opacity-10"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">CV Diunggah</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ Route::currentRouteName() == 'sertifikasi' ? 'active' : '' }}" href="{{ route('sertifikasi.index') }}">
+                        <div
+                            class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="fa fa-id-card-o text-danger text-sm opacity-10"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">Sertifikasi</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ Route::currentRouteName() == 'logout' ? 'active' : '' }}" href="{{ route('logout') }}">
+                        <div
+                            class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="fa fa-sign-out text-dark text-sm opacity-10"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">Log Out</span>
+                    </a>
+                </li>
+            </ul>           
+        @endif
+
+        @if (Auth::user()->role == "Penyedia Kerja")
+        <!-- nav links here -->           
+        @endif
+        
     </div>
     {{-- <div class="sidenav-footer mx-3 ">
         <div class="card card-plain shadow-none" id="sidenavCard">
