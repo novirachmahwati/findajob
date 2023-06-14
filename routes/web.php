@@ -60,6 +60,7 @@ Route::group(['middleware' => 'auth'], function () {
 	// Pencari Kerja
 	Route::prefix('pencari-kerja')->group(function () {
 		Route::get('/dashboard', [PencariKerjaController::class, 'dashboard'])->name('pencari_kerja.dashboard');
+		Route::get('/profil', [PencariKerjaController::class, 'profil'])->name('pencari_kerja.profil');
 		Route::get('/lengkapi-biodata', [PencariKerjaController::class, 'LB_create'])->name('LB.create');
 		Route::post('/lengkapi-biodata', [PencariKerjaController::class, 'LB_store'])->name('LB.store');
 
@@ -125,9 +126,9 @@ Route::group(['middleware' => 'auth'], function () {
 		'sertifikasi' => SertifikasiController::class,
 		'lowongan' => LowonganKerjaController::class,
 		'info-penyedia-kerja' => SertifikasiController::class,
-		'profil' => LowonganKerjaController::class,
 		'riwayat-lamaran' => LowonganKerjaController::class,
-		'cv' => LowonganKerjaController::class,
+		'daftar-riwayat-hidup' => LowonganKerjaController::class,
 	]);
+	
 	
 });

@@ -12,25 +12,21 @@
         </nav>
         <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
             <div class="ms-md-auto pe-md-3 d-flex align-items-center">
-                {{-- <div class="input-group">
-                    <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
-                    <input type="text" class="form-control" placeholder="Type here...">
-                </div> --}}
             </div>
             <ul class="navbar-nav justify-content-end">
                 @if (Auth::user()->role == "Pencari Kerja")
                     <li class="nav-item px-3 d-flex align-items-center">
-                        <a href="javascript:;" class="nav-link text-white p-0">
+                        <a href="{{ route('lowongan.index') }}" class="nav-link text-white p-0">
                             Cari Lowongan
                         </a>
                     </li>
                     <li class="nav-item px-3 d-flex align-items-center">
-                        <a href="javascript:;" class="nav-link text-white p-0">
+                        <a href="{{ route('info-penyedia-kerja.index') }}" class="nav-link text-white p-0">
                             Info Penyedia Kerja
                         </a>
                     </li>
                     <li class="nav-item px-3 d-flex align-items-center">
-                        <a href="javascript:;" class="nav-link text-white p-0">
+                        <a href="{{ route('riwayat-lamaran.index') }}" class="nav-link text-white p-0">
                             Riwayat Lamaran
                         </a>
                     </li>
@@ -53,7 +49,7 @@
                     </a>
                     <ul class="dropdown-menu  dropdown-menu-end  px-2 py-3 me-sm-n4" aria-labelledby="dropdownMenuButton">
                         <li class="mb-2">
-                            <a href="{{ route('profil.index') }}" class="dropdown-item border-radius-md">
+                            <a href="{{ route('pencari_kerja.profil') }}" class="dropdown-item border-radius-md">
                                 <i class="fa fa-user"></i>
                                 <span class="d-sm-inline d-none ms-2">Edit Profil</span>
                             </a>

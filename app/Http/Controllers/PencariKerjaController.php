@@ -24,6 +24,45 @@ class PencariKerjaController extends Controller
                     
     }
 
+    // Profil
+    public function profil()
+    {
+        return view('pencariKerja.profil');
+                    
+    }
+    
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\pencariKerja  $pencariKerja
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, pencariKerja $pencariKerja)
+    {
+        $attributes = request()->validate([
+            'name' => 'required|max:255',
+            'email' => ['required', 'email', 'max:255',  Rule::unique('users')->ignore(auth()->user()->id),],
+            'alamat' => 'required|max:255',
+            'tempat_lahir' => 'required|max:255',
+            'tgl_lahir' => 'required|date',
+            'jenis_kelamin' => 'required|max:255',
+            'no_telp' => 'required|max:16',
+            'agama' => 'required|max:20'
+        ]);
+
+        auth()->user()->update([
+            'name' => $request->get('name'),
+            'email' => $request->get('email'),
+        ]);
+
+        $pencariKerja = pencariKerja::where('id', Auth::user()->pencariKerja->id)->first();
+        $pencariKerja->fill($attributes);
+        $pencariKerja->save();
+
+        return back()->with('success', 'Profil berhasil diperbarui!');
+    }
+
     // Lengkapi Biodata
     public function LB_create()
     {
@@ -163,37 +202,7 @@ class PencariKerjaController extends Controller
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\pencariKerja  $pencariKerja
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, pencariKerja $pencariKerja)
-    {
-        $attributes = request()->validate([
-            'name' => 'required|max:255',
-            'email' => ['required', 'email', 'max:255',  Rule::unique('users')->ignore(auth()->user()->id),],
-            'alamat' => 'required|max:255',
-            'tempat_lahir' => 'required|max:255',
-            'tgl_lahir' => 'required|date',
-            'jenis_kelamin' => 'required|max:255',
-            'no_telp' => 'required|max:16',
-            'agama' => 'required|max:20'
-        ]);
-
-        auth()->user()->update([
-            'name' => $request->get('name'),
-            'email' => $request->get('email'),
-        ]);
-
-        $pencariKerja = pencariKerja::where('id', Auth::user()->pencariKerja->id)->first();
-        $pencariKerja->fill($attributes);
-        $pencariKerja->save();
-
-        return back()->with('success', 'Profil berhasil diperbarui!');
-    }
+    
 
     /**
      * Remove the specified resource from storage.

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\lowonganKerja;
 use Illuminate\Http\Request;
+use DataTables;
 
 class LowonganKerjaController extends Controller
 {
@@ -12,9 +13,42 @@ class LowonganKerjaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        if ($request->ajax()) {
+            $lowonganKerja = lowonganKerja::select('id','judul_pekerjaan','jenis_pekerjaan','lokasi_pekerjaan')->orderBy('id','desc')->get();
+            return Datatables::of($lowonganKerja)->addIndexColumn()
+                ->addColumn('action', function($lowonganKerja){
+                    $btn = '<div class="dropdown dropstart text-end">          
+                                <button type="button" class="btn btn-link" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></button>
+                                <ul class="dropdown-menu dropdown-menu-end">
+                                    <li>
+                                        <a class="dropdown-item" href="'.route('sertifikasi.show', $lowonganKerja->id).'">
+                                            <i class="fa fa-eye text-success" aria-hidden="true"></i>
+                                            <span class="d-sm-inline d-none ms-2">Lihat</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="'.route('sertifikasi.edit', $lowonganKerja->id).'">
+                                            <i class="fa fa-pencil text-primary" aria-hidden="true"></i>
+                                            <span class="d-sm-inline d-none ms-2">Edit</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item deleteSertifikasi" href="javascript:void(0);" data-toggle="tooltip" data-id="'.$lowonganKerja->id .'">
+                                            <i class="fa fa-trash-o text-danger" aria-hidden="true"></i>
+                                            <span class="d-sm-inline d-none ms-2">Hapus</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>';
+                    return $btn;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
+
+        return view('pencariKerja.lowongan.index');
     }
 
     /**
