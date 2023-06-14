@@ -18,21 +18,28 @@
                 </div> --}}
             </div>
             <ul class="navbar-nav justify-content-end">
-                <li class="nav-item px-3 d-flex align-items-center">
-                    <a href="javascript:;" class="nav-link text-white p-0">
-                        Cari Lowongan
-                    </a>
-                </li>
-                <li class="nav-item px-3 d-flex align-items-center">
-                    <a href="javascript:;" class="nav-link text-white p-0">
-                        Info Penyedia Kerja
-                    </a>
-                </li>
-                <li class="nav-item px-3 d-flex align-items-center">
-                    <a href="javascript:;" class="nav-link text-white p-0">
-                        Riwayat Lamaran
-                    </a>
-                </li>
+                @if (Auth::user()->role == "Pencari Kerja")
+                    <li class="nav-item px-3 d-flex align-items-center">
+                        <a href="javascript:;" class="nav-link text-white p-0">
+                            Cari Lowongan
+                        </a>
+                    </li>
+                    <li class="nav-item px-3 d-flex align-items-center">
+                        <a href="javascript:;" class="nav-link text-white p-0">
+                            Info Penyedia Kerja
+                        </a>
+                    </li>
+                    <li class="nav-item px-3 d-flex align-items-center">
+                        <a href="javascript:;" class="nav-link text-white p-0">
+                            Riwayat Lamaran
+                        </a>
+                    </li>
+                @endif
+
+                @if (Auth::user()->role == "Penyedia Kerja")
+                <!-- nav links here -->           
+                @endif
+                
                 <li class="nav-item d-flex align-items-center">
                     <div class="vr" style="height: 40px; margin-right: 15px; color:white"></div>
                 </li>

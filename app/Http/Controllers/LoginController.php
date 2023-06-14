@@ -29,7 +29,11 @@ class LoginController extends Controller
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
             $request->session()->regenerate();
 
-            return redirect()->intended('dashboard');
+            if (Auth::user()->role == 'Pencari Kerja') {
+                return redirect()->intended('pencari-kerja/dashboard');
+            } else {
+                return redirect()->intended('penyedia-kerja/dashboard');
+            }
         }
 
         return back()->withInput()->withErrors([

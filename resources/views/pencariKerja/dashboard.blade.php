@@ -10,7 +10,12 @@
                         <div class="row">
                             <div class="col-8">
                                 <div class="numbers">
-                                    <p class="text-sm mb-0 font-weight-bold">Belum ada lamaran kerja terkirim</p>
+                                    <p class="text-sm mb-0 font-weight-bold">
+                                        @if ($jml_lamaranTerkirim == 0)
+                                        Belum ada lamaran kerja terkirim
+                                        @else
+                                        {{ $jml_sertifikasi }} Lamaran kerja berhasil dikirim
+                                        @endif</p></p>
                                 </div>
                             </div>
                             <div class="col-4 text-end">
@@ -46,7 +51,12 @@
                         <div class="row">
                             <div class="col-8">
                                 <div class="numbers">
-                                    <p class="text-sm mb-0 font-weight-bold">Belum ada sertifikasi yang dimiliki</p>
+                                    <p class="text-sm mb-0 font-weight-bold">
+                                        @if ($jml_sertifikasi == 0)
+                                        Belum ada sertifikasi yang dimiliki
+                                        @else
+                                        {{ $jml_sertifikasi }} Sertifikasi berhasil diunggah
+                                        @endif</p>
                                 </div>
                             </div>
                             <div class="col-4 text-end">
@@ -64,7 +74,9 @@
                         <div class="row">
                             <div class="col-8">
                                 <div class="numbers">
-                                    <p class="text-sm mb-0 font-weight-bold">Unduh format daftar riwayat hidup</p>
+                                    <p class="text-sm mb-0 font-weight-bold">
+                                        <a href="{{ route('UC.download') }}" class="text-dark">Unduh format daftar riwayat hidup</a>
+                                    </p>
                                 </div>
                             </div>
                             <div class="col-4 text-end">

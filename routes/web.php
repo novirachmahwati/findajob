@@ -50,7 +50,7 @@ Route::get('/', function () {return redirect('/dashboard');})->middleware('auth'
 	Route::post('/registrasi-penyedia-kerja', [RegisterController::class, 'storePenyediaKerja'])->middleware('guest')->name('registrasi.penyediaKerja.perform');
 	Route::get('/login', [LoginController::class, 'show'])->middleware('guest')->name('login');
 	Route::post('/login', [LoginController::class, 'login'])->middleware('guest')->name('login.perform');
-	Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard')->middleware('auth');
+	// Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard')->middleware('auth');
 	
 Route::group(['middleware' => 'auth'], function () {
 	Route::get('/profile', [UserProfileController::class, 'show'])->name('profile');
@@ -59,6 +59,7 @@ Route::group(['middleware' => 'auth'], function () {
 
 	// Pencari Kerja
 	Route::prefix('pencari-kerja')->group(function () {
+		Route::get('/dashboard', [PencariKerjaController::class, 'dashboard'])->name('pencari_kerja.dashboard');
 		Route::get('/lengkapi-biodata', [PencariKerjaController::class, 'LB_create'])->name('LB.create');
 		Route::post('/lengkapi-biodata', [PencariKerjaController::class, 'LB_store'])->name('LB.store');
 
@@ -80,6 +81,7 @@ Route::group(['middleware' => 'auth'], function () {
 
 	// Penyedia Kerja
 	Route::prefix('penyedia-kerja')->group(function () {
+		Route::get('/dashboard', [PenyediaKerjaController::class, 'dashboard'])->name('penyedia_kerja.dashboard');
 		Route::get('/lengkapi-data', [PenyediaKerjaController::class, 'LD_create'])->name('LD.create');
 		Route::post('/lengkapi-data', [PenyediaKerjaController::class, 'LD_store'])->name('LD.store');
 

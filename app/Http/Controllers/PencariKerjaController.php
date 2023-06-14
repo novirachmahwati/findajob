@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\pencariKerja;
 use App\Models\sertifikasi;
+use App\Models\riwayatLamaran;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -12,6 +13,17 @@ use Illuminate\Validation\Rule;
 
 class PencariKerjaController extends Controller
 {
+    // Dashboard
+    public function dashboard()
+    {
+        $jml_lamaranTerkirim = riwayatLamaran::where('pencari_kerja_id', Auth::user()->pencariKerja->id)->count();
+        $jml_sertifikasi = sertifikasi::where('pencari_kerja_id', Auth::user()->pencariKerja->id)->count();
+        return view('pencariKerja.dashboard')
+                    ->with('jml_lamaranTerkirim', $jml_lamaranTerkirim)
+                    ->with('jml_sertifikasi', $jml_sertifikasi);
+                    
+    }
+
     // Lengkapi Biodata
     public function LB_create()
     {
