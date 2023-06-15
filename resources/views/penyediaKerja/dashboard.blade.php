@@ -1,241 +1,192 @@
 @extends('layouts.app', ['class' => 'g-sidenav-show bg-gray-100'])
-@section('title', 'Unggah Lowongan Pekerjaan')
+@section('title', 'Portal Lowongan Kerja')
 @section('content')
-    @include('layouts.navbars.auth.topnav', ['title' => 'Unggah Lowongan'])
+    @include('layouts.navbars.auth.topnav', ['title' => 'Dashboard'])
     <div class="container-fluid py-4">
         <div class="row">
-            <div class="col-xl-12">
-                <p class="text-white" style="position: relative !important">Daftar Lowongan Kerja</p>
-            </div>
-            <div class="col-xl-12">
-                <div class="card h-75">
-                    <div class="card-body p-3">
-                        <div class="row gx-6">
-                            <div class="col-sm-6 col-md-5 text-white">
-                                <div class="input-group mb-3">
-                                    <span class="input-group-text" id="basic-addon1">@</span>
-                                    <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
-                                  </div>
-                                {{-- <input type="text" class="form-control" placeholder="Cari berdasarkan judul lowongan atau nama perusahaan">  --}}
-                            </div>
-                            <div class="col-6 col-md-1">
-                                <div class="vr" style="height: 40px;"></div>
-                            </div>
-                            <div class="col-6 col-md-2 text-white" style="margin-left:-50px">
-                                <input type="text" class="form-control" placeholder="Masukkan Lokasi" style="border: 0px solid #d2d6da !important">
-                            </div>
-                            <div class="col-6 col-md-1">
-                                <div class="vr" style="height: 40px;"></div>
-                            </div>
-                            <div class="col-6 col-md-2 text-white" style="margin-left:-50px">
-                                <input type="text" class="form-control" placeholder="Masukkan Lokasi" style="border: 0px solid #d2d6da !important">
-                            </div>
-                            <div class="col-6 col-md-1 text-white">
-                                <button id="search-button" type="button" class="btn btn-primary">
-                                    <i class="fas fa-search"></i>
-                                  </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            {{-- <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-3 text-end">
-                                <div class="icon icon-shape bg-gradient-primary shadow-primary text-center rounded-circle">
-                                    <h5 class="text-white" style="line-height: 2.2">1</h5>
-                                </div>
-                            </div>
-                            <div class="col-9">
-                                <div class="numbers">
-                                    <p class="text-sm mb-0 font-weight-bold" style="margin-left: 10px;">
-                                        Informasi Lowongan
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div> --}}
-            {{-- <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
-                <div class="card" style="opacity: 0.5; background-color: #DED3D3">
+            <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+                <div class="card"><a href="{{ route('riwayat-lamaran.index') }}">
                     <div class="card-body p-3">
                         <div class="row">
-                            <div class="col-3 text-end">
-                                <div class="icon icon-shape bg-gradient-primary shadow-primary text-center rounded-circle">
-                                    <h5 class="text-white" style="line-height: 2.2">
-                                        2
-                                    </h5>
+                            <div class="col-8">
+                                <div class="numbers">
+                                    <p class="text-sm mb-0 font-weight-bold">
+                                        @if ($jml_lamaranTerkirim == 0)
+                                        Belum ada lamaran kerja terkirim
+                                        @else
+                                        {{ $jml_sertifikasi }} Lamaran kerja anda telah berhasil dikirim
+                                        @endif</p>
                                 </div>
                             </div>
-                            <div class="col-9">
-                                <div class="numbers">
-                                    <p class="text-sm mb-0 font-weight-bold" style="margin-left: 10px">
-                                        Persyaratan Umum & Khusus
-                                    </p>
+                            <div class="col-4 text-end">
+                                <div class="icon icon-shape bg-gradient-primary shadow-primary text-center rounded-circle">
+                                    <i class="ni ni-money-coins text-lg opacity-10" aria-hidden="true"></i>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                </a></div>
             </div>
             <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
-                <div class="card" style="opacity: 0.5; background-color: #DED3D3">
+                <div class="card"><a href="{{ route('daftar-riwayat-hidup.index') }}">
                     <div class="card-body p-3">
                         <div class="row">
-                            <div class="col-3 text-end">
-                                <div class="icon icon-shape bg-gradient-primary shadow-primary text-center rounded-circle">
-                                    <h5 class="text-white" style="line-height: 2.2">
-                                        3
-                                    </h5>
+                            <div class="col-8">
+                                <div class="numbers">
+                                    <p class="text-sm mb-0 font-weight-bold">1 Daftar riwayat hidup berhasil diunggah</p>
                                 </div>
                             </div>
-                            <div class="col-9">
-                                <div class="numbers">
-                                    <p class="text-sm mb-0 font-weight-bold" style="margin-left: 10px; line-height: 3">
-                                        Kontak
-                                    </p>
+                            <div class="col-4 text-end">
+                                <div class="icon icon-shape bg-gradient-danger shadow-danger text-center rounded-circle">
+                                    <i class="fa fa-file text-lg opacity-10" aria-hidden="true"></i>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                </a></div>
             </div>
             <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
-                <div class="card" style="opacity: 0.5; background-color: #DED3D3">
+                <div class="card"><a href="{{ route('sertifikasi.index') }}">
                     <div class="card-body p-3">
                         <div class="row">
-                            <div class="col-3 text-end">
-                                <div class="icon icon-shape bg-gradient-primary shadow-primary text-center rounded-circle">
-                                    <h5 class="text-white" style="line-height: 2.2">
-                                        4
-                                    </h5>
+                            <div class="col-8">
+                                <div class="numbers">
+                                    <p class="text-sm mb-0 font-weight-bold">
+                                        @if ($jml_sertifikasi == 0)
+                                        Belum ada sertifikasi yang dimiliki
+                                        @else
+                                        {{ $jml_sertifikasi }} Sertifikasi anda telah berhasil diunggah
+                                        @endif
+                                    </p>
                                 </div>
                             </div>
-                            <div class="col-9">
-                                <div class="numbers">
-                                    <p class="text-sm mb-0 font-weight-bold" style="margin-left: 10px;">
-                                        Syarat & Ketentuan
-                                    </p>
+                            <div class="col-4 text-end">
+                                <div class="icon icon-shape bg-gradient-success shadow-success text-center rounded-circle">
+                                    <i class="ni ni-paper-diploma text-lg opacity-10" aria-hidden="true"></i>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div> --}}
+                </a></div>
+            </div>
+            <div class="col-xl-3 col-sm-6">
+                <div class="card"><a href="{{ route('UC.download') }}">
+                    <div class="card-body p-3">
+                        <div class="row">
+                            <div class="col-8">
+                                <div class="numbers">
+                                    <p class="text-sm mb-0 font-weight-bold">
+                                        Unduh format daftar riwayat hidup
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-4 text-end">
+                                <div class="icon icon-shape bg-gradient-warning shadow-warning text-center rounded-circle">
+                                    <i class="fa fa-download text-lg opacity-10" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </a></div>
+            </div>
         </div>
         <div class="row mt-4">
             <div class="col-lg-12 mb-lg-0 mb-4">
                 <div class="card z-index-2 h-100">
-                    <div class="card-header pb-0 pt-4 bg-transparent">
-                        <h6 class="text-capitalize" style="margin-left: 15px">Informasi Lowongan</h6>
-                        <p style="margin-left: 15px">Tambahkan informasi dasar mengenai lowongan pekerjaan Anda.</p>
+                    <div class="card-header pb-0 pt-3 bg-transparent">
                     </div>
-                    <div class="card-body p-3" style="margin-top: -30px">
+                    <div class="card-body p-3">
+                        <div class="row">
+                            <div class="col-auto ms-4">
+                                <div class="avatar avatar-xl position-relative">
+                                    <img src="{{ asset(auth()->user()->penyediaKerja->foto) }}" onerror="this.src='{{ asset('img/office-building.png') }}'"  alt="profile_image" class="w-100 border-radius-lg shadow-sm">
+                                </div>
+                            </div>
+                            <div class="col">
+                                <h4>{{ auth()->user()->name }}</h4>
+                                <p><i class="fas fa-envelope"></i>&nbsp;{{ auth()->user()->email }} |&nbsp;<i class="fas fa-phone"></i>&nbsp;{{ auth()->user()->pencariKerja->no_telp }}</p>
+                            </div>
+                        </div>
                         <div class="row">
                             <div class="col">
-                                <form role="form" method="POST" action={{ route('ULP.store') }} enctype="multipart/form-data">
+                                <form role="form" method="POST" action={{ route('penyedia_kerja.edit') }} enctype="multipart/form-data">
                                     @csrf
+                                    <div class="card-header pb-0">
+                                        @include('layouts.flash-message')
+                                        <div class="d-flex align-items-center">
+                                            <p class="mb-0">Edit Profile</p>
+                                            <button type="submit" class="btn btn-primary btn-sm ms-auto">Simpan</button>
+                                        </div>
+                                    </div>
                                     <div class="card-body">
                                         <div class="row">
-                                            <input type="hidden" name="penyedia_kerja_id" value="{{ auth()->user()->penyediaKerja->id }}">
-                                            <input type="hidden" name="status" value="Aktif">
+                                            <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="example-text-input" class="form-control-label">Nama<span class="titik-logo">*</span></label>
+                                                    <input class="form-control" type="text" name="name" value="{{ old('name', auth()->user()->name) }}">
+                                                    @error('name') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="example-text-input" class="form-control-label">Email<span class="titik-logo">*</span></label>
+                                                    <input class="form-control" type="email" name="email" value="{{ old('email', auth()->user()->email) }}">
+                                                    @error('email') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
+                                                </div>
+                                            </div>
                                             <div class="col-md-12">
                                                 <div class="form-group">
-                                                    <label for="nama" class="form-control-label">Judul Pekerjaan<span class="titik-logo">*</span></label>
-                                                    <input class="form-control" type="text" name="judul_pekerjaan" value="{{ old('judul_pekerjaan') }}" placeholder="Judul Pekerjaan">
-                                                    @error('judul_pekerjaan') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
+                                                    <label for="example-text-input" class="form-control-label">Role</label>
+                                                    <input class="form-control" type="text" name="role" value="{{ old('role', auth()->user()->role) }}" readonly>
                                                 </div>
                                             </div>
                                             <div class="col-md-12">
                                                 <div class="form-group">
-                                                    <label for="deskripsi_pekerjaan" class="form-control-label">Deskripsi Pekerjaan<span class="titik-logo">*</span></label>
-                                                    <textarea class="ckeditor form-control" type="text" name="deskripsi_pekerjaan" value="{{ old('deskripsi_pekerjaan') }}" placeholder="Deskripsi Pekerjaan"></textarea>
-                                                    @error('deskripsi_pekerjaan') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
+                                                    <label for="example-text-input" class="form-control-label">Alamat<span class="titik-logo">*</span></label>
+                                                    <input class="form-control" type="text" name="alamat" value="{{ old('alamat', auth()->user()->pencariKerja->alamat) }}">
+                                                    @error('alamat') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label for="jenis_pekerjaan" class="form-control-label">Jenis Pekerjaan<span class="titik-logo">*</span></label>
-                                                    <select class="form-control" name="jenis_pekerjaan">
-                                                        <option value="" hidden>Pilih Jenis Pekerjaan</option>
-                                                        <option value="Full Time" @if(old('jenis_pekerjaan') == 'Full Time')selected @endif>Full Time</option>
-                                                        <option value="Part Time" @if(old('jenis_pekerjaan') == 'Part Time')selected @endif>Part Time</option>
-                                                        <option value="Temporary" @if(old('jenis_pekerjaan') == 'Temporary')selected @endif>Temporary</option>
-                                                        <option value="Kontrak" @if(old('jenis_pekerjaan') == 'Kontrak')selected @endif>Kontrak</option>
-                                                        <option value="Magang" @if(old('jenis_pekerjaan') == 'Magang')selected @endif>Magang</option>
-                                                        <option value="Pekerja Harian" @if(old('jenis_pekerjaan') == 'Pekerja Harian')selected @endif>Pekerja Harian</option>
-                                                    </select>
-                                                    @error('jenis_pekerjaan') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
+                                                    <label for="example-text-input" class="form-control-label">Tempat Lahir<span class="titik-logo">*</span></label>
+                                                    <input class="form-control" type="text" name="tempat_lahir"  value="{{ old('tempat_lahir', auth()->user()->pencariKerja->tempat_lahir) }}">
+                                                    @error('tempat_lahir') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label for="lokasi" class="form-control-label">Lokasi Pekerjaan<span class="titik-logo">*</span></label>
-                                                    <input class="form-control" type="text" name="lokasi_pekerjaan" value="{{ old('lokasi_pekerjaan') }}" placeholder="Lokasi Pekerjaan">
-                                                    @error('lokasi_pekerjaan') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="rentang_gaji_minimal" class="form-control-label">Rentang Gaji (Rupiah)<span class="titik-logo">*</span></label>
-                                                    <input class="form-control" type="number" name="rentang_gaji_minimal" value="{{ old('rentang_gaji_minimal') }}" placeholder="Rentang gaji minimal" min="1">
-                                                    @error('rentang_gaji_minimal') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group" style="margin-top: 30px;">
-                                                    <input class="form-control" type="number" name="rentang_gaji_maksimal" value="{{ old('rentang_gaji_maksimal') }}" placeholder="Rentang gaji maksimal" min="1">
-                                                    @error('rentang_gaji_maksimal') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
+                                                    <label for="example-text-input" class="form-control-label">Tanggal Lahir<span class="titik-logo">*</span></label>
+                                                    <input class="form-control" type="date" name="tgl_lahir" value="{{ old('tgl_lahir', auth()->user()->pencariKerja->tgl_lahir) }}">
+                                                    @error('tgl_lahir') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
                                                 </div>
                                             </div>
                                             <div class="col-md-12">
                                                 <div class="form-group">
                                                     <label for="jenis_kelamin" class="form-control-label">Jenis Kelamin<span class="titik-logo">*</span></label>
-                                                </div>
-                                                <div class="form-group" style="margin-top:-15px;">
-                                                    <div class="form-check form-check-inline">
-                                                        <input class="form-check-input" name="jenis_kelamin[]" type="checkbox" id="inlineCheckbox1" value="Laki-laki">
-                                                        <label class="form-check-label" for="inlineCheckbox1">Laki-laki</label>
-                                                    </div>
-                                                    <div class="form-check form-check-inline">
-                                                        <input class="form-check-input" name="jenis_kelamin[]" type="checkbox" id="inlineCheckbox2" value="Perempuan">
-                                                        <label class="form-check-label" for="inlineCheckbox2">Perempuan</label>
-                                                    </div>
+                                                    <select class="form-control" name="jenis_kelamin">
+                                                        <option value="" disabled hidden></option>
+                                                        <option value="Laki-laki" {{ auth()->user()->pencariKerja->jenis_kelamin == "Laki-laki"  ? 'selected' : ''}} >Laki-laki</option>
+                                                        <option value="Perempuan" {{ auth()->user()->pencariKerja->jenis_kelamin == "Perempuan"  ? 'selected' : ''}}>Perempuan</option>
+                                                    </select>
                                                     @error('jenis_kelamin') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
                                                 </div>
                                             </div>
-                                            <hr class="horizontal dark">
                                             <div class="col-md-12">
                                                 <div class="form-group">
-                                                    <label for="example-text-input" class="form-control-label">Tanggal Tayang<span class="titik-logo">*</span></label>
-                                                    <input class="form-control" type="date" name="tanggal_tayang" value="{{ old('tanggal_tayang') }}">
-                                                    @error('tanggal_tayang') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
+                                                    <label for="example-text-input" class="form-control-label">No. Telepon<span class="titik-logo">*</span></label>
+                                                    <input class="form-control" type="text" name="no_telp" value="{{ old('no_telp', auth()->user()->pencariKerja->no_telp) }}">
+                                                    @error('no_telp') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
                                                 </div>
                                             </div>
-                                            <div class="col-md-6">
+                                            <div class="col-md-12">
                                                 <div class="form-group">
-                                                    <label for="example-text-input" class="form-control-label">Tanggal Kadaluwarsa<span class="titik-logo">*</span></label>
-                                                    <input class="form-control" type="date" name="tanggal_kadaluwarsa" value="{{ old('tanggal_kadaluwarsa') }}">
-                                                    @error('tanggal_kadaluwarsa') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
+                                                    <label for="example-text-input" class="form-control-label">Agama<span class="titik-logo">*</span></label>
+                                                    <input class="form-control" type="text" name="agama" value="{{ old('agama', auth()->user()->pencariKerja->agama) }}">
+                                                    @error('agama') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
                                                 </div>
                                             </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="kuota" class="form-control-label">Kuota<span class="titik-logo">*</span></label>
-                                                    <input class="form-control" type="number" name="kuota" value="{{ old('kuota') }}" placeholder="Kuota Lowongan" min="1">
-                                                    @error('kuota') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                        <div class="card-footer pb-0">
-                                        <div class="d-flex align-items-center">
-                                            <button type="submit" class="btn btn-primary btn-lg ms-auto" style="margin-right: -22px">Selanjutnya 
-                                                <i class="fa fa-forward" style="font-size: 15px; margin-left: 5px"></i></button>
                                         </div>
                                     </div>
                                 </form>
@@ -247,13 +198,4 @@
         </div>
         @include('layouts.footers.auth.footer')
     </div>
-@endsection
-
-@section('bottom-content')
-    <script src="//cdn.ckeditor.com/4.14.1/standard/ckeditor.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $('.ckeditor').ckeditor();
-        });
-    </script>
 @endsection

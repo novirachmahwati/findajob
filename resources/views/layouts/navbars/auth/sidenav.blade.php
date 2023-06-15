@@ -96,24 +96,69 @@
         @endif
 
         @if (Auth::user()->role == "Penyedia Kerja")
-        <!-- nav links here -->           
+            <ul class="navbar-nav">
+                <li class="nav-item mt-3">
+                    <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Halaman</h6>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ Route::currentRouteName() == 'pencari_kerja.dashboard' ? 'active' : '' }}" href="{{ route('pencari_kerja.dashboard') }}">
+                        <div
+                            class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="ni ni-tv-2 text-dark text-sm opacity-10"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">Dashboard</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ Route::currentRouteName() == 'lowongan.index' ? 'active' : '' }}" href="{{ route('lowongan.index') }}">
+                        <div
+                            class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="fa fa-pencil text-dark text-sm opacity-10"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">Kelola Lowongan</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ Route::currentRouteName() == 'info-penyedia-kerja.index' ? 'active' : '' }}" href="{{ route('info-penyedia-kerja.index') }}">
+                        <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="fa fa-users text-dark text-sm opacity-10"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">Info Pencari Kerja</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{  Route::currentRouteName() == 'riwayat-lamaran.index' ? 'active' : '' }}" href="{{ route('riwayat-lamaran.index') }}">
+                        <div
+                            class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="fa fa-inbox text-dark text-sm opacity-10"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">Lihat Pelamar</span>
+                    </a>
+                </li>
+                
+                <li class="nav-item mt-3">
+                    <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Akun</h6>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ Route::currentRouteName() == 'penyedia_kerja.profil' ? 'active' : '' }}" href="{{ route('penyedia_kerja.profil') }}">
+                        <div
+                            class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="ni ni-single-02 text-dark text-sm opacity-10"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">Profil</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ Route::currentRouteName() == 'logout' ? 'active' : '' }}" href="{{ route('logout') }}">
+                        <div
+                            class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="fa fa-sign-out text-dark text-sm opacity-10"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">Log Out</span>
+                    </a>
+                </li>
+            </ul>              
         @endif
         
     </div>
-    {{-- <div class="sidenav-footer mx-3 ">
-        <div class="card card-plain shadow-none" id="sidenavCard">
-            <img class="w-50 mx-auto" src="/img/illustrations/icon-documentation-warning.svg"
-                alt="sidebar_illustration">
-            <div class="card-body text-center p-3 w-100 pt-0">
-                <div class="docs-info">
-                    <h6 class="mb-0">Need help?</h6>
-                    <p class="text-xs font-weight-bold mb-0">Please check our docs</p>
-                </div>
-            </div>
-        </div>
-        <a href="/docs/bootstrap/overview/argon-dashboard/index.html" target="_blank"
-            class="btn btn-dark btn-sm w-100 mb-3">Documentation</a>
-        <a class="btn btn-primary btn-sm mb-0 w-100"
-            href="https://www.creative-tim.com/product/argon-dashboard-pro-laravel" target="_blank" type="button">Upgrade to PRO</a>
-    </div> --}}
 </aside>

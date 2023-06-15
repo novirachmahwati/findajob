@@ -83,6 +83,7 @@ Route::group(['middleware' => 'auth'], function () {
 	// Penyedia Kerja
 	Route::prefix('penyedia-kerja')->group(function () {
 		Route::get('/dashboard', [PenyediaKerjaController::class, 'dashboard'])->name('penyedia_kerja.dashboard');
+		Route::get('/profil', [PenyediaKerjaController::class, 'profil'])->name('penyedia_kerja.profil');
 		Route::get('/lengkapi-data', [PenyediaKerjaController::class, 'LD_create'])->name('LD.create');
 		Route::post('/lengkapi-data', [PenyediaKerjaController::class, 'LD_store'])->name('LD.store');
 
@@ -108,9 +109,8 @@ Route::group(['middleware' => 'auth'], function () {
 
 		Route::get('/dashboard', [PenyediaKerjaController::class, 'index'])->name('penyedia-kerja.dashboard');
 		
-		Route::get('/{pencari_kerja_id}', [PenyediaKerjaController::class, 'show'])->name('pencari_kerja.show');
-		// Route::get('/{pencari_kerja_id}', [PencariKerjaController::class, 'update'])->name('pencari_kerja.edit');
-		Route::post('/edit', [PenyediaKerjaController::class, 'update'])->name('pencari_kerja.edit');
+		Route::get('/{penyedia_kerja_id}', [PenyediaKerjaController::class, 'show'])->name('penyedia_kerja.show');
+		Route::post('/edit', [PenyediaKerjaController::class, 'update'])->name('penyedia_kerja.edit');
 	});
 
 	// Route::get('/sertifikasi', [SertifikasiController::class, 'index'])->name('sertifikasi.index');
