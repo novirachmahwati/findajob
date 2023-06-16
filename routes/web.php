@@ -40,27 +40,29 @@ use App\Http\Controllers\PencariKerjaController;
 use App\Http\Controllers\PenyediaKerjaController;
 use App\Http\Controllers\RiwayatLamaranController;
 use App\Http\Controllers\SertifikasiController;
-use App\Http\Controllers\LowonganKerjaController;      
+use App\Http\Controllers\LowonganKerjaController;    
+use App\Http\Controllers\ProfilController;  
             
-
-Route::get('/', function () {return redirect('/dashboard');})->middleware('auth');
+// Register
 	Route::get('/registrasi-pencari-kerja', [RegisterController::class, 'create'])->middleware('guest')->name('registrasi');
 	Route::post('/registrasi-pencari-kerja', [RegisterController::class, 'store'])->middleware('guest')->name('registrasi.perform');
 	Route::get('/registrasi-penyedia-kerja', [RegisterController::class, 'createPenyediaKerja'])->middleware('guest')->name('registrasi.penyediaKerja');
 	Route::post('/registrasi-penyedia-kerja', [RegisterController::class, 'storePenyediaKerja'])->middleware('guest')->name('registrasi.penyediaKerja.perform');
+	
+// Authentication
 	Route::get('/login', [LoginController::class, 'show'])->middleware('guest')->name('login');
 	Route::post('/login', [LoginController::class, 'login'])->middleware('guest')->name('login.perform');
-	// Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard')->middleware('auth');
+	Route::post('logout', [LoginController::class, 'logout'])->middleware('auth')->name('logout');
 	
 Route::group(['middleware' => 'auth'], function () {
-	Route::get('/profile', [UserProfileController::class, 'show'])->name('profile');
-	Route::post('/profile', [UserProfileController::class, 'update'])->name('profile.update');
-	Route::post('logout', [LoginController::class, 'logout'])->name('logout');
+	Route::get('/', function () {return redirect('/dashboard');});
+	Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+	Route::get('/profil', [ProfilController::class, 'show'])->name('profil');
+	Route::get('/profil/edit', [ProfilController::class, 'update'])->name('profil.edit');
+	
 
 	// Pencari Kerja
 	Route::prefix('pencari-kerja')->group(function () {
-		Route::get('/dashboard', [PencariKerjaController::class, 'dashboard'])->name('pencari_kerja.dashboard');
-		Route::get('/profil', [PencariKerjaController::class, 'profil'])->name('pencari_kerja.profil');
 		Route::get('/lengkapi-biodata', [PencariKerjaController::class, 'LB_create'])->name('LB.create');
 		Route::post('/lengkapi-biodata', [PencariKerjaController::class, 'LB_store'])->name('LB.store');
 
@@ -75,15 +77,10 @@ Route::group(['middleware' => 'auth'], function () {
 		Route::get('/download-cv', [PencariKerjaController::class, 'UC_download'])->name('UC.download');
 		Route::post('/unggah-daftar-riwayat-hidup', [PencariKerjaController::class, 'UC_store'])->name('UC.store');
 
-		Route::get('/{pencari_kerja_id}', [PencariKerjaController::class, 'show'])->name('pencari_kerja.show');
-		// Route::get('/{pencari_kerja_id}', [PencariKerjaController::class, 'update'])->name('pencari_kerja.edit');
-		Route::post('/edit', [PencariKerjaController::class, 'update'])->name('pencari_kerja.edit');
 	});
 
 	// Penyedia Kerja
 	Route::prefix('penyedia-kerja')->group(function () {
-		Route::get('/dashboard', [PenyediaKerjaController::class, 'dashboard'])->name('penyedia_kerja.dashboard');
-		Route::get('/profil', [PenyediaKerjaController::class, 'profil'])->name('penyedia_kerja.profil');
 		Route::get('/lengkapi-data', [PenyediaKerjaController::class, 'LD_create'])->name('LD.create');
 		Route::post('/lengkapi-data', [PenyediaKerjaController::class, 'LD_store'])->name('LD.store');
 
@@ -106,28 +103,17 @@ Route::group(['middleware' => 'auth'], function () {
 
 		Route::get('/syarat-dan-ketentuan', [PenyediaKerjaController::class, 'SDK_create'])->name('SDK.create');
 		Route::post('/syarat-dan-ketentuan', [PenyediaKerjaController::class, 'SDK_store'])->name('SDK.store');
-
-		Route::get('/dashboard', [PenyediaKerjaController::class, 'index'])->name('penyedia-kerja.dashboard');
-		
-		Route::get('/{penyedia_kerja_id}', [PenyediaKerjaController::class, 'show'])->name('penyedia_kerja.show');
-		Route::post('/edit', [PenyediaKerjaController::class, 'update'])->name('penyedia_kerja.edit');
 	});
 
-	// Route::get('/sertifikasi', [SertifikasiController::class, 'index'])->name('sertifikasi.index');
-	// Route::post('/sertifikasi', [SertifikasiController::class, 'store'])->name('sertifikasi.store');
-	// Route::get('/sertifikasi/{id}', [SertifikasiController::class, 'show'])->name('sertifikasi.show');
-	// Route::get('/sertifikasi/{id}/edit', [SertifikasiController::class, 'edit'])->name('sertifikasi.edit');
-	// Route::put('/sertifikasi/{id}', [SertifikasiController::class, 'update'])->name('sertifikasi.update');
-	// Route::delete('/sertifikasi/{id}', [SertifikasiController::class, 'delete'])->name('sertifikasi.delete');
-
-
-	// Route::resource('/sertifikasi', [SertifikasiController::class, 'index']);
 	Route::resources([
 		'sertifikasi' => SertifikasiController::class,
 		'lowongan' => LowonganKerjaController::class,
-		'info-penyedia-kerja' => SertifikasiController::class,
-		'riwayat-lamaran' => LowonganKerjaController::class,
-		'daftar-riwayat-hidup' => LowonganKerjaController::class,
+		'info-penyedia-kerja' => PenyediaKerjaController::class,
+		'info-pencari-kerja' => PencariKerjaController::class,
+		'riwayat-lamaran' => RiwayatLamaranController::class,
+		'daftar-riwayat-hidup' => PencariKerjaController::class,
+		'kelola-lowongan' => KelolaLowonganController::class,
+		'lihat-pelamar' => LihatPelamarController::class,
 	]);
 	
 	

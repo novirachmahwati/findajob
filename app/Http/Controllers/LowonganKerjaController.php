@@ -23,13 +23,13 @@ class LowonganKerjaController extends Controller
                                 <button type="button" class="btn btn-link" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></button>
                                 <ul class="dropdown-menu dropdown-menu-end">
                                     <li>
-                                        <a class="dropdown-item" href="'.route('sertifikasi.show', $lowonganKerja->id).'">
+                                        <a class="dropdown-item" href="'.route('lowongan.show', $lowonganKerja->id).'">
                                             <i class="fa fa-eye text-success" aria-hidden="true"></i>
                                             <span class="d-sm-inline d-none ms-2">Lihat</span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="'.route('sertifikasi.edit', $lowonganKerja->id).'">
+                                        <a class="dropdown-item" href="'.route('lowongan.edit', $lowonganKerja->id).'">
                                             <i class="fa fa-pencil text-primary" aria-hidden="true"></i>
                                             <span class="d-sm-inline d-none ms-2">Edit</span>
                                         </a>

@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('status');
             $table->unsignedInteger('lowongan_kerja_id');
             $table->unsignedInteger('pencari_kerja_id');
+            $table->unsignedInteger('penyedia_kerja_id');
             $table->timestamps();
         });
 
@@ -32,6 +33,11 @@ return new class extends Migration
             $table->foreign('pencari_kerja_id')
             ->references('id')
             ->on('pencari_kerjas')
+            ->onDelete('cascade');
+
+            $table->foreign('penyedia_kerja_id')
+            ->references('id')
+            ->on('penyedia_kerjas')
             ->onDelete('cascade');
         });
     }

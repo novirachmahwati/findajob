@@ -13,23 +13,6 @@ use Illuminate\Validation\Rule;
 
 class PencariKerjaController extends Controller
 {
-    // Dashboard
-    public function dashboard()
-    {
-        $jml_lamaranTerkirim = riwayatLamaran::where('pencari_kerja_id', Auth::user()->pencariKerja->id)->count();
-        $jml_sertifikasi = sertifikasi::where('pencari_kerja_id', Auth::user()->pencariKerja->id)->count();
-        return view('pencariKerja.dashboard')
-                    ->with('jml_lamaranTerkirim', $jml_lamaranTerkirim)
-                    ->with('jml_sertifikasi', $jml_sertifikasi);
-                    
-    }
-
-    // Profil
-    public function profil()
-    {
-        return view('pencariKerja.profil');
-                    
-    }
     
     /**
      * Update the specified resource in storage.

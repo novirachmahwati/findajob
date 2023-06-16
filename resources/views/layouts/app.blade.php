@@ -38,8 +38,6 @@
     @guest
         @yield('content')
     @endguest
-
-    @include('sweetalert::alert')
     
     @auth
         @if (in_array(request()->route()->getName(), ['sign-in-static', 'sign-up-static', 'login', 'register', 'recover-password', 'rtl', 'virtual-reality']))

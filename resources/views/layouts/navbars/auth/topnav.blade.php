@@ -30,89 +30,57 @@
                             Riwayat Lamaran
                         </a>
                     </li>
-                    <li class="nav-item d-flex align-items-center">
-                        <div class="vr" style="height: 40px; margin-right: 15px; color:white"></div>
-                    </li>
-                    <li class="nav-item dropdown pe-2 d-flex align-items-center">
-                        <a href="javascript:;" class="nav-link text-white p-0" id="dropdownMenuButton"data-bs-toggle="dropdown" aria-expanded="false">
-                            <div>
-                                <i class="far fa-user"></i>
-                                {{ Auth::user()->name }}
-                                <i class="fa fa-caret-down"></i>
-                            </div>
-                        </a>
-                        <ul class="dropdown-menu  dropdown-menu-end  px-2 py-3 me-sm-n4" aria-labelledby="dropdownMenuButton">
-                            <li class="mb-2">
-                                <a href="{{ route('pencari_kerja.profil') }}" class="dropdown-item border-radius-md">
-                                    <i class="fa fa-user"></i>
-                                    <span class="d-sm-inline d-none ms-2">Edit Profil</span>
-                                </a>
-                            </li>
-                            <li class="mb-2">
-                                <form role="form" method="post" action="{{ route('logout') }}" id="logout-form">
-                                    @csrf
-                                    <a href="{{ route('logout') }}" 
-                                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
-                                        class="dropdown-item border-radius-md">
-                                        <i class="fa fa-sign-out"></i>
-                                        <span class="d-sm-inline d-none ms-2">Log out</span>
-                                    </a>
-                                </form>
-                            </li>
-                        </ul>
-                    </li>
                 @endif
 
                 @if (Auth::user()->role == "Penyedia Kerja")
                     <li class="nav-item px-3 d-flex align-items-center">
-                        <a href="javascript:;" class="nav-link text-white p-0">
+                        <a href="{{ route('kelola-lowongan.index') }}" class="nav-link text-white p-0">
                             Kelola Lowongan
                         </a>
                     </li>
                     <li class="nav-item px-3 d-flex align-items-center">
-                        <a href="javascript:;" class="nav-link text-white p-0">
+                        <a href="{{ route('info-penyedia-kerja.index') }}" class="nav-link text-white p-0">
                             Info Pencari Kerja
                         </a>
                     </li>
                     <li class="nav-item px-3 d-flex align-items-center">
-                        <a href="javascript:;" class="nav-link text-white p-0">
+                        <a href="{{ route('lihat-pelamar.index') }}" class="nav-link text-white p-0">
                             Lihat Pelamar
                         </a>
-                    </li>
-                    <li class="nav-item d-flex align-items-center">
-                        <div class="vr" style="height: 40px; margin-right: 15px; color:white"></div>
-                    </li>
-                    <li class="nav-item dropdown pe-2 d-flex align-items-center">
-                        <a href="javascript:;" class="nav-link text-white p-0" id="dropdownMenuButton"data-bs-toggle="dropdown" aria-expanded="false">
-                            <div>
-                                <i class="far fa-user"></i>
-                                {{ Auth::user()->name }}
-                                <i class="fa fa-caret-down"></i>
-                            </div>
-                        </a>
-                        <ul class="dropdown-menu  dropdown-menu-end  px-2 py-3 me-sm-n4" aria-labelledby="dropdownMenuButton">
-                            <li class="mb-2">
-                                <a href="{{ route('penyedia_kerja.profil') }}" class="dropdown-item border-radius-md">
-                                    <i class="fa fa-user"></i>
-                                    <span class="d-sm-inline d-none ms-2">Edit Profil</span>
-                                </a>
-                            </li>
-                            <li class="mb-2">
-                                <form role="form" method="post" action="{{ route('logout') }}" id="logout-form">
-                                    @csrf
-                                    <a href="{{ route('logout') }}" 
-                                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
-                                        class="dropdown-item border-radius-md">
-                                        <i class="fa fa-sign-out"></i>
-                                        <span class="d-sm-inline d-none ms-2">Log out</span>
-                                    </a>
-                                </form>
-                            </li>
-                        </ul>
-                    </li>         
+                    </li>        
                 @endif
-                
-               
+
+                <li class="nav-item d-flex align-items-center">
+                    <div class="vr" style="height: 40px; margin-right: 15px; color:white"></div>
+                </li>
+                <li class="nav-item dropdown pe-2 d-flex align-items-center">
+                    <a href="javascript:;" class="nav-link text-white p-0" id="dropdownMenuButton"data-bs-toggle="dropdown" aria-expanded="false">
+                        <div>
+                            <i class="far fa-user"></i>
+                            {{ Auth::user()->name }}
+                            <i class="fa fa-caret-down"></i>
+                        </div>
+                    </a>
+                    <ul class="dropdown-menu  dropdown-menu-end  px-2 py-3 me-sm-n4" aria-labelledby="dropdownMenuButton">
+                        <li class="mb-2">
+                            <a href="{{ route('profil') }}" class="dropdown-item border-radius-md">
+                                <i class="fa fa-user"></i>
+                                <span class="d-sm-inline d-none ms-2">Edit Profil</span>
+                            </a>
+                        </li>
+                        <li class="mb-2">
+                            <form role="form" method="post" action="{{ route('logout') }}" id="logout-form">
+                                @csrf
+                                <a href="{{ route('logout') }}" 
+                                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
+                                    class="dropdown-item border-radius-md">
+                                    <i class="fa fa-sign-out"></i>
+                                    <span class="d-sm-inline d-none ms-2">Log out</span>
+                                </a>
+                            </form>
+                        </li>
+                    </ul>
+                </li>
             </ul>
         </div>
     </div>

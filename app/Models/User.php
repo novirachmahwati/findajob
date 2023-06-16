@@ -70,12 +70,4 @@ class User extends Authenticatable
     {
         return $this->hasOne(penyediaKerja::class);
     }
-
-    public function getRedirectRoute()
-    {
-        return match($this->role) {
-            'Pencari Kerja' => '/pencari-kerja/dashboard',
-            'Penyedia Kerja' => '/penyedia-kerja/dashboard'
-        };
-    }
 }

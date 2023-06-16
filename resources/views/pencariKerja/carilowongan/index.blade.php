@@ -148,7 +148,7 @@
                     {data: 'DT_RowIndex', name:'DT_RowIndex', orderable: false, searchable: false},
                     {data: 'judul_pekerjaan', name: 'judul_pekerjaan'},
                     {data: 'jenis_pekerjaan', name: 'jenis_pekerjaan'},
-                    {data: 'lokasi', name: 'lokasi'},
+                    {data: 'lokasi_pekerjaan', name: 'lokasi_pekerjaan'},
                     {data: 'action',  name: 'action', orderable: false, searchable: false},
                 ]
             });

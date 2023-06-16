@@ -99,7 +99,7 @@
                 <div class="card z-index-2 h-100">
                     <div class="card-header pb-0 pt-4 bg-transparent">
                         <h6 class="text-capitalize" style="margin-left: 15px">Kontak</h6>
-                        <p style="margin-left: 15px">Kami akan mengirimkan email ke daftar email di bawah ini untuk setiap lamaran yang masuk.</p>
+                        <p style="margin-left: 15px">Masukkan email yang dapat dihubungi oleh calon pelamar</p>
                     </div>
                     <div class="card-body p-3" style="margin-top: -30px">
                         <div class="row">
