@@ -108,7 +108,7 @@
                                     @csrf
                                     <div class="card-body">
                                         <div class="row">
-                                            <input type="hidden" name="lowongan_kerja_id" value="{{ $lowongan_kerja_id }}">
+                                            <input type="hidden" name="lowongan_id" value="{{ $lowongan_id }}">
                                             <input type="hidden" name="prioritas_minimal_pendidikan" value="#">
                                             <div class="col-md-6">
                                                 <div class="form-group">
@@ -192,7 +192,7 @@
                                                         <input class="form-check-input" name="bahasa[]" type="checkbox" id="inlineCheckbox3" value="Mandarin">
                                                         <label class="form-check-label" for="inlineCheckbox3">Mandarin</label>
                                                     </div>
-                                                    @error('status_pernikahan') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
+                                                    @error('bahasa') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
                                                 </div>
                                             </div>
                                             <hr class="horizontal dark mt-3">
