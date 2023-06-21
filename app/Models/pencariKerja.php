@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class pencariKerja extends Model
 {
@@ -29,5 +30,10 @@ class pencariKerja extends Model
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');
+    }
+ 
+    public function riwayatLamaran(): HasMany
+    {
+        return $this->hasMany(riwayatLamaran::class);
     }
 }

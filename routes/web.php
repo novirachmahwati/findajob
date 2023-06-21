@@ -59,6 +59,7 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 	Route::get('/profil', [ProfilController::class, 'show'])->name('profil');
 	Route::post('/profil/edit', [ProfilController::class, 'update'])->name('profil.edit');
+	Route::get('/lowongan/{lowongan}/sukses-lamar', [lowonganController::class, 'sukses-lamar'])->name('sukses-lamar');
 	
 
 	// Pencari Kerja

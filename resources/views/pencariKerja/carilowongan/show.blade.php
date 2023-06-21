@@ -9,15 +9,27 @@
                     <div class="card-header pb-0 pt-4 bg-transparent" style="margin-left: 15px">
                         <h6 class="text-capitalize" >Informasi Lowongan</h6>
                         <p>Berikut informasi dasar mengenai lowongan pekerjaan untuk Anda.</p>
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#tambahModal">
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#lamarModal">
                                 Lamar Sekarang
                         </button>
+                        <button type="button" class="btn btn-primary text-white" data-bs-toggle="modal" data-bs-target="#lamarModal" disabled="">
+                            Anda sudah melamar
+                    </button>
                     </div>
                     <div class="card-body p-3 mt-n3">
                         <div class="row">
                             <div class="col">
                                 <div class="card-body">
                                     <div class="border border-light rounded-3 p-3">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label for="nama" class="form-control-label">Penyedia Kerja</label>
+                                                <input class="form-control" type="text"value="{{ $lowongan->penyediaKerja->user->name }}" readonly>
+                                                <div id="passwordHelpBlock" class="form-text">
+                                                    Klik <a href="{{ route('UC.download') }}" class="text-success"><b><u>disini.</u></b></a> Untuk informasi lebih lengkap tentang penyedia kerja.
+                                                </div>
+                                            </div>
+                                        </div>
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label for="nama" class="form-control-label">Judul Pekerjaan</label>
@@ -93,7 +105,7 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="kuota" class="form-control-label">Kuota</label>
+                                                <label for="kuota" class="form-control-label">Kuota (Orang)</label>
                                                 <input class="form-control" type="number" name="kuota" value="{{ $lowongan->kuota }}" readonly>
                                                 @error('kuota') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
                                             </div>
@@ -189,25 +201,47 @@
                                             </div>
                                         </div>
                                     </div>
-                                        <hr class="horizontal dark mt-3">
-                                            <h6 class="text-capitalize mt-3">Persyaratan Khusus</h6>
-                                            <p>Masukkan persyaratan khusus dan requirement yang kamu butuhkan, kemudian pilih prioritasnya.</p>
+                                        
+                                    {{-- </div> --}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-header pb-0 pt-4 bg-transparent" style="margin-left: 15px">
+                        <h6 class="text-capitalize" >Persyaratan Khusus</h6>
+                        <p>Berikut persyaratan khusus dan requirement berdasarkan skala prioritas yang dibutuhkan</p>
+                    </div>
+                    <div class="card-body p-3 mt-n3">
+                        <div class="row">
+                            <div class="col">
+                                <div class="card-body">
+                                    <div class="border border-light rounded-3 p-3">
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label for="keterampilan_teknis" class="form-control-label">Keterampilan Teknis / Hard Skill </label>
                                                 <div class="table-responsive">  
-                                                    <table class="table table-bordered" id="dynamic_field_keterampilan_teknis">  
-                                                        <tr>  
-                                                            <td><input type="text" name="keterampilan_teknis[]" placeholder="Contoh: Python" class="form-control" required/></td>   
-                                                            <td><select class="form-control" name="prioritas_keterampilan_teknis[]" required>
-                                                                <option value="" hidden>Pilih Prioritas</option>
-                                                                <option value="4" @if(old('prioritas_keterampilan_teknis') == '4')selected @endif>Sangat Penting</option>
-                                                                <option value="3" @if(old('prioritas_keterampilan_teknis') == '3')selected @endif>Penting</option>
-                                                                <option value="2" @if(old('prioritas_keterampilan_teknis') == '2')selected @endif>Regular</option>
-                                                                <option value="1" @if(old('prioritas_keterampilan_teknis') == '1')selected @endif>Menambah Value</option>
-                                                            </select></td>
-                                                            <td><button type="button" name="add_keterampilan_teknis" id="add_keterampilan_teknis" class="btn btn-success"><i class="fa fa-plus" aria-hidden="true"></i></button></td>  
-                                                        </tr>  
+                                                    <table class="table table-bordered">  
+                                                        @foreach (array_combine($lowongan->kriteria->keterampilan_teknis, $lowongan->kriteria->prioritas_keterampilan_teknis)  as $keterampilan_teknis => $prioritas_keterampilan_teknis)
+                                                            <tr>  
+                                                                <td><input type="text" class="form-control" value="{{ $keterampilan_teknis }}" readonly/></td>
+                                                                @switch($prioritas_keterampilan_teknis)
+                                                                    @case(4)
+                                                                        <td><input type="text" class="form-control" value="Sangat Penting" readonly/></td>
+                                                                        @break
+                                                                    @case(3)
+                                                                        <td><input type="text" class="form-control" value="Penting" readonly/></td>
+                                                                        @break
+                                                                    @case(2)
+                                                                        <td><input type="text" class="form-control" value="Regular" readonly/></td>
+                                                                        @break
+                                                                    @case(1)
+                                                                        <td><input type="text" class="form-control" value="Menambah Value" readonly/></td>
+                                                                        @break
+                                                                    @default
+                                                                        <td><input type="text" class="form-control" value="Penting" readonly/></td>
+                                                                @endswitch
+                                                            </tr> 
+                                                        @endforeach
                                                     </table>  
                                                 </div>
                                                 @error('keterampilan_teknis') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
@@ -218,18 +252,28 @@
                                             <div class="form-group">
                                                 <label for="keterampilan_non_teknis" class="form-control-label">Keterampilan Non Teknis / Soft Skill </label>
                                                 <div class="table-responsive">  
-                                                    <table class="table table-bordered" id="dynamic_field_keterampilan_non_teknis">  
-                                                        <tr>  
-                                                            <td><input type="text" name="keterampilan_non_teknis[]" placeholder="Contoh: Kreatif" class="form-control" required/></td>   
-                                                            <td><select class="form-control" name="prioritas_keterampilan_non_teknis[]" required>
-                                                                <option value="" hidden>Pilih Prioritas</option>
-                                                                <option value="4" @if(old('prioritas_keterampilan_non_teknis') == '4')selected @endif>Sangat Penting</option>
-                                                                <option value="3" @if(old('prioritas_keterampilan_non_teknis') == '3')selected @endif>Penting</option>
-                                                                <option value="2" @if(old('prioritas_keterampilan_non_teknis') == '2')selected @endif>Regular</option>
-                                                                <option value="1" @if(old('prioritas_keterampilan_non_teknis') == '1')selected @endif>Menambah Value</option>
-                                                            </select></td>
-                                                            <td><button type="button" name="add_keterampilan_non_teknis" id="add_keterampilan_non_teknis" class="btn btn-success"><i class="fa fa-plus" aria-hidden="true"></i></button></td>  
-                                                        </tr>  
+                                                    <table class="table table-bordered">  
+                                                        @foreach (array_combine($lowongan->kriteria->keterampilan_non_teknis, $lowongan->kriteria->prioritas_keterampilan_non_teknis)  as $keterampilan_non_teknis => $prioritas_keterampilan_non_teknis)
+                                                            <tr>  
+                                                                <td><input type="text" class="form-control" value="{{ $keterampilan_non_teknis }}" readonly/></td>
+                                                                @switch($prioritas_keterampilan_non_teknis)
+                                                                    @case(4)
+                                                                        <td><input type="text" class="form-control" value="Sangat Penting" readonly/></td>
+                                                                        @break
+                                                                    @case(3)
+                                                                        <td><input type="text" class="form-control" value="Penting" readonly/></td>
+                                                                        @break
+                                                                    @case(2)
+                                                                        <td><input type="text" class="form-control" value="Regular" readonly/></td>
+                                                                        @break
+                                                                    @case(1)
+                                                                        <td><input type="text" class="form-control" value="Menambah Value" readonly/></td>
+                                                                        @break
+                                                                    @default
+                                                                        <td><input type="text" class="form-control" value="Penting" readonly/></td>
+                                                                @endswitch
+                                                            </tr> 
+                                                        @endforeach 
                                                     </table>  
                                                 </div>
                                                 @error('keterampilan_non_teknis') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
@@ -240,18 +284,28 @@
                                             <div class="form-group">
                                                 <label for="sertifikasi" class="form-control-label">Sertifikasi</label>
                                                 <div class="table-responsive">  
-                                                    <table class="table table-bordered" id="dynamic_field_sertifikasi">  
-                                                        <tr>  
-                                                            <td><input type="text" name="sertifikasi[]" placeholder="Contoh: CCNA" class="form-control" /></td>   
-                                                            <td><select class="form-control" name="prioritas_sertifikasi[]">
-                                                                <option value="" hidden>Pilih Prioritas</option>
-                                                                <option value="4" @if(old('prioritas_sertifikasi') == '4')selected @endif>Sangat Penting</option>
-                                                                <option value="3" @if(old('prioritas_sertifikasi') == '3')selected @endif>Penting</option>
-                                                                <option value="2" @if(old('prioritas_sertifikasi') == '2')selected @endif>Regular</option>
-                                                                <option value="1" @if(old('prioritas_sertifikasi') == '1')selected @endif>Menambah Value</option>
-                                                            </select></td>
-                                                            <td><button type="button" name="add_sertifikasi" id="add_sertifikasi" class="btn btn-success"><i class="fa fa-plus" aria-hidden="true"></i></button></td>  
-                                                        </tr>  
+                                                    <table class="table table-bordered">  
+                                                        @foreach (array_combine($lowongan->kriteria->sertifikasi, $lowongan->kriteria->prioritas_sertifikasi)  as $sertifikasi => $prioritas_sertifikasi)
+                                                            <tr>  
+                                                                <td><input type="text" class="form-control" value="{{ $sertifikasi }}" readonly/></td>
+                                                                @switch($prioritas_sertifikasi)
+                                                                    @case(4)
+                                                                        <td><input type="text" class="form-control" value="Sangat Penting" readonly/></td>
+                                                                        @break
+                                                                    @case(3)
+                                                                        <td><input type="text" class="form-control" value="Penting" readonly/></td>
+                                                                        @break
+                                                                    @case(2)
+                                                                        <td><input type="text" class="form-control" value="Regular" readonly/></td>
+                                                                        @break
+                                                                    @case(1)
+                                                                        <td><input type="text" class="form-control" value="Menambah Value" readonly/></td>
+                                                                        @break
+                                                                    @default
+                                                                        <td><input type="text" class="form-control" value="Menambah Value" readonly/></td>
+                                                                @endswitch
+                                                            </tr> 
+                                                        @endforeach   
                                                     </table>  
                                                 </div>
                                                 @error('sertifikasi') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
@@ -263,10 +317,40 @@
                             </div>
                         </div>
                     </div>
+                    <div class="card-footer d-flex justify-content-end">
+                        <a href="javascript:history.back()" class="btn btn-secondary">Kembali</a>
+                        <button type="button" class="btn btn-primary ms-3" data-bs-toggle="modal" data-bs-target="#lamarModal">
+                            Lamar Sekarang
+                    </button>
+                    </div>
                 </div>
             </div>
         </div>
         @include('layouts.footers.auth.footer')
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="lamarModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Apakah Anda Yakin?</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form role="form_lamar" id="form_lamar" method="POST" action={{ route('riwayat-lamaran.store') }} enctype="multipart/form-data">
+                    @csrf
+                    <p>Anda akan melamar posisi sebagai {{ $lowongan->judul_pekerjaan }} di {{ $lowongan->penyediaKerja->user->name }}</p>
+                    <input type="hidden" name="lowongan_id" value="{{ $lowongan->id }}">
+                    <input type="hidden" name="pencari_kerja_id" value="{{ auth()->user()->pencariKerja->id }}">
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                <button type="submit" class="btn btn-primary" form="form_lamar">Kirim Lamaran</button>
+            </div>
+        </div>
+        </div>
     </div>
 
 @endsection

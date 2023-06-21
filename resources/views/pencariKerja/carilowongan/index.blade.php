@@ -21,7 +21,7 @@
                                         </button>
                                     </p> --}}
                                     <div class="border border-light rounded-3 p-3">
-                                    <table class="table table-bordered table-hover yajra-datatable lowonggan-index-datatable" id="table">
+                                    <table class="table table-bordered table-hover yajra-datatable lowongan-datatable" id="tablelowongan">
                                         <thead>
                                             <tr>
                                                 <th>No</th>
@@ -44,7 +44,7 @@
     </div>
 
     <!-- Modal Tambah -->
-    <div class="modal fade" id="tambahModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    {{-- <div class="modal fade" id="tambahModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-scrollable modal-lg">
         <div class="modal-content">
             <div class="modal-header">
@@ -107,9 +107,9 @@
                 </div>
         </div>
         </div>
-    </div>
+    </div> --}}
 
-    <!-- Modal Hapus -->
+    {{-- <!-- Modal Hapus -->
     <div class="modal fade" id="deleteModal" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="deleteModal" aria-hidden="true">
    <div class="modal-dialog modal-sm" role="document">
        <div class="modal-content">
@@ -128,7 +128,7 @@
                <button type="button" class="btn btn-danger" id="modal-confirm_delete">Delete</button>
            </div>
        </div>
-   </div>
+   </div> --}}
 </div>
 @endsection
 
@@ -137,7 +137,7 @@
     <script type="text/javascript">
         $(document).ready(function () {
             // datatable
-            var table = $('.lowonggan-index-datatable').DataTable({
+            var tablelowongan = $('.lowongan-datatable').DataTable({
                 processing: true,
                 serverSide: true,
                 language: {
@@ -156,22 +156,22 @@
                 //     headers: {
                 //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 //     }
-            $('body').on('click', '.deleteSertifikasi', function () {
-                var id = $(this).data('id');
+    //         $('body').on('click', '.deleteSertifikasi', function () {
+    //             var id = $(this).data('id');
 
-                var deleteConfirm = confirm("Apakah anda yakin akan menghapus data ini?");
-                if (deleteConfirm == true) {
-                    // AJAX request
-                    $.ajax({
-                        url: "{{ url('sertifikasi') }}"+'/'+id,
-                        type: 'DELETE',
-                        data: {"_token": "{{ csrf_token() }}"},
-                        success: function (data) {
-                            location.reload();
-                        },
-                    });
-                }
-    });       
+    //             var deleteConfirm = confirm("Apakah anda yakin akan menghapus data ini?");
+    //             if (deleteConfirm == true) {
+    //                 // AJAX request
+    //                 $.ajax({
+    //                     url: "{{ url('sertifikasi') }}"+'/'+id,
+    //                     type: 'DELETE',
+    //                     data: {"_token": "{{ csrf_token() }}"},
+    //                     success: function (data) {
+    //                         location.reload();
+    //                     },
+    //                 });
+    //             }
+    // });       
   });
     </script>
 @endsection

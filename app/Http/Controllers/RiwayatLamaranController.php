@@ -35,7 +35,15 @@ class RiwayatLamaranController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $attributes = request()->validate([
+            'lowongan_id' => 'required',
+            'pencari_kerja_id' => 'required'
+        ]);
+        
+        $riwayatLamaran = riwayatLamaran::create($attributes);
+        $riwayatLamaran->load('lowongan');
+        
+        return view('pencariKerja.cariLowongan.sukses-lamar',['riwayatLamaran' => $riwayatLamaran]);
     }
 
     /**

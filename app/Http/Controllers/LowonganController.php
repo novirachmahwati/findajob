@@ -80,7 +80,7 @@ class lowonganController extends Controller
      */
     public function show(lowongan $lowongan)
     {
-        $lowongan->load('kriteria');
+        $lowongan->load(['kriteria','penyediaKerja']);
         return view('pencariKerja.cariLowongan.show', compact('lowongan'));
     }
 

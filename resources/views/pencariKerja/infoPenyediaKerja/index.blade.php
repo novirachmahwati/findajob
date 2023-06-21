@@ -21,7 +21,7 @@
                                         </button>
                                     </p> --}}
                                     <div class="border border-light rounded-3 p-3">
-                                    <table class="table table-bordered table-hover yajra-datatable lowonggan-index-datatable" id="table">
+                                    <table class="table table-bordered table-hover yajra-datatable lowongan-index-datatable" id="table">
                                         <thead>
                                             <tr>
                                                 <th>No</th>
@@ -137,7 +137,7 @@
     <script type="text/javascript">
         $(document).ready(function () {
             // datatable
-            var table = $('.lowonggan-index-datatable').DataTable({
+            var table = $('.lowongan-index-datatable').DataTable({
                 processing: true,
                 serverSide: true,
                 language: {
