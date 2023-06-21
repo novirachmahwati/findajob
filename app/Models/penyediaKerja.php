@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class penyediaKerja extends Model
 {
@@ -30,4 +31,10 @@ class penyediaKerja extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+
+    public function lowongan(): HasMany
+    {
+        return $this->hasMany(Lowongan::class);
+    }
+
 }
