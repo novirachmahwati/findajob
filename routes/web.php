@@ -40,7 +40,7 @@ use App\Http\Controllers\PencariKerjaController;
 use App\Http\Controllers\PenyediaKerjaController;
 use App\Http\Controllers\RiwayatLamaranController;
 use App\Http\Controllers\SertifikasiController;
-use App\Http\Controllers\LowonganKerjaController;    
+use App\Http\Controllers\lowonganController;    
 use App\Http\Controllers\ProfilController;  
             
 // Register
@@ -58,7 +58,7 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('/', function () {return redirect('/dashboard');});
 	Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 	Route::get('/profil', [ProfilController::class, 'show'])->name('profil');
-	Route::get('/profil/edit', [ProfilController::class, 'update'])->name('profil.edit');
+	Route::post('/profil/edit', [ProfilController::class, 'update'])->name('profil.edit');
 	
 
 	// Pencari Kerja
@@ -107,7 +107,7 @@ Route::group(['middleware' => 'auth'], function () {
 
 	Route::resources([
 		'sertifikasi' => SertifikasiController::class,
-		'lowongan' => LowonganKerjaController::class,
+		'lowongan' => lowonganController::class,
 		'info-penyedia-kerja' => PenyediaKerjaController::class,
 		'info-pencari-kerja' => PencariKerjaController::class,
 		'riwayat-lamaran' => RiwayatLamaranController::class,

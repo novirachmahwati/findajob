@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\sertifikasi;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use DataTables;
 
@@ -16,7 +17,9 @@ class SertifikasiController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $sertifikasi = sertifikasi::select('id','nama','penerbit','tgl_diterbitkan')->orderBy('tgl_diterbitkan','desc')->get();
+            $sertifikasi = sertifikasi::select('id','nama','penerbit','tgl_diterbitkan')
+                            ->where('pencari_kerja_id', Auth::user()->pencariKerja->id)
+                            ->orderBy('tgl_diterbitkan','desc')->get();
             return Datatables::of($sertifikasi)->addIndexColumn()
                 ->addColumn('action', function($sertifikasi){
                     $btn = '<div class="dropdown dropstart text-end">          

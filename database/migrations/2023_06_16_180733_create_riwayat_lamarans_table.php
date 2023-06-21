@@ -18,16 +18,16 @@ return new class extends Migration
             $table->id();
             $table->dateTime('terkirim_pada');
             $table->string('status');
-            $table->unsignedInteger('lowongan_kerja_id');
+            $table->unsignedInteger('lowongan_id');
             $table->unsignedInteger('pencari_kerja_id');
             $table->unsignedInteger('penyedia_kerja_id');
             $table->timestamps();
         });
 
 	    Schema::table('riwayat_lamarans', function($table) {
-            $table->foreign('lowongan_kerja_id')
+            $table->foreign('lowongan_id')
             ->references('id')
-            ->on('lowongan_kerjas')
+            ->on('lowongans')
             ->onDelete('cascade');
 
             $table->foreign('pencari_kerja_id')

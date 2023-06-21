@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\lowonganKerja;
+use App\Models\lowongan;
 use Illuminate\Http\Request;
 use DataTables;
 
-class LowonganKerjaController extends Controller
+class lowonganController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,26 +16,26 @@ class LowonganKerjaController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $lowonganKerja = lowonganKerja::select('id','judul_pekerjaan','jenis_pekerjaan','lokasi_pekerjaan')->orderBy('id','desc')->get();
-            return Datatables::of($lowonganKerja)->addIndexColumn()
-                ->addColumn('action', function($lowonganKerja){
+            $lowongan = lowongan::select('id','judul_pekerjaan','jenis_pekerjaan','lokasi_pekerjaan')->orderBy('id','desc')->get();
+            return Datatables::of($lowongan)->addIndexColumn()
+                ->addColumn('action', function($lowongan){
                     $btn = '<div class="dropdown dropstart text-end">          
                                 <button type="button" class="btn btn-link" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></button>
                                 <ul class="dropdown-menu dropdown-menu-end">
                                     <li>
-                                        <a class="dropdown-item" href="'.route('lowongan.show', $lowonganKerja->id).'">
+                                        <a class="dropdown-item" href="'.route('lowongan.show', $lowongan->id).'">
                                             <i class="fa fa-eye text-success" aria-hidden="true"></i>
                                             <span class="d-sm-inline d-none ms-2">Lihat</span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="'.route('lowongan.edit', $lowonganKerja->id).'">
+                                        <a class="dropdown-item" href="'.route('lowongan.edit', $lowongan->id).'">
                                             <i class="fa fa-pencil text-primary" aria-hidden="true"></i>
                                             <span class="d-sm-inline d-none ms-2">Edit</span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item deleteSertifikasi" href="javascript:void(0);" data-toggle="tooltip" data-id="'.$lowonganKerja->id .'">
+                                        <a class="dropdown-item deleteSertifikasi" href="javascript:void(0);" data-toggle="tooltip" data-id="'.$lowongan->id .'">
                                             <i class="fa fa-trash-o text-danger" aria-hidden="true"></i>
                                             <span class="d-sm-inline d-none ms-2">Hapus</span>
                                         </a>
@@ -48,7 +48,7 @@ class LowonganKerjaController extends Controller
                 ->make(true);
         }
 
-        return view('pencariKerja.lowongan.index');
+        return view('pencariKerja.cariLowongan.index');
     }
 
     /**
@@ -75,21 +75,22 @@ class LowonganKerjaController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\lowonganKerja  $lowonganKerja
+     * @param  \App\Models\lowongan  $lowongan
      * @return \Illuminate\Http\Response
      */
-    public function show(lowonganKerja $lowonganKerja)
+    public function show(lowongan $lowongan)
     {
-        //
+        $lowongan->load('kriteria');
+        return view('pencariKerja.cariLowongan.show', compact('lowongan'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\lowonganKerja  $lowonganKerja
+     * @param  \App\Models\lowongan  $lowongan
      * @return \Illuminate\Http\Response
      */
-    public function edit(lowonganKerja $lowonganKerja)
+    public function edit(lowongan $lowongan)
     {
         //
     }
@@ -98,10 +99,10 @@ class LowonganKerjaController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\lowonganKerja  $lowonganKerja
+     * @param  \App\Models\lowongan  $lowongan
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, lowonganKerja $lowonganKerja)
+    public function update(Request $request, lowongan $lowongan)
     {
         //
     }
@@ -109,10 +110,10 @@ class LowonganKerjaController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\lowonganKerja  $lowonganKerja
+     * @param  \App\Models\lowongan  $lowongan
      * @return \Illuminate\Http\Response
      */
-    public function destroy(lowonganKerja $lowonganKerja)
+    public function destroy(lowongan $lowongan)
     {
         //
     }

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\penyediaKerja;
-use App\Models\lowonganKerja;
+use App\Models\lowongan;
 use App\Models\riwayatLamaran;
 use App\Models\kriteria;
 use Illuminate\Http\Request;
@@ -14,10 +14,10 @@ class PenyediaKerjaController extends Controller
     // Dashboard
     public function dashboard()
     {
-        $jml_lowongan = lowonganKerja::where('penyedia_kerja_id', Auth::user()->penyediaKerja->id)->count();
-        $jml_lowongan_aktif = lowonganKerja::where('penyedia_kerja_id', Auth::user()->penyediaKerja->id)
+        $jml_lowongan = lowongan::where('penyedia_kerja_id', Auth::user()->penyediaKerja->id)->count();
+        $jml_lowongan_aktif = lowongan::where('penyedia_kerja_id', Auth::user()->penyediaKerja->id)
                                             ->where('status', 'Aktif')->count();
-        $jml_lowongan_tdk_aktif = lowonganKerja::where('penyedia_kerja_id', Auth::user()->penyediaKerja->id)
+        $jml_lowongan_tdk_aktif = lowongan::where('penyedia_kerja_id', Auth::user()->penyediaKerja->id)
                                             ->where('status', 'Tidak Aktif')->count();
         // $jml_pelamar = riwayatLamaran::where('penyedia_kerja_id', Auth::user()->penyediaKerja->id)->count();
         $jml_pelamar = 0;
@@ -138,9 +138,9 @@ class PenyediaKerjaController extends Controller
 
         $attributes['jenis_kelamin'] = $request->input('jenis_kelamin');
 
-        $lowonganKerja = lowonganKerja::create($attributes);
+        $lowongan = lowongan::create($attributes);
         
-        return view('penyediaKerja.persyaratan-umum-khusus',['lowongan_kerja_id' => $lowonganKerja->id]);
+        return view('penyediaKerja.persyaratan-umum-khusus',['lowongan_id' => $lowongan->id]);
     }
 
     // Persyaratan Umum & Khusus
@@ -166,7 +166,7 @@ class PenyediaKerjaController extends Controller
             'prioritas_keterampilan_non_teknis' => 'required|max:255',
             'sertifikasi' => 'max:255',
             'prioritas_sertifikasi' => 'required|max:255',
-            'lowongan_kerja_id' => 'required'
+            'lowongan_id' => 'required'
         ]);
 
         switch($request->minimal_pendidikan) {
@@ -204,7 +204,7 @@ class PenyediaKerjaController extends Controller
         
         $kriteria = kriteria::create($attributes);
         
-        return view('penyediaKerja.kontak',['lowongan_kerja_id' => $kriteria->lowongan_kerja_id]);
+        return view('penyediaKerja.kontak',['lowongan_id' => $kriteria->lowongan_id]);
     }
 
     // Kontak Lowongan Pekerjaan
@@ -217,12 +217,12 @@ class PenyediaKerjaController extends Controller
     {
         $attributes = request()->validate([
             'email' => 'required|email|max:255',
-            'lowongan_kerja_id' => 'required'
+            'lowongan_id' => 'required'
         ]);
             
-        $lowonganKerja = lowonganKerja::where('id', $attributes['lowongan_kerja_id'])->first();
-        $lowonganKerja->fill($attributes);
-        $lowonganKerja->save();
+        $lowongan = lowongan::where('id', $attributes['lowongan_id'])->first();
+        $lowongan->fill($attributes);
+        $lowongan->save();
 
         return redirect()->route('SDK.create');
     }

@@ -21,7 +21,7 @@ class kriteria extends Model
         'prioritas_keterampilan_non_teknis',
         'sertifikasi',
         'prioritas_sertifikasi',
-        'lowongan_kerja_id'
+        'lowongan_id'
     ];
 
     public function setStatusPernikahanAttribute($value)
@@ -29,20 +29,20 @@ class kriteria extends Model
         $this->attributes['status_pernikahan'] = json_encode($value);
     }
 
-    public function getStatusPernikahanAttribute($value)
-    {
-        return $this->attributes['status_pernikahan'] = json_decode($value);
-    }
+    // public function getStatusPernikahanAttribute($value)
+    // {
+    //     return $this->attributes['status_pernikahan'] = json_decode($value);
+    // }
 
     public function setBahasaAttribute($value)
     {
         $this->attributes['bahasa'] = json_encode($value);
     }
 
-    public function getBahasaAttribute($value)
-    {
-        return $this->attributes['bahasa'] = json_decode($value);
-    }
+    // public function getBahasaAttribute($value)
+    // {
+    //     return $this->attributes['bahasa'] = json_decode($value);
+    // }
 
     public function setKeterampilanTeknisAttribute($value)
     {
@@ -107,8 +107,8 @@ class kriteria extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function lowongankerja()
+    public function lowongan()
     {
-        return $this->belongsTo(lowongankerja::class, 'lowongan_kerja_id');
+        return $this->belongsTo(lowongan::class, 'lowongan_id');
     }
 }

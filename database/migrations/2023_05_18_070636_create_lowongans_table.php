@@ -13,8 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::dropIfExists('lowongan_kerjas');
-        Schema::create('lowongan_kerjas', function (Blueprint $table) {
+        Schema::dropIfExists('lowongans');
+        Schema::create('lowongans', function (Blueprint $table) {
             $table->id();
             $table->string('judul_pekerjaan');
             $table->text('deskripsi_pekerjaan');
@@ -32,7 +32,7 @@ return new class extends Migration
             $table->timestamps();
         });
 
-	    Schema::table('lowongan_kerjas', function($table) {
+	    Schema::table('lowongans', function($table) {
             $table->foreign('penyedia_kerja_id')
             ->references('id')
             ->on('penyedia_kerjas')
@@ -47,6 +47,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('lowongan_kerjas');
+        Schema::dropIfExists('lowongans');
     }
 };

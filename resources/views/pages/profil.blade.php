@@ -23,7 +23,7 @@
                             </div>
                             <div class="row">
                                 <div class="col">
-                                    <form role="form" method="POST" action={{ route('pencari_kerja.edit') }} enctype="multipart/form-data">
+                                    <form role="form" method="POST" action={{ route('profil.edit') }} enctype="multipart/form-data">
                                         @csrf
                                         <div class="card-header pb-0">
                                             @include('layouts.flash-message')
@@ -122,7 +122,7 @@
                             </div>
                             <div class="row">
                                 <div class="col">
-                                    <form role="form" method="POST" action={{ route('pencari_kerja.edit') }} enctype="multipart/form-data">
+                                    <form role="form" method="POST" action={{ route('profil.edit') }} enctype="multipart/form-data">
                                         @csrf
                                         <div class="card-header pb-0">
                                             @include('layouts.flash-message')

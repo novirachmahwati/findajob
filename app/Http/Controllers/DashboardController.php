@@ -7,7 +7,7 @@ use App\Models\pencariKerja;
 use App\Models\sertifikasi;
 use App\Models\riwayatLamaran;
 use App\Models\penyediaKerja;
-use App\Models\lowonganKerja;
+use App\Models\lowongan;
 use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
@@ -36,10 +36,10 @@ class DashboardController extends Controller
                         ->with('jml_lamaranTerkirim', $jml_lamaranTerkirim)
                         ->with('jml_sertifikasi', $jml_sertifikasi);
         } else {
-            $jml_lowongan = lowonganKerja::where('penyedia_kerja_id', Auth::user()->penyediaKerja->id)->count();
-            $jml_lowongan_aktif = lowonganKerja::where('penyedia_kerja_id', Auth::user()->penyediaKerja->id)
+            $jml_lowongan = lowongan::where('penyedia_kerja_id', Auth::user()->penyediaKerja->id)->count();
+            $jml_lowongan_aktif = lowongan::where('penyedia_kerja_id', Auth::user()->penyediaKerja->id)
                                                 ->where('status', 'Aktif')->count();
-            $jml_lowongan_tdk_aktif = lowonganKerja::where('penyedia_kerja_id', Auth::user()->penyediaKerja->id)
+            $jml_lowongan_tdk_aktif = lowongan::where('penyedia_kerja_id', Auth::user()->penyediaKerja->id)
                                                 ->where('status', 'Tidak Aktif')->count();
             // $jml_pelamar = riwayatLamaran::where('penyedia_kerja_id', Auth::user()->penyediaKerja->id)->count();
             $jml_pelamar = 0;

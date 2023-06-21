@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
-class lowonganKerja extends Model
+class lowongan extends Model
 {
     protected $fillable = [
         'judul_pekerjaan',
@@ -27,16 +27,32 @@ class lowonganKerja extends Model
         $this->attributes['jenis_kelamin'] = json_encode($value);
     }
 
-    public function getJenisKelaminAttribute($value)
-    {
-        return $this->attributes['jenis_kelamin'] = json_decode($value);
-    }
+    // public function getJenisKelaminAttribute($value)
+    // {
+    //     return $this->attributes['jenis_kelamin'] = json_decode($value);
+    // }
 
     /**
-     * Get the kriteria associated with lowonganKerja.
+     * Get the kriteria associated with lowongan.
      */
     public function kriteria(): HasOne
     {
         return $this->hasOne(kriteria::class);
+    }
+
+    /**
+     * Get the kriteria associated with lowongan.
+     */
+    public function riwayatLamaran(): HasOne
+    {
+        return $this->hasOne(riwayatLamaran::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function penyediaKerja()
+    {
+        return $this->belongsTo(penyediaKerja::class, 'penyedia_kerja_id');
     }
 }

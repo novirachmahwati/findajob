@@ -108,7 +108,7 @@
                                     @csrf
                                     <div class="card-body">
                                         <div class="row">
-                                            <input type="hidden" name="lowongan_kerja_id" value="{{ $lowongan_kerja_id }}">
+                                            <input type="hidden" name="lowongan_id" value="{{ $lowongan_id }}">
                                             <div class="col-md-12">
                                                 <div class="form-group">
                                                     <label for="kontak" class="form-control-label">Kontak <span class="titik-logo">*</span></label>

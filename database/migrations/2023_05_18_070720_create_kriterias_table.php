@@ -29,14 +29,14 @@ return new class extends Migration
             $table->string('prioritas_keterampilan_non_teknis');
             $table->string('sertifikasi')->nullable();
             $table->string('prioritas_sertifikasi')->nullable();
-            $table->unsignedInteger('lowongan_kerja_id');
+            $table->unsignedInteger('lowongan_id');
             $table->timestamps();
         });
 
         Schema::table('kriterias', function($table) {
-            $table->foreign('lowongan_kerja_id')
+            $table->foreign('lowongan_id')
             ->references('id')
-            ->on('lowongan_kerjas')
+            ->on('lowongans')
             ->onDelete('cascade');
         });
     }
