@@ -338,7 +338,7 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form role="form_lamar" id="form_lamar" method="POST" action={{ route('riwayat-lamaran.store') }} enctype="multipart/form-data">
+                <form role="form_lamar" id="form_lamar" method="POST" action={{ route('sukses-lamar') }} enctype="multipart/form-data">
                     @csrf
                     <p>Anda akan melamar posisi sebagai {{ $lowongan->judul_pekerjaan }} di {{ $lowongan->penyediaKerja->user->name }}</p>
                     <input type="hidden" name="lowongan_id" value="{{ $lowongan->id }}">
