@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\lowongan;
+use App\Models\riwayatLamaran;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use DataTables;
 
@@ -27,19 +29,7 @@ class lowonganController extends Controller
                                             <i class="fa fa-eye text-success" aria-hidden="true"></i>
                                             <span class="d-sm-inline d-none ms-2">Lihat</span>
                                         </a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item" href="'.route('lowongan.edit', $lowongan->id).'">
-                                            <i class="fa fa-pencil text-primary" aria-hidden="true"></i>
-                                            <span class="d-sm-inline d-none ms-2">Edit</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item deleteSertifikasi" href="javascript:void(0);" data-toggle="tooltip" data-id="'.$lowongan->id .'">
-                                            <i class="fa fa-trash-o text-danger" aria-hidden="true"></i>
-                                            <span class="d-sm-inline d-none ms-2">Hapus</span>
-                                        </a>
-                                    </li>
+                                    </li>s
                                 </ul>
                             </div>';
                     return $btn;
@@ -80,8 +70,11 @@ class lowonganController extends Controller
      */
     public function show(lowongan $lowongan)
     {
+        $riwayatLamaran = riwayatLamaran::where('lowongan_id', $lowongan->id)
+                            ->where('pencari_kerja_id', Auth::user()->pencariKerja->id)
+                            ->get();
         $lowongan->load(['kriteria','penyediaKerja']);
-        return view('pencariKerja.cariLowongan.show', compact('lowongan'));
+        return view('pencariKerja.cariLowongan.show', compact(['lowongan','riwayatLamaran']));
     }
 
     /**

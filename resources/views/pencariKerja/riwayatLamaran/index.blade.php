@@ -22,6 +22,7 @@
                                                 <th>Judul</th>
                                                 <th>Penyedia Kerja</th>
                                                 <th>Lokasi</th>
+                                                <th>Status</th>
                                                 <th>Terkirim Pada</th>
                                                 <th>Aksi</th>
                                             </tr>
@@ -48,6 +49,7 @@
             var tablelowongan = $('.riwayat-lamaran-datatable').DataTable({
                 processing: true,
                 serverSide: true,
+                scrollX: true,
                 language: {
                     url: '//cdn.datatables.net/plug-ins/1.13.4/i18n/id.json',
                 },
@@ -57,6 +59,7 @@
                     {data: 'judul_pekerjaan', name: 'lowongans.judul_pekerjaan'},
                     {data: 'name', name: 'users.name'},
                     {data: 'lokasi_pekerjaan', name: 'lowongans.lokasi_pekerjaan'},
+                    {data: 'status', name: 'lowongans.status'},
                     {data: 'created_at', name: 'riwayat_lamarans.created_at'},
                     {data: 'action',  name: 'action', orderable: false, searchable: false},
                 ]

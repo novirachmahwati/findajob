@@ -29,11 +29,6 @@ class kriteria extends Model
         $this->attributes['status_pernikahan'] = json_encode($value);
     }
 
-    // public function getStatusPernikahanAttribute($value)
-    // {
-    //     return $this->attributes['status_pernikahan'] = json_decode($value);
-    // }
-
     public function setBahasaAttribute($value)
     {
         $this->attributes['bahasa'] = json_encode($value);

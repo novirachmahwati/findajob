@@ -9,12 +9,15 @@
                     <div class="card-header pb-0 pt-4 bg-transparent" style="margin-left: 15px">
                         <h6 class="text-capitalize" >Informasi Lowongan</h6>
                         <p>Berikut informasi dasar mengenai lowongan pekerjaan untuk Anda.</p>
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#lamarModal">
+                        @if($riwayatLamaran->count() == 0)  
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#lamarModal">
                                 Lamar Sekarang
-                        </button>
-                        <button type="button" class="btn btn-primary text-white" data-bs-toggle="modal" data-bs-target="#lamarModal" disabled="">
-                            Anda sudah melamar
-                    </button>
+                            </button>
+                        @else
+                            <button type="button" class="btn btn-primary text-white" disabled>
+                                {{ $riwayatLamaran }}Anda sudah melamar
+                            </button>
+                        @endif
                     </div>
                     <div class="card-body p-3 mt-n3">
                         <div class="row">
@@ -319,9 +322,11 @@
                     </div>
                     <div class="card-footer d-flex justify-content-end">
                         <a href="javascript:history.back()" class="btn btn-secondary">Kembali</a>
-                        <button type="button" class="btn btn-primary ms-3" data-bs-toggle="modal" data-bs-target="#lamarModal">
-                            Lamar Sekarang
-                    </button>
+                        @if(empty($riwayatLamaran))
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#lamarModal">
+                                Lamar Sekarang
+                            </button>
+                        @endif
                     </div>
                 </div>
             </div>
