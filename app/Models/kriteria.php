@@ -9,7 +9,7 @@ class kriteria extends Model
     protected $fillable = [
         'minimal_pendidikan',
         'prioritas_minimal_pendidikan',
-        'tahun_pengalaman',
+        'pengalaman',
         'jurusan_pendidikan_terakhir',
         'status_pernikahan',
         'rentang_usia_minimal',
@@ -21,6 +21,10 @@ class kriteria extends Model
         'prioritas_keterampilan_non_teknis',
         'sertifikasi',
         'prioritas_sertifikasi',
+        'faktor_utama',
+        'bobot_faktor_utama',
+        'faktor_pendukung',
+        'bobot_faktor_pendukung',
         'lowongan_id'
     ];
 
@@ -97,6 +101,26 @@ class kriteria extends Model
     public function getPrioritasSertifikasiAttribute($value)
     {
         return $this->attributes['prioritas_sertifikasi'] = json_decode($value);
+    }
+
+    public function setFaktorUtama($value)
+    {
+        $this->attributes['faktor_utama'] = json_encode($value);
+    }
+
+    public function setBobotFaktorUtama($value)
+    {
+        $this->attributes['bobot_faktor_utama'] = json_encode($value);
+    }
+
+    public function setFaktorPendukung($value)
+    {
+        $this->attributes['faktor_pendukung'] = json_encode($value);
+    }
+
+    public function setBobotFaktorPendukung($value)
+    {
+        $this->attributes['bobot_faktor_pendukung'] = json_encode($value);
     }
 
     /**

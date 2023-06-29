@@ -212,7 +212,8 @@
                                             Belum ada lamaran kerja diunggah
                                             @else
                                             {{ $jml_lowongan }} Lamaran kerja anda telah diunggah
-                                            @endif</p>
+                                            @endif
+                                        </p>
                                     </div>
                                 </div>
                                 <div class="col-4 text-end">
@@ -235,7 +236,7 @@
                                             Belum ada lowongan kerja aktif
                                             @else
                                             {{ $jml_lowongan_aktif }} Lowongan kerja anda aktif dipublikasikan
-                                            @endif</p>
+                                            @endif
                                         </p>
                                     </div>
                                 </div>
@@ -283,7 +284,7 @@
                                             Belum ada pelamar yang masuk
                                             @else
                                             {{ $jml_pelamar }} Pelamar telah melamar lowongan anda
-                                            @endif</p>
+                                            @endif
                                         </p>
                                     </div>
                                 </div>
@@ -390,7 +391,7 @@
                                                 <div class="col-md-12">
                                                     <div class="form-group">
                                                         <label for="deskripsi" class="form-control-label">Deskripsi<span class="titik-logo">*</span></label>
-                                                        <textarea class="form-control" type="text" name="deskripsi" value="{{ old('deskripsi', auth()->user()->penyediaKerja->deskripsi) }}" placeholder="Deskripsi Perusahaan"></textarea>
+                                                        <textarea class="ckeditor form-control" type="text" name="deskripsi_pekerjaan">{{ auth()->user()->penyediaKerja->deskripsi }}</textarea>
                                                         @error('deskripsi') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
                                                     </div>
                                                 </div>
@@ -407,4 +408,13 @@
         
         @include('layouts.footers.auth.footer')
     </div>
+@endsection
+
+@section('bottom-content')
+    <script src="//cdn.ckeditor.com/4.14.1/standard/ckeditor.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.ckeditor').ckeditor();
+        });
+    </script>
 @endsection

@@ -27,7 +27,6 @@ return new class extends Migration
             $table->date('tanggal_kadaluwarsa');
             $table->integer('kuota');
             $table->string('status');
-            $table->string('kontak')->nullable();
             $table->unsignedInteger('penyedia_kerja_id');
             $table->timestamps();
         });

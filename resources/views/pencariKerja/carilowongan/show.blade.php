@@ -15,7 +15,7 @@
                             </button>
                         @else
                             <button type="button" class="btn btn-primary text-white" disabled>
-                                {{ $riwayatLamaran }}Anda sudah melamar
+                                Anda sudah melamar
                             </button>
                         @endif
                     </div>

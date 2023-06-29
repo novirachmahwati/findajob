@@ -29,6 +29,10 @@ return new class extends Migration
             $table->string('prioritas_keterampilan_non_teknis');
             $table->string('sertifikasi')->nullable();
             $table->string('prioritas_sertifikasi')->nullable();
+            $table->string('faktor_utama')->nullable();
+            $table->string('bobot_faktor_utama')->nullable();
+            $table->string('faktor_pendukung')->nullable();
+            $table->string('bobot_faktor_pendukung')->nullable();
             $table->unsignedInteger('lowongan_id');
             $table->timestamps();
         });

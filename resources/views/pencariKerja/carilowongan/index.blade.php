@@ -20,6 +20,7 @@
                                             <tr>
                                                 <th>No</th>
                                                 <th>Judul</th>
+                                                <th>Penyedia Kerja</th>
                                                 <th>Jenis Pekerjaan</th>
                                                 <th>Lokasi</th>
                                                 <th>Aksi</th>
@@ -54,6 +55,7 @@
                 columns: [
                     {data: 'DT_RowIndex', name:'DT_RowIndex', orderable: false, searchable: false},
                     {data: 'judul_pekerjaan', name: 'judul_pekerjaan'},
+                    {data: 'name', name: 'users.name'},
                     {data: 'jenis_pekerjaan', name: 'jenis_pekerjaan'},
                     {data: 'lokasi_pekerjaan', name: 'lokasi_pekerjaan'},
                     {data: 'action',  name: 'action', orderable: false, searchable: false},

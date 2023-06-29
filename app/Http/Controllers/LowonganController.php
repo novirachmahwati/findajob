@@ -18,7 +18,11 @@ class lowonganController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $lowongan = lowongan::select('id','judul_pekerjaan','jenis_pekerjaan','lokasi_pekerjaan')->orderBy('id','desc')->get();
+            $lowongan = lowongan::leftJoin('penyedia_kerjas','penyedia_kerjas.id','=','lowongans.penyedia_kerja_id')
+                                ->leftJoin('users','users.id','=','penyedia_kerjas.user_id')
+                                ->select('lowongans.id','lowongans.judul_pekerjaan','users.name','lowongans.lokasi_pekerjaan','lowongans.jenis_pekerjaan')
+                                ->orderBy('lowongans.id','desc')
+                                ->get();
             return Datatables::of($lowongan)->addIndexColumn()
                 ->addColumn('action', function($lowongan){
                     $btn = '<div class="dropdown dropstart text-end">          
@@ -29,7 +33,7 @@ class lowonganController extends Controller
                                             <i class="fa fa-eye text-success" aria-hidden="true"></i>
                                             <span class="d-sm-inline d-none ms-2">Lihat</span>
                                         </a>
-                                    </li>s
+                                    </li>
                                 </ul>
                             </div>';
                     return $btn;

@@ -41,7 +41,8 @@ use App\Http\Controllers\PenyediaKerjaController;
 use App\Http\Controllers\RiwayatLamaranController;
 use App\Http\Controllers\SertifikasiController;
 use App\Http\Controllers\lowonganController;    
-use App\Http\Controllers\ProfilController;  
+use App\Http\Controllers\ProfilController; 
+use App\Http\Controllers\KelolaLowonganController;  
             
 // Register
 	Route::get('/registrasi-pencari-kerja', [RegisterController::class, 'create'])->middleware('guest')->name('registrasi');
@@ -60,6 +61,8 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('/profil', [ProfilController::class, 'show'])->name('profil');
 	Route::post('/profil/edit', [ProfilController::class, 'update'])->name('profil.edit');
 	Route::post('/lowongan/sukses-lamar', [RiwayatLamaranController::class, 'store'])->name('sukses-lamar');
+	Route::get('/pembobotan-persyaratan', [KelolaLowonganController::class, 'PP_create'])->name('pembobotan-persyaratan.create');
+	Route::post('/pembobotan-persyaratan', [KelolaLowonganController::class, 'PP_store'])->name('pembobotan-persyaratan.store');
 	
 
 	// Pencari Kerja
