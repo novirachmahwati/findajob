@@ -8,6 +8,7 @@ use App\Models\kriteria;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use DataTables;
+use App\Rules\JumlahBobot;
 
 class KelolaLowonganController extends Controller
 {
@@ -159,22 +160,37 @@ class KelolaLowonganController extends Controller
             'bobot_faktor_utama' => 'required|max:255',
             'faktor_pendukung' => 'required|max:255',
             'bobot_faktor_pendukung' => 'required|max:255',
-            'lowongan_id' => 'required'
+            // 'lowongan_id' => 'required'
         ]);
             
-        $lowongan = lowongan::where('id', $attributes['lowongan_id'])->first();
+        $attributes['faktor_utama'] = $request->input('faktor_utama');
+        $attributes['bobot_faktor_utama'] = $request->input('bobot_faktor_utama');
+        $attributes['faktor_pendukung'] = $request->input('faktor_pendukung');
+        $attributes['bobot_faktor_pendukung'] = $request->input('bobot_faktor_pendukung');
+        
+        $faktor = array_merge($attributes['faktor_utama'],$attributes['faktor_pendukung']);
+
+        if (count($faktor) !== count(array_unique($faktor)) ) {
+            return back()->with('error', 'Terdapat duplikat persyaratan yang dimasukkan');
+        }
+
+        if (array_sum($attributes['bobot_faktor_utama']) != 1) {
+            return back()->with('error', 'Jumlah bobot faktor utama tidak boleh lebih/kurang dari 1');
+        }
+
+        if (array_sum($attributes['bobot_faktor_pendukung']) != 1) {
+            return back()->with('error', 'Jumlah bobot faktor pendukung tidak boleh lebih/kurang dari 1');
+
+        }
+
+        $lowongan = kriteria::where('lowongan_id', $attributes['lowongan_id'])->first();
         $lowongan->fill($attributes);
         $lowongan->save();
 
-        return redirect()->route('SDK.create');
-    }
-
-    // Syarat dan Ketentuan
-    public function SDK_create()
-    {
         return view('penyediaKerja.kelolaLowongan.syarat-dan-ketentuan');
     }
 
+    // Syarat dan Ketentuan
     public function SDK_store()
     {   
         return redirect()->route('dashboard');

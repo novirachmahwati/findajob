@@ -99,12 +99,11 @@
                 <div class="card z-index-2 h-100">
                     <div class="card-header pb-0 pt-4 bg-transparent">
                         <h6 class="text-capitalize" style="margin-left: 15px">Pembobotan Persyaratan</h6>
-                        <p style="margin-left: 15px">Masukkan pembobotan persyaratan berdasarkan kelompok variabel Faktor Utama (Core Factor) dan Faktor Pendukung (Secondary Factor). 
-                            Tahap ini digunakan untuk membantu kami melakukan proses perhitungan pencocokan profil pelamar. 
-                            Klik <a href="{{ route('UC.download') }}" class="text-success"><b><u>disini</u></b></a> Untuk penjelasan lebih lengkap. 
+                        <p class="text-justify" style="margin-left: 15px">Masukkan pembobotan persyaratan berdasarkan kelompok variabel Faktor Utama (Core Factor) dan Faktor Pendukung (Secondary Factor). 
+                            Jumlah pembobotan tiap faktor kelompok apabila dijumlahkan harus sama dengan = 1, tidak boleh lebih atau kurang dari 1. 
+                            Klik tombol "Selanjutnya" apabila pembobotan sudah sesuai dengan kriteria Anda.
+                            Klik <a href="#" class="text-success" data-bs-toggle="modal" data-bs-target="#pembobotanModal"><b><u>disini</u></b></a> Untuk penjelasan lebih lengkap. 
                         </p>
-                            {{-- Dengan Anda melakukan pendefinisian nilai atau bobot untuk setiap variabel-variabel persyaratan.
-                            anda dalam proses pemilihan pelamar terbaik yang sesuai dengan persyaratan lowongan Anda.</p> --}}
                     </div>
                     <div class="card-body p-3" style="margin-top: -30px">
                         <div class="row">
@@ -113,6 +112,7 @@
                                     @csrf
                                     <div class="card-body">
                                         <div class="row">
+                                            @include('layouts.flash-message')
                                             {{-- <input type="hidden" name="lowongan_id" value="{{ $lowongan_id }}"> --}}
                                             <div class="col-md-12">
                                                 <div class="form-group">
@@ -134,7 +134,7 @@
                                                                         <option value="sertifikasi">Sertifikasi</option>
                                                                     </select>
                                                                 <td>
-                                                                    <input type="number" name="bobot_faktor_utama[]" value="0.2" min="0" max="1" class="form-control" required/></td> 
+                                                                    <input type="number" name="bobot_faktor_utama[]" value="0.2" min="0" max="1" step="any" class="form-control" required/></td> 
                                                                 </td>
                                                                 <td><button type="button" name="add_faktor_utama" id="add_faktor_utama" class="btn btn-success"><i class="fa fa-plus" aria-hidden="true"></i></button></td>  
                                                             </tr>
@@ -153,7 +153,7 @@
                                                                         <option value="sertifikasi">Sertifikasi</option>
                                                                     </select>
                                                                 <td>
-                                                                    <input type="number" name="bobot_faktor_utama[]" value="0.2" min="0" max="1" class="form-control" required/></td> 
+                                                                    <input type="number" name="bobot_faktor_utama[]" value="0.2" min="0" max="1" step="any" class="form-control" required/></td> 
                                                                 </td>
                                                                 <td><button type="button" name="remove" id="2" class="btn btn-danger btn_remove">X</button></td>
                                                             </tr>
@@ -172,7 +172,7 @@
                                                                         <option value="sertifikasi">Sertifikasi</option>
                                                                     </select>
                                                                 <td>
-                                                                    <input type="number" name="bobot_faktor_utama[]" value="0.1" min="0" max="1" class="form-control" required/></td> 
+                                                                    <input type="number" name="bobot_faktor_utama[]" value="0.1" min="0" max="1" step="any" class="form-control" required/></td> 
                                                                 </td>
                                                                 <td><button type="button" name="remove" id="3" class="btn btn-danger btn_remove">X</button></td>
                                                             </tr>
@@ -191,7 +191,7 @@
                                                                         <option value="sertifikasi">Sertifikasi</option>
                                                                     </select>
                                                                 <td>
-                                                                    <input type="number" name="bobot_faktor_utama[]" value="0.3" min="0" max="1" class="form-control" required/></td> 
+                                                                    <input type="number" name="bobot_faktor_utama[]" value="0.3" min="0" max="1" step="any" class="form-control" required/></td> 
                                                                 </td>
                                                                 <td><button type="button" name="remove" id="4" class="btn btn-danger btn_remove">X</button></td>
                                                             </tr>
@@ -210,7 +210,7 @@
                                                                         <option value="sertifikasi">Sertifikasi</option>
                                                                     </select>
                                                                 <td>
-                                                                    <input type="number" name="bobot_faktor_utama[]" value="0.2" min="0" max="1" class="form-control" required/></td> 
+                                                                    <input type="number" name="bobot_faktor_utama[]" value="0.2" min="0" max="1" step="any" class="form-control" required/></td> 
                                                                 </td>
                                                                 <td><button type="button" name="remove" id="5" class="btn btn-danger btn_remove">X</button></td>
                                                             </tr>  
@@ -240,7 +240,7 @@
                                                                         <option value="sertifikasi">Sertifikasi</option>
                                                                     </select>
                                                                 <td>
-                                                                    <input type="number" name="bobot_faktor_pendukung[]" value="0.1" min="0" max="1" class="form-control" required/></td> 
+                                                                    <input type="number" name="bobot_faktor_pendukung[]" value="0.1" min="0" max="1" step="any" class="form-control" required/></td> 
                                                                 </td>
                                                                 <td><button type="button" name="add_faktor_pendukung" id="add_faktor_pendukung" class="btn btn-success"><i class="fa fa-plus" aria-hidden="true"></i></button></td>  
                                                             </tr>
@@ -259,7 +259,7 @@
                                                                         <option value="sertifikasi">Sertifikasi</option>
                                                                     </select>
                                                                 <td>
-                                                                    <input type="number" name="bobot_faktor_pendukung[]" value="0.15" min="0" max="1" class="form-control" required/></td> 
+                                                                    <input type="number" name="bobot_faktor_pendukung[]" value="0.15" min="0" max="1" step="any" class="form-control" required/></td> 
                                                                 </td>
                                                                 <td><button type="button" name="remove" id="7" class="btn btn-danger btn_remove">X</button></td>
                                                             </tr>
@@ -278,7 +278,7 @@
                                                                         <option value="sertifikasi">Sertifikasi</option>
                                                                     </select>
                                                                 <td>
-                                                                    <input type="number" name="bobot_faktor_pendukung[]" value="0.15" min="0" max="1" class="form-control" required/></td> 
+                                                                    <input type="number" name="bobot_faktor_pendukung[]" value="0.15" min="0" max="1" step="any" class="form-control" required/></td> 
                                                                 </td>
                                                                 <td><button type="button" name="remove" id="8" class="btn btn-danger btn_remove">X</button></td>
                                                             </tr>
@@ -297,7 +297,7 @@
                                                                         <option value="sertifikasi">Sertifikasi</option>
                                                                     </select>
                                                                 <td>
-                                                                    <input type="number" name="bobot_faktor_pendukung[]" value="0.25" min="0" max="1" class="form-control" required/></td> 
+                                                                    <input type="number" name="bobot_faktor_pendukung[]" value="0.25" min="0" max="1" step="any" class="form-control" required/></td> 
                                                                 </td>
                                                                 <td><button type="button" name="remove" id="9" class="btn btn-danger btn_remove">X</button></td>
                                                             </tr>
@@ -316,7 +316,7 @@
                                                                         <option value="sertifikasi" selected>Sertifikasi</option>
                                                                     </select>
                                                                 <td>
-                                                                    <input type="number" name="bobot_faktor_pendukung[]" value="0.35" min="0" max="1" class="form-control" required/></td> 
+                                                                    <input type="number" name="bobot_faktor_pendukung[]" value="0.35" min="0" max="1" step="any" class="form-control" required/></td> 
                                                                 </td>
                                                                 <td><button type="button" name="remove" id="10" class="btn btn-danger btn_remove">X</button></td>
                                                             </tr>  
@@ -343,6 +343,40 @@
         </div>
         @include('layouts.footers.auth.footer')
     </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="pembobotanModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Pembobotan Persyaratan</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+                <div class="modal-body">
+                    <p class="text-justify">
+                        Pembobotan persyaratan merupakan salah satu tahap yang wajib diisi oleh penyedia kerja sebelum mengunggah lowongan pekerjaan. 
+                        Tahap ini digunakan untuk membantu kami melakukan proses perhitungan pencocokan profil pelamar.
+                        Kemudian memberikan alternatif pemecahan masalah dengan mengimplementasikan sistem pendukung keputusan
+                        metode profile matching dalam memilih pelamar terbaik, dan memudahkan pihak penyedia kerja mendapat pelamar terbaik untuk lowongan pekerjaan yang diunggah. 
+                        <br><br>
+                        Penyedia kerja memberikan bobot persyaratan berdasarkan 2 kelompok yaitu: 
+                        <ol type="1">
+                            <li class="text-justify">Faktor Utama (Core Factor), yaitu merupakan kriteria (kompetensi) yang paling penting atau menonjol atau paling dibutuhkan oleh suatu penilaian yang diharapkan dapat memperoleh hasil yang optimal.</li>
+                            <li class="text-justify">Faktor Pendukung (Secondary Factor), yaitu merupakan item-item selain yang ada pada core factor.
+                                Atau  dengan kata lain merupakan faktor pendukung yang kurang dibutuhkan oleh suatu penilaian.</li>
+                        </ol>
+                        <p class="text-justify">
+                            Jumlah pembobotan tiap faktor kelompok apabila dijumlahkan harus sama dengan = 1, tidak boleh lebih atau kurang dari 1.
+                            Hasil akhir dari tahap ini, penyedia kerja akan mendapatkan ranking pelamar terbaik untuk lowongan pekerjaan yang diunggah.
+                        </p>
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kembali</button>
+                </div>
+        </div>
+        </div>
+    </div>
 @endsection
 
 @section('bottom-content')
@@ -364,7 +398,7 @@
                                                                             <option value="keterampilan_non_teknis">Keterampilan Non Teknis</option> \
                                                                             <option value="sertifikasi">Sertifikasi</option> \
                                                                         </select></td> \
-                                                                    <td> <input type="number" name="bobot_faktor_utama[]" value="0.2" min="0" max="1" class="form-control" required/></td> \
+                                                                    <td> <input type="number" name="bobot_faktor_utama[]" value="0.2" min="0" max="1" step="any" class="form-control" required/></td> \
                                                                     <td><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">X</button></td></tr>');  
             });
             
@@ -382,7 +416,7 @@
                                                                             <option value="keterampilan_non_teknis">Keterampilan Non Teknis</option> \
                                                                             <option value="sertifikasi">Sertifikasi</option> \
                                                                         </select></td> \
-                                                                    <td> <input type="number" name="bobot_faktor_pendukung[]" value="0.2" min="0" max="1" class="form-control" required/></td> \
+                                                                    <td> <input type="number" name="bobot_faktor_pendukung[]" value="0.2" min="0" max="1" step="any" class="form-control" required/></td> \
                                                                     <td><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">X</button></td></tr>'); 
             });
         });

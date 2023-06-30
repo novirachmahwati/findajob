@@ -62,8 +62,8 @@
                             </div>
                             <div class="col-9">
                                 <div class="numbers">
-                                    <p class="text-sm mb-0 font-weight-bold" style="margin-left: 10px; line-height: 3">
-                                        Kontak
+                                    <p class="text-sm mb-0 font-weight-bold" style="margin-left: 10px">
+                                        Pembobotan Persyaratan
                                     </p>
                                 </div>
                             </div>
