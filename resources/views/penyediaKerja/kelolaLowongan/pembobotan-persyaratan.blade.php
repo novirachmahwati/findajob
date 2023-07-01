@@ -1,7 +1,7 @@
 @extends('layouts.app', ['class' => 'g-sidenav-show bg-gray-100'])
 @section('title', 'Unggah Lowongan Pekerjaan')
 @section('content')
-    @include('layouts.navbars.auth.topnav', ['title' => 'Unggah Lowongan'])
+    @include('layouts.navbars.auth.topnav', ['title' => 'Kelola Lowongan / Unggah'])
     <div class="container-fluid py-4">
         <div class="row">
             <div class="col-xl-12">
@@ -113,7 +113,7 @@
                                     <div class="card-body">
                                         <div class="row">
                                             @include('layouts.flash-message')
-                                            {{-- <input type="hidden" name="lowongan_id" value="{{ $lowongan_id }}"> --}}
+                                            <input type="hidden" name="lowongan_id" value="{{ $lowongan_id }}">
                                             <div class="col-md-12">
                                                 <div class="form-group">
                                                     <label for="faktor_utama" class="form-control-label">Faktor Utama / Core Factor <span class="titik-logo">*</span></label>

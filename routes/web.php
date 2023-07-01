@@ -61,8 +61,11 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('/profil', [ProfilController::class, 'show'])->name('profil');
 	Route::post('/profil/edit', [ProfilController::class, 'update'])->name('profil.edit');
 	Route::post('/lowongan/sukses-lamar', [RiwayatLamaranController::class, 'store'])->name('sukses-lamar');
-	Route::get('/pembobotan-persyaratan', [KelolaLowonganController::class, 'PP_create'])->name('pembobotan-persyaratan.create');
-	Route::post('/pembobotan-persyaratan', [KelolaLowonganController::class, 'PP_store'])->name('pembobotan-persyaratan.store');
+
+	// Unggah Lowongan
+	Route::post('/pembobotan-persyaratan', [KelolaLowonganController::class, 'PUK_store'])->name('persyaratan-umum-khusus.store');
+	Route::post('/syarat-dan-ketentuan', [KelolaLowonganController::class, 'PP_store'])->name('pembobotan-persyaratan.store');
+	Route::post('/syarat-dan-ketentuan-temp', [KelolaLowonganController::class, 'SDK_store'])->name('syarat-dan-ketentuan.store');
 	
 
 	// Pencari Kerja
@@ -96,17 +99,7 @@ Route::group(['middleware' => 'auth'], function () {
 
 		Route::get('/unggah-lowongan', [PenyediaKerjaController::class, 'UL_create'])->name('UL.create');
 		Route::post('/unggah-lowongan', [PenyediaKerjaController::class, 'UL_store'])->name('UL.store');
-
-		Route::get('/unggah-lowongan-pekerjaan', [PenyediaKerjaController::class, 'ULP_create'])->name('ULP.create');
-		Route::post('/unggah-lowongan-pekerjaan', [PenyediaKerjaController::class, 'ULP_store'])->name('ULP.store');
-		Route::get('/persyaratan-umum-khusus', [PenyediaKerjaController::class, 'PUK_create'])->name('PUK.create');
-		Route::post('/persyaratan-umum-khusus', [PenyediaKerjaController::class, 'PUK_store'])->name('PUK.store');
-
-		Route::get('/kontak-lowongan', [PenyediaKerjaController::class, 'KL_create'])->name('KL.create');
-		Route::post('/kontak-lowongan', [PenyediaKerjaController::class, 'KL_store'])->name('KL.store');
-
-		Route::get('/syarat-dan-ketentuan', [PenyediaKerjaController::class, 'SDK_create'])->name('SDK.create');
-		Route::post('/syarat-dan-ketentuan', [PenyediaKerjaController::class, 'SDK_store'])->name('SDK.store');
+		
 	});
 
 	Route::resources([

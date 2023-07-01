@@ -36,6 +36,18 @@ class KelolaLowonganController extends Controller
                                             <span class="d-sm-inline d-none ms-2">Lihat</span>
                                         </a>
                                     </li>
+                                    <li>
+                                        <a class="dropdown-item" href="'.route('lowongan.edit', $lowongan->id).'">
+                                            <i class="fa fa-pencil text-primary" aria-hidden="true"></i>
+                                            <span class="d-sm-inline d-none ms-2">Edit</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item deleteLowongan" href="javascript:void(0);" data-toggle="tooltip" data-id="'.$lowongan->id .'">
+                                            <i class="fa fa-trash-o text-danger" aria-hidden="true"></i>
+                                            <span class="d-sm-inline d-none ms-2">Hapus</span>
+                                        </a>
+                                    </li>
                                 </ul>
                             </div>';
                     return $btn;
@@ -44,7 +56,7 @@ class KelolaLowonganController extends Controller
                 ->make(true);
         }
 
-        return view('pencariKerja.cariLowongan.index');
+        return view('penyediaKerja.kelolaLowongan.index');
     }
 
     /**
@@ -94,7 +106,7 @@ class KelolaLowonganController extends Controller
         $attributes = request()->validate([
             'minimal_pendidikan' => 'required|max:255',
             'prioritas_minimal_pendidikan' => 'required|max:500',
-            'tahun_pengalaman' => 'required|max:255',
+            'pengalaman' => 'required|max:255',
             'jurusan_pendidikan_terakhir' => 'required|max:255',
             'status_pernikahan' => 'required|max:255',
             'rentang_usia_minimal' => 'required|max:255',
@@ -144,15 +156,10 @@ class KelolaLowonganController extends Controller
         
         $kriteria = kriteria::create($attributes);
         
-        return view('penyediaKerja.kontak',['lowongan_id' => $kriteria->lowongan_id]);
+        return view('penyediaKerja.kelolaLowongan.pembobotan-persyaratan',['lowongan_id' => $kriteria->lowongan_id]);
     }
 
     // Pembobotan Persyaratan
-    public function PP_create()
-    {
-        return view('penyediaKerja.kelolaLowongan.pembobotan-persyaratan');
-    }
-
     public function PP_store(Request $request)
     {
         $attributes = request()->validate([
@@ -160,7 +167,7 @@ class KelolaLowonganController extends Controller
             'bobot_faktor_utama' => 'required|max:255',
             'faktor_pendukung' => 'required|max:255',
             'bobot_faktor_pendukung' => 'required|max:255',
-            // 'lowongan_id' => 'required'
+            'lowongan_id' => 'required'
         ]);
             
         $attributes['faktor_utama'] = $request->input('faktor_utama');

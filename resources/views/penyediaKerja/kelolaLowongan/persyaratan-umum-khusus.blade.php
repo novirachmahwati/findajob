@@ -1,7 +1,7 @@
 @extends('layouts.app', ['class' => 'g-sidenav-show bg-gray-100'])
 @section('title', 'Unggah Lowongan Pekerjaan')
 @section('content')
-    @include('layouts.navbars.auth.topnav', ['title' => 'Unggah Lowongan'])
+    @include('layouts.navbars.auth.topnav', ['title' => 'Kelola Lowongan / Unggah'])
     <div class="container-fluid py-4">
         <div class="row">
             <div class="col-xl-12">
@@ -104,7 +104,7 @@
                     <div class="card-body p-3" style="margin-top: -30px">
                         <div class="row">
                             <div class="col">
-                                <form role="form" method="POST" action={{ route('PUK.store') }} enctype="multipart/form-data">
+                                <form role="form" method="POST" action={{ route('persyaratan-umum-khusus.store') }} enctype="multipart/form-data">
                                     @csrf
                                     <div class="card-body">
                                         <div class="row">
@@ -128,15 +128,15 @@
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label for="tahun_pengalaman" class="form-control-label">Tahun Pengalaman<span class="titik-logo">*</span></label>
-                                                    <select class="form-control" name="tahun_pengalaman">
+                                                    <label for="pengalaman" class="form-control-label">Pengalaman (Tahun)<span class="titik-logo">*</span></label>
+                                                    <select class="form-control" name="pengalaman">
                                                         <option value="" hidden>Pilih Minimal Tahun Pengalaman Kerja</option>
-                                                        <option value="Fresh Graduate" @if(old('tahun_pengalaman') == 'Fresh Graduate')selected @endif>Fresh Graduate</option>
-                                                        <option value="1 - 2 Tahun" @if(old('tahun_pengalaman') == '1 - 2 Tahun')selected @endif>1 - 2 Tahun</option>
-                                                        <option value="3 - 5 Tahun" @if(old('tahun_pengalaman') == '3 - 5 Tahun')selected @endif>3 - 5 Tahun</option>
-                                                        <option value="> 5 Tahun" @if(old('tahun_pengalaman') == '> 5 Tahun')selected @endif>> 5 Tahun</option>
+                                                        <option value="Fresh Graduate" @if(old('pengalaman') == 'Fresh Graduate')selected @endif>Fresh Graduate</option>
+                                                        <option value="1 - 2" @if(old('pengalaman') == '1 - 2')selected @endif>1 - 2</option>
+                                                        <option value="3 - 5" @if(old('pengalaman') == '3 - 5')selected @endif>3 - 5</option>
+                                                        <option value="> 5" @if(old('pengalaman') == '> 5')selected @endif>> 5</option>
                                                     </select>
-                                                    @error('tahun_pengalaman') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
+                                                    @error('pengalaman') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
                                                 </div>
                                             </div>
                                             <div class="col-md-12">
