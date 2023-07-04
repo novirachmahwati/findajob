@@ -158,7 +158,7 @@ class PencariKerjaController extends Controller
     
     public function UC_download()
     {
-        return Storage::disk('public')->download('formatCV/Rekomendasi Format Daftar Riwayat Hidup.pdf');
+        return Storage::disk('public')->download('formatCV/Rekomendasi Format Daftar Riwayat Hidup.docx');
     }
 
     /**
