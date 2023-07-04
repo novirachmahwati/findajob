@@ -16,6 +16,7 @@ class pencariKerja extends Model
         'agama',
         'foto',
         'cv',
+        'usia',
         'user_id'
     ];
 

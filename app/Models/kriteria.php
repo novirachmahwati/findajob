@@ -11,9 +11,7 @@ class kriteria extends Model
         'prioritas_minimal_pendidikan',
         'pengalaman',
         'jurusan_pendidikan_terakhir',
-        'status_pernikahan',
-        'rentang_usia_minimal',
-        'rentang_usia_maksimal',
+        'rentang_usia',
         'bahasa',
         'keterampilan_teknis',
         'prioritas_keterampilan_teknis',
@@ -28,20 +26,10 @@ class kriteria extends Model
         'lowongan_id'
     ];
 
-    public function setStatusPernikahanAttribute($value)
-    {
-        $this->attributes['status_pernikahan'] = json_encode($value);
-    }
-
     public function setBahasaAttribute($value)
     {
         $this->attributes['bahasa'] = json_encode($value);
     }
-
-    // public function getBahasaAttribute($value)
-    // {
-    //     return $this->attributes['bahasa'] = json_decode($value);
-    // }
 
     public function setKeterampilanTeknisAttribute($value)
     {

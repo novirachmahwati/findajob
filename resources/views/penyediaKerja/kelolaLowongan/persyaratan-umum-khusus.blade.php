@@ -148,31 +148,9 @@
                                             </div>
                                             <div class="col-md-12">
                                                 <div class="form-group">
-                                                    <label for="status_pernikahan" class="form-control-label">Status Pernikahan<span class="titik-logo">*</span></label>
-                                                </div>
-                                                <div class="form-group" style="margin-top:-15px;">
-                                                    <div class="form-check form-check-inline">
-                                                        <input class="form-check-input" name="status_pernikahan[]" type="checkbox" id="inlineCheckboxSP1" value="Single / Belum Menikah">
-                                                        <label class="form-check-label" for="inlineCheckboxSP1">Single / Belum Menikah</label>
-                                                    </div>
-                                                    <div class="form-check form-check-inline">
-                                                        <input class="form-check-input" name="status_pernikahan[]" type="checkbox" id="inlineCheckboxSP2" value="Sudah Menikah">
-                                                        <label class="form-check-label" for="inlineCheckboxSP2">Sudah Menikah</label>
-                                                    </div>
-                                                    @error('status_pernikahan') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="rentang_usia_minimal" class="form-control-label">Rentang Usia (Tahun)<span class="titik-logo">*</span></label>
-                                                    <input class="form-control" type="number" name="rentang_usia_minimal" value="{{ old('rentang_usia_minimal') }}" placeholder="Rentang usia minimal" min="15" max="100">
-                                                    @error('rentang_usia_minimal') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group" style="margin-top: 30px;">
-                                                    <input class="form-control" type="number" name="rentang_usia_maksimal" value="{{ old('rentang_usia_maksimal') }}" placeholder="Rentang usia maksimal" min="15" max="100">
-                                                    @error('rentang_usia_maksimal') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
+                                                    <label for="rentang_usia" class="form-control-label">Rentang Usia (Tahun)<span class="titik-logo">*</span></label>
+                                                    <input class="form-control" type="text" name="rentang_usia" value="{{ old('rentang_usia') }}" placeholder="Rentang usia minimal-maksimal">
+                                                    @error('rentang_usia') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
                                                 </div>
                                             </div>
                                             <div class="col-md-12">

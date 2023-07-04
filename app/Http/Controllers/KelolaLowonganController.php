@@ -66,7 +66,7 @@ class KelolaLowonganController extends Controller
      */
     public function create()
     {
-        return view('penyediaKerja.kelolaLowongan.unggah-lowongan-pekerjaan');
+        return view('penyediaKerja.kelolaLowongan.create');
     }
 
     /**
@@ -108,9 +108,7 @@ class KelolaLowonganController extends Controller
             'prioritas_minimal_pendidikan' => 'required|max:500',
             'pengalaman' => 'required|max:255',
             'jurusan_pendidikan_terakhir' => 'required|max:255',
-            'status_pernikahan' => 'required|max:255',
-            'rentang_usia_minimal' => 'required|max:255',
-            'rentang_usia_maksimal' => 'required|max:255',
+            'rentang_usia' => 'required|max:255',
             'bahasa' => 'required|max:255',
             'keterampilan_teknis' => 'required|max:255',
             'prioritas_keterampilan_teknis' => 'required|max:255',
@@ -145,7 +143,6 @@ class KelolaLowonganController extends Controller
                 break;
         }
 
-        $attributes['status_pernikahan'] = $request->input('status_pernikahan');
         $attributes['bahasa'] = $request->input('bahasa');
         $attributes['keterampilan_teknis'] = $request->input('keterampilan_teknis');
         $attributes['prioritas_keterampilan_teknis'] = $request->input('prioritas_keterampilan_teknis');

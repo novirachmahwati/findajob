@@ -19,9 +19,7 @@ return new class extends Migration
             $table->string('prioritas_minimal_pendidikan');
             $table->string('tahun_pengalaman');
             $table->string('jurusan_pendidikan_terakhir');
-            $table->string('status_pernikahan');
-            $table->integer('rentang_usia_minimal');
-            $table->integer('rentang_usia_maksimal');
+            $table->string('rentang_usia');
             $table->string('bahasa');
             $table->string('keterampilan_teknis');
             $table->string('prioritas_keterampilan_teknis');

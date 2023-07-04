@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('agama');
             $table->string('foto')->nullable();
             $table->text('cv')->nullable();
+            $table->integer('usia');
             $table->unsignedInteger('user_id');
             $table->timestamps();
         });

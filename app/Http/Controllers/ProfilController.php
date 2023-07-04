@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\pencariKerja;
+use App\Models\penyediaKerja;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 
@@ -25,6 +26,7 @@ class ProfilController extends Controller
                 'tgl_lahir' => 'required|date',
                 'jenis_kelamin' => 'required|max:255',
                 'no_telp' => 'required|max:16',
+                'usia' => 'required',
                 'agama' => 'required|max:20'
             ]);
 
@@ -32,6 +34,8 @@ class ProfilController extends Controller
                 'name' => $request->get('name'),
                 'email' => $request->get('email'),
             ]);
+
+            $attributes['usia'] = Carbon::parse($attributes['tgl_lahir'])->age;
     
             $pencariKerja = pencariKerja::where('id', Auth::user()->pencariKerja->id)->first();
             $pencariKerja->fill($attributes);
@@ -54,9 +58,9 @@ class ProfilController extends Controller
                 'email' => $request->get('email'),
             ]);
     
-            $pencariKerja = pencariKerja::where('id', Auth::user()->pencariKerja->id)->first();
-            $pencariKerja->fill($attributes);
-            $pencariKerja->save();
+            $penyediaKerja = penyediaKerja::where('id', Auth::user()->penyediaKerja->id)->first();
+            $penyediaKerja->fill($attributes);
+            $penyediaKerja->save();
         }
         
         return back()->with('success', 'Profil berhasil diperbarui!');

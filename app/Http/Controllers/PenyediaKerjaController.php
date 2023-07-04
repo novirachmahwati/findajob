@@ -108,7 +108,6 @@ class PenyediaKerjaController extends Controller
         
         return redirect('/unggah-lowongan');
         
-        
     }
 
     // Unggah Lowongan

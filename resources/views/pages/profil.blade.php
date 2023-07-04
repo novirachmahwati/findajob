@@ -35,6 +35,7 @@
                                         <div class="card-body">
                                             <div class="row">
                                                 <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
+                                                <input type="hidden" name="usia" value="0">
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label for="example-text-input" class="form-control-label">Nama<span class="titik-logo">*</span></label>

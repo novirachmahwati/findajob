@@ -4,48 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Models\pencariKerja;
 use App\Models\sertifikasi;
-use App\Models\riwayatLamaran;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
+use Carbon\Carbon;
 
 class PencariKerjaController extends Controller
 {
-    
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\pencariKerja  $pencariKerja
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, pencariKerja $pencariKerja)
-    {
-        $attributes = request()->validate([
-            'name' => 'required|max:255',
-            'email' => ['required', 'email', 'max:255',  Rule::unique('users')->ignore(auth()->user()->id),],
-            'alamat' => 'required|max:255',
-            'tempat_lahir' => 'required|max:255',
-            'tgl_lahir' => 'required|date',
-            'jenis_kelamin' => 'required|max:255',
-            'no_telp' => 'required|max:16',
-            'agama' => 'required|max:20'
-        ]);
-
-        auth()->user()->update([
-            'name' => $request->get('name'),
-            'email' => $request->get('email'),
-        ]);
-
-        $pencariKerja = pencariKerja::where('id', Auth::user()->pencariKerja->id)->first();
-        $pencariKerja->fill($attributes);
-        $pencariKerja->save();
-
-        return back()->with('success', 'Profil berhasil diperbarui!');
-    }
-
     // Lengkapi Biodata
     public function LB_create()
     {
@@ -61,9 +28,11 @@ class PencariKerjaController extends Controller
             'jenis_kelamin' => 'required|max:255',
             'no_telp' => 'required|max:15',
             'agama' => 'required|max:20',
+            'usia' => 'required',
             'user_id' => 'required'
         ]);
         
+        $attributes['usia'] = Carbon::parse($attributes['tgl_lahir'])->age;
         pencariKerja::create($attributes);
         
         return redirect('/unggah-foto');
@@ -90,7 +59,6 @@ class PencariKerjaController extends Controller
         }
         
         return redirect('/sertifikasi-pencari-kerja');
-        
         
     }
 

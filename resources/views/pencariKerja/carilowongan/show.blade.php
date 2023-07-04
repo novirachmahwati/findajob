@@ -138,9 +138,9 @@
                                         </div>
                                         <div class="col-md-6" style="float: left !important; padding-left: 10px;">
                                             <div class="form-group">
-                                                <label for="tahun_pengalaman" class="form-control-label">Tahun Pengalaman</label>
-                                                <input class="form-control" type="text" name="tahun_pengalaman" value="{{ $lowongan->kriteria->tahun_pengalaman }}" readonly>
-                                                @error('tahun_pengalaman') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
+                                                <label for="pengalaman" class="form-control-label">Pengalaman (Tahun)</label>
+                                                <input class="form-control" type="text" name="pengalaman" value="{{ $lowongan->kriteria->pengalaman }}" readonly>
+                                                @error('pengalaman') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
                                             </div>
                                         </div>
                                         <div class="col-md-12">
@@ -152,34 +152,9 @@
                                         </div>
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <label for="status_pernikahan" class="form-control-label">Status Pernikahan</label>
-                                            </div>
-                                            <div class="form-group mt-n3">
-                                                <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" name="status_pernikahan[]" type="checkbox" id="inlineCheckboxSP1" value=""
-                                                    {{ in_array('Single / Belum Menikah', json_decode($lowongan->kriteria->status_pernikahan)) ? 'checked' : '' }} onclick="return false;">
-                                                    <label class="form-check-label" for="inlineCheckboxSP1">Single / Belum Menikah</label>
-                                                </div>
-                                                <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" name="status_pernikahan[]" type="checkbox" id="inlineCheckboxSP2" value=""
-                                                    {{ in_array('Sudah Menikah', json_decode($lowongan->kriteria->status_pernikahan)) ? 'checked' : '' }} onclick="return false;">
-                                                    <label class="form-check-label" for="inlineCheckboxSP2">Sudah Menikah</label>
-                                                </div>
-                                                @error('status_pernikahan') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6" style="float: left !important">
-                                            <div class="form-group">
-                                                <label for="rentang_usia_minimal" class="form-control-label">Rentang Usia Minimal (Tahun)</label>
-                                                <input class="form-control" type="number" name="rentang_usia_minimal" value="{{ $lowongan->kriteria->rentang_usia_minimal }}" readonly>
-                                                @error('rentang_usia_minimal') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6" style="float: left !important; padding-left: 10px;">
-                                            <div class="form-group">
-                                                <label for="rentang_usia_maksimal" class="form-control-label">Rentang Usia Maksimal (Tahun)</label>
-                                                <input class="form-control" type="number" name="rentang_usia_maksimal" value="{{ $lowongan->kriteria->rentang_usia_maksimal }}" readonly>
-                                                @error('rentang_usia_maksimal') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
+                                                <label for="rentang_usia" class="form-control-label">Rentang Usia (Tahun)</label>
+                                                <input class="form-control" type="number" name="rentang_usia" value="{{ $lowongan->kriteria->rentang_usia }}" readonly>
+                                                @error('rentang_usia') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
                                             </div>
                                         </div>
                                         <div class="col-md-12">
