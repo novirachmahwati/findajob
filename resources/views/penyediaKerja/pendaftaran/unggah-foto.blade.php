@@ -82,7 +82,7 @@
                             <div class="col-9">
                                 <div class="numbers">
                                     <p class="text-sm mb-0 font-weight-bold" style="margin-left: 10px;">
-                                        Unggah Lowongan Pekerjaan
+                                        Unggah Lowongan
                                     </p>
                                 </div>
                             </div>

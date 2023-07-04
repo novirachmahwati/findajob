@@ -108,9 +108,19 @@ class kriteria extends Model
         $this->attributes['faktor_utama'] = json_encode($value);
     }
 
+    public function getFaktorUtama($value)
+    {
+        $this->attributes['faktor_utama'] = json_decode($value);
+    }
+
     public function setBobotFaktorUtama($value)
     {
         $this->attributes['bobot_faktor_utama'] = json_encode($value);
+    }
+    
+    public function getBobotFaktorUtama($value)
+    {
+        $this->attributes['bobot_faktor_utama'] = json_decode($value);
     }
 
     public function setFaktorPendukung($value)
@@ -118,9 +128,19 @@ class kriteria extends Model
         $this->attributes['faktor_pendukung'] = json_encode($value);
     }
 
+    public function getFaktorPendukung($value)
+    {
+        $this->attributes['faktor_pendukung'] = json_decode($value);
+    }
+
     public function setBobotFaktorPendukung($value)
     {
         $this->attributes['bobot_faktor_pendukung'] = json_encode($value);
+    }
+
+    public function getBobotFaktorPendukung($value)
+    {
+        $this->attributes['bobot_faktor_pendukung'] = json_decode($value);
     }
 
     /**

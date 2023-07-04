@@ -49,7 +49,7 @@ class PencariKerjaController extends Controller
     // Lengkapi Biodata
     public function LB_create()
     {
-        return view('pencariKerja.lengkapi-biodata');
+        return view('pencariKerja.pendaftaran.lengkapi-biodata');
     }
 
     public function LB_store()
@@ -66,13 +66,13 @@ class PencariKerjaController extends Controller
         
         pencariKerja::create($attributes);
         
-        return redirect('/pencari-kerja/unggah-foto');
+        return redirect('/unggah-foto');
     }
 
     // Unggah Foto
     public function UF_create()
     {
-        return view('pencariKerja.unggah-foto');
+        return view('pencariKerja.pendaftaran.unggah-foto');
     }
 
     public function UF_store(Request $request)
@@ -89,7 +89,7 @@ class PencariKerjaController extends Controller
             $pencariKerja->save();
         }
         
-        return redirect('/pencari-kerja/sertifikasi');
+        return redirect('/sertifikasi-pencari-kerja');
         
         
     }
@@ -97,7 +97,7 @@ class PencariKerjaController extends Controller
     // Sertifikasi
     public function SE_create()
     {
-        return view('pencariKerja.sertifikasi');
+        return view('pencariKerja.pendaftaran.sertifikasi');
     }
 
     public function SE_store(Request $request)
@@ -116,15 +116,14 @@ class PencariKerjaController extends Controller
             sertifikasi::create($attributes);
         }
         
-        return redirect('/pencari-kerja/unggah-daftar-riwayat-hidup');
-        
+        return redirect('/unggah-daftar-riwayat-hidup-pencari-kerja');
         
     }
 
     // Unggah Daftar Riwayat Hidup
     public function UC_create()
     {
-        return view('pencariKerja.unggah-daftar-riwayat-hidup');
+        return view('pencariKerja.pendaftaran.unggah-daftar-riwayat-hidup');
     }
 
     public function UC_store(Request $request)
@@ -140,7 +139,7 @@ class PencariKerjaController extends Controller
         $validator = Validator::make($request->all(), $rules, $messages);
 
         if ($validator->fails()) {
-            return redirect('/pencari-kerja/unggah-daftar-riwayat-hidup')
+            return redirect('/unggah-daftar-riwayat-hidup-pencari-kerja')
                         ->withErrors($validator)
                         ->withInput();
         }
@@ -154,8 +153,7 @@ class PencariKerjaController extends Controller
         $pencariKerja->save();
         
         return redirect('/dashboard');
-        
-        
+          
     }
     
     public function UC_download()

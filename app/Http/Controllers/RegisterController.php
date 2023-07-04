@@ -27,7 +27,7 @@ class RegisterController extends Controller
         $user = User::create($attributes);
         auth()->login($user);
 
-        return redirect('/pencari-kerja/lengkapi-biodata');
+        return redirect('/lengkapi-biodata');
     }
 
     public function storePenyediaKerja()
@@ -41,6 +41,6 @@ class RegisterController extends Controller
         $user = User::create($attributes);
         auth()->login($user);
 
-        return redirect('/penyedia-kerja/lengkapi-data');
+        return redirect('/lengkapi-data');
     }
 }

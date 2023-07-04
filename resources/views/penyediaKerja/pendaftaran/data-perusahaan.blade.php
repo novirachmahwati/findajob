@@ -82,7 +82,7 @@
                             <div class="col-9">
                                 <div class="numbers">
                                     <p class="text-sm mb-0 font-weight-bold" style="margin-left: 10px;">
-                                        Unggah Lowongan Pekerjaan
+                                        Unggah Lowongan
                                     </p>
                                 </div>
                             </div>
@@ -161,7 +161,7 @@
                                             <div class="col-md-12">
                                                 <div class="form-group">
                                                     <label for="deskripsi" class="form-control-label">Deskripsi<span class="titik-logo">*</span></label>
-                                                    <textarea class="form-control" type="text" name="deskripsi" value="{{ old('deskripsi') }}" placeholder="Deskripsi Perusahaan"></textarea>
+                                                    <textarea class="ckeditor form-control" type="text" name="deskripsi" value="{{ old('deskripsi') }}" placeholder="Deskripsi Perusahaan"></textarea>
                                                     @error('deskripsi') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
                                                 </div>
                                             </div>
@@ -180,4 +180,13 @@
         </div>
         @include('layouts.footers.auth.footer')
     </div>
+@endsection
+
+@section('bottom-content')
+    <script src="//cdn.ckeditor.com/4.14.1/standard/ckeditor.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.ckeditor').ckeditor();
+        });
+    </script>
 @endsection

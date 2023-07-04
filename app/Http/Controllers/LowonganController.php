@@ -74,9 +74,14 @@ class lowonganController extends Controller
      */
     public function show(lowongan $lowongan)
     {
-        $riwayatLamaran = riwayatLamaran::where('lowongan_id', $lowongan->id)
+        $riwayatLamaran = [0];
+
+        if (Auth::user()->role == 'Pencari Kerja') {
+            $riwayatLamaran = riwayatLamaran::where('lowongan_id', $lowongan->id)
                             ->where('pencari_kerja_id', Auth::user()->pencariKerja->id)
                             ->get();
+        }
+        
         $lowongan->load(['kriteria','penyediaKerja']);
         return view('pencariKerja.cariLowongan.show', compact(['lowongan','riwayatLamaran']));
     }
@@ -89,7 +94,8 @@ class lowonganController extends Controller
      */
     public function edit(lowongan $lowongan)
     {
-        //
+        $lowongan->load(['kriteria','penyediaKerja']);
+        return view('penyediaKerja.kelolaLowongan.edit', compact('lowongan'));
     }
 
     /**

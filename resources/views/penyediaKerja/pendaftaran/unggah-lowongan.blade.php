@@ -82,7 +82,7 @@
                             <div class="col-9">
                                 <div class="numbers">
                                     <p class="text-sm mb-0 font-weight-bold" style="margin-left: 10px">
-                                        Unggah Lowongan Pekerjaan
+                                        Unggah Lowongan
                                     </p>
                                 </div>
                             </div>
@@ -104,7 +104,7 @@
                                     @csrf
                                     <div class="card-body">
                                         <p>
-                                            <a class="btn btn-success" href="{{ route('ULP.create') }}">
+                                            <a class="btn btn-success" href="{{ route('kelola-lowongan.create') }}">
                                                 <i class="fa fa-plus" aria-hidden="true"></i>
                                                 Tambah
                                             </a>

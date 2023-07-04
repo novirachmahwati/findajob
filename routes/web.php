@@ -67,41 +67,35 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::post('/syarat-dan-ketentuan', [KelolaLowonganController::class, 'PP_store'])->name('pembobotan-persyaratan.store');
 	Route::post('/syarat-dan-ketentuan-temp', [KelolaLowonganController::class, 'SDK_store'])->name('syarat-dan-ketentuan.store');
 	
-
 	// Pencari Kerja
-	Route::prefix('pencari-kerja')->group(function () {
-		Route::get('/lengkapi-biodata', [PencariKerjaController::class, 'LB_create'])->name('LB.create');
-		Route::post('/lengkapi-biodata', [PencariKerjaController::class, 'LB_store'])->name('LB.store');
+	Route::get('/lengkapi-biodata', [PencariKerjaController::class, 'LB_create'])->name('LB.create');
+	Route::post('/lengkapi-biodata', [PencariKerjaController::class, 'LB_store'])->name('LB.store');
 
-		Route::get('/unggah-foto', [PencariKerjaController::class, 'UF_create'])->name('UF.create');
-		Route::post('/unggah-foto', [PencariKerjaController::class, 'UF_store'])->name('UF.store');
+	Route::get('/unggah-foto', [PencariKerjaController::class, 'UF_create'])->name('UF.create');
+	Route::post('/unggah-foto', [PencariKerjaController::class, 'UF_store'])->name('UF.store');
 
-		Route::get('/sertifikasi', [PencariKerjaController::class, 'SE_create'])->name('SE.create');
-		Route::post('/sertifikasi', [PencariKerjaController::class, 'SE_store'])->name('SE.store');
+	Route::get('/sertifikasi-pencari-kerja', [PencariKerjaController::class, 'SE_create'])->name('SE.create');
+	Route::post('/sertifikasi-pencari-kerja', [PencariKerjaController::class, 'SE_store'])->name('SE.store');
 
-		Route::get('/unggah-daftar-riwayat-hidup', [PencariKerjaController::class, 'UC_create'])->name('UC.create');
-		Route::post('/unggah-daftar-riwayat-hidup', [PencariKerjaController::class, 'UC_store'])->name('UC.store');
-		Route::get('/download-cv', [PencariKerjaController::class, 'UC_download'])->name('UC.download');
-		Route::post('/unggah-daftar-riwayat-hidup', [PencariKerjaController::class, 'UC_store'])->name('UC.store');
+	Route::get('/unggah-daftar-riwayat-hidup-pencari-kerja', [PencariKerjaController::class, 'UC_create'])->name('UC.create');
+	Route::post('/unggah-daftar-riwayat-hidup-pencari-kerja', [PencariKerjaController::class, 'UC_store'])->name('UC.store');
 
-	});
+	Route::get('/download-cv', [PencariKerjaController::class, 'UC_download'])->name('UC.download');
 
 	// Penyedia Kerja
-	Route::prefix('penyedia-kerja')->group(function () {
-		Route::get('/lengkapi-data', [PenyediaKerjaController::class, 'LD_create'])->name('LD.create');
-		Route::post('/lengkapi-data', [PenyediaKerjaController::class, 'LD_store'])->name('LD.store');
+	Route::get('/lengkapi-data', [PenyediaKerjaController::class, 'LD_create'])->name('LD.create');
+	Route::post('/lengkapi-data', [PenyediaKerjaController::class, 'LD_store'])->name('LD.store');
 
-		Route::get('/data-perusahaan', [PenyediaKerjaController::class, 'DP_create'])->name('DP.create');
-		Route::post('/data-perusahaan', [PenyediaKerjaController::class, 'DP_store'])->name('DP.store');
+	Route::get('/data-perusahaan', [PenyediaKerjaController::class, 'DP_create'])->name('DP.create');
+	Route::post('/data-perusahaan', [PenyediaKerjaController::class, 'DP_store'])->name('DP.store');
 
-		Route::get('/unggah-foto', [PenyediaKerjaController::class, 'UFP_create'])->name('UFP.create');
-		Route::post('/unggah-foto', [PenyediaKerjaController::class, 'UFP_store'])->name('UFP.store');
+	Route::get('/unggah-foto-perusahaan', [PenyediaKerjaController::class, 'UFP_create'])->name('UFP.create');
+	Route::post('/unggah-foto-perusahaan', [PenyediaKerjaController::class, 'UFP_store'])->name('UFP.store');
 
-		Route::get('/unggah-lowongan', [PenyediaKerjaController::class, 'UL_create'])->name('UL.create');
-		Route::post('/unggah-lowongan', [PenyediaKerjaController::class, 'UL_store'])->name('UL.store');
-		
-	});
+	Route::get('/unggah-lowongan', [PenyediaKerjaController::class, 'UL_create'])->name('UL.create');
+	Route::post('/unggah-lowongan', [PenyediaKerjaController::class, 'UL_store'])->name('UL.store');
 
+	// Resource
 	Route::resources([
 		'sertifikasi' => SertifikasiController::class,
 		'lowongan' => lowonganController::class,

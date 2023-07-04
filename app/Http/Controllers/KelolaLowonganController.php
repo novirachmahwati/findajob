@@ -211,11 +211,7 @@ class KelolaLowonganController extends Controller
      */
     public function show(lowongan $lowongan)
     {
-        $riwayatLamaran = riwayatLamaran::where('lowongan_id', $lowongan->id)
-                            ->where('pencari_kerja_id', Auth::user()->pencariKerja->id)
-                            ->get();
-        $lowongan->load(['kriteria','penyediaKerja']);
-        return view('pencariKerja.cariLowongan.show', compact(['lowongan','riwayatLamaran']));
+        //
     }
 
     /**

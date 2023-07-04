@@ -391,7 +391,7 @@
                                                 <div class="col-md-12">
                                                     <div class="form-group">
                                                         <label for="deskripsi" class="form-control-label">Deskripsi<span class="titik-logo">*</span></label>
-                                                        <textarea class="ckeditor form-control" type="text" name="deskripsi_pekerjaan">{{ auth()->user()->penyediaKerja->deskripsi }}</textarea>
+                                                        <textarea class="ckeditor form-control" type="text" name="deskripsi">{{ auth()->user()->penyediaKerja->deskripsi }}</textarea>
                                                         @error('deskripsi') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
                                                     </div>
                                                 </div>

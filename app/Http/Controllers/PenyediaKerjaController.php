@@ -48,7 +48,7 @@ class PenyediaKerjaController extends Controller
     // Lengkapi Data
     public function LD_create()
     {
-        return view('penyediaKerja.lengkapi-data');
+        return view('penyediaKerja.pendaftaran.lengkapi-data');
     }
 
     public function LD_store()
@@ -61,13 +61,13 @@ class PenyediaKerjaController extends Controller
         
         penyediaKerja::create($attributes);
         
-        return redirect('/penyedia-kerja/data-perusahaan');
+        return redirect('/data-perusahaan');
     }
 
     // Data Perusahaan
     public function DP_create()
     {
-        return view('penyediaKerja.data-perusahaan');
+        return view('penyediaKerja.pendaftaran.data-perusahaan');
     }
 
     public function DP_store()
@@ -77,19 +77,19 @@ class PenyediaKerjaController extends Controller
             'alamat' => 'required|max:255',
             'no_telp' => 'required|max:16',
             'jml_karyawan' => 'required|max:255',
-            'deskripsi' => 'required|max:255',
+            'deskripsi' => 'required|max:5000',
             'user_id' => 'required'
         ]);
         
         penyediaKerja::create($attributes);
         
-        return redirect('/penyedia-kerja/unggah-foto');
+        return redirect('/unggah-foto-perusahaan');
     }
 
     // Unggah Foto
     public function UFP_create()
     {
-        return view('penyediaKerja.unggah-foto');
+        return view('penyediaKerja.pendaftaran.unggah-foto');
     }
 
     public function UFP_store(Request $request)
@@ -106,7 +106,7 @@ class PenyediaKerjaController extends Controller
             $penyediaKerja->save();
         }
         
-        return redirect('/penyedia-kerja/unggah-lowongan');
+        return redirect('/unggah-lowongan');
         
         
     }
@@ -114,12 +114,12 @@ class PenyediaKerjaController extends Controller
     // Unggah Lowongan
     public function UL_create()
     {
-        return view('penyediaKerja.unggah-lowongan');
+        return view('penyediaKerja.pendaftaran.unggah-lowongan');
     }
 
     public function UL_store()
     {
-        return redirect('/penyedia-kerja/dashboard');
+        return redirect('/dashboard');
     }
     
     /**
