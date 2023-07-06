@@ -85,21 +85,21 @@
                                             </div>
                                         </div>
                                         <hr class="horizontal dark">
-                                        <div class="col-md-6" style="float: left !important">
+                                        <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="example-text-input" class="form-control-label">Tanggal Tayang</label>
                                                 <input class="form-control" type="date" name="tanggal_tayang" value="{{ $lowongan->tanggal_tayang }}">
                                                 @error('tanggal_tayang') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
                                             </div>
                                         </div>
-                                        <div class="col-md-6" style="float: left !important; padding-left: 10px;">
+                                        <div class="col-md-6" style="float: left !important">
                                             <div class="form-group">
                                                 <label for="example-text-input" class="form-control-label">Tanggal Kadaluwarsa</label>
                                                 <input class="form-control" type="date" name="tanggal_kadaluwarsa" value="{{ $lowongan->tanggal_kadaluwarsa }}">
                                                 @error('tanggal_kadaluwarsa') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
                                             </div>
                                         </div>
-                                        <div class="col-md-6">
+                                        <div class="col-md-6" style="float: left !important; padding-left: 10px;">
                                             <div class="form-group">
                                                 <label for="kuota" class="form-control-label">Kuota (Orang)</label>
                                                 <input class="form-control" type="number" name="kuota" value="{{ $lowongan->kuota }}">
