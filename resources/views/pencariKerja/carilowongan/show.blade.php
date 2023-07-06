@@ -31,7 +31,7 @@
                                                 <label for="nama" class="form-control-label">Penyedia Kerja</label>
                                                 <input class="form-control" type="text"value="{{ $lowongan->penyediaKerja->user->name }}" readonly>
                                                 <div id="passwordHelpBlock" class="form-text">
-                                                    Klik <a href="{{ route('UC.download') }}" class="text-success"><b><u>disini.</u></b></a> Untuk informasi lebih lengkap tentang penyedia kerja.
+                                                    Klik <a href="{{ route('info-penyedia-kerja.show', $lowongan->penyediaKerja->id) }}" class="text-success"><b><u>disini.</u></b></a> Untuk informasi lebih lengkap tentang penyedia kerja.
                                                 </div>
                                             </div>
                                         </div>
@@ -94,25 +94,32 @@
                                             </div>
                                         </div>
                                         <hr class="horizontal dark">
-                                        <div class="col-md-6" style="float: left !important">
+                                        <div class="col-md-12">
                                             <div class="form-group">
                                                 <label for="example-text-input" class="form-control-label">Tanggal Tayang</label>
                                                 <input class="form-control" type="date" name="tanggal_tayang" value="{{ $lowongan->tanggal_tayang }}" readonly>
                                                 @error('tanggal_tayang') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
                                             </div>
                                         </div>
-                                        <div class="col-md-6" style="float: left !important; padding-left: 10px;">
+                                        <div class="col-md-6" style="float: left !important">
                                             <div class="form-group">
                                                 <label for="example-text-input" class="form-control-label">Tanggal Kadaluwarsa</label>
                                                 <input class="form-control" type="date" name="tanggal_kadaluwarsa" value="{{ $lowongan->tanggal_kadaluwarsa }}" readonly>
                                                 @error('tanggal_kadaluwarsa') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
                                             </div>
                                         </div>
-                                        <div class="col-md-6">
+                                        <div class="col-md-6" style="float: left !important; padding-left: 10px;">
                                             <div class="form-group">
                                                 <label for="kuota" class="form-control-label">Kuota (Orang)</label>
                                                 <input class="form-control" type="number" name="kuota" value="{{ $lowongan->kuota }}" readonly>
                                                 @error('kuota') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label for="status" class="form-control-label">Status</label>
+                                                <input class="form-control" type="text" name="status" value="{{ $lowongan->status }}" readonly>
+                                                @error('status') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
                                             </div>
                                         </div>
                                     </div>
@@ -153,7 +160,7 @@
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label for="rentang_usia" class="form-control-label">Rentang Usia (Tahun)</label>
-                                                <input class="form-control" type="number" name="rentang_usia" value="{{ $lowongan->kriteria->rentang_usia }}" readonly>
+                                                <input class="form-control" type="text" name="rentang_usia" value="{{ $lowongan->kriteria->rentang_usia }}" readonly>
                                                 @error('rentang_usia') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
                                             </div>
                                         </div>
@@ -181,8 +188,6 @@
                                             </div>
                                         </div>
                                     </div>
-                                        
-                                    {{-- </div> --}}
                                 </div>
                             </div>
                         </div>
@@ -201,7 +206,7 @@
                                                 <label for="keterampilan_teknis" class="form-control-label">Keterampilan Teknis / Hard Skill </label>
                                                 <div class="table-responsive">  
                                                     <table class="table table-bordered">  
-                                                        @foreach (array_combine($lowongan->kriteria->keterampilan_teknis, $lowongan->kriteria->prioritas_keterampilan_teknis)  as $keterampilan_teknis => $prioritas_keterampilan_teknis)
+                                                        @foreach (array_combine(json_decode($lowongan->kriteria->keterampilan_teknis), json_decode($lowongan->kriteria->prioritas_keterampilan_teknis))  as $keterampilan_teknis => $prioritas_keterampilan_teknis)
                                                             <tr>  
                                                                 <td><input type="text" class="form-control" value="{{ $keterampilan_teknis }}" readonly/></td>
                                                                 @switch($prioritas_keterampilan_teknis)
@@ -233,7 +238,7 @@
                                                 <label for="keterampilan_non_teknis" class="form-control-label">Keterampilan Non Teknis / Soft Skill </label>
                                                 <div class="table-responsive">  
                                                     <table class="table table-bordered">  
-                                                        @foreach (array_combine($lowongan->kriteria->keterampilan_non_teknis, $lowongan->kriteria->prioritas_keterampilan_non_teknis)  as $keterampilan_non_teknis => $prioritas_keterampilan_non_teknis)
+                                                        @foreach (array_combine(json_decode($lowongan->kriteria->keterampilan_non_teknis), json_decode($lowongan->kriteria->prioritas_keterampilan_non_teknis))  as $keterampilan_non_teknis => $prioritas_keterampilan_non_teknis)
                                                             <tr>  
                                                                 <td><input type="text" class="form-control" value="{{ $keterampilan_non_teknis }}" readonly/></td>
                                                                 @switch($prioritas_keterampilan_non_teknis)
@@ -265,7 +270,7 @@
                                                 <label for="sertifikasi" class="form-control-label">Sertifikasi</label>
                                                 <div class="table-responsive">  
                                                     <table class="table table-bordered">  
-                                                        @foreach (array_combine($lowongan->kriteria->sertifikasi, $lowongan->kriteria->prioritas_sertifikasi)  as $sertifikasi => $prioritas_sertifikasi)
+                                                        @foreach (array_combine(json_decode($lowongan->kriteria->sertifikasi), json_decode($lowongan->kriteria->prioritas_sertifikasi))  as $sertifikasi => $prioritas_sertifikasi)
                                                             <tr>  
                                                                 <td><input type="text" class="form-control" value="{{ $sertifikasi }}" readonly/></td>
                                                                 @switch($prioritas_sertifikasi)

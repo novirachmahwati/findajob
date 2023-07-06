@@ -109,7 +109,6 @@
                                     <div class="card-body">
                                         <div class="row">
                                             <input type="hidden" name="penyedia_kerja_id" value="{{ auth()->user()->penyediaKerja->id }}">
-                                            <input type="hidden" name="status" value="Aktif">
                                             <div class="col-md-12">
                                                 <div class="form-group">
                                                     <label for="nama" class="form-control-label">Judul Pekerjaan<span class="titik-logo">*</span></label>
@@ -176,25 +175,36 @@
                                                 </div>
                                             </div>
                                             <hr class="horizontal dark">
-                                            <div class="col-md-12">
+                                            <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="example-text-input" class="form-control-label">Tanggal Tayang<span class="titik-logo">*</span></label>
-                                                    <input class="form-control" type="date" name="tanggal_tayang" value="{{ old('tanggal_tayang') }}">
+                                                    <input class="form-control" type="date" name="tanggal_tayang" value="{{ old('tanggal_tayang', $dateToday) }}">
                                                     @error('tanggal_tayang') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="example-text-input" class="form-control-label">Tanggal Kadaluwarsa<span class="titik-logo">*</span></label>
-                                                    <input class="form-control" type="date" name="tanggal_kadaluwarsa" value="{{ old('tanggal_kadaluwarsa') }}">
+                                                    <input class="form-control" type="date" name="tanggal_kadaluwarsa" value="{{ old('tanggal_kadaluwarsa', $dateEndYear) }}">
                                                     @error('tanggal_kadaluwarsa') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label for="kuota" class="form-control-label">Kuota<span class="titik-logo">*</span></label>
+                                                    <label for="kuota" class="form-control-label">Kuota (Orang)<span class="titik-logo">*</span></label>
                                                     <input class="form-control" type="number" name="kuota" value="{{ old('kuota') }}" placeholder="Kuota Lowongan" min="1">
                                                     @error('kuota') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="status" class="form-control-label">Status<span class="titik-logo">*</span></label>
+                                                    <select class="form-control" name="status">
+                                                        <option value="" hidden>Pilih Status Lowongan</option>
+                                                        <option value="Aktif" @if(old('status') == 'Aktif')selected @endif>Aktif</option>
+                                                        <option value="Tidak Aktif" @if(old('status') == 'Tidak Aktif')selected @endif>Tidak Aktif</option>
+                                                    </select>
+                                                    @error('status') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
                                                 </div>
                                             </div>
                                         </div>

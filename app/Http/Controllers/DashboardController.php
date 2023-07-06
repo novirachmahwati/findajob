@@ -30,24 +30,33 @@ class DashboardController extends Controller
     public function index()
     {
         if (Auth::user()->role == 'Pencari Kerja') {
+            if (pencariKerja::where('user_id', Auth::user()->id)->exists()) {
+                
             $jml_lamaranTerkirim = riwayatLamaran::where('pencari_kerja_id', Auth::user()->pencariKerja->id)->count();
             $jml_sertifikasi = sertifikasi::where('pencari_kerja_id', Auth::user()->pencariKerja->id)->count();
             return view('pages.dashboard')
                         ->with('jml_lamaranTerkirim', $jml_lamaranTerkirim)
                         ->with('jml_sertifikasi', $jml_sertifikasi);
+            } else {
+                return redirect()->route('LB.create');
+            }
         } else {
-            $jml_lowongan = lowongan::where('penyedia_kerja_id', Auth::user()->penyediaKerja->id)->count();
-            $jml_lowongan_aktif = lowongan::where('penyedia_kerja_id', Auth::user()->penyediaKerja->id)
-                                                ->where('status', 'Aktif')->count();
-            $jml_lowongan_tdk_aktif = lowongan::where('penyedia_kerja_id', Auth::user()->penyediaKerja->id)
-                                                ->where('status', 'Tidak Aktif')->count();
-            // $jml_pelamar = riwayatLamaran::where('penyedia_kerja_id', Auth::user()->penyediaKerja->id)->count();
-            $jml_pelamar = 0;
-            return view('pages.dashboard')
-                        ->with('jml_lowongan', $jml_lowongan)
-                        ->with('jml_lowongan_aktif', $jml_lowongan_aktif)
-                        ->with('jml_lowongan_tdk_aktif', $jml_lowongan_tdk_aktif)
-                        ->with('jml_pelamar', $jml_pelamar);
+            if (penyediaKerja::where('user_id', Auth::user()->id)->exists()) {
+                $jml_lowongan = lowongan::where('penyedia_kerja_id', Auth::user()->penyediaKerja->id)->count();
+                $jml_lowongan_aktif = lowongan::where('penyedia_kerja_id', Auth::user()->penyediaKerja->id)
+                                                    ->where('status', 'Aktif')->count();
+                $jml_lowongan_tdk_aktif = lowongan::where('penyedia_kerja_id', Auth::user()->penyediaKerja->id)
+                                                    ->where('status', 'Tidak Aktif')->count();
+                // $jml_pelamar = riwayatLamaran::where('penyedia_kerja_id', Auth::user()->penyediaKerja->id)->count();
+                $jml_pelamar = 0;
+                return view('pages.dashboard')
+                            ->with('jml_lowongan', $jml_lowongan)
+                            ->with('jml_lowongan_aktif', $jml_lowongan_aktif)
+                            ->with('jml_lowongan_tdk_aktif', $jml_lowongan_tdk_aktif)
+                            ->with('jml_pelamar', $jml_pelamar);
+            } else {
+                return redirect()->route('LD.create');
+            }
         }
     }
 }

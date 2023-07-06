@@ -6,6 +6,9 @@
         <div class="row mt-4">
             <div class="col-lg-12 mb-lg-0 mb-4">
                 <div class="card z-index-2 h-100">
+                <form role="form_edit" id="myform" method="POST" action="{{ route('lowongan.update', $lowongan->id) }}" enctype="multipart/form-data">
+                    @csrf
+                    @method('PUT')  
                     <div class="card-header pb-0 pt-4 bg-transparent" style="margin-left: 15px">
                         <h6 class="text-capitalize" >Informasi Lowongan</h6>
                     </div>
@@ -17,9 +20,9 @@
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label for="nama" class="form-control-label">Penyedia Kerja</label>
-                                                <input class="form-control" type="text"value="{{ $lowongan->penyediaKerja->user->name }}">
+                                                <input class="form-control" type="text"value="{{ $lowongan->penyediaKerja->user->name }}" readonly>
                                                 <div id="passwordHelpBlock" class="form-text">
-                                                    Klik <a href="{{ route('UC.download') }}" class="text-success"><b><u>disini.</u></b></a> Untuk informasi lebih lengkap tentang penyedia kerja.
+                                                    Klik <a href="{{ route('info-penyedia-kerja.show', $lowongan->penyediaKerja->id) }}" class="text-success"><b><u>disini.</u></b></a> Untuk informasi lebih lengkap tentang penyedia kerja.
                                                 </div>
                                             </div>
                                         </div>
@@ -141,7 +144,7 @@
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label for="rentang_usia" class="form-control-label">Rentang Usia (Tahun)</label>
-                                                <input class="form-control" type="number" name="rentang_usia" value="{{ $lowongan->kriteria->rentang_usia }}">
+                                                <input class="form-control" type="text" name="rentang_usia" value="{{ $lowongan->kriteria->rentang_usia }}">
                                                 @error('rentang_usia') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
                                             </div>
                                         </div>
@@ -169,8 +172,6 @@
                                             </div>
                                         </div>
                                     </div>
-                                        
-                                    {{-- </div> --}}
                                 </div>
                             </div>
                         </div>
@@ -189,7 +190,7 @@
                                                 <label for="keterampilan_teknis" class="form-control-label">Keterampilan Teknis / Hard Skill </label>
                                                 <div class="table-responsive">  
                                                     <table class="table table-bordered">  
-                                                        @foreach (array_combine($lowongan->kriteria->keterampilan_teknis, $lowongan->kriteria->prioritas_keterampilan_teknis)  as $keterampilan_teknis => $prioritas_keterampilan_teknis)
+                                                        @foreach (array_combine(json_decode($lowongan->kriteria->keterampilan_teknis), json_decode($lowongan->kriteria->prioritas_keterampilan_teknis))  as $keterampilan_teknis => $prioritas_keterampilan_teknis)
                                                             <tr>  
                                                                 <td><input type="text" class="form-control" value="{{ $keterampilan_teknis }}"/></td>
                                                                 @switch($prioritas_keterampilan_teknis)
@@ -221,7 +222,7 @@
                                                 <label for="keterampilan_non_teknis" class="form-control-label">Keterampilan Non Teknis / Soft Skill </label>
                                                 <div class="table-responsive">  
                                                     <table class="table table-bordered">  
-                                                        @foreach (array_combine($lowongan->kriteria->keterampilan_non_teknis, $lowongan->kriteria->prioritas_keterampilan_non_teknis)  as $keterampilan_non_teknis => $prioritas_keterampilan_non_teknis)
+                                                        @foreach (array_combine(json_decode($lowongan->kriteria->keterampilan_non_teknis), json_decode($lowongan->kriteria->prioritas_keterampilan_non_teknis))  as $keterampilan_non_teknis => $prioritas_keterampilan_non_teknis)
                                                             <tr>  
                                                                 <td><input type="text" class="form-control" value="{{ $keterampilan_non_teknis }}"/></td>
                                                                 @switch($prioritas_keterampilan_non_teknis)
@@ -253,7 +254,7 @@
                                                 <label for="sertifikasi" class="form-control-label">Sertifikasi</label>
                                                 <div class="table-responsive">  
                                                     <table class="table table-bordered">  
-                                                        @foreach (array_combine($lowongan->kriteria->sertifikasi, $lowongan->kriteria->prioritas_sertifikasi)  as $sertifikasi => $prioritas_sertifikasi)
+                                                        @foreach (array_combine(json_decode($lowongan->kriteria->sertifikasi), json_decode($lowongan->kriteria->prioritas_sertifikasi))  as $sertifikasi => $prioritas_sertifikasi)
                                                             <tr>  
                                                                 <td><input type="text" class="form-control" value="{{ $sertifikasi }}"/></td>
                                                                 @switch($prioritas_sertifikasi)
@@ -299,24 +300,24 @@
                                                 <label for="keterampilan_teknis" class="form-control-label">Faktor Utama / Core Factor</label>
                                                 <div class="table-responsive">  
                                                     <table class="table table-bordered">  
-                                                        {{-- @foreach (array_combine($lowongan->kriteria->faktor_utama, $lowongan->kriteria->bobot_faktor_utama)  as $faktor_utama => $bobot_faktor_utama)
+                                                        @foreach (array_combine(json_decode($lowongan->kriteria->faktor_utama), json_decode($lowongan->kriteria->bobot_faktor_utama))  as $faktor_utama => $bobot_faktor_utama)
                                                             <tr>  
                                                                 <td>
                                                                     <select class="form-control" name="faktor_utama[]" required>
-                                                                        <option value="minimal_pendidikan" selected>Minimal Pendidikan</option>
-                                                                        <option value="pengalaman" >Pengalaman</option>
-                                                                        <option value="jurusan_pendidikan_terakhir">Jurusan Pendidikan Terakhir</option>
-                                                                        <option value="rentang_usia">Rentang Usia</option>
-                                                                        <option value="bahasa">Bahasa</option>
-                                                                        <option value="keterampilan_teknis">Keterampilan Teknis</option>
-                                                                        <option value="keterampilan_non_teknis">Keterampilan Non Teknis</option>
-                                                                        <option value="sertifikasi">Sertifikasi</option>
+                                                                        <option value="minimal_pendidikan" @if($faktor_utama == 'minimal_pendidikan')selected @endif>Minimal Pendidikan</option>
+                                                                        <option value="pengalaman" @if($faktor_utama == 'pengalaman')selected @endif>Pengalaman</option>
+                                                                        <option value="jurusan_pendidikan_terakhir" @if($faktor_utama == 'jurusan_pendidikan_terakhir')selected @endif>Jurusan Pendidikan Terakhir</option>
+                                                                        <option value="rentang_usia" @if($faktor_utama == 'rentang_usia')selected @endif>Rentang Usia</option>
+                                                                        <option value="bahasa" @if($faktor_utama == 'bahasa')selected @endif>Bahasa</option>
+                                                                        <option value="keterampilan_teknis" @if($faktor_utama == 'keterampilan_teknis')selected @endif>Keterampilan Teknis</option>
+                                                                        <option value="keterampilan_non_teknis" @if($faktor_utama == 'keterampilan_non_teknis')selected @endif>Keterampilan Non Teknis</option>
+                                                                        <option value="sertifikasi" @if($faktor_utama == 'sertifikasi')selected @endif>Sertifikasi</option>
                                                                     </select>
                                                                 <td>
                                                                     <input type="number" name="bobot_faktor_utama[]" value="{{ $bobot_faktor_utama }}" min="0" max="1" step="any" class="form-control" required/></td> 
                                                                 </td>
                                                             </tr> 
-                                                        @endforeach --}}
+                                                        @endforeach
                                                     </table>  
                                                 </div>
                                                 @error('faktor_utama') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
@@ -325,66 +326,31 @@
                                         </div>
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <label for="keterampilan_non_teknis" class="form-control-label">Keterampilan Non Teknis / Soft Skill </label>
+                                                <label for="keterampilan_teknis" class="form-control-label">Faktor Pendukung / Secondary Factor</label>
                                                 <div class="table-responsive">  
                                                     <table class="table table-bordered">  
-                                                        @foreach (array_combine($lowongan->kriteria->keterampilan_non_teknis, $lowongan->kriteria->prioritas_keterampilan_non_teknis)  as $keterampilan_non_teknis => $prioritas_keterampilan_non_teknis)
+                                                        @foreach (array_combine(json_decode($lowongan->kriteria->faktor_pendukung), json_decode($lowongan->kriteria->bobot_faktor_pendukung))  as $faktor_pendukung => $bobot_faktor_pendukung)
                                                             <tr>  
-                                                                <td><input type="text" class="form-control" value="{{ $keterampilan_non_teknis }}"/></td>
-                                                                @switch($prioritas_keterampilan_non_teknis)
-                                                                    @case(4)
-                                                                        <td><input type="text" class="form-control" value="Sangat Penting"/></td>
-                                                                        @break
-                                                                    @case(3)
-                                                                        <td><input type="text" class="form-control" value="Penting"/></td>
-                                                                        @break
-                                                                    @case(2)
-                                                                        <td><input type="text" class="form-control" value="Regular"/></td>
-                                                                        @break
-                                                                    @case(1)
-                                                                        <td><input type="text" class="form-control" value="Menambah Value"/></td>
-                                                                        @break
-                                                                    @default
-                                                                        <td><input type="text" class="form-control" value="Penting"/></td>
-                                                                @endswitch
+                                                                <td>
+                                                                    <select class="form-control" name="faktor_pendukung[]" required>
+                                                                        <option value="minimal_pendidikan" @if($faktor_pendukung == 'minimal_pendidikan')selected @endif>Minimal Pendidikan</option>
+                                                                        <option value="pengalaman" @if($faktor_pendukung == 'pengalaman')selected @endif>Pengalaman</option>
+                                                                        <option value="jurusan_pendidikan_terakhir" @if($faktor_pendukung == 'jurusan_pendidikan_terakhir')selected @endif>Jurusan Pendidikan Terakhir</option>
+                                                                        <option value="rentang_usia" @if($faktor_pendukung == 'rentang_usia')selected @endif>Rentang Usia</option>
+                                                                        <option value="bahasa" @if($faktor_pendukung == 'bahasa')selected @endif>Bahasa</option>
+                                                                        <option value="keterampilan_teknis" @if($faktor_pendukung == 'keterampilan_teknis')selected @endif>Keterampilan Teknis</option>
+                                                                        <option value="keterampilan_non_teknis" @if($faktor_pendukung == 'keterampilan_non_teknis')selected @endif>Keterampilan Non Teknis</option>
+                                                                        <option value="sertifikasi" @if($faktor_pendukung == 'sertifikasi')selected @endif>Sertifikasi</option>
+                                                                    </select>
+                                                                <td>
+                                                                    <input type="number" name="bobot_faktor_pendukung[]" value="{{ $bobot_faktor_pendukung }}" min="0" max="1" step="any" class="form-control" required/></td> 
+                                                                </td>
                                                             </tr> 
-                                                        @endforeach 
+                                                        @endforeach
                                                     </table>  
                                                 </div>
-                                                @error('keterampilan_non_teknis') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
-                                                @error('prioritas_keterampilan_non_teknis') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label for="sertifikasi" class="form-control-label">Sertifikasi</label>
-                                                <div class="table-responsive">  
-                                                    <table class="table table-bordered">  
-                                                        @foreach (array_combine($lowongan->kriteria->sertifikasi, $lowongan->kriteria->prioritas_sertifikasi)  as $sertifikasi => $prioritas_sertifikasi)
-                                                            <tr>  
-                                                                <td><input type="text" class="form-control" value="{{ $sertifikasi }}"/></td>
-                                                                @switch($prioritas_sertifikasi)
-                                                                    @case(4)
-                                                                        <td><input type="text" class="form-control" value="Sangat Penting"/></td>
-                                                                        @break
-                                                                    @case(3)
-                                                                        <td><input type="text" class="form-control" value="Penting"/></td>
-                                                                        @break
-                                                                    @case(2)
-                                                                        <td><input type="text" class="form-control" value="Regular"/></td>
-                                                                        @break
-                                                                    @case(1)
-                                                                        <td><input type="text" class="form-control" value="Menambah Value"/></td>
-                                                                        @break
-                                                                    @default
-                                                                        <td><input type="text" class="form-control" value=""/></td>
-                                                                @endswitch
-                                                            </tr> 
-                                                        @endforeach   
-                                                    </table>  
-                                                </div>
-                                                @error('sertifikasi') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
-                                                @error('prioritas_sertifikasi') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
+                                                @error('faktor_pendukung') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
+                                                @error('bobot_faktor_pendukung') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
                                             </div>
                                         </div>
                                     </div>
@@ -394,10 +360,9 @@
                     </div>
                     <div class="card-footer d-flex justify-content-end">
                         <a href="javascript:history.back()" class="btn btn-secondary">Kembali</a>
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#lamarModal">
-                            Lamar Sekarang
-                        </button>
+                        <button type="submit" class="btn btn-primary ms-3">Simpan</button>
                     </div>
+                </form>
                 </div>
             </div>
         </div>

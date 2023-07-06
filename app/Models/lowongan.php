@@ -27,11 +27,6 @@ class lowongan extends Model
         $this->attributes['jenis_kelamin'] = json_encode($value);
     }
 
-    // public function getJenisKelaminAttribute($value)
-    // {
-    //     return $this->attributes['jenis_kelamin'] = json_decode($value);
-    // }
-
     /**
      * Get the kriteria associated with lowongan.
      */

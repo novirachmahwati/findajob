@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use DataTables;
 use App\Rules\JumlahBobot;
+use Carbon\Carbon;
 
 class KelolaLowonganController extends Controller
 {
@@ -23,6 +24,7 @@ class KelolaLowonganController extends Controller
             $lowongan = lowongan::leftJoin('penyedia_kerjas','penyedia_kerjas.id','=','lowongans.penyedia_kerja_id')
                                 ->leftJoin('users','users.id','=','penyedia_kerjas.user_id')
                                 ->select('lowongans.id','lowongans.judul_pekerjaan','users.name','lowongans.lokasi_pekerjaan','lowongans.jenis_pekerjaan')
+                                ->where('penyedia_kerja_id', Auth::user()->penyediaKerja->id)
                                 ->orderBy('lowongans.id','desc')
                                 ->get();
             return Datatables::of($lowongan)->addIndexColumn()
@@ -66,7 +68,9 @@ class KelolaLowonganController extends Controller
      */
     public function create()
     {
-        return view('penyediaKerja.kelolaLowongan.create');
+        $dateToday = Carbon::now()->format('Y-m-d');
+        $dateEndYear = Carbon::now()->endOfYear()->format('Y-m-d');
+        return view('penyediaKerja.kelolaLowongan.create', compact(['dateToday', 'dateEndYear']));
     }
 
     /**
@@ -197,7 +201,7 @@ class KelolaLowonganController extends Controller
     // Syarat dan Ketentuan
     public function SDK_store()
     {   
-        return redirect()->route('dashboard');
+        return redirect()->route('kelola-lowongan.index')->with('success', 'Lowongan berhasil diunggah!');
     }
 
     /**
