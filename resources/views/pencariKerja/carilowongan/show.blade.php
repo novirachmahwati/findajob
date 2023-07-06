@@ -305,7 +305,7 @@
                     <div class="card-footer d-flex justify-content-end">
                         <a href="javascript:history.back()" class="btn btn-secondary">Kembali</a>
                         @if(empty($riwayatLamaran))
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#lamarModal">
+                            <button type="button" class="btn btn-primary ms-3" data-bs-toggle="modal" data-bs-target="#lamarModal">
                                 Lamar Sekarang
                             </button>
                         @endif

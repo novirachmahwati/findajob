@@ -40,7 +40,7 @@ use App\Http\Controllers\PencariKerjaController;
 use App\Http\Controllers\PenyediaKerjaController;
 use App\Http\Controllers\RiwayatLamaranController;
 use App\Http\Controllers\SertifikasiController;
-use App\Http\Controllers\lowonganController;    
+use App\Http\Controllers\LowonganController;    
 use App\Http\Controllers\ProfilController; 
 use App\Http\Controllers\KelolaLowonganController;  
             
@@ -98,7 +98,7 @@ Route::group(['middleware' => 'auth'], function () {
 	// Resource
 	Route::resources([
 		'sertifikasi' => SertifikasiController::class,
-		'lowongan' => lowonganController::class,
+		'lowongan' => LowonganController::class,
 		'info-penyedia-kerja' => PenyediaKerjaController::class,
 		'info-pencari-kerja' => PencariKerjaController::class,
 		'riwayat-lamaran' => RiwayatLamaranController::class,
