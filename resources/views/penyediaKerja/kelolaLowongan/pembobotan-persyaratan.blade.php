@@ -1,7 +1,7 @@
 @extends('layouts.app', ['class' => 'g-sidenav-show bg-gray-100'])
 @section('title', 'Unggah Lowongan Pekerjaan')
 @section('content')
-    @include('layouts.navbars.auth.topnav', ['title' => 'Kelola Lowongan / Unggah'])
+    @include('layouts.navbars.auth.topnav', ['title' => 'Unggah Lowongan'])
     <div class="container-fluid py-4">
         <div class="row">
             <div class="col-xl-12">
@@ -100,7 +100,7 @@
                     <div class="card-header pb-0 pt-4 bg-transparent">
                         <h6 class="text-capitalize" style="margin-left: 15px">Pembobotan Persyaratan</h6>
                         <p class="text-justify" style="margin-left: 15px">Masukkan pembobotan persyaratan berdasarkan kelompok variabel Faktor Utama (Core Factor) dan Faktor Pendukung (Secondary Factor). 
-                            Jumlah pembobotan tiap faktor kelompok apabila dijumlahkan harus sama dengan = 1, tidak boleh lebih atau kurang dari 1. 
+                            Jumlah pembobotan faktor utama apabila dijumlahkan harus sama dengan = 1, tidak boleh lebih atau kurang dari 1. 
                             Klik tombol "Selanjutnya" apabila pembobotan sudah sesuai dengan kriteria Anda.
                             Klik <a href="#" class="text-success" data-bs-toggle="modal" data-bs-target="#pembobotanModal"><b><u>disini</u></b></a> Untuk penjelasan lebih lengkap. 
                         </p>
@@ -121,71 +121,48 @@
                                                         <table class="table" id="dynamic_field_faktor_utama">  
                                                             <tr>  
                                                                 <td>
-                                                                    <select class="form-control" name="faktor_utama[]" required>
+                                                                    <select class="form-control" name="faktor_utama[]" readonly>
                                                                         <option value="minimal_pendidikan" selected>Minimal Pendidikan</option>
-                                                                        <option value="pengalaman" >Pengalaman</option>
-                                                                        <option value="jurusan_pendidikan_terakhir">Jurusan Pendidikan Terakhir</option>
-                                                                        <option value="rentang_usia">Rentang Usia</option>
-                                                                        <option value="bahasa">Bahasa</option>
-                                                                        <option value="keterampilan_teknis">Keterampilan Teknis</option>
-                                                                        <option value="keterampilan_non_teknis">Keterampilan Non Teknis</option>
-                                                                        <option value="sertifikasi">Sertifikasi</option>
                                                                     </select>
                                                                 <td>
                                                                     <input type="number" name="bobot_faktor_utama[]" value="0.2" min="0" max="1" step="any" class="form-control" required/></td> 
                                                                 </td>
-                                                                <td><button type="button" name="add_faktor_utama" id="add_faktor_utama" class="btn btn-success"><i class="fa fa-plus" aria-hidden="true"></i></button></td>  
                                                             </tr>
                                                             <tr id="2" class="dynamic-added">
                                                                 <td>
-                                                                    <select class="form-control" name="faktor_utama[]" required>
-                                                                        <option value="minimal_pendidikan">Minimal Pendidikan</option>
+                                                                    <select class="form-control" name="faktor_utama[]" readonly>
                                                                         <option value="pengalaman" selected>Pengalaman</option>
-                                                                        <option value="jurusan_pendidikan_terakhir">Jurusan Pendidikan Terakhir</option>
-                                                                        <option value="rentang_usia">Rentang Usia</option>
-                                                                        <option value="bahasa">Bahasa</option>
-                                                                        <option value="keterampilan_teknis">Keterampilan Teknis</option>
-                                                                        <option value="keterampilan_non_teknis">Keterampilan Non Teknis</option>
-                                                                        <option value="sertifikasi">Sertifikasi</option>
                                                                     </select>
                                                                 <td>
                                                                     <input type="number" name="bobot_faktor_utama[]" value="0.2" min="0" max="1" step="any" class="form-control" required/></td> 
                                                                 </td>
-                                                                <td><button type="button" name="remove" id="2" class="btn btn-danger btn_remove">X</button></td>
                                                             </tr>
                                                             <tr id="3" class="dynamic-added">
                                                                 <td>
-                                                                    <select class="form-control" name="faktor_utama[]" required>
-                                                                        <option value="minimal_pendidikan">Minimal Pendidikan</option>
-                                                                        <option value="pengalaman">Pengalaman</option>
-                                                                        <option value="jurusan_pendidikan_terakhir">Jurusan Pendidikan Terakhir</option>
-                                                                        <option value="rentang_usia">Rentang Usia</option>
-                                                                        <option value="bahasa">Bahasa</option>
+                                                                    <select class="form-control" name="faktor_utama[]" readonly>
                                                                         <option value="keterampilan_teknis" selected>Keterampilan Teknis</option>
-                                                                        <option value="keterampilan_non_teknis">Keterampilan Non Teknis</option>
-                                                                        <option value="sertifikasi">Sertifikasi</option>
                                                                     </select>
                                                                 <td>
                                                                     <input type="number" name="bobot_faktor_utama[]" value="0.3" min="0" max="1" step="any" class="form-control" required/></td> 
                                                                 </td>
-                                                                <td><button type="button" name="remove" id="3" class="btn btn-danger btn_remove">X</button></td>
                                                             </tr>
                                                             <tr id="4" class="dynamic-added">
                                                                 <td>
-                                                                    <select class="form-control" name="faktor_utama[]" required>
-                                                                        <option value="minimal_pendidikan">Minimal Pendidikan</option>
-                                                                        <option value="pengalaman">Pengalaman</option>
-                                                                        <option value="jurusan_pendidikan_terakhir">Jurusan Pendidikan Terakhir</option>
-                                                                        <option value="rentang_usia">Rentang Usia</option>
-                                                                        <option value="bahasa">Bahasa</option>
-                                                                        <option value="keterampilan_teknis">Keterampilan Teknis</option>
+                                                                    <select class="form-control" name="faktor_utama[]" readonly>
                                                                         <option value="keterampilan_non_teknis" selected>Keterampilan Non Teknis</option>
-                                                                        <option value="sertifikasi">Sertifikasi</option>
                                                                     </select>
                                                                 <td>
-                                                                    <input type="number" name="bobot_faktor_utama[]" value="0.3" min="0" max="1" step="any" class="form-control" required/></td> 
+                                                                    <input type="number" name="bobot_faktor_utama[]" value="0.2" min="0" max="1" step="any" class="form-control" required/></td> 
                                                                 </td>
-                                                                <td><button type="button" name="remove" id="4" class="btn btn-danger btn_remove">X</button></td>
+                                                            </tr>
+                                                            <tr id="5" class="dynamic-added">
+                                                                <td>
+                                                                    <select class="form-control" name="faktor_utama[]" readonly>
+                                                                        <option value="jurusan_pendidikan_terakhir" selected>Jurusan Pendidikan Terakhir</option>
+                                                                    </select>
+                                                                <td>
+                                                                    <input type="number" name="bobot_faktor_utama[]" value="0.1" min="0" max="1" step="any" class="form-control" required/></td> 
+                                                                </td>
                                                             </tr>  
                                                         </table>  
                                                     </div>
@@ -200,73 +177,36 @@
                                                         <table class="table" id="dynamic_field_faktor_pendukung">  
                                                             <tr>  
                                                                 <td>
-                                                                    <select class="form-control" name="faktor_pendukung[]" required>
-                                                                        <option value="minimal_pendidikan">Minimal Pendidikan</option>
-                                                                        <option value="pengalaman" >Pengalaman</option>
-                                                                        <option value="jurusan_pendidikan_terakhir">Jurusan Pendidikan Terakhir</option>
+                                                                    <select class="form-control" name="faktor_pendukung[]" readonly>
                                                                         <option value="rentang_usia" selected>Rentang Usia</option>
-                                                                        <option value="bahasa">Bahasa</option>
-                                                                        <option value="keterampilan_teknis">Keterampilan Teknis</option>
-                                                                        <option value="keterampilan_non_teknis">Keterampilan Non Teknis</option>
-                                                                        <option value="sertifikasi">Sertifikasi</option>
                                                                     </select>
                                                                 <td>
-                                                                    <input type="number" name="bobot_faktor_pendukung[]" value="0.2" min="0" max="1" step="any" class="form-control" required/></td> 
+                                                                    <input type="number" name="bobot_faktor_pendukung[]" value="0.1" min="0" max="1" step="any" class="form-control" readonly/></td> 
                                                                 </td>
-                                                                <td><button type="button" name="add_faktor_pendukung" id="add_faktor_pendukung" class="btn btn-success"><i class="fa fa-plus" aria-hidden="true"></i></button></td>  
-                                                            </tr>
-                                                            <tr id="6" class="dynamic-added">
-                                                                <td>
-                                                                    <select class="form-control" name="faktor_utama[]" required>
-                                                                        <option value="minimal_pendidikan">Minimal Pendidikan</option>
-                                                                        <option value="pengalaman">Pengalaman</option>
-                                                                        <option value="jurusan_pendidikan_terakhir" selected>Jurusan Pendidikan Terakhir</option>
-                                                                        <option value="rentang_usia">Rentang Usia</option>
-                                                                        <option value="bahasa">Bahasa</option>
-                                                                        <option value="keterampilan_teknis">Keterampilan Teknis</option>
-                                                                        <option value="keterampilan_non_teknis">Keterampilan Non Teknis</option>
-                                                                        <option value="sertifikasi">Sertifikasi</option>
-                                                                    </select>
-                                                                <td>
-                                                                    <input type="number" name="bobot_faktor_utama[]" value="0.2" min="0" max="1" step="any" class="form-control" required/></td> 
-                                                                </td>
-                                                                <td><button type="button" name="remove" id="6" class="btn btn-danger btn_remove">X</button></td>
                                                             </tr>
                                                             <tr id="7" class="dynamic-added">
                                                                 <td>
-                                                                    <select class="form-control" name="faktor_pendukung[]" required>
-                                                                        <option value="minimal_pendidikan">Minimal Pendidikan</option>
-                                                                        <option value="pengalaman">Pengalaman</option>
-                                                                        <option value="jurusan_pendidikan_terakhir">Jurusan Pendidikan Terakhir</option>
-                                                                        <option value="rentang_usia">Rentang Usia</option>
+                                                                    <select class="form-control" name="faktor_pendukung[]" readonly>
                                                                         <option value="bahasa" selected>Bahasa</option>
-                                                                        <option value="keterampilan_teknis">Keterampilan Teknis</option>
-                                                                        <option value="keterampilan_non_teknis">Keterampilan Non Teknis</option>
-                                                                        <option value="sertifikasi">Sertifikasi</option>
                                                                     </select>
                                                                 <td>
-                                                                    <input type="number" name="bobot_faktor_pendukung[]" value="0.3" min="0" max="1" step="any" class="form-control" required/></td> 
+                                                                    <input type="number" name="bobot_faktor_pendukung[]" value="0.1" min="0" max="1" step="any" class="form-control" readonly/></td> 
                                                                 </td>
-                                                                <td><button type="button" name="remove" id="7" class="btn btn-danger btn_remove">X</button></td>
                                                             </tr>
                                                             <tr id="8" class="dynamic-added">
                                                                 <td>
-                                                                    <select class="form-control" name="faktor_pendukung[]" required>
-                                                                        <option value="minimal_pendidikan">Minimal Pendidikan</option>
-                                                                        <option value="pengalaman">Pengalaman</option>
-                                                                        <option value="jurusan_pendidikan_terakhir">Jurusan Pendidikan Terakhir</option>
-                                                                        <option value="rentang_usia">Rentang Usia</option>
-                                                                        <option value="bahasa">Bahasa</option>
-                                                                        <option value="keterampilan_teknis">Keterampilan Teknis</option>
-                                                                        <option value="keterampilan_non_teknis">Keterampilan Non Teknis</option>
+                                                                    <select class="form-control" name="faktor_pendukung[]" readonly>
                                                                         <option value="sertifikasi" selected>Sertifikasi</option>
                                                                     </select>
                                                                 <td>
-                                                                    <input type="number" name="bobot_faktor_pendukung[]" value="0.3" min="0" max="1" step="any" class="form-control" required/></td> 
+                                                                    <input type="number" name="bobot_faktor_pendukung[]" value="0.1" min="0" max="1" step="any" class="form-control" readonly/></td> 
                                                                 </td>
-                                                                <td><button type="button" name="remove" id="8" class="btn btn-danger btn_remove">X</button></td>
                                                             </tr>  
-                                                        </table>  
+                                                        </table>
+                                                        <input type="text" name="faktor_pendukung[]" value="prestasi" hidden/>
+                                                        <input type="number" name="bobot_faktor_pendukung[]" value="0.1" hidden/>
+                                                        <input type="text" name="faktor_pendukung[]" value="organisasi" hidden/>
+                                                        <input type="number" name="bobot_faktor_pendukung[]" value="0.1" hidden/>  
                                                     </div>
                                                     @error('faktor_pendukung') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
                                                     @error('bobot_faktor_pendukung') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
@@ -312,7 +252,7 @@
                                 Atau  dengan kata lain merupakan faktor pendukung yang kurang dibutuhkan oleh suatu penilaian.</li>
                         </ol>
                         <p class="text-justify">
-                            Jumlah pembobotan tiap faktor kelompok apabila dijumlahkan harus sama dengan = 1, tidak boleh lebih atau kurang dari 1.
+                            Jumlah pembobotan faktor utama apabila dijumlahkan harus sama dengan = 1, tidak boleh lebih atau kurang dari 1.
                             Hasil akhir dari tahap ini, penyedia kerja akan mendapatkan ranking pelamar terbaik untuk lowongan pekerjaan yang diunggah.
                         </p>
                     </p>
@@ -332,7 +272,7 @@
 
             $('#add_faktor_utama').click(function(){  
                 i++;  
-                $('#dynamic_field_faktor_utama').append('<tr id="row'+i+'" class="dynamic-added"><td><select class="form-control" name="faktor_utama[]" required> \
+                $('#dynamic_field_faktor_utama').append('<tr id="row'+i+'" class="dynamic-added"><td><select class="form-control" name="faktor_utama[]" readonly> \
                                                                             <option value="minimal_pendidikan" selected>Minimal Pendidikan</option> \
                                                                             <option value="pengalaman" >Pengalaman</option> \
                                                                             <option value="jurusan_pendidikan_terakhir">Jurusan Pendidikan Terakhir</option> \
@@ -348,7 +288,7 @@
             
             $('#add_faktor_pendukung').click(function(){  
                 i++;  
-                $('#dynamic_field_faktor_pendukung').append('<tr id="row'+i+'" class="dynamic-added"><td><select class="form-control" name="faktor_pendukung[]" required> \
+                $('#dynamic_field_faktor_pendukung').append('<tr id="row'+i+'" class="dynamic-added"><td><select class="form-control" name="faktor_pendukung[]" readonly> \
                                                                             <option value="minimal_pendidikan" selected>Minimal Pendidikan</option> \
                                                                             <option value="pengalaman" >Pengalaman</option> \
                                                                             <option value="jurusan_pendidikan_terakhir">Jurusan Pendidikan Terakhir</option> \

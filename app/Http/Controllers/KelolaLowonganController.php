@@ -70,6 +70,8 @@ class KelolaLowonganController extends Controller
     {
         $dateToday = Carbon::now()->format('Y-m-d');
         $dateEndYear = Carbon::now()->endOfYear()->format('Y-m-d');
+
+        // return redirect()->route('kelola-lowongan.create', ['dateToday' => $dateToday, 'dateEndYear' => $dateEndYear]);
         return view('penyediaKerja.kelolaLowongan.create', compact(['dateToday', 'dateEndYear']));
     }
 
@@ -100,11 +102,14 @@ class KelolaLowonganController extends Controller
 
         $lowongan = lowongan::create($attributes);
         
-        return view('penyediaKerja.kelolaLowongan.persyaratan-umum-khusus',['lowongan_id' => $lowongan->id]);
+        return redirect()->route('persyaratan-umum-khusus.create', ['lowongan_id' => $lowongan->id]);
     }
 
     // Persyaratan Umum & Khusus
-
+    public function PUK_create($lowongan_id)
+    {
+        return view('penyediaKerja.kelolaLowongan.persyaratan-umum-khusus',['lowongan_id' => $lowongan_id]);
+    }
     public function PUK_store(Request $request)
     {
         $attributes = request()->validate([
@@ -157,10 +162,14 @@ class KelolaLowonganController extends Controller
         
         $kriteria = kriteria::create($attributes);
         
-        return view('penyediaKerja.kelolaLowongan.pembobotan-persyaratan',['lowongan_id' => $kriteria->lowongan_id]);
+        return redirect()->route('pembobotan-persyaratan.create', ['lowongan_id' => $kriteria->lowongan_id]);
     }
 
     // Pembobotan Persyaratan
+    public function PP_create($lowongan_id)
+    {
+        return view('penyediaKerja.kelolaLowongan.pembobotan-persyaratan',['lowongan_id' => $lowongan_id]);
+    }
     public function PP_store(Request $request)
     {
         $attributes = request()->validate([
@@ -175,30 +184,23 @@ class KelolaLowonganController extends Controller
         $attributes['bobot_faktor_utama'] = $request->input('bobot_faktor_utama');
         $attributes['faktor_pendukung'] = $request->input('faktor_pendukung');
         $attributes['bobot_faktor_pendukung'] = $request->input('bobot_faktor_pendukung');
-        
-        $faktor = array_merge($attributes['faktor_utama'],$attributes['faktor_pendukung']);
 
-        if (count($faktor) !== count(array_unique($faktor)) ) {
-            return back()->with('error', 'Terdapat duplikat persyaratan yang dimasukkan');
-        }
-
-        if (array_sum($attributes['bobot_faktor_utama']) != 1) {
-            return back()->with('error', 'Jumlah bobot faktor utama tidak boleh lebih/kurang dari 1');
-        }
-
-        if (array_sum($attributes['bobot_faktor_pendukung']) != 1) {
-            return back()->with('error', 'Jumlah bobot faktor pendukung tidak boleh lebih/kurang dari 1');
-
-        }
+        // if (array_sum($attributes['bobot_faktor_utama']) != 1) {
+        //     return back()->with('error', 'Jumlah bobot faktor utama tidak boleh lebih/kurang dari 1');
+        // }
 
         $lowongan = kriteria::where('lowongan_id', $attributes['lowongan_id'])->first();
         $lowongan->fill($attributes);
         $lowongan->save();
 
-        return view('penyediaKerja.kelolaLowongan.syarat-dan-ketentuan');
+        return redirect()->route('syarat-dan-ketentuan.create');
     }
 
     // Syarat dan Ketentuan
+    public function SDK_create()
+    {
+        return view('penyediaKerja.kelolaLowongan.syarat-dan-ketentuan');
+    }
     public function SDK_store()
     {   
         return redirect()->route('kelola-lowongan.index')->with('success', 'Lowongan berhasil diunggah!');

@@ -63,9 +63,14 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::post('/lowongan/sukses-lamar', [RiwayatLamaranController::class, 'store'])->name('sukses-lamar');
 
 	// Unggah Lowongan
-	Route::post('/pembobotan-persyaratan', [KelolaLowonganController::class, 'PUK_store'])->name('persyaratan-umum-khusus.store');
-	Route::post('/syarat-dan-ketentuan', [KelolaLowonganController::class, 'PP_store'])->name('pembobotan-persyaratan.store');
-	Route::post('/syarat-dan-ketentuan-temp', [KelolaLowonganController::class, 'SDK_store'])->name('syarat-dan-ketentuan.store');
+	Route::get('/persyaratan-umum-khusus/{lowongan_id}', [KelolaLowonganController::class, 'PUK_create'])->name('persyaratan-umum-khusus.create');
+	Route::post('/persyaratan-umum-khusus', [KelolaLowonganController::class, 'PUK_store'])->name('persyaratan-umum-khusus.store');
+
+	Route::get('/pembobotan-persyaratan/{lowongan_id}', [KelolaLowonganController::class, 'PP_create'])->name('pembobotan-persyaratan.create');
+	Route::post('/pembobotan-persyaratan', [KelolaLowonganController::class, 'PP_store'])->name('pembobotan-persyaratan.store');
+	
+	Route::get('/syarat-dan-ketentuan', [KelolaLowonganController::class, 'SDK_create'])->name('syarat-dan-ketentuan.create');
+	Route::post('/syarat-dan-ketentuan', [KelolaLowonganController::class, 'SDK_store'])->name('syarat-dan-ketentuan.store');
 	
 	// Pencari Kerja
 	Route::get('/lengkapi-biodata', [PencariKerjaController::class, 'LB_create'])->name('LB.create');
