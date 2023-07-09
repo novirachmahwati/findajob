@@ -96,6 +96,7 @@ class PencariKerjaController extends Controller
 
     public function UC_store(Request $request)
     {
+        // Validasi CV
         $rules = [
             'cv' => 'required'
         ];
@@ -114,8 +115,16 @@ class PencariKerjaController extends Controller
 
         $requestData = $request->all();
         
+        // Encode CV to base64
         $cvBase64 = base64_encode(file_get_contents($request->file('cv')));
         $requestData['cv'] = $cvBase64 ;
+
+        // Save to public storage
+        $fileName = time().$request->file('cv')->getClientOriginalName();
+        $path = $request->file('cv')->storeAs('cv', $fileName, 'public');
+        $requestData['cv_public_storage'] = '/storage/'.$path;
+
+        // Save to database
         $pencariKerja = pencariKerja::where('id', Auth::user()->pencariKerja->id)->first();
         $pencariKerja->fill($requestData);
         $pencariKerja->save();

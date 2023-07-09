@@ -42,7 +42,8 @@ use App\Http\Controllers\RiwayatLamaranController;
 use App\Http\Controllers\SertifikasiController;
 use App\Http\Controllers\LowonganController;    
 use App\Http\Controllers\ProfilController; 
-use App\Http\Controllers\KelolaLowonganController;  
+use App\Http\Controllers\KelolaLowonganController;
+use App\Http\Controllers\DaftarRiwayatHidupController;   
             
 // Register
 	Route::get('/registrasi-pencari-kerja', [RegisterController::class, 'create'])->middleware('guest')->name('registrasi');
@@ -107,7 +108,7 @@ Route::group(['middleware' => 'auth'], function () {
 		'info-penyedia-kerja' => PenyediaKerjaController::class,
 		'info-pencari-kerja' => PencariKerjaController::class,
 		'riwayat-lamaran' => RiwayatLamaranController::class,
-		'daftar-riwayat-hidup' => PencariKerjaController::class,
+		'daftar-riwayat-hidup' => DaftarRiwayatHidupController::class,
 		'kelola-lowongan' => KelolaLowonganController::class,
 		'lihat-pelamar' => LihatPelamarController::class,
 	]);
