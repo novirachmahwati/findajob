@@ -150,10 +150,7 @@
                     {data: 'action',  name: 'action', orderable: false, searchable: false},
                 ]
             });
-                // $.ajaxSetup({
-                //     headers: {
-                //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                //     }
+            
             $('body').on('click', '.deleteSertifikasi', function () {
                 var id = $(this).data('id');
 
