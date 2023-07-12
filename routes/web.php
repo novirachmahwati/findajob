@@ -15,27 +15,13 @@ use App\Http\Controllers\DashboardController;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
-// Route::get('/dashboard', function () {
-//     return view('dashboard');
-// })->middleware(['auth', 'verified'])->name('dashboard');
-
-// Route::middleware('auth')->group(function () {
-//     Route::get('/profil', [ProfileController::class, 'edit'])->name('profil.edit');
-//     Route::patch('/profil', [ProfileController::class, 'update'])->name('profil.update');
-//     Route::delete('/profil', [ProfileController::class, 'destroy'])->name('profil.destroy');
-// });
-
 require __DIR__.'/auth.php';
 
 Auth::routes();
 
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LoginController;
-use App\Http\Controllers\UserProfileController;
+use App\Http\Controllers\LihatPelamarController;
 use App\Http\Controllers\PencariKerjaController;
 use App\Http\Controllers\PenyediaKerjaController;
 use App\Http\Controllers\RiwayatLamaranController;

@@ -1,13 +1,13 @@
 @extends('layouts.app', ['class' => 'g-sidenav-show bg-gray-100'])
-@section('title', 'Info Penyedia Kerja')
+@section('title', 'Info Pencari Kerja')
 @section('content')
-    @include('layouts.navbars.auth.topnav', ['title' => 'Info Penyedia Kerja'])
+    @include('layouts.navbars.auth.topnav', ['title' => 'Info Pencari Kerja'])
     <div class="container-fluid py-4">
         <div class="row mt-4">
             <div class="col-lg-12 mb-lg-0 mb-4">
                 <div class="card z-index-2 h-100">
                     <div class="card-header pb-0 pt-4 bg-transparent">
-                        <h6 class="text-capitalize" style="margin-left: 15px">Info Penyedia Kerja</h6>
+                        <h6 class="text-capitalize" style="margin-left: 15px">Info Pencari Kerja</h6>
                     </div>
                     <div class="card-body p-3" style="margin-top: -15px">
                         <div class="row">
@@ -104,34 +104,6 @@
                                         </a> 
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-header pb-0 pt-4 bg-transparent">
-                        <h6 class="text-capitalize" style="margin-left: 15px">Sertifikasi</h6>
-                    </div>
-                    <div class="card-body p-3" style="margin-top: -15px">
-                        <div class="row">
-                            <div class="col">
-                                <div class="card-body">
-                                    <div class="border border-light rounded-3 p-3">  
-                                        <div class="row">
-                                            <div class="col">
-                                                <table class="table table-bordered table-hover yajra-datatable sertifikasi-datatable" id="table">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>No</th>
-                                                            <th>Nama</th>
-                                                            <th>Penerbit</th>
-                                                            <th>Aksi</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody></tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
                                 <div class="card-footer d-flex justify-content-end">
                                     <a href="{{ route('pencari-kerja.index') }}" class="btn btn-secondary">Kembali</a>
                                 </div>
@@ -151,22 +123,6 @@
     <script type="text/javascript">
         $(document).ready(function () {
             $('.ckeditor').ckeditor();
-
-            // datatable
-            var table = $('.sertifikasi-datatable').DataTable({
-                processing: true,
-                serverSide: true,
-                language: {
-                    url: '//cdn.datatables.net/plug-ins/1.13.4/i18n/id.json',
-                },
-                ajax: "{{ route('show_sertifikasi', $pencariKerja->id) }}",
-                columns: [
-                    {data: 'DT_RowIndex', name:'DT_RowIndex', orderable: false, searchable: false},
-                    {data: 'nama', name: 'nama'},
-                    {data: 'penerbit', name: 'penerbit'},
-                    {data: 'action',  name: 'action', orderable: false, searchable: false},
-                ]
-            });
         });
     </script>
 @endsection

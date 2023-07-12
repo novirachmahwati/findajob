@@ -181,29 +181,6 @@ class PencariKerjaController extends Controller
      */
     public function show(Request $request, pencariKerja $pencariKerja)
     {
-        // if ($request->ajax()) {
-        //     $sertifikasi = sertifikasi::select('id','nama','penerbit','tgl_diterbitkan')
-        //                     ->where('pencari_kerja_id', $pencariKerja->id)
-        //                     ->orderBy('tgl_diterbitkan','desc')->get();
-        //     return Datatables::of($sertifikasi)->addIndexColumn()
-        //         ->addColumn('action', function($sertifikasi){
-        //             $btn = '<div class="dropdown dropstart text-end">          
-        //                         <button type="button" class="btn btn-link" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></button>
-        //                         <ul class="dropdown-menu dropdown-menu-end">
-        //                             <li>
-        //                                 <a class="dropdown-item" href="'.route('sertifikasi.show', $sertifikasi->id).'">
-        //                                     <i class="fa fa-eye text-success" aria-hidden="true"></i>
-        //                                     <span class="d-sm-inline d-none ms-2">Lihat</span>
-        //                                 </a>
-        //                             </li>
-        //                         </ul>
-        //                     </div>';
-        //             return $btn;
-        //         })
-        //         ->rawColumns(['action'])
-        //         ->make(true);
-        // }
-
         return view('penyediaKerja.infoPencariKerja.show', compact(['pencariKerja']));
     }
 
