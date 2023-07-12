@@ -49,18 +49,10 @@ class DaftarRiwayatHidupController extends Controller
      */
     public function show($id)
     {   
-        // $base64_cv = pencariKerja::where('id', $id)->select('cv')->get();
         $pencariKerja = pencariKerja::where('id', $id)->first();
-        // print_r($pencariKerja);
-        $base64_cv = $pencariKerja->cv_public_storage;
-        $base64_decode = base64_decode($base64_cv);
-        // return response()->file($base64_decode,['content-type'=>'application/pdf']);
-        return Response::make(file_get_contents($base64_decode), 200, [
-            'content-type'=>'application/pdf',
-        ]);
+        $cv = $pencariKerja->cv_public_storage;
+        return response()->file(public_path($cv),['content-type'=>'application/pdf']);
     }
-
-        // return view('pencariKerja.daftarRiwayatHidup.index', compact('daftarRiwayatHidup'));
 
     /**
      * Show the form for editing the specified resource.
@@ -112,6 +104,8 @@ class DaftarRiwayatHidupController extends Controller
         $pencariKerja = pencariKerja::where('id', $id)->first();
         $pencariKerja->fill($requestData);
         $pencariKerja->save();
+
+        return redirect()->route('daftar-riwayat-hidup.index')->with('success', 'Daftar riwayat hidup berhasil diubah!');
     }
 
     /**

@@ -22,7 +22,7 @@
                                                 <label for="nama" class="form-control-label">Penyedia Kerja</label>
                                                 <input class="form-control" type="text"value="{{ $lowongan->penyediaKerja->user->name }}" readonly>
                                                 <div id="passwordHelpBlock" class="form-text">
-                                                    Klik <a href="{{ route('info-penyedia-kerja.show', $lowongan->penyediaKerja->id) }}" class="text-success"><b><u>disini.</u></b></a> Untuk informasi lebih lengkap tentang penyedia kerja.
+                                                    Klik <a href="{{ route('penyedia-kerja.show', $lowongan->penyediaKerja->id) }}" class="text-success"><b><u>disini.</u></b></a> Untuk informasi lebih lengkap tentang penyedia kerja.
                                                 </div>
                                             </div>
                                         </div>

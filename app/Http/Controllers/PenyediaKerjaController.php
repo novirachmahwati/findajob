@@ -8,6 +8,7 @@ use App\Models\riwayatLamaran;
 use App\Models\kriteria;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use DataTables;
 
 class PenyediaKerjaController extends Controller
 {
@@ -20,8 +21,9 @@ class PenyediaKerjaController extends Controller
     {
         if ($request->ajax()) {
             $penyediaKerja = penyediaKerja::leftJoin('users','users.id','=','penyedia_kerjas.user_id')
-                                ->select('penyedia_kerjas.id','users.name','penyedia_kerjas.bidang','penyedia_kerjas.foto')
+                                ->select('penyedia_kerjas.id','users.name','penyedia_kerjas.bidang','penyedia_kerjas.alamat')
                                 ->orderBy('penyedia_kerjas.id','desc')
+                                ->whereNotNull('penyedia_kerjas.bidang')
                                 ->get();
             return Datatables::of($penyediaKerja)->addIndexColumn()
                 ->addColumn('action', function($penyediaKerja){
@@ -29,7 +31,7 @@ class PenyediaKerjaController extends Controller
                                 <button type="button" class="btn btn-link" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></button>
                                 <ul class="dropdown-menu dropdown-menu-end">
                                     <li>
-                                        <a class="dropdown-item" href="'.route('info-penyedia-kerja.show', $penyediaKerja->id).'">
+                                        <a class="dropdown-item" href="'.route('penyedia-kerja.show', $penyediaKerja->id).'">
                                             <i class="fa fa-eye text-success" aria-hidden="true"></i>
                                             <span class="d-sm-inline d-none ms-2">Lihat</span>
                                         </a>
@@ -150,7 +152,7 @@ class PenyediaKerjaController extends Controller
      */
     public function show(penyediaKerja $penyediaKerja)
     {
-        //
+        return view('pencariKerja.infoPenyediaKerja.show', compact(['penyediaKerja']));
     }
 
     /**

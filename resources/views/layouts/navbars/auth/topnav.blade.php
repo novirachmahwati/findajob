@@ -21,7 +21,7 @@
                         </a>
                     </li>
                     <li class="nav-item px-3 d-flex align-items-center">
-                        <a href="{{ route('info-penyedia-kerja.index') }}" class="nav-link text-white p-0">
+                        <a href="{{ route('penyedia-kerja.index') }}" class="nav-link text-white p-0">
                             Info Penyedia Kerja
                         </a>
                     </li>
@@ -39,7 +39,7 @@
                         </a>
                     </li>
                     <li class="nav-item px-3 d-flex align-items-center">
-                        <a href="{{ route('info-penyedia-kerja.index') }}" class="nav-link text-white p-0">
+                        <a href="{{ route('penyedia-kerja.index') }}" class="nav-link text-white p-0">
                             Info Pencari Kerja
                         </a>
                     </li>

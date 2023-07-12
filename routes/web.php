@@ -101,12 +101,14 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('/unggah-lowongan', [PenyediaKerjaController::class, 'UL_create'])->name('UL.create');
 	Route::post('/unggah-lowongan', [PenyediaKerjaController::class, 'UL_store'])->name('UL.store');
 
+	Route::get('/show_sertifikasi/{show_sertifikasi}', [PencariKerjaController::class, 'show_sertifikasi'])->name('show_sertifikasi');
+
 	// Resource
 	Route::resources([
 		'sertifikasi' => SertifikasiController::class,
 		'lowongan' => LowonganController::class,
-		'info-penyedia-kerja' => PenyediaKerjaController::class,
-		'info-pencari-kerja' => PencariKerjaController::class,
+		'penyedia-kerja' => PenyediaKerjaController::class,
+		'pencari-kerja' => PencariKerjaController::class,
 		'riwayat-lamaran' => RiwayatLamaranController::class,
 		'daftar-riwayat-hidup' => DaftarRiwayatHidupController::class,
 		'kelola-lowongan' => KelolaLowonganController::class,

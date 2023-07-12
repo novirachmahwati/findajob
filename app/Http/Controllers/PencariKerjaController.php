@@ -10,9 +10,44 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Carbon\Carbon;
+use DataTables;
 
 class PencariKerjaController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index(Request $request)
+    {
+        if ($request->ajax()) {
+            $pencariKerja = pencariKerja::leftJoin('users','users.id','=','pencari_kerjas.user_id')
+                                ->select('pencari_kerjas.id','users.name','users.email','pencari_kerjas.usia')
+                                ->orderBy('pencari_kerjas.id','desc')
+                                ->get();
+            return Datatables::of($pencariKerja)->addIndexColumn()
+                ->addColumn('action', function($pencariKerja){
+                    $btn = '<div class="dropdown dropstart text-end">          
+                                <button type="button" class="btn btn-link" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></button>
+                                <ul class="dropdown-menu dropdown-menu-end">
+                                    <li>
+                                        <a class="dropdown-item" href="'.route('pencari-kerja.show', $pencariKerja->id).'">
+                                            <i class="fa fa-eye text-success" aria-hidden="true"></i>
+                                            <span class="d-sm-inline d-none ms-2">Lihat</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>';
+                    return $btn;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
+
+        return view('penyediaKerja.infoPencariKerja.index');
+    }
+    
     // Lengkapi Biodata
     public function LB_create()
     {
@@ -144,9 +179,65 @@ class PencariKerjaController extends Controller
      * @param  \App\Models\pencariKerja  $pencariKerja
      * @return \Illuminate\Http\Response
      */
-    public function show(pencariKerja $pencariKerja)
+    public function show(Request $request, pencariKerja $pencariKerja)
     {
-        //
+        // if ($request->ajax()) {
+        //     $sertifikasi = sertifikasi::select('id','nama','penerbit','tgl_diterbitkan')
+        //                     ->where('pencari_kerja_id', $pencariKerja->id)
+        //                     ->orderBy('tgl_diterbitkan','desc')->get();
+        //     return Datatables::of($sertifikasi)->addIndexColumn()
+        //         ->addColumn('action', function($sertifikasi){
+        //             $btn = '<div class="dropdown dropstart text-end">          
+        //                         <button type="button" class="btn btn-link" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></button>
+        //                         <ul class="dropdown-menu dropdown-menu-end">
+        //                             <li>
+        //                                 <a class="dropdown-item" href="'.route('sertifikasi.show', $sertifikasi->id).'">
+        //                                     <i class="fa fa-eye text-success" aria-hidden="true"></i>
+        //                                     <span class="d-sm-inline d-none ms-2">Lihat</span>
+        //                                 </a>
+        //                             </li>
+        //                         </ul>
+        //                     </div>';
+        //             return $btn;
+        //         })
+        //         ->rawColumns(['action'])
+        //         ->make(true);
+        // }
+
+        return view('penyediaKerja.infoPencariKerja.show', compact(['pencariKerja']));
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function show_sertifikasi(Request $request, $pencari_kerja_id)
+    {
+        if ($request->ajax()) {
+            $sertifikasi = sertifikasi::select('id','nama','penerbit','tgl_diterbitkan')
+                            ->where('pencari_kerja_id', $pencari_kerja_id)
+                            ->orderBy('tgl_diterbitkan','desc')->get();
+            return Datatables::of($sertifikasi)->addIndexColumn()
+                ->addColumn('action', function($sertifikasi){
+                    $btn = '<div class="dropdown dropstart text-end">          
+                                <button type="button" class="btn btn-link" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></button>
+                                <ul class="dropdown-menu dropdown-menu-end">
+                                    <li>
+                                        <a class="dropdown-item" href="'.route('sertifikasi.show', $sertifikasi->id).'">
+                                            <i class="fa fa-eye text-success" aria-hidden="true"></i>
+                                            <span class="d-sm-inline d-none ms-2">Lihat</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>';
+                    return $btn;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
+
+        return view('penyediaKerja.infoPencariKerja.show', compact(['pencariKerja']));
     }
 
     /**

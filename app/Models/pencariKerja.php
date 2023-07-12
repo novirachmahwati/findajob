@@ -21,11 +21,6 @@ class pencariKerja extends Model
         'user_id'
     ];
 
-    protected $appends = [
-        'name',
-        'email'
-    ];
-
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */

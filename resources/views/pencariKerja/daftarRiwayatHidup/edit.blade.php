@@ -14,6 +14,7 @@
                             <div class="col">
                                 <form role="form" method="POST" action={{ route('daftar-riwayat-hidup.update', auth()->user()->pencariKerja->id) }} enctype="multipart/form-data">
                                     @csrf
+                                    @method('PUT')
                                     <div class="card-body">
                                         <div class="form-group">
                                             <input type="file" name="cv" accept="pdf">
@@ -25,11 +26,9 @@
                                             <p>Kami menganjurkan anda menggunakan format yang dapat diunduh <a href="{{ route('UC.download') }}" class="text-success"><b><u>disini.</u></b></a> Untuk performa lamaran yang lebih baik.</p>
                                             <p class="text-secondary"><i>Unggah daftar riwayat hidup dalam bentuk <b class="text-danger">PDF (Maksimal 3 MB)</b></i></p>
                                     </div>
-                                    <div class="card-footer pb-0">
-                                        <div class="d-flex align-items-center">
-                                            <button type="submit" class="btn btn-primary btn-lg ms-auto" style="margin-right: -22px">Selanjutnya 
-                                                <i class="fa fa-forward" style="font-size: 15px; margin-left: 5px"></i></button>
-                                        </div>
+                                    <div class="card-footer d-flex justify-content-end">
+                                        <a href="javascript:history.back()" class="btn btn-secondary">Kembali</a>
+                                        <button type="submit" class="btn btn-primary ms-3">Simpan</button>
                                     </div>
                                 </form>
                             </div>
