@@ -7,6 +7,7 @@ use App\Models\pencariKerja;
 use App\Models\penyediaKerja;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
+use Carbon\Carbon;
 
 class ProfilController extends Controller
 {
@@ -45,12 +46,11 @@ class ProfilController extends Controller
             $attributes = request()->validate([
                 'name' => 'required|max:255',
                 'email' => ['required', 'email', 'max:255',  Rule::unique('users')->ignore(auth()->user()->id),],
+                'bidang' => 'required|max:255',
                 'alamat' => 'required|max:255',
-                'tempat_lahir' => 'required|max:255',
-                'tgl_lahir' => 'required|date',
-                'jenis_kelamin' => 'required|max:255',
-                'no_telp' => 'required|max:16',
-                'agama' => 'required|max:20'
+                'no_telp' => 'required|max:20',
+                'jml_karyawan' => 'required|max:50',
+                'deskripsi' => 'required|max:5000'
             ]);
 
             auth()->user()->update([

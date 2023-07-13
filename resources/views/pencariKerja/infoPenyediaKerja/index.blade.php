@@ -46,7 +46,7 @@
             // datatable
             var tablePenyediaKerja = $('.penyedia-kerja-datatable').DataTable({
                 processing: true,
-                serverSide: true,
+                scrollX: true,
                 language: {
                     url: '//cdn.datatables.net/plug-ins/1.13.4/i18n/id.json',
                 },

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\lowongan;
+use App\Models\kriteria;
 use App\Models\riwayatLamaran;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -118,34 +119,53 @@ class lowonganController extends Controller
             'tanggal_tayang' => 'required|date',
             'tanggal_kadaluwarsa' => 'required|date',
             'kuota' => 'required|max:10000',
-            'status' => 'required|max:255',
-            'penyedia_kerja_id' => 'required',
-            'minimal_pendidikan' => 'required|max:255',
-            'prioritas_minimal_pendidikan' => 'required|max:500',
-            'pengalaman' => 'required|max:255',
-            'jurusan_pendidikan_terakhir' => 'required|max:255',
-            'rentang_usia' => 'required|max:255',
-            'bahasa' => 'required|max:255',
-            'keterampilan_teknis' => 'required|max:255',
-            'prioritas_keterampilan_teknis' => 'required|max:255',
-            'keterampilan_non_teknis' => 'required|max:255',
-            'prioritas_keterampilan_non_teknis' => 'required|max:255',
-            'sertifikasi' => 'max:255',
-            'prioritas_sertifikasi' => 'required|max:255',
-            'faktor_utama' => 'required|max:255',
-            'bobot_faktor_utama' => 'required|max:255',
-            'faktor_pendukung' => 'required|max:255',
-            'bobot_faktor_pendukung' => 'required|max:255',
-            'lowongan_id' => 'required'
+            'status' => 'required|max:255'
         ]);
 
-        auth()->user()->update([
-            'name' => $request->get('name'),
-            'email' => $request->get('email'),
-        ]);
+        // switch($request->minimal_pendidikan) {
+        //     case('S3'):
+        //         $attributes['prioritas_minimal_pendidikan'] = "['SD':0, 'SMP':0, 'SMA / SMK':0, 'D3':0, 'S1 / D4':0, 'S2':0, 'S3':1]";
+        //         break;
+        //     case('S2'):
+        //         $attributes['prioritas_minimal_pendidikan'] = "['SD':0, 'SMP':0, 'SMA / SMK':0, 'D3':0, 'S1 / D4':0, 'S2':1, 'S3':2]";
+        //         break;
+        //     case('S1 / D4'):
+        //         $attributes['prioritas_minimal_pendidikan'] = "['SD':0, 'SMP':0, 'SMA / SMK':0, 'D3':0, 'S1 / D4':1, 'S2':2, 'S3':3]";
+        //         break;
+        //     case('D3'):
+        //         $attributes['prioritas_minimal_pendidikan'] = "['SD':0, 'SMP':0, 'SMA / SMK':0, 'D3':1, 'S1 / D4':2, 'S2':3, 'S3':4]";
+        //         break;
+        //     case('SMA / SMK'):
+        //         $attributes['prioritas_minimal_pendidikan'] = "['SD':0, 'SMP':0, 'SMA / SMK':1, 'D3':2, 'S1 / D4':3, 'S2':4, 'S3':5]";
+        //         break;
+        //     case('SMP'):
+        //         $attributes['prioritas_minimal_pendidikan'] = "['SD':0, 'SMP':1, 'SMA / SMK':2, 'D3':3, 'S1 / D4':4, 'S2':5, 'S3':6]";
+        //         break;
+        //     case('SD'):
+        //         $attributes['prioritas_minimal_pendidikan'] = "['SD':1, 'SMP':2, 'SMA / SMK':3, 'D3':4, 'S1 / D4':5, 'S2':6, 'S3':7]";
+        //         break;
+        // }
+
+        // $attributes['jenis_kelamin'] = $request->input('jenis_kelamin');
+        // $attributes['bahasa'] = $request->input('bahasa');
+        // $attributes['keterampilan_teknis'] = $request->input('keterampilan_teknis');
+        // $attributes['prioritas_keterampilan_teknis'] = $request->input('prioritas_keterampilan_teknis');
+        // $attributes['keterampilan_non_teknis'] = $request->input('keterampilan_non_teknis');
+        // $attributes['prioritas_keterampilan_non_teknis'] = $request->input('prioritas_keterampilan_non_teknis');
+        // $attributes['sertifikasi'] = $request->input('sertifikasi');
+        // $attributes['prioritas_sertifikasi'] = $request->input('prioritas_sertifikasi');
+
+        // print_r($lowongan->id);
         $lowongan->fill($request->post())->save();
+        // $lowongan = lowongan::where('id', $lowongan->id)->first();
+        // $lowongan->fill($attributes);
+        // $lowongan->save();
+
+        // $kriteria = kriteria::where('lowongan_id', $lowongan->id)->first();
+        // $kriteria->fill($attributes);
+        // $kriteria->save();
         
-        return redirect()->route('sertifikasi.index')->with('success', 'Sertifikasi berhasil diubah!');
+        return redirect()->route('kelola-lowongan.index')->with('success', 'Lowongan berhasil diubah!');
     }
 
     /**
@@ -157,6 +177,6 @@ class lowonganController extends Controller
     public function destroy(lowongan $lowongan)
     {
         $lowongan->delete();
-        return redirect()->route('kelola-lowongan.index')->with('error', 'Sertifikasi berhasil dihapus!');
+        return redirect()->route('kelola-lowongan.index')->with('error', 'Lowongan berhasil dihapus!');
     }
 }

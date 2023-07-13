@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\lihatPelamar;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use DataTables;
 
 class LihatPelamarController extends Controller
@@ -16,10 +18,10 @@ class LihatPelamarController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $lihatPelamar = lihatPelamar::leftJoin('lowongans','lowongans.id','=','hasil_perhitungan.lowongan_id')
-                                ->select('lowongans.id','lowongans.judul_pekerjaan','COUNT(hasil_perhitungan.id) as jumlah_pelamar')
-                                ->group_by('hasil_perhitungan.lowongan_id')
-                                ->orderBy('lowongans.id','desc')
+            $lihatPelamar = DB::table('hasil_perhitungan')->leftJoin('lowongans','lowongans.id','=','hasil_perhitungan.lowongan_id')
+                                ->select(DB::raw('count(hasil_perhitungan.*) as jumlah_pelamar, hasil_perhitungan.lowongan_id, lowongans.judul_pekerjaan'))
+                                ->groupBy('hasil_perhitungan.lowongan_id', 'lowongans.judul_pekerjaan')
+                                ->where('lowongans.penyedia_kerja_id', Auth::user()->penyediaKerja->id)
                                 ->get();
             return Datatables::of($lihatPelamar)->addIndexColumn()
                 ->addColumn('action', function($lihatPelamar){
@@ -27,7 +29,7 @@ class LihatPelamarController extends Controller
                                 <button type="button" class="btn btn-link" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></button>
                                 <ul class="dropdown-menu dropdown-menu-end">
                                     <li>
-                                        <a class="dropdown-item" href="'.route('lihat-pelamar.show', $lihatPelamar->id).'">
+                                        <a class="dropdown-item" href="'.route('lihat-pelamar.show', $lihatPelamar->lowongan_id).'">
                                             <i class="fa fa-eye text-success" aria-hidden="true"></i>
                                             <span class="d-sm-inline d-none ms-2">Lihat</span>
                                         </a>
@@ -70,9 +72,35 @@ class LihatPelamarController extends Controller
      * @param  \App\Models\lihatPelamar  $lihatPelamar
      * @return \Illuminate\Http\Response
      */
-    public function show(lihatPelamar $lihatPelamar)
+    public function show(Request $request, $id)
     {
-        return view('penyediaKerja.lihatPelamar.show', compact(['lihatPelamar']));
+        if ($request->ajax()) {
+            $lihatPelamar = DB::table('hasil_perhitungan')->leftJoin('pencari_kerjas','pencari_kerjas.id','=','hasil_perhitungan.pencari_kerja_id')
+                                ->leftJoin('users','users.id','=','pencari_kerjas.user_id')
+                                ->select('users.name', 'hasil_perhitungan.rank', 'hasil_perhitungan.skor', 'hasil_perhitungan.pencari_kerja_id')
+                                ->where('hasil_perhitungan.lowongan_id', $id)
+                                ->orderBy('hasil_perhitungan.rank','asc')
+                                ->get();
+            return Datatables::of($lihatPelamar)
+                ->addColumn('action', function($lihatPelamar){
+                    $btn = '<div class="dropdown dropstart text-end">          
+                                <button type="button" class="btn btn-link" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></button>
+                                <ul class="dropdown-menu dropdown-menu-end">
+                                    <li>
+                                        <a class="dropdown-item" href="'.route('pencari-kerja.show', $lihatPelamar->pencari_kerja_id).'">
+                                            <i class="fa fa-eye text-success" aria-hidden="true"></i>
+                                            <span class="d-sm-inline d-none ms-2">Lihat</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>';
+                    return $btn;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
+
+        return view('penyediaKerja.lihatPelamar.show', ['lowongan_id', $id]);
     }
 
     /**

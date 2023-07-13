@@ -71,7 +71,6 @@ class KelolaLowonganController extends Controller
         $dateToday = Carbon::now()->format('Y-m-d');
         $dateEndYear = Carbon::now()->endOfYear()->format('Y-m-d');
 
-        // return redirect()->route('kelola-lowongan.create', ['dateToday' => $dateToday, 'dateEndYear' => $dateEndYear]);
         return view('penyediaKerja.kelolaLowongan.create', compact(['dateToday', 'dateEndYear']));
     }
 

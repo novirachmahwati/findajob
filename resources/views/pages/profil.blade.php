@@ -113,12 +113,12 @@
                             <div class="row">
                                 <div class="col-auto ms-4">
                                     <div class="avatar avatar-xl position-relative">
-                                        <img src="{{ asset(auth()->user()->pencariKerja->foto) }}" onerror="this.src='{{ asset('img/user.png') }}'"  alt="profile_image" class="w-100 border-radius-lg shadow-sm">
+                                        <img src="{{ asset(auth()->user()->penyediaKerja->foto) }}" onerror="this.src='{{ asset('img/office-building.png') }}'"  alt="profile_image" class="w-100 border-radius-lg shadow-sm">
                                     </div>
                                 </div>
                                 <div class="col">
                                     <h4>{{ auth()->user()->name }}</h4>
-                                    <p><i class="fas fa-envelope"></i>&nbsp;{{ auth()->user()->email }} |&nbsp;<i class="fas fa-phone"></i>&nbsp;{{ auth()->user()->pencariKerja->no_telp }}</p>
+                                    <p><i class="fas fa-envelope"></i>&nbsp;{{ auth()->user()->email }} |&nbsp;<i class="fas fa-phone"></i>&nbsp;{{ auth()->user()->penyediaKerja->no_telp }}</p>
                                 </div>
                             </div>
                             <div class="row">
@@ -157,48 +157,48 @@
                                                 </div>
                                                 <div class="col-md-12">
                                                     <div class="form-group">
+                                                        <label for="bidang" class="form-control-label">Bidang Bisnis<span class="titik-logo">*</span></label>
+                                                        <select class="form-control" name="bidang">
+                                                            <option value="" hidden>Pilih Bidang Bisnis</option>
+                                                            <option value="IT/Komputer" {{ auth()->user()->penyediaKerja->bidang == "IT/Komputer"  ? 'selected' : ''}}>IT/Komputer</option>
+                                                        </select>
+                                                        @error('bidang') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
                                                         <label for="example-text-input" class="form-control-label">Alamat<span class="titik-logo">*</span></label>
-                                                        <input class="form-control" type="text" name="alamat" value="{{ old('alamat', auth()->user()->pencariKerja->alamat) }}">
+                                                        <input class="form-control" type="text" name="alamat" value="{{ old('alamat', auth()->user()->penyediaKerja->alamat) }}" placeholder="Alamat Perusahaan">
                                                         @error('alamat') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label for="example-text-input" class="form-control-label">Tempat Lahir<span class="titik-logo">*</span></label>
-                                                        <input class="form-control" type="text" name="tempat_lahir"  value="{{ old('tempat_lahir', auth()->user()->pencariKerja->tempat_lahir) }}">
-                                                        @error('tempat_lahir') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
+                                                        <label for="example-text-input" class="form-control-label">No. Telepon<span class="titik-logo">*</span></label>
+                                                        <input class="form-control" type="text" name="no_telp" value="{{ old('no_telp', auth()->user()->penyediaKerja->no_telp) }}" placeholder="No. Telepon Perusahaan">
+                                                        @error('no_telp') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label for="example-text-input" class="form-control-label">Tanggal Lahir<span class="titik-logo">*</span></label>
-                                                        <input class="form-control" type="date" name="tgl_lahir" value="{{ old('tgl_lahir', auth()->user()->pencariKerja->tgl_lahir) }}">
-                                                        @error('tgl_lahir') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-12">
-                                                    <div class="form-group">
-                                                        <label for="jenis_kelamin" class="form-control-label">Jenis Kelamin<span class="titik-logo">*</span></label>
-                                                        <select class="form-control" name="jenis_kelamin">
-                                                            <option value="" disabled hidden></option>
-                                                            <option value="Laki-laki" {{ auth()->user()->pencariKerja->jenis_kelamin == "Laki-laki"  ? 'selected' : ''}} >Laki-laki</option>
-                                                            <option value="Perempuan" {{ auth()->user()->pencariKerja->jenis_kelamin == "Perempuan"  ? 'selected' : ''}}>Perempuan</option>
+                                                        <label for="jml_karyawan" class="form-control-label">Jumlah Karyawan<span class="titik-logo">*</span></label>
+                                                        <select class="form-control" name="jml_karyawan">
+                                                            <option value="" hidden>Pilih Jumlah Karyawan</option>
+                                                            <option value="< 50 Karyawan" {{ auth()->user()->penyediaKerja->jml_karyawan == "< 50 Karyawan"  ? 'selected' : ''}}>< 50 Karyawan</option>
+                                                            <option value="50-100 Karyawan" {{ auth()->user()->penyediaKerja->jml_karyawan == "50-100 Karyawan"  ? 'selected' : ''}}>50-100 Karyawan</option>
+                                                            <option value="101-250 Karyawan" {{ auth()->user()->penyediaKerja->jml_karyawan == "101-250 Karyawan"  ? 'selected' : ''}}>101-250 Karyawan</option>
+                                                            <option value="251-500 Karyawan" {{ auth()->user()->penyediaKerja->jml_karyawan == "251-500 Karyawan"  ? 'selected' : ''}}>251-500 Karyawan</option>
+                                                            <option value="501-1000 Karyawan" {{ auth()->user()->penyediaKerja->jml_karyawan == "501-1000 Karyawan"  ? 'selected' : ''}}>501-1000 Karyawan</option>
+                                                            <option value="> 1000 Karyawan" {{ auth()->user()->penyediaKerja->jml_karyawan == "> 1000 Karyawan"  ? 'selected' : ''}}>> 1000 Karyawan</option>
                                                         </select>
-                                                        @error('jenis_kelamin') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
+                                                        @error('jml_karyawan') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
                                                     </div>
                                                 </div>
                                                 <div class="col-md-12">
                                                     <div class="form-group">
-                                                        <label for="example-text-input" class="form-control-label">No. Telepon<span class="titik-logo">*</span></label>
-                                                        <input class="form-control" type="text" name="no_telp" value="{{ old('no_telp', auth()->user()->pencariKerja->no_telp) }}">
-                                                        @error('no_telp') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-12">
-                                                    <div class="form-group">
-                                                        <label for="example-text-input" class="form-control-label">Agama<span class="titik-logo">*</span></label>
-                                                        <input class="form-control" type="text" name="agama" value="{{ old('agama', auth()->user()->pencariKerja->agama) }}">
-                                                        @error('agama') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
+                                                        <label for="deskripsi" class="form-control-label">Deskripsi<span class="titik-logo">*</span></label>
+                                                        <textarea class="ckeditor form-control" type="text" name="deskripsi">{{ auth()->user()->penyediaKerja->deskripsi }}</textarea>
+                                                        @error('deskripsi') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
                                                     </div>
                                                 </div>
                                             </div>
@@ -215,3 +215,11 @@
     </div>
 @endsection
 
+@section('bottom-content')
+    <script src="//cdn.ckeditor.com/4.14.1/standard/ckeditor.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.ckeditor').ckeditor();
+        });
+    </script>
+@endsection
