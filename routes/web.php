@@ -40,7 +40,7 @@ use App\Http\Controllers\DaftarRiwayatHidupController;
 // Authentication
 	Route::get('/login', [LoginController::class, 'show'])->middleware('guest')->name('login');
 	Route::post('/login', [LoginController::class, 'login'])->middleware('guest')->name('login.perform');
-	Route::post('logout', [LoginController::class, 'logout'])->middleware('auth')->name('logout');
+	Route::get('logout', [LoginController::class, 'logout'])->middleware('auth')->name('logout');
 	
 Route::group(['middleware' => 'auth'], function () {
 	Route::get('/', function () {return redirect('/dashboard');});

@@ -47,8 +47,8 @@ class DashboardController extends Controller
                                                     ->where('status', 'Aktif')->count();
                 $jml_lowongan_tdk_aktif = lowongan::where('penyedia_kerja_id', Auth::user()->penyediaKerja->id)
                                                     ->where('status', 'Tidak Aktif')->count();
-                // $jml_pelamar = riwayatLamaran::where('penyedia_kerja_id', Auth::user()->penyediaKerja->id)->count();
-                $jml_pelamar = 0;
+                $jml_pelamar = riwayatLamaran::join('lowongans', 'lowongans.id', '=', 'riwayat_lamarans.lowongan_id')
+                                            ->where('lowongans.penyedia_kerja_id', Auth::user()->penyediaKerja->id)->count();
                 return view('pages.dashboard')
                             ->with('jml_lowongan', $jml_lowongan)
                             ->with('jml_lowongan_aktif', $jml_lowongan_aktif)

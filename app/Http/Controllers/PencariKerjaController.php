@@ -6,9 +6,9 @@ use App\Models\pencariKerja;
 use App\Models\sertifikasi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Validation\Rule;
 use Carbon\Carbon;
 use DataTables;
 
@@ -163,14 +163,17 @@ class PencariKerjaController extends Controller
         $pencariKerja = pencariKerja::where('id', Auth::user()->pencariKerja->id)->first();
         $pencariKerja->fill($requestData);
         $pencariKerja->save();
-        
+
+        // Hit API 
+        Http::post('http://47.254.207.10:5000/ekstrak_cv/'. Auth::user()->pencariKerja->id);
+
         return redirect('/dashboard');
           
     }
     
     public function UC_download()
     {
-        return Storage::disk('public')->download('formatCV/Rekomendasi Format Daftar Riwayat Hidup.docx');
+        return Storage::disk('public')->download('formatCV/Format Daftar Riwayat Hidup.docx');
     }
 
     /**
@@ -185,39 +188,6 @@ class PencariKerjaController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function show_sertifikasi(Request $request, $pencari_kerja_id)
-    {
-        if ($request->ajax()) {
-            $sertifikasi = sertifikasi::select('id','nama','penerbit','tgl_diterbitkan')
-                            ->where('pencari_kerja_id', $pencari_kerja_id)
-                            ->orderBy('tgl_diterbitkan','desc')->get();
-            return Datatables::of($sertifikasi)->addIndexColumn()
-                ->addColumn('action', function($sertifikasi){
-                    $btn = '<div class="dropdown dropstart text-end">          
-                                <button type="button" class="btn btn-link" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></button>
-                                <ul class="dropdown-menu dropdown-menu-end">
-                                    <li>
-                                        <a class="dropdown-item" href="'.route('sertifikasi.show', $sertifikasi->id).'">
-                                            <i class="fa fa-eye text-success" aria-hidden="true"></i>
-                                            <span class="d-sm-inline d-none ms-2">Lihat</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>';
-                    return $btn;
-                })
-                ->rawColumns(['action'])
-                ->make(true);
-        }
-
-        return view('penyediaKerja.infoPencariKerja.show', compact(['pencariKerja']));
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param  \App\Models\pencariKerja  $pencariKerja
@@ -227,8 +197,6 @@ class PencariKerjaController extends Controller
     {
         //
     }
-
-    
 
     /**
      * Remove the specified resource from storage.

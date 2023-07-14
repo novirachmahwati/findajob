@@ -34,7 +34,6 @@
                                         </div>
                                         <div class="card-body">
                                             <div class="row">
-                                                <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
                                                 <input type="hidden" name="usia" value="0">
                                                 <div class="col-md-6">
                                                     <div class="form-group">
@@ -82,7 +81,7 @@
                                                         <label for="jenis_kelamin" class="form-control-label">Jenis Kelamin<span class="titik-logo">*</span></label>
                                                         <select class="form-control" name="jenis_kelamin">
                                                             <option value="" disabled hidden></option>
-                                                            <option value="Laki-laki" {{ auth()->user()->pencariKerja->jenis_kelamin == "Laki-laki"  ? 'selected' : ''}} >Laki-laki</option>
+                                                            <option value="Laki-laki" {{ auth()->user()->pencariKerja->jenis_kelamin == "Laki-laki"  ? 'selected' : ''}}>Laki-laki</option>
                                                             <option value="Perempuan" {{ auth()->user()->pencariKerja->jenis_kelamin == "Perempuan"  ? 'selected' : ''}}>Perempuan</option>
                                                         </select>
                                                         @error('jenis_kelamin') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror

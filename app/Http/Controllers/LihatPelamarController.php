@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use DataTables;
+use Illuminate\Support\Facades\Http;
 
 class LihatPelamarController extends Controller
 {
@@ -99,6 +100,9 @@ class LihatPelamarController extends Controller
                 ->rawColumns(['action'])
                 ->make(true);
         }
+        
+        // Hit API 
+        Http::post('http://47.254.207.10:5000/measure/'. $id);
 
         return view('penyediaKerja.lihatPelamar.show', ['lowongan_id', $id]);
     }

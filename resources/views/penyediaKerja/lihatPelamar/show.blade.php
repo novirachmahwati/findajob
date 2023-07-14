@@ -14,6 +14,12 @@
                             <div class="col">
                                 <div class="card-body">
                                     @include('layouts.flash-message')
+                                    <p>
+                                        <a href="{{ url(Request::url()) }}" class="btn btn-primary">
+                                            <i class="fa fa-refresh" aria-hidden="true"></i>
+                                            Refresh
+                                        </a>
+                                    </p>
                                     <div class="border border-light rounded-3 p-3">
                                     <table class="table table-bordered table-hover yajra-datatable lihat-pelamar-datatable" id="tableLihatPelamar">
                                         <thead>

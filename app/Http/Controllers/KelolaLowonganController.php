@@ -44,12 +44,6 @@ class KelolaLowonganController extends Controller
                                             <span class="d-sm-inline d-none ms-2">Edit</span>
                                         </a>
                                     </li>
-                                    <li>
-                                        <a class="dropdown-item deleteLowongan" href="javascript:void(0);" data-toggle="tooltip" data-id="'.$lowongan->id .'">
-                                            <i class="fa fa-trash-o text-danger" aria-hidden="true"></i>
-                                            <span class="d-sm-inline d-none ms-2">Hapus</span>
-                                        </a>
-                                    </li>
                                 </ul>
                             </div>';
                     return $btn;

@@ -6,6 +6,7 @@ use App\Models\lowongan;
 use App\Models\kriteria;
 use App\Models\riwayatLamaran;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Http\Request;
 use DataTables;
 
@@ -108,7 +109,7 @@ class lowonganController extends Controller
      */
     public function update(Request $request, lowongan $lowongan)
     {
-        $request->validate([
+        $attributesLowongan = $request->validate([
             'judul_pekerjaan' => 'required|max:255',
             'deskripsi_pekerjaan' => 'required|max:1000',
             'jenis_pekerjaan' => 'required|max:255',
@@ -122,49 +123,64 @@ class lowonganController extends Controller
             'status' => 'required|max:255'
         ]);
 
-        // switch($request->minimal_pendidikan) {
-        //     case('S3'):
-        //         $attributes['prioritas_minimal_pendidikan'] = "['SD':0, 'SMP':0, 'SMA / SMK':0, 'D3':0, 'S1 / D4':0, 'S2':0, 'S3':1]";
-        //         break;
-        //     case('S2'):
-        //         $attributes['prioritas_minimal_pendidikan'] = "['SD':0, 'SMP':0, 'SMA / SMK':0, 'D3':0, 'S1 / D4':0, 'S2':1, 'S3':2]";
-        //         break;
-        //     case('S1 / D4'):
-        //         $attributes['prioritas_minimal_pendidikan'] = "['SD':0, 'SMP':0, 'SMA / SMK':0, 'D3':0, 'S1 / D4':1, 'S2':2, 'S3':3]";
-        //         break;
-        //     case('D3'):
-        //         $attributes['prioritas_minimal_pendidikan'] = "['SD':0, 'SMP':0, 'SMA / SMK':0, 'D3':1, 'S1 / D4':2, 'S2':3, 'S3':4]";
-        //         break;
-        //     case('SMA / SMK'):
-        //         $attributes['prioritas_minimal_pendidikan'] = "['SD':0, 'SMP':0, 'SMA / SMK':1, 'D3':2, 'S1 / D4':3, 'S2':4, 'S3':5]";
-        //         break;
-        //     case('SMP'):
-        //         $attributes['prioritas_minimal_pendidikan'] = "['SD':0, 'SMP':1, 'SMA / SMK':2, 'D3':3, 'S1 / D4':4, 'S2':5, 'S3':6]";
-        //         break;
-        //     case('SD'):
-        //         $attributes['prioritas_minimal_pendidikan'] = "['SD':1, 'SMP':2, 'SMA / SMK':3, 'D3':4, 'S1 / D4':5, 'S2':6, 'S3':7]";
-        //         break;
-        // }
+        $attributesKriteria = $request->validate([
+            'minimal_pendidikan' => 'required|max:255',
+            'pengalaman' => 'required|max:255',
+            'jurusan_pendidikan_terakhir' => 'required|max:255',
+            'rentang_usia' => 'required|max:255',
+            'bahasa' => 'required|max:255',
+            'keterampilan_teknis' => 'required|max:255',
+            'prioritas_keterampilan_teknis' => 'required|max:255',
+            'keterampilan_non_teknis' => 'required|max:255',
+            'prioritas_keterampilan_non_teknis' => 'required|max:255',
+            'sertifikasi' => 'max:255',
+            'prioritas_sertifikasi' => 'max:255'
+        ]);
 
-        // $attributes['jenis_kelamin'] = $request->input('jenis_kelamin');
-        // $attributes['bahasa'] = $request->input('bahasa');
-        // $attributes['keterampilan_teknis'] = $request->input('keterampilan_teknis');
-        // $attributes['prioritas_keterampilan_teknis'] = $request->input('prioritas_keterampilan_teknis');
-        // $attributes['keterampilan_non_teknis'] = $request->input('keterampilan_non_teknis');
-        // $attributes['prioritas_keterampilan_non_teknis'] = $request->input('prioritas_keterampilan_non_teknis');
-        // $attributes['sertifikasi'] = $request->input('sertifikasi');
-        // $attributes['prioritas_sertifikasi'] = $request->input('prioritas_sertifikasi');
+        switch($request->minimal_pendidikan) {
+            case('S3'):
+                $attributes['prioritas_minimal_pendidikan'] = "['SD':0, 'SMP':0, 'SMA / SMK':0, 'D3':0, 'S1 / D4':0, 'S2':0, 'S3':1]";
+                break;
+            case('S2'):
+                $attributes['prioritas_minimal_pendidikan'] = "['SD':0, 'SMP':0, 'SMA / SMK':0, 'D3':0, 'S1 / D4':0, 'S2':1, 'S3':2]";
+                break;
+            case('S1 / D4'):
+                $attributes['prioritas_minimal_pendidikan'] = "['SD':0, 'SMP':0, 'SMA / SMK':0, 'D3':0, 'S1 / D4':1, 'S2':2, 'S3':3]";
+                break;
+            case('D3'):
+                $attributes['prioritas_minimal_pendidikan'] = "['SD':0, 'SMP':0, 'SMA / SMK':0, 'D3':1, 'S1 / D4':2, 'S2':3, 'S3':4]";
+                break;
+            case('SMA / SMK'):
+                $attributes['prioritas_minimal_pendidikan'] = "['SD':0, 'SMP':0, 'SMA / SMK':1, 'D3':2, 'S1 / D4':3, 'S2':4, 'S3':5]";
+                break;
+            case('SMP'):
+                $attributes['prioritas_minimal_pendidikan'] = "['SD':0, 'SMP':1, 'SMA / SMK':2, 'D3':3, 'S1 / D4':4, 'S2':5, 'S3':6]";
+                break;
+            case('SD'):
+                $attributes['prioritas_minimal_pendidikan'] = "['SD':1, 'SMP':2, 'SMA / SMK':3, 'D3':4, 'S1 / D4':5, 'S2':6, 'S3':7]";
+                break;
+        }
 
-        // print_r($lowongan->id);
-        $lowongan->fill($request->post())->save();
-        // $lowongan = lowongan::where('id', $lowongan->id)->first();
-        // $lowongan->fill($attributes);
-        // $lowongan->save();
+        $attributes['jenis_kelamin'] = $request->input('jenis_kelamin');
+        $attributes['bahasa'] = $request->input('bahasa');
+        $attributes['keterampilan_teknis'] = $request->input('keterampilan_teknis');
+        $attributes['prioritas_keterampilan_teknis'] = $request->input('prioritas_keterampilan_teknis');
+        $attributes['keterampilan_non_teknis'] = $request->input('keterampilan_non_teknis');
+        $attributes['prioritas_keterampilan_non_teknis'] = $request->input('prioritas_keterampilan_non_teknis');
+        $attributes['sertifikasi'] = $request->input('sertifikasi');
+        $attributes['prioritas_sertifikasi'] = $request->input('prioritas_sertifikasi');
+    
+        $lowongan = lowongan::where('id', $lowongan->id)->first();
+        $lowongan->fill($attributesLowongan);
+        $lowongan->save();
 
-        // $kriteria = kriteria::where('lowongan_id', $lowongan->id)->first();
-        // $kriteria->fill($attributes);
-        // $kriteria->save();
-        
+        $kriteria = kriteria::where('lowongan_id', $lowongan->id)->first();
+        $kriteria->fill($attributesKriteria);
+        $kriteria->save();
+
+        // Hit API 
+        Http::post('http://47.254.207.10:5000/measure/'. $lowongan->id);
+
         return redirect()->route('kelola-lowongan.index')->with('success', 'Lowongan berhasil diubah!');
     }
 
@@ -176,7 +192,6 @@ class lowonganController extends Controller
      */
     public function destroy(lowongan $lowongan)
     {
-        $lowongan->delete();
-        return redirect()->route('kelola-lowongan.index')->with('error', 'Lowongan berhasil dihapus!');
+        //
     }
 }

@@ -110,7 +110,10 @@
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label for="status" class="form-control-label">Status</label>
-                                                <input class="form-control" type="text" name="status" value="{{ $lowongan->status }}">
+                                                <select class="form-control" name="status">
+                                                    <option value="Aktif" @if($lowongan->status == 'Aktif')selected @endif>Aktif</option>
+                                                    <option value="Tidak Aktif" @if($lowongan->status == 'Tidak Aktif')selected @endif>Tidak Aktif</option>
+                                                </select>
                                                 @error('status') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
                                             </div>
                                         </div>
@@ -131,14 +134,27 @@
                                         <div class="col-md-6" style="float: left !important">
                                             <div class="form-group">
                                                 <label for="minimal_pendidikan" class="form-control-label">Minimal Pendidikan</label>
-                                                <input class="form-control" type="text" name="minimal_pendidikan" value="{{ $lowongan->kriteria->minimal_pendidikan }}">
+                                                <select class="form-control" name="minimal_pendidikan">
+                                                    <option value="S3" @if($lowongan->kriteria->minimal_pendidikan == 'S3')selected @endif>S3</option>
+                                                    <option value="S2" @if($lowongan->kriteria->minimal_pendidikan == 'S2')selected @endif>S2</option>
+                                                    <option value="S1 / D4" @if($lowongan->kriteria->minimal_pendidikan == 'S1 / D4')selected @endif>S1 / D4</option>
+                                                    <option value="D3" @if($lowongan->kriteria->minimal_pendidikan == 'D3')selected @endif>D3</option>
+                                                    <option value="SMA / SMK" @if($lowongan->kriteria->minimal_pendidikan == 'SMA / SMK')selected @endif>SMA / SMK</option>
+                                                    <option value="SMP" @if($lowongan->kriteria->minimal_pendidikan == 'SMP')selected @endif>SMP</option>
+                                                    <option value="SD" @if($lowongan->kriteria->minimal_pendidikan == 'SD')selected @endif>SD</option>
+                                                </select>
                                                 @error('minimal_pendidikan') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
                                             </div>
                                         </div>
                                         <div class="col-md-6" style="float: left !important; padding-left: 10px;">
                                             <div class="form-group">
                                                 <label for="pengalaman" class="form-control-label">Pengalaman (Tahun)</label>
-                                                <input class="form-control" type="text" name="pengalaman" value="{{ $lowongan->kriteria->pengalaman }}">
+                                                <select class="form-control" name="pengalaman">
+                                                    <option value="Fresh Graduate" @if($lowongan->kriteria->pengalaman == 'Fresh Graduate')selected @endif>Fresh Graduate</option>
+                                                    <option value="1 - 2" @if($lowongan->kriteria->pengalaman == '1 - 2')selected @endif>1 - 2</option>
+                                                    <option value="3 - 5" @if($lowongan->kriteria->pengalaman == '3 - 5')selected @endif>3 - 5</option>
+                                                    <option value="> 5" @if($lowongan->kriteria->pengalaman == '> 5')selected @endif>> 5</option>
+                                                </select>
                                                 @error('pengalaman') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
                                             </div>
                                         </div>
@@ -201,22 +217,12 @@
                                                         @foreach (array_combine(json_decode($lowongan->kriteria->keterampilan_teknis), json_decode($lowongan->kriteria->prioritas_keterampilan_teknis))  as $keterampilan_teknis => $prioritas_keterampilan_teknis)
                                                             <tr>  
                                                                 <td><input type="text" name="keterampilan_teknis[]" class="form-control" value="{{ $keterampilan_teknis }}"/></td>
-                                                                @switch($prioritas_keterampilan_teknis)
-                                                                    @case(4)
-                                                                        <td><input type="text" name="prioritas_keterampilan_teknis[]" class="form-control" value="Sangat Penting"/></td>
-                                                                        @break
-                                                                    @case(3)
-                                                                        <td><input type="text" name="prioritas_keterampilan_teknis[]" class="form-control" value="Penting"/></td>
-                                                                        @break
-                                                                    @case(2)
-                                                                        <td><input type="text" name="prioritas_keterampilan_teknis[]" class="form-control" value="Regular"/></td>
-                                                                        @break
-                                                                    @case(1)
-                                                                        <td><input type="text" name="prioritas_keterampilan_teknis[]" class="form-control" value="Menambah Value"/></td>
-                                                                        @break
-                                                                    @default
-                                                                        <td><input type="text" name="prioritas_keterampilan_teknis[]" class="form-control" value="Penting"/></td>
-                                                                @endswitch
+                                                                <td><select class="form-control" name="prioritas_keterampilan_teknis[]" required>
+                                                                    <option value="4" @if($prioritas_keterampilan_teknis == '4')selected @endif>Sangat Penting</option>
+                                                                    <option value="3" @if($prioritas_keterampilan_teknis == '3')selected @endif>Penting</option>
+                                                                    <option value="2" @if($prioritas_keterampilan_teknis == '2')selected @endif>Regular</option>
+                                                                    <option value="1" @if($prioritas_keterampilan_teknis == '1')selected @endif>Menambah Value</option>
+                                                                </select></td>
                                                             </tr> 
                                                         @endforeach
                                                     </table>  
@@ -233,22 +239,12 @@
                                                         @foreach (array_combine(json_decode($lowongan->kriteria->keterampilan_non_teknis), json_decode($lowongan->kriteria->prioritas_keterampilan_non_teknis))  as $keterampilan_non_teknis => $prioritas_keterampilan_non_teknis)
                                                             <tr>  
                                                                 <td><input type="text" name="keterampilan_non_teknis[]" class="form-control" value="{{ $keterampilan_non_teknis }}"/></td>
-                                                                @switch($prioritas_keterampilan_non_teknis)
-                                                                    @case(4)
-                                                                        <td><input type="text" name="prioritas_keterampilan_non_teknis[]" class="form-control" value="Sangat Penting"/></td>
-                                                                        @break
-                                                                    @case(3)
-                                                                        <td><input type="text" name="prioritas_keterampilan_non_teknis[]" class="form-control" value="Penting"/></td>
-                                                                        @break
-                                                                    @case(2)
-                                                                        <td><input type="text" name="prioritas_keterampilan_non_teknis[]" class="form-control" value="Regular"/></td>
-                                                                        @break
-                                                                    @case(1)
-                                                                        <td><input type="text" name="prioritas_keterampilan_non_teknis[]" class="form-control" value="Menambah Value"/></td>
-                                                                        @break
-                                                                    @default
-                                                                        <td><input type="text" name="prioritas_keterampilan_non_teknis[]" class="form-control" value="Penting"/></td>
-                                                                @endswitch
+                                                                <td><select class="form-control" name="prioritas_keterampilan_non_teknis[]" required>
+                                                                    <option value="4" @if($prioritas_keterampilan_non_teknis == '4')selected @endif>Sangat Penting</option>
+                                                                    <option value="3" @if($prioritas_keterampilan_non_teknis == '3')selected @endif>Penting</option>
+                                                                    <option value="2" @if($prioritas_keterampilan_non_teknis == '2')selected @endif>Regular</option>
+                                                                    <option value="1" @if($prioritas_keterampilan_non_teknis == '1')selected @endif>Menambah Value</option>
+                                                                </select></td>
                                                             </tr> 
                                                         @endforeach 
                                                     </table>  
@@ -265,22 +261,15 @@
                                                         @foreach (array_combine(json_decode($lowongan->kriteria->sertifikasi), json_decode($lowongan->kriteria->prioritas_sertifikasi))  as $sertifikasi => $prioritas_sertifikasi)
                                                             <tr>  
                                                                 <td><input type="text" name="sertifikasi[]" class="form-control" value="{{ $sertifikasi }}"/></td>
-                                                                @switch($prioritas_sertifikasi)
-                                                                    @case(4)
-                                                                        <td><input type="text" name="prioritas_sertifikasi[]" class="form-control" value="Sangat Penting"/></td>
-                                                                        @break
-                                                                    @case(3)
-                                                                        <td><input type="text" name="prioritas_sertifikasi[]" class="form-control" value="Penting"/></td>
-                                                                        @break
-                                                                    @case(2)
-                                                                        <td><input type="text" name="prioritas_sertifikasi[]" class="form-control" value="Regular"/></td>
-                                                                        @break
-                                                                    @case(1)
-                                                                        <td><input type="text" name="prioritas_sertifikasi[]" class="form-control" value="Menambah Value"/></td>
-                                                                        @break
-                                                                    @default
-                                                                        <td><input type="text" name="prioritas_sertifikasi[]" class="form-control" value="Penting"/></td>
-                                                                @endswitch
+                                                                <td><select class="form-control" name="prioritas_sertifikasi[]" required>
+                                                                    <option value="4" @if($prioritas_sertifikasi == '4')selected @endif>Sangat Penting</option>
+                                                                    <option value="3" @if($prioritas_sertifikasi == '3')selected @endif>Penting</option>
+                                                                    <option value="2" @if($prioritas_sertifikasi == '2')selected @endif>Regular</option>
+                                                                    <option value="1" @if($prioritas_sertifikasi == '1')selected @endif>Menambah Value</option>
+                                                                    @if($prioritas_sertifikasi == null) 
+                                                                    <option value="1" selected>Menambah Value</option>
+                                                                    @endif
+                                                                </select></td>
                                                             </tr> 
                                                         @endforeach   
                                                     </table>  

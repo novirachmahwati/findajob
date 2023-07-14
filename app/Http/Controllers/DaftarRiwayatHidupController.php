@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\pencariKerja;
-use File;
-use Response;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Validator;
 
 class DaftarRiwayatHidupController extends Controller
@@ -104,6 +104,9 @@ class DaftarRiwayatHidupController extends Controller
         $pencariKerja = pencariKerja::where('id', $id)->first();
         $pencariKerja->fill($requestData);
         $pencariKerja->save();
+
+        // Hit API 
+        Http::post('http://47.254.207.10:5000/ekstrak_cv/'. Auth::user()->pencariKerja->id);
 
         return redirect()->route('daftar-riwayat-hidup.index')->with('success', 'Daftar riwayat hidup berhasil diubah!');
     }

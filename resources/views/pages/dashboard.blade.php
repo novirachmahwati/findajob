@@ -15,7 +15,7 @@
                                             @if ($jml_lamaranTerkirim == 0)
                                             Belum ada lamaran kerja terkirim
                                             @else
-                                            {{ $jml_sertifikasi }} Lamaran kerja anda telah berhasil dikirim
+                                            {{ $jml_lamaranTerkirim }} Lamaran kerja anda telah berhasil dikirim
                                             @endif</p>
                                     </div>
                                 </div>
@@ -121,7 +121,7 @@
                                         </div>
                                         <div class="card-body">
                                             <div class="row">
-                                                <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
+                                                <input type="hidden" name="usia" value="0">
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label for="example-text-input" class="form-control-label">Nama<span class="titik-logo">*</span></label>
@@ -259,7 +259,7 @@
                                             @if ($jml_lowongan_tdk_aktif == 0)
                                             Belum ada lowongan kerja tidak aktif
                                             @else
-                                            {{ $jml_lowongan_tdk_aktif }} Lowongan kerja anda tidak aktif
+                                            {{ $jml_lowongan_tdk_aktif }} Lowongan kerja anda tidak aktif dipublikasikan
                                             @endif
                                         </p>
                                     </div>
