@@ -21,9 +21,7 @@ class KelolaLowonganController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $lowongan = lowongan::leftJoin('penyedia_kerjas','penyedia_kerjas.id','=','lowongans.penyedia_kerja_id')
-                                ->leftJoin('users','users.id','=','penyedia_kerjas.user_id')
-                                ->select('lowongans.id','lowongans.judul_pekerjaan','users.name','lowongans.lokasi_pekerjaan','lowongans.jenis_pekerjaan')
+            $lowongan = lowongan::select('id','judul_pekerjaan','lokasi_pekerjaan','jenis_pekerjaan','status')
                                 ->where('penyedia_kerja_id', Auth::user()->penyediaKerja->id)
                                 ->orderBy('lowongans.id','desc')
                                 ->get();

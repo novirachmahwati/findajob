@@ -202,7 +202,7 @@
         @if (Auth::user()->role == "Penyedia Kerja")
             <div class="row">
                 <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
-                    <div class="card"><a href="{{ route('riwayat-lamaran.index') }}">
+                    <div class="card"><a href="{{ route('kelola-lowongan.index') }}">
                         <div class="card-body p-3">
                             <div class="row">
                                 <div class="col-8">
@@ -226,7 +226,7 @@
                     </a></div>
                 </div>
                 <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
-                    <div class="card"><a href="{{ route('daftar-riwayat-hidup.index') }}">
+                    <div class="card"><a href="{{ route('kelola-lowongan.index') }}">
                         <div class="card-body p-3">
                             <div class="row">
                                 <div class="col-8">
@@ -250,7 +250,7 @@
                     </a></div>
                 </div>
                 <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
-                    <div class="card"><a href="{{ route('sertifikasi.index') }}">
+                    <div class="card"><a href="{{ route('kelola-lowongan.index') }}">
                         <div class="card-body p-3">
                             <div class="row">
                                 <div class="col-8">
@@ -274,7 +274,7 @@
                     </a></div>
                 </div>
                 <div class="col-xl-3 col-sm-6">
-                    <div class="card"><a href="{{ route('UC.download') }}">
+                    <div class="card"><a href="{{ route('lihat-pelamar.index') }}">
                         <div class="card-body p-3">
                             <div class="row">
                                 <div class="col-8">

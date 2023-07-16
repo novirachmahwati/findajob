@@ -71,9 +71,7 @@
                         <li class="mb-2">
                             <form role="form" method="post" action="{{ route('logout') }}" id="logout-form">
                                 @csrf
-                                <a href="{{ route('logout') }}" 
-                                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
-                                    class="dropdown-item border-radius-md">
+                                <a href="{{ route('logout') }}" class="dropdown-item border-radius-md">
                                     <i class="fa fa-sign-out"></i>
                                     <span class="d-sm-inline d-none ms-2">Log out</span>
                                 </a>
