@@ -25,8 +25,7 @@
 @endif
   
 @if ($errors->any())
-<div class="alert alert-danger">
-    <button type="button" class="close" data-dismiss="alert">×</button>    
-    Please check the form below for errors
+<div class="alert alert-danger alert-block text-white" style="height: 60px !important;"> 
+    Silakan periksa formulir di bawah ini untuk detail pesan kesalahan.
 </div>
 @endif

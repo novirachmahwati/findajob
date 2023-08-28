@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use DataTables;
 use Illuminate\Support\Facades\Http;
+use Carbon\Carbon;
 
 class LihatPelamarController extends Controller
 {
@@ -75,10 +76,15 @@ class LihatPelamarController extends Controller
      */
     public function show(Request $request, $id)
     {
+        // Hit API 
+        Http::post('http://47.254.207.10:5000/measure/'. $id);
+
+        $last_update = Carbon::now()->toDateTimeString();
+        
         if ($request->ajax()) {
             $lihatPelamar = DB::table('hasil_perhitungan')->leftJoin('pencari_kerjas','pencari_kerjas.id','=','hasil_perhitungan.pencari_kerja_id')
                                 ->leftJoin('users','users.id','=','pencari_kerjas.user_id')
-                                ->select('users.name', 'hasil_perhitungan.rank', 'hasil_perhitungan.skor', 'hasil_perhitungan.pencari_kerja_id')
+                                ->select('users.name', 'hasil_perhitungan.rank', 'hasil_perhitungan.skor', 'hasil_perhitungan.pencari_kerja_id', 'hasil_perhitungan.last_update')
                                 ->where('hasil_perhitungan.lowongan_id', $id)
                                 ->orderBy('hasil_perhitungan.rank','asc')
                                 ->get();
@@ -101,10 +107,7 @@ class LihatPelamarController extends Controller
                 ->make(true);
         }
         
-        // Hit API 
-        Http::post('http://47.254.207.10:5000/measure/'. $id);
-
-        return view('penyediaKerja.lihatPelamar.show', ['lowongan_id', $id]);
+        return view('penyediaKerja.lihatPelamar.show', compact('last_update'));
     }
 
     /**

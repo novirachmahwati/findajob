@@ -68,6 +68,7 @@ Route::group(['middleware' => 'auth'], function () {
 
 	Route::get('/sertifikasi-pencari-kerja', [PencariKerjaController::class, 'SE_create'])->name('SE.create');
 	Route::post('/sertifikasi-pencari-kerja', [PencariKerjaController::class, 'SE_store'])->name('SE.store');
+	Route::get('/sertifikasi/file/{sertifikasi_id}', [SertifikasiController::class, 'file'])->name('SE.file');
 
 	Route::get('/unggah-daftar-riwayat-hidup-pencari-kerja', [PencariKerjaController::class, 'UC_create'])->name('UC.create');
 	Route::post('/unggah-daftar-riwayat-hidup-pencari-kerja', [PencariKerjaController::class, 'UC_store'])->name('UC.store');

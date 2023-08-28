@@ -25,7 +25,7 @@
             </li>
             @if (Auth::user()->role == "Pencari Kerja")
                 <li class="nav-item">
-                        <a class="nav-link {{ Route::currentRouteName() == 'lowongan.index' ? 'active' : '' }}" href="{{ route('lowongan.index') }}">
+                        <a class="nav-link {{ Route::currentRouteName() == 'lowongan.index' ? 'active' : '' }} {{ Route::currentRouteName() == 'lowongan.show' ? 'active' : '' }}" href="{{ route('lowongan.index') }}">
                             <div
                                 class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                                 <i class="fa fa-search text-dark text-sm opacity-10"></i>
@@ -54,7 +54,7 @@
                         <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Portofolio</h6>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {{  Route::currentRouteName() == 'daftar-riwayat-hidup.index' ? 'active' : '' }}" href="{{ route('daftar-riwayat-hidup.index') }}">
+                        <a class="nav-link {{  Route::currentRouteName() == 'daftar-riwayat-hidup.index' ? 'active' : '' }} {{  Route::currentRouteName() == 'daftar-riwayat-hidup.edit' ? 'active' : '' }}" href="{{ route('daftar-riwayat-hidup.index') }}">
                             <div
                                 class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                                 <i class="fa fa-file text-dark text-sm opacity-10"></i>
@@ -63,7 +63,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {{ Route::currentRouteName() == 'sertifikasi.index' ? 'active' : '' }}" href="{{ route('sertifikasi.index') }}">
+                        <a class="nav-link {{ Route::currentRouteName() == 'sertifikasi.index' ? 'active' : '' }} {{ Route::currentRouteName() == 'sertifikasi.show' ? 'active' : '' }} {{ Route::currentRouteName() == 'sertifikasi.edit' ? 'active' : '' }} {{ Route::currentRouteName() == 'SE.file' ? 'active' : '' }}" href="{{ route('sertifikasi.index') }}">
                             <div
                                 class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                                 <i class="fa fa-id-card-o text-dark text-sm opacity-10"></i>
@@ -75,7 +75,7 @@
 
             @if (Auth::user()->role == "Penyedia Kerja")
                 <li class="nav-item">
-                    <a class="nav-link {{ Route::currentRouteName() == 'kelola-lowongan.index' ? 'active' : '' }}" href="{{ route('kelola-lowongan.index') }}">
+                    <a class="nav-link {{ Route::currentRouteName() == 'kelola-lowongan.index' ? 'active' : '' }} {{ Route::currentRouteName() == 'kelola-lowongan.create' ? 'active' : '' }} {{ Route::currentRouteName() == 'lowongan.show' ? 'active' : '' }} {{ Route::currentRouteName() == 'lowongan.edit' ? 'active' : '' }}" href="{{ route('kelola-lowongan.index') }}">
                         <div
                             class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="fa fa-pencil text-dark text-sm opacity-10"></i>
@@ -84,7 +84,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ Route::currentRouteName() == 'pencari-kerja.index' ? 'active' : '' }}" href="{{ route('pencari-kerja.index') }}">
+                    <a class="nav-link {{ Route::currentRouteName() == 'pencari-kerja.index' ? 'active' : '' }} {{ Route::currentRouteName() == 'pencari-kerja.show' ? 'active' : '' }}" href="{{ route('pencari-kerja.index') }}">
                         <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="fa fa-users text-dark text-sm opacity-10"></i>
                         </div>
@@ -92,7 +92,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{  Route::currentRouteName() == 'lihat-pelamar.index' ? 'active' : '' }}" href="{{ route('lihat-pelamar.index') }}">
+                    <a class="nav-link {{  Route::currentRouteName() == 'lihat-pelamar.index' ? 'active' : '' }} {{  Route::currentRouteName() == 'lihat-pelamar.show' ? 'active' : '' }}" href="{{ route('lihat-pelamar.index') }}">
                         <div
                             class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="fa fa-inbox text-dark text-sm opacity-10"></i>

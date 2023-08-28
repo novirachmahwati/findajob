@@ -103,19 +103,17 @@
                                 <form role="form" method="POST" action={{ route('SE.store') }} enctype="multipart/form-data">
                                     @csrf
                                     <div class="card-body">
-                                        <p>
-                                            <a class="btn btn-success" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-                                                <i class="fa fa-plus" aria-hidden="true"></i>
-                                                Tambah
-                                            </a>
-                                        </p>
+                                        <a class="btn btn-light" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                            <i class="fa fa-plus" aria-hidden="true"></i>
+                                            Tambah
+                                        </a>
                                         <div class="collapse" id="collapseExample">
                                             <div class="card card-body">
                                                 <div class="row">
                                                     <input type="hidden" name="pencari_kerja_id" value="{{ auth()->user()->pencariKerja->id }}">
                                                     <div class="col-md-12">
                                                         <div class="form-group">
-                                                            <label for="example-text-input" class="form-control-label">Nama<span class="titik-logo">*</span></label>
+                                                            <label for="example-text-input" class="form-control-label">Nama Sertifikat<span class="titik-logo">*</span></label>
                                                             <input class="form-control" type="text" name="nama" value="{{ old('nama') }}" placeholder="Contoh: CCNA">
                                                             @error('nama') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
                                                         </div>
@@ -143,20 +141,17 @@
                                                     </div>
                                                     <div class="col-md-12">
                                                         <div class="form-group">
-                                                            <label for="example-text-input" class="form-control-label">Kredensial ID<span class="titik-logo">*</span></label>
-                                                            <input class="form-control" type="text" name="kredensial_id" value="{{ old('kredensial_id') }}">
-                                                            @error('kredensial_id') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-12">
-                                                        <div class="form-group">
-                                                            <label for="example-text-input" class="form-control-label">Kredensial URL<span class="titik-logo">*</span></label>
-                                                            <input class="form-control" type="text" name="kredensial_url" value="{{ old('kredensial_url') }}">
-                                                            @error('kredensial_url') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
+                                                            <label for="file" class="form-control-label">Unggah File<span class="titik-logo">*</span></label>
+                                                            <input class="form-control" type="file" name="file">
+                                                            @error('file') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
+                                        </div>
+                                        <div class="pt-3">
+                                            <p>Catatan :</p>
+                                            <p class="text-secondary"><i>Bagian ini bersifat opsional atau tidak wajib diisi oleh pencari kerja.</i></p>
                                         </div>
                                     <div class="card-footer pb-0">
                                         <div class="d-flex align-items-center">

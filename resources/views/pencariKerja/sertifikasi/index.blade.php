@@ -25,7 +25,7 @@
                                         <thead>
                                             <tr>
                                                 <th>No</th>
-                                                <th>Nama</th>
+                                                <th>Nama Sertifikat</th>
                                                 <th>Penerbit</th>
                                                 <th>Aksi</th>
                                             </tr>
@@ -57,7 +57,7 @@
                             <input type="hidden" name="pencari_kerja_id" value="{{ auth()->user()->pencariKerja->id }}">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label for="example-text-input" class="form-control-label">Nama<span class="titik-logo">*</span></label>
+                                    <label for="example-text-input" class="form-control-label">Nama Sertifikat<span class="titik-logo">*</span></label>
                                     <input class="form-control" type="text" name="nama" value="{{ old('nama') }}" placeholder="Contoh: CCNA">
                                     @error('nama') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
                                 </div>
@@ -85,16 +85,9 @@
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label for="example-text-input" class="form-control-label">Kredensial ID<span class="titik-logo">*</span></label>
-                                    <input class="form-control" type="text" name="kredensial_id" value="{{ old('kredensial_id') }}">
-                                    @error('kredensial_id') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label for="example-text-input" class="form-control-label">Kredensial URL<span class="titik-logo">*</span></label>
-                                    <input class="form-control" type="text" name="kredensial_url" value="{{ old('kredensial_url') }}">
-                                    @error('kredensial_url') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
+                                    <label for="file" class="form-control-label">Unggah File<span class="titik-logo">*</span></label>
+                                    <input class="form-control" type="file" name="file">
+                                    @error('file') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
                                 </div>
                             </div>
                         </div>
@@ -107,28 +100,6 @@
         </div>
         </div>
     </div>
-
-    <!-- Modal Hapus -->
-    <div class="modal fade" id="deleteModal" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="deleteModal" aria-hidden="true">
-   <div class="modal-dialog modal-sm" role="document">
-       <div class="modal-content">
-           <div class="modal-header">
-               <h5 class="modal-title">This action is not reversible.</h5>
-               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                   <span aria-hidden="true">&times;</span>
-               </button>
-           </div>
-           <div class="modal-body">
-               Are you sure you want to delete?
-               <input type="hidden" id="id" name="id">
-           </div>
-           <div class="modal-footer">
-               <button type="button" class="btn bg-white" data-dismiss="modal">Close</button>
-               <button type="button" class="btn btn-danger" id="modal-confirm_delete">Delete</button>
-           </div>
-       </div>
-   </div>
-</div>
 @endsection
 
 

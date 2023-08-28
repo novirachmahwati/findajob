@@ -11,8 +11,7 @@ class sertifikasi extends Model
         'penerbit',
         'tgl_diterbitkan',
         'tgl_kadaluwarsa',
-        'kredensial_id',
-        'kredensial_url',
+        'file',
         'pencari_kerja_id'
     ];
 

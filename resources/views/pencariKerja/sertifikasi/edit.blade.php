@@ -20,7 +20,7 @@
                                                 <input type="hidden" name="pencari_kerja_id" value="{{ $sertifikasi->pencari_kerja_id }}">
                                                 <div class="col-md-12">
                                                     <div class="form-group">
-                                                        <label for="example-text-input" class="form-control-label">Nama<span class="titik-logo">*</span></label>
+                                                        <label for="example-text-input" class="form-control-label">Nama Sertifikat<span class="titik-logo">*</span></label>
                                                         <input class="form-control" type="text" name="nama" value="{{ $sertifikasi->nama }}">
                                                         @error('nama') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
                                                     </div>
@@ -48,16 +48,9 @@
                                                 </div>
                                                 <div class="col-md-12">
                                                     <div class="form-group">
-                                                        <label for="example-text-input" class="form-control-label">Kredensial ID<span class="titik-logo">*</span></label>
-                                                        <input class="form-control" type="text" name="kredensial_id" value="{{ $sertifikasi->kredensial_id }}">
-                                                        @error('kredensial_id') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-12">
-                                                    <div class="form-group">
-                                                        <label for="example-text-input" class="form-control-label">Kredensial URL<span class="titik-logo">*</span></label>
-                                                        <input class="form-control" type="text" name="kredensial_url" value="{{ $sertifikasi->kredensial_url }}">
-                                                        @error('kredensial_url') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
+                                                        <label for="file" class="form-control-label">Unggah File<span class="titik-logo">*</span></label>
+                                                        <input class="form-control" type="file" name="file" value="{{ $sertifikasi->file }}">
+                                                        @error('file') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
                                                     </div>
                                                 </div>
                                         </div>

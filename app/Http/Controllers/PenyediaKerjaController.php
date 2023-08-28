@@ -175,27 +175,7 @@ class PenyediaKerjaController extends Controller
      */
     public function update(Request $request, penyediaKerja $penyediaKerja)
     {
-        $attributes = request()->validate([
-            'name' => 'required|max:255',
-            'email' => ['required', 'email', 'max:255',  Rule::unique('users')->ignore(auth()->user()->id),],
-            'alamat' => 'required|max:255',
-            'tempat_lahir' => 'required|max:255',
-            'tgl_lahir' => 'required|date',
-            'jenis_kelamin' => 'required|max:255',
-            'no_telp' => 'required|max:16',
-            'agama' => 'required|max:20'
-        ]);
-
-        auth()->user()->update([
-            'name' => $request->get('name'),
-            'email' => $request->get('email'),
-        ]);
-
-        $pencariKerja = pencariKerja::where('id', Auth::user()->pencariKerja->id)->first();
-        $pencariKerja->fill($attributes);
-        $pencariKerja->save();
-
-        return back()->with('success', 'Profil berhasil diperbarui!');
+        //
     }
 
     /**

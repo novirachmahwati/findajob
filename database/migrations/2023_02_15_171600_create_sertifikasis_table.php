@@ -20,7 +20,6 @@ return new class extends Migration
             $table->string('penerbit');
             $table->date('tgl_diterbitkan')->nullable();
             $table->date('tgl_kadaluwarsa')->nullable();
-            $table->string('kredensial_id')->nullable();
             $table->string('kredensial_url')->nullable();
             $table->unsignedInteger('pencari_kerja_id');
             $table->timestamps();

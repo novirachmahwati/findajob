@@ -23,8 +23,8 @@ return [
     'alpha_num' => 'The :attribute must only contain letters and numbers.',
     'array' => 'The :attribute must be an array.',
     'ascii' => 'The :attribute must only contain single-byte alphanumeric characters and symbols.',
-    'before' => 'The :attribute must be a date before :date.',
-    'before_or_equal' => 'The :attribute must be a date before or equal to :date.',
+    'before' => ':attribute tidak valid.',
+    'before_or_equal' => ':attribute harus tanggal sebelum atau sama dengan tanggal hari ini.',
     'between' => [
         'array' => 'The :attribute must have between :min and :max items.',
         'file' => 'The :attribute must be between :min and :max kilobytes.',

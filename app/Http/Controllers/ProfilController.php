@@ -24,7 +24,7 @@ class ProfilController extends Controller
                 'email' => ['required', 'email', 'max:255',  Rule::unique('users')->ignore(auth()->user()->id),],
                 'alamat' => 'required|max:255',
                 'tempat_lahir' => 'required|max:255',
-                'tgl_lahir' => 'required|date',
+                'tgl_lahir' => 'required|date|before:tomorrow',
                 'jenis_kelamin' => 'required|max:255',
                 'no_telp' => 'required|max:16',
                 'usia' => 'required',
@@ -37,6 +37,10 @@ class ProfilController extends Controller
             ]);
 
             $attributes['usia'] = Carbon::parse($attributes['tgl_lahir'])->age;
+            if ($attributes['usia'] < 15) {
+                return back()->withErrors(['tgl_lahir' => 'Usia minimum untuk diperbolehkan bekerja adalah 15 (lima belas) tahun'])
+                ->withInput();
+            }
     
             $pencariKerja = pencariKerja::where('id', Auth::user()->pencariKerja->id)->first();
             $pencariKerja->fill($attributes);

@@ -105,7 +105,7 @@
                                     </div>
                                 </div>
                                 <div class="card-footer d-flex justify-content-end">
-                                    <a href="{{ route('pencari-kerja.index') }}" class="btn btn-secondary">Kembali</a>
+                                    <a href="{{ url()->previous() }}" class="btn btn-secondary">Kembali</a>
                                 </div>
                             </div>
                         </div>

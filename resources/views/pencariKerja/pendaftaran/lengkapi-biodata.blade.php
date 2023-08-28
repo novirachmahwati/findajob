@@ -145,7 +145,7 @@
                                                 <div class="form-group">
                                                     <label for="jenis_kelamin" class="form-control-label">Jenis Kelamin<span class="titik-logo">*</span></label>
                                                     <select class="form-control" name="jenis_kelamin">
-                                                        <option value="" hidden>Pilih Jenis Kelamin</option>
+                                                        <option value="" hidden>Pilih Jenis Kelamin Pencari Kerja</option>
                                                         <option value="Laki-laki" @if(old('jenis_kelamin') == 'Laki-laki')selected @endif>Laki-laki</option>
                                                         <option value="Perempuan" @if(old('jenis_kelamin') == 'Perempuan')selected @endif>Perempuan</option>
                                                     </select>
@@ -161,8 +161,16 @@
                                             </div>
                                             <div class="col-md-12">
                                                 <div class="form-group">
-                                                    <label for="example-text-input" class="form-control-label">Agama<span class="titik-logo">*</span></label>
-                                                    <input class="form-control" type="text" name="agama" value="{{ old('agama') }}" placeholder="Agama Pencari Kerja">
+                                                    <label for="agama" class="form-control-label">Agama<span class="titik-logo">*</span></label>
+                                                    <select class="form-control" name="agama">
+                                                        <option value="" hidden>Pilih Agama Pencari Kerja</option>
+                                                        <option value="Islam" @if(old('agama') == 'Islam')selected @endif>Islam</option>
+                                                        <option value="Protestan" @if(old('agama') == 'Protestan')selected @endif>Protestan</option>
+                                                        <option value="Katolik" @if(old('agama') == 'Katolik')selected @endif>Katolik</option>
+                                                        <option value="Hindu" @if(old('agama') == 'Hindu')selected @endif>Hindu</option>
+                                                        <option value="Buddha" @if(old('agama') == 'Buddha')selected @endif>Buddha</option>
+                                                        <option value="Khonghucu" @if(old('agama') == 'Khonghucu')selected @endif>Khonghucu</option>
+                                                    </select>
                                                     @error('agama') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
                                                 </div>
                                             </div>

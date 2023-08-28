@@ -96,8 +96,15 @@
                                                 </div>
                                                 <div class="col-md-12">
                                                     <div class="form-group">
-                                                        <label for="example-text-input" class="form-control-label">Agama<span class="titik-logo">*</span></label>
-                                                        <input class="form-control" type="text" name="agama" value="{{ old('agama', auth()->user()->pencariKerja->agama) }}">
+                                                        <label for="agama" class="form-control-label">Agama<span class="titik-logo">*</span></label>
+                                                        <select class="form-control" name="agama">
+                                                            <option value="Islam" {{ auth()->user()->pencariKerja->agama == "Islam"  ? 'selected' : ''}}>Islam</option>
+                                                            <option value="Protestan" {{ auth()->user()->pencariKerja->agama == "Protestan"  ? 'selected' : ''}}>Protestan</option>
+                                                            <option value="Katolik" {{ auth()->user()->pencariKerja->agama == "Katolik"  ? 'selected' : ''}}>Katolik</option>
+                                                            <option value="Hindu" {{ auth()->user()->pencariKerja->agama == "Hindu"  ? 'selected' : ''}}>Hindu</option>
+                                                            <option value="Buddha" {{ auth()->user()->pencariKerja->agama == "Buddha"  ? 'selected' : ''}}>Buddha</option>
+                                                            <option value="Khonghucu" {{ auth()->user()->pencariKerja->agama == "Khonghucu"  ? 'selected' : ''}}>Khonghucu</option>
+                                                        </select>
                                                         @error('agama') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
                                                     </div>
                                                 </div>

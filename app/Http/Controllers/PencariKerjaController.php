@@ -59,7 +59,7 @@ class PencariKerjaController extends Controller
         $attributes = request()->validate([
             'alamat' => 'required|max:255',
             'tempat_lahir' => 'required|max:255',
-            'tgl_lahir' => 'required|date',
+            'tgl_lahir' => 'required|date|before:tomorrow',
             'jenis_kelamin' => 'required|max:255',
             'no_telp' => 'required|max:15',
             'agama' => 'required|max:20',
@@ -68,6 +68,10 @@ class PencariKerjaController extends Controller
         ]);
         
         $attributes['usia'] = Carbon::parse($attributes['tgl_lahir'])->age;
+        if ($attributes['usia'] < 15) {
+            return back()->withErrors(['tgl_lahir' => 'Usia minimum untuk diperbolehkan bekerja adalah 15 (lima belas) tahun'])
+            ->withInput();
+        }
         pencariKerja::create($attributes);
         
         return redirect('/unggah-foto');
@@ -81,17 +85,16 @@ class PencariKerjaController extends Controller
 
     public function UF_store(Request $request)
     {
-        $requestData = $request->all();
-        $foto = $request->hasFile('foto');
-        if($foto){
-            $fileName = time().$request->file('foto')->getClientOriginalName();
-            $path = $request->file('foto')->storeAs('images', $fileName, 'public');
-            $requestData['foto'] = '/storage/'.$path;
-            
-            $pencariKerja = pencariKerja::where('id', Auth::user()->pencariKerja->id)->first();
-            $pencariKerja->fill($requestData);
-            $pencariKerja->save();
-        }
+        $attributes = request()->validate([
+            'foto' => 'required'
+        ]);
+        $fileName = time().$request->file('foto')->getClientOriginalName();
+        $path = $request->file('foto')->storeAs('images', $fileName, 'public');
+        $attributes['foto'] = '/storage/'.$path;
+        
+        $pencariKerja = pencariKerja::where('id', Auth::user()->pencariKerja->id)->first();
+        $pencariKerja->fill($attributes);
+        $pencariKerja->save();
         
         return redirect('/sertifikasi-pencari-kerja');
         
@@ -111,11 +114,15 @@ class PencariKerjaController extends Controller
                 'penerbit' => 'required|max:255',
                 'tgl_diterbitkan' => 'required|date',
                 'tgl_kadaluwarsa' => 'required|date',
-                'kredensial_id' => 'required|max:255',
-                'kredensial_url' => 'required|max:255',
+                'file' => 'required|max:255',
                 'pencari_kerja_id' => 'required'
             ]);
 
+            // Save to public storage
+            $fileName = time().$request->file('file')->getClientOriginalName();
+            $path = $request->file('file')->storeAs('sertifikasi', $fileName, 'public');
+            $attributes['file'] = '/storage/'.$path;
+            
             sertifikasi::create($attributes);
         }
         

@@ -78,11 +78,15 @@ class SertifikasiController extends Controller
                 'penerbit' => 'required|max:255',
                 'tgl_diterbitkan' => 'required|date',
                 'tgl_kadaluwarsa' => 'required|date',
-                'kredensial_id' => 'required|max:255',
-                'kredensial_url' => 'required|max:255',
+                'file' => 'required|max:255',
                 'pencari_kerja_id' => 'required'
             ]);
 
+            // Save to public storage
+            $fileName = time().$request->file('file')->getClientOriginalName();
+            $path = $request->file('file')->storeAs('sertifikasi', $fileName, 'public');
+            $attributes['file'] = '/storage/'.$path;
+            
             sertifikasi::create($attributes);
         }
         
@@ -98,6 +102,19 @@ class SertifikasiController extends Controller
     public function show(sertifikasi $sertifikasi)
     {
         return view('pencariKerja.sertifikasi.show', compact('sertifikasi'));
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\sertifikasi  $sertifikasi
+     * @return \Illuminate\Http\Response
+     */
+    public function file($id)
+    {
+        $sertifikasi = sertifikasi::where('id', $id)->first();
+        $file = $sertifikasi->file;
+        return response()->file(public_path($file));
     }
 
     /**
@@ -125,10 +142,14 @@ class SertifikasiController extends Controller
             'penerbit' => 'required|max:255',
             'tgl_diterbitkan' => 'required|date',
             'tgl_kadaluwarsa' => 'required|date',
-            'kredensial_id' => 'required|max:255',
-            'kredensial_url' => 'required|max:255',
+            'file' => 'required|max:255',
             'pencari_kerja_id' => 'required'
         ]);
+
+        // Save to public storage
+        $fileName = time().$request->file('file')->getClientOriginalName();
+        $path = $request->file('file')->storeAs('sertifikasi', $fileName, 'public');
+        $request['file'] = '/storage/'.$path;
 
         $sertifikasi->fill($request->post())->save();
         

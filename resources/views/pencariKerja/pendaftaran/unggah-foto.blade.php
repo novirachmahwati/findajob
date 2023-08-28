@@ -103,16 +103,14 @@
                                 <form role="form" method="POST" action={{ route('UF.store') }} enctype="multipart/form-data">
                                     @csrf
                                     <div class="card-body">
-                                        <div class="card mb-4 mb-xl-0">
-                                            <div class="card-header">Foto Profil</div>
-                                            <div class="card-body text-center">
-                                                <img class="img-account-profile rounded-circle mb-2" style="width: 100px" src="{{ asset('img/user.png') }}" alt="">
-                                                <div class="small font-italic text-muted mb-4">JPG atau PNG (Maksimal 5 MB)</div>
-                                                <div class="form-group" style="margin-left: 100px">
-                                                    <input type="file" name="foto" accept="image/png, image/jpeg">
-                                                </div>
-                                            </div>
+                                        <p>Catatan :</p>
+                                        <p class="text-secondary"><i>Unggah dalam bentuk <b class="text-danger">JPG atau PNG (Maksimal 5 MB)</b></i></p>
+                                        
+                                        <div class="form-group">
+                                            <input class="form-control" type="file" name="foto" accept="image/png, image/jpeg">
+                                            @error('foto') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
                                         </div>
+                                    </div>
                                     <div class="card-footer pb-0">
                                         <div class="d-flex align-items-center">
                                             <button type="submit" class="btn btn-primary btn-lg ms-auto" style="margin-right: -22px">Selanjutnya 

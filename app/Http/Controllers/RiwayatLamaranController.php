@@ -6,6 +6,7 @@ use App\Models\riwayatLamaran;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use DataTables;
+use Illuminate\Support\Facades\Http;
 
 class RiwayatLamaranController extends Controller
 {
@@ -73,6 +74,9 @@ class RiwayatLamaranController extends Controller
         
         $riwayatLamaran = riwayatLamaran::create($attributes);
         $riwayatLamaran->load('lowongan');
+
+        // Hit API 
+        Http::post('http://47.254.207.10:5000/measure/'. $attributes['lowongan_id']);
         
         return view('pencariKerja.cariLowongan.sukses-lamar',['riwayatLamaran' => $riwayatLamaran]);
     }

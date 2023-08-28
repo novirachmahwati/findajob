@@ -17,44 +17,39 @@
                                         <input type="hidden" name="pencari_kerja_id" value="{{ auth()->user()->pencariKerja->id }}">
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <label for="example-text-input" class="form-control-label">Nama<span class="titik-logo">*</span></label>
+                                                <label for="example-text-input" class="form-control-label">Nama Sertifikat</label>
                                                 <input class="form-control" type="text" name="nama" value="{{ $sertifikasi->nama }}" readonly>
                                                 @error('nama') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
                                             </div>
                                         </div>
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <label for="example-text-input" class="form-control-label">Penerbit<span class="titik-logo">*</span></label>
+                                                <label for="example-text-input" class="form-control-label">Penerbit</label>
                                                 <input class="form-control" type="text" name="penerbit" value="{{ $sertifikasi->penerbit }}" readonly>
                                                 @error('penerbit') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
                                             </div>
                                         </div>
                                         <div class="col-md-6" style="float: left !important">
                                             <div class="form-group">
-                                                <label for="example-text-input" class="form-control-label">Tanggal Diterbitkan<span class="titik-logo">*</span></label>
+                                                <label for="example-text-input" class="form-control-label">Tanggal Diterbitkan</label>
                                                 <input class="form-control" type="date" name="tgl_diterbitkan" value="{{ $sertifikasi->tgl_diterbitkan }}" readonly>
                                                 @error('tgl_diterbitkan') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
                                             </div>
                                         </div>
                                         <div class="col-md-6" style="float: left !important; padding-left: 10px;">
                                             <div class="form-group">
-                                                <label for="example-text-input" class="form-control-label">Tanggal Kadaluawarsa<span class="titik-logo">*</span></label>
+                                                <label for="example-text-input" class="form-control-label">Tanggal Kadaluawarsa</label>
                                                 <input class="form-control" type="date" name="tgl_kadaluwarsa" value="{{ $sertifikasi->tgl_kadaluwarsa }}" readonly>
                                                 @error('tgl_kadaluwarsa') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
                                             </div>
                                         </div>
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <label for="example-text-input" class="form-control-label">Kredensial ID<span class="titik-logo">*</span></label>
-                                                <input class="form-control" type="text" name="kredensial_id" value="{{ $sertifikasi->kredensial_id }}" readonly>
-                                                @error('kredensial_id') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label for="example-text-input" class="form-control-label">Kredensial URL<span class="titik-logo">*</span></label>
-                                                <input class="form-control" type="url" name="kredensial_url" value="{{ $sertifikasi->kredensial_url }}" readonly>
-                                                @error('kredensial_url') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
+                                                <label for="example-text-input" class="form-control-label">File</label><br>
+                                                <a class="btn btn-light" href="{{ route('SE.file', $sertifikasi->id) }}">
+                                                    <i class="fa fa-eye" aria-hidden="true"></i>
+                                                    <span class="d-sm-inline d-none ms-2">Lihat</span>
+                                                </a>
                                             </div>
                                         </div>
                                     </div>
