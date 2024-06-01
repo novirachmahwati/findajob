@@ -23,6 +23,8 @@ class kriteria extends Model
         'bobot_faktor_utama',
         'faktor_pendukung',
         'bobot_faktor_pendukung',
+        'usia_minimal',
+        'usia_maksimal',
         'lowongan_id'
     ];
 

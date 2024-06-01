@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use DataTables;
 use App\Rules\JumlahBobot;
 use Carbon\Carbon;
+use Illuminate\Support\Str;
 
 class KelolaLowonganController extends Controller
 {
@@ -116,6 +117,8 @@ class KelolaLowonganController extends Controller
             'prioritas_keterampilan_non_teknis' => 'required|max:255',
             'sertifikasi' => 'max:255',
             'prioritas_sertifikasi' => 'required|max:255',
+            'usia_minimal' => 'required',
+            'usia_maksimal' => 'required',
             'lowongan_id' => 'required'
         ]);
 
@@ -150,6 +153,8 @@ class KelolaLowonganController extends Controller
         $attributes['prioritas_keterampilan_non_teknis'] = $request->input('prioritas_keterampilan_non_teknis');
         $attributes['sertifikasi'] = $request->input('sertifikasi');
         $attributes['prioritas_sertifikasi'] = $request->input('prioritas_sertifikasi');
+        $attributes['usia_minimal'] = Str::substr($request->input('rentang_usia'), 0, 2);
+        $attributes['usia_maksimal'] = Str::substr($request->input('rentang_usia'), 3, 2);
         
         $kriteria = kriteria::create($attributes);
         

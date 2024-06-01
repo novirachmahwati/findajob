@@ -100,7 +100,8 @@ class RiwayatLamaranController extends Controller
      */
     public function edit(riwayatLamaran $riwayatLamaran)
     {
-        //
+        $riwayatLamaran->load(['lowongan','pencariKerja']);
+        return view('penyediaKerja.riwayatLamaran.edit', compact('riwayatLamaran'));
     }
 
     /**

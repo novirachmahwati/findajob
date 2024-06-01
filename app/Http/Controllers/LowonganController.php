@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Http;
 use Illuminate\Http\Request;
 use DataTables;
 
-class lowonganController extends Controller
+class LowonganController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -22,7 +22,12 @@ class lowonganController extends Controller
         if ($request->ajax()) {
             $lowongan = lowongan::leftJoin('penyedia_kerjas','penyedia_kerjas.id','=','lowongans.penyedia_kerja_id')
                                 ->leftJoin('users','users.id','=','penyedia_kerjas.user_id')
+                                ->leftJoin('kriterias','lowongans.id','=','kriterias.lowongan_id')
                                 ->select('lowongans.id','lowongans.judul_pekerjaan','users.name','lowongans.lokasi_pekerjaan','lowongans.jenis_pekerjaan')
+                                ->where('kriterias.minimal_pendidikan', Auth::user()->pencariKerja->pendidikan)
+                                ->where('kriterias.jurusan_pendidikan_terakhir', 'LIKE','%'.Auth::user()->pencariKerja->jurusan.'%')
+                                ->where('kriterias.usia_minimal', '<', Auth::user()->pencariKerja->usia)
+                                ->where('kriterias.usia_maksimal', '>', Auth::user()->pencariKerja->usia)
                                 ->orderBy('lowongans.id','desc')
                                 ->get();
             return Datatables::of($lowongan)->addIndexColumn()
@@ -44,7 +49,7 @@ class lowonganController extends Controller
                 ->make(true);
         }
 
-        return view('pencariKerja.cariLowongan.index');
+        return view('pencariKerja.carilowongan.index');
     }
 
     /**

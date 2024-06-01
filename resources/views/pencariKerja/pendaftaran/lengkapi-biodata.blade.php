@@ -174,6 +174,29 @@
                                                     @error('agama') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
                                                 </div>
                                             </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="pendidikan" class="form-control-label">Pendidikan<span class="titik-logo">*</span></label>
+                                                    <select class="form-control" name="pendidikan">
+                                                        <option value="" hidden>Pilih Pendidikan</option>
+                                                        <option value="S3" @if(old('pendidikan') == 'S3')selected @endif>S3</option>
+                                                        <option value="S2" @if(old('pendidikan') == 'S2')selected @endif>S2</option>
+                                                        <option value="S1 / D4" @if(old('pendidikan') == 'S1 / D4')selected @endif>S1 / D4</option>
+                                                        <option value="D3" @if(old('pendidikan') == 'D3')selected @endif>D3</option>
+                                                        <option value="SMA / SMK" @if(old('pendidikan') == 'SMA / SMK')selected @endif>SMA / SMK</option>
+                                                        <option value="SMP" @if(old('pendidikan') == 'SMP')selected @endif>SMP</option>
+                                                        <option value="SD" @if(old('pendidikan') == 'SD')selected @endif>SD</option>
+                                                    </select>
+                                                    @error('pendidikan') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="jurusan" class="form-control-label">Jurusan Pendidikan<span class="titik-logo">*</span></label>
+                                                    <input class="form-control" type="text" name="jurusan" value="{{ old('jurusan') }}" placeholder="Jurusan Pendidikan">
+                                                    @error('jurusan') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
+                                                </div>
+                                            </div>
                                         </div>
                                     <div class="card-footer pb-0">
                                         <div class="d-flex align-items-center">

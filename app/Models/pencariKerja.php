@@ -18,6 +18,8 @@ class pencariKerja extends Model
         'cv',
         'cv_public_storage',
         'usia',
+        'pendidikan',
+        'jurusan',
         'user_id'
     ];
 

@@ -63,7 +63,8 @@ class PencariKerjaController extends Controller
             'jenis_kelamin' => 'required|max:255',
             'no_telp' => 'required|max:15',
             'agama' => 'required|max:20',
-            'usia' => 'required',
+            'pendidikan' => 'required|max:255',
+            'jurusan' => 'required|max:255',
             'user_id' => 'required'
         ]);
         

@@ -110,6 +110,8 @@
                                         <div class="row">
                                             <input type="hidden" name="lowongan_id" value="{{ $lowongan_id }}">
                                             <input type="hidden" name="prioritas_minimal_pendidikan" value="#">
+                                            <input type="hidden" name="usia_minimal" value="0">
+                                            <input type="hidden" name="usia_maksimal" value="0">
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="minimal_pendidikan" class="form-control-label">Minimal Pendidikan<span class="titik-logo">*</span></label>
