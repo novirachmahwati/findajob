@@ -184,7 +184,7 @@ class LowonganController extends Controller
         $kriteria->save();
 
         // Hit API 
-        Http::post('http://47.254.207.10:5000/measure/'. $lowongan->id);
+        // Http::post('http://47.254.207.10:5000/measure/'. $lowongan->id);
 
         return redirect()->route('kelola-lowongan.index')->with('success', 'Lowongan berhasil diubah!');
     }
