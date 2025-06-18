@@ -17,7 +17,6 @@ return new class extends Migration
             $table->id();
             $table->string('minimal_pendidikan');
             $table->string('prioritas_minimal_pendidikan');
-            $table->string('tahun_pengalaman');
             $table->string('jurusan_pendidikan_terakhir');
             $table->string('rentang_usia');
             $table->string('bahasa');

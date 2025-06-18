@@ -18,7 +18,9 @@
                                 </div>
                                 <div class="col">
                                     <h4>{{ auth()->user()->name }}</h4>
-                                    <p><i class="fas fa-envelope"></i>&nbsp;{{ auth()->user()->email }} |&nbsp;<i class="fas fa-phone"></i>&nbsp;{{ auth()->user()->pencariKerja->no_telp }}</p>
+                                    <p><i class="fa fa
+-envelope"></i>&nbsp;{{ auth()->user()->email }} |&nbsp;<i class="fa fa
+-phone"></i>&nbsp;{{ auth()->user()->pencariKerja->no_telp }}</p>
                                 </div>
                             </div>
                             <div class="row">
@@ -124,7 +126,9 @@
                                 </div>
                                 <div class="col">
                                     <h4>{{ auth()->user()->name }}</h4>
-                                    <p><i class="fas fa-envelope"></i>&nbsp;{{ auth()->user()->email }} |&nbsp;<i class="fas fa-phone"></i>&nbsp;{{ auth()->user()->penyediaKerja->no_telp }}</p>
+                                    <p><i class="fa fa
+-envelope"></i>&nbsp;{{ auth()->user()->email }} |&nbsp;<i class="fa fa
+-phone"></i>&nbsp;{{ auth()->user()->penyediaKerja->no_telp }}</p>
                                 </div>
                             </div>
                             <div class="row">

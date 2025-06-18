@@ -18,7 +18,6 @@ return new class extends Migration
             $table->id();
             $table->unsignedInteger('lowongan_id');
             $table->unsignedInteger('pencari_kerja_id');
-            $table->unsignedInteger('penyedia_kerja_id');
             $table->timestamps();
         });
 

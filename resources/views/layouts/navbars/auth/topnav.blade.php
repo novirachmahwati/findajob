@@ -56,7 +56,7 @@
                 <li class="nav-item dropdown pe-2 d-flex align-items-center">
                     <a href="javascript:;" class="nav-link text-white p-0" id="dropdownMenuButton"data-bs-toggle="dropdown" aria-expanded="false">
                         <div>
-                            <i class="far fa-user"></i>
+                            <i class="fa fa-user"></i>
                             {{ Auth::user()->name }}
                             <i class="fa fa-caret-down"></i>
                         </div>
